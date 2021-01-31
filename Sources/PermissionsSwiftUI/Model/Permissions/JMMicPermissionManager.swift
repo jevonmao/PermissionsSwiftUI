@@ -11,14 +11,6 @@ import AVFoundation
 struct JMMicPermissionManager {
     
     static var shared = JMMicPermissionManager()
-
-       var isAuthorized: Bool {
-        return AVAudioSession.sharedInstance().recordPermission == .granted
-    }
-    
-    var isDenied: Bool {
-        return AVAudioSession.sharedInstance().recordPermission == .denied
-    }
     
     func requestPermission(completion: @escaping JMPermissionAuthorizationHandlerCompletionBlock) {
         AVAudioSession.sharedInstance().requestRecordPermission {

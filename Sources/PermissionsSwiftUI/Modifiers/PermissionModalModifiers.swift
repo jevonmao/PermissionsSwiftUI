@@ -11,47 +11,66 @@ import SwiftUI
 struct Permissions: ViewModifier{
     @Binding var showModal:Bool
     var permissions:[PermissionModel]
+
     func body(content: Content) -> some View {
         MainView(for: AnyView(content), show: $showModal, permissions: permissions)
     }
 }
-
+/**
+ Displays a PermissionsSwiftUI modal view that displays and handles permissions.
+ 
+ For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This view will show a PermissionsSwiftUI modal with 3 different permissions.
+ ````
+     struct ContentView: View {
+         @State var showModal = false
+         var body: some View {
+             Button(action: {
+                 showModal=true
+             }, label: {
+                 Text("Ask user for permissions")
+             })
+             .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
+         }
+     }
+ ````
+ - Parameters:
+    - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
+    - for: An array of type `PermissionModel` to specify permissions to show
+ - Returns:
+    Returns a new view, a modal that will overlay your existing view to show PermissionsSwiftUI related.
+ 
+ */
 public extension View{
+    
+    /**
+     Displays a PermissionsSwiftUI modal view that displays and handles permissions.
+     
+     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This view will show a PermissionsSwiftUI modal with 3 different permissions.
+     ````
+         struct ContentView: View {
+             @State var showModal = false
+             var body: some View {
+                 Button(action: {
+                     showModal=true
+                 }, label: {
+                     Text("Ask user for permissions")
+                 })
+                 .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
+             }
+             
+         }
+     ````
+     - Parameters:
+        - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
+        - for: An array of type `PermissionModel` to specify permissions to show
+     - Returns:
+        Returns a new view, a modal that will overlay your existing view to show PermissionsSwiftUI related.
+     
+     */
     func JMPermissions(showModal:Binding<Bool>, for permissions:[PermissionModel]) -> some View{
         self.modifier(Permissions(showModal:showModal, permissions: permissions))
     }
 }
-
-import Foundation
-import CoreLocation
-
-public class LocationPermissionManager: NSObject, ObservableObject {
-    private let locationManager = CLLocationManager()
-    @Published var authorisationStatus: CLAuthorizationStatus = .notDetermined
-
-    public override init() {
-        super.init()
-        self.locationManager.delegate = self
-    }
-
-    public func requestAuthorisation(always: Bool = false) {
-        if always {
-            self.locationManager.requestAlwaysAuthorization()
-        } else {
-            self.locationManager.requestWhenInUseAuthorization()
-        }
-    }
-}
-
-extension LocationPermissionManager: CLLocationManagerDelegate {
-
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        self.authorisationStatus = status
-    }
-}
-
-
-
 // MARK: - Package modifiers
 struct ButtonStatusColor:ViewModifier{
     var allowButtonStatus:AllowButtonStatus
@@ -59,37 +78,50 @@ struct ButtonStatusColor:ViewModifier{
         switch allowButtonStatus{
         case .idle:
             return content
-                .textCase(.uppercase)
-                .font(.subheadline)
+                .frame(width:70)
+                .font(.system(size: 15))
                 .foregroundColor(Color(.systemBlue))
                 .padding(4)
-                .padding(.horizontal,4)
+                .padding(.horizontal,2)
                 .background(
                     Capsule()
                         .fill(Color(.systemGray6))
                 )
+                .animation(.default)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+
         case .allowed:
             return content
-                .textCase(.uppercase)
-                .font(.callout)
+                .frame(width:70)
+                .font(.system(size: 15))
                 .foregroundColor(.white)
                 .padding(4)
-                .padding(.horizontal,4)
+                .padding(.horizontal,2)
                 .background(
                     Capsule()
                         .fill(Color(.systemBlue))
                 )
+                .animation(.default)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+
+
         case .denied:
             return content
-                .textCase(.uppercase)
-                .font(.subheadline)
+                .frame(width:70)
+                .font(.system(size: 15))
                 .foregroundColor(.white)
                 .padding(4)
-                .padding(.horizontal,4)
+                .padding(.horizontal,2)
                 .background(
                     Capsule()
                         .fill(Color(.systemRed))
                 )
+                .animation(.default)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+
         }
     }
 }

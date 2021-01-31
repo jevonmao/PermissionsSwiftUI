@@ -26,18 +26,6 @@ struct PermissionSection: View {
 
     }
 }
-class LocationDelegate:NSObject, CLLocationManagerDelegate{
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if manager.authorizationStatus == .authorizedWhenInUse{
-            print("authed")
-        }
-        else{
-            print("not authed")
-        }
-        
-    }
-
-}
 
 enum AllowButtonStatus{
     case idle
@@ -56,11 +44,10 @@ struct PermissionSectionCell: View{
                 .frame(width:50)
             VStack(alignment: .leading){
                 Text(currentPermission.title)
-                    .font(.title3)
+                    .font(.system(size: 20))
                     .bold()
                 Text(currentPermission.description)
                     .font(.body)
-                    .fontWeight(.medium)
                     .foregroundColor(Color(.systemGray2))
             }
             .padding(.horizontal, 5)

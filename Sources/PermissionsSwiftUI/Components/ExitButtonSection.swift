@@ -17,7 +17,7 @@ struct ExitButtonSection: View {
                 .overlay(
                     Image(systemName: "xmark")
                         .font(.system(size: 18, weight: .bold, design: .rounded))
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color(.systemGray))
                 )
                 
         })

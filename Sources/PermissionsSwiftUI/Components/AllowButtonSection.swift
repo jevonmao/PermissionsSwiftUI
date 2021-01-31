@@ -12,7 +12,7 @@ struct AllowButtonSection: View {
     @Binding var allowButtonStatus:AllowButtonStatus
     var body: some View {
         Button(action: action, label: {
-            Text(allowButtonStatus == .allowed ? "Allowed" : "Allow")
+            Text(allowButtonStatus == .allowed ? "ALLOWED" : "ALLOW")
                 .fontWeight(.bold)
                 .buttonStatusColor(for: allowButtonStatus)
         })

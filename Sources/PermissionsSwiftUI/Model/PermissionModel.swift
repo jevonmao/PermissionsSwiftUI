@@ -13,6 +13,10 @@ public enum PermissionModel{
     case locationAlways
     case photo
     case microphone
+    case camera
+    case notification
+    case calendar
+    case bluetooth
     
     var currentPermission:JMPermission{
         switch self{
@@ -24,6 +28,14 @@ public enum PermissionModel{
             return JMPermission(imageIcon: Image(systemName: "photo"), title: "Photo Library", description: "Allow to access your photos")
         case .microphone:
             return JMPermission(imageIcon: Image(systemName: "mic.fill"), title: "Microphone", description: "Allow to record with microphone")
+        case .camera:
+            return JMPermission(imageIcon: Image(systemName: "camera.fill"), title: "Camera", description: "Allow to use your camera")
+        case .notification:
+            return JMPermission(imageIcon: Image(systemName: "bell.fill"), title: "Notification", description: "Allow to send notifications")
+        case .calendar:
+            return JMPermission(imageIcon: Image(systemName: "calendar"), title: "Calendar", description: "Allow to access calendar")
+        case .bluetooth:
+            return JMPermission(imageIcon: Image(systemName: "wave.3.left.circle.fill"), title: "Bluetooth", description: "Allow to use bluetooth")
         }
     }
     func requestPermission(isPermissionGranted: @escaping (Bool) -> Void){
@@ -47,6 +59,23 @@ public enum PermissionModel{
             JMMicPermissionManager.shared.requestPermission{authorized in
                 isPermissionGranted(authorized)
                 
+            }
+        case .camera:
+            JMCameraPermissionManager.shared.requestPermission{authorized in
+                isPermissionGranted(authorized)
+            }
+        case .notification:
+            JMNotificationPermissionManager.shared.requestPermission{authorized in
+                isPermissionGranted(authorized)
+            }
+        case .calendar:
+            JMBluetoothPermissionManager.shared.requestPermission{authorized in
+                isPermissionGranted(authorized)
+            }
+         
+        case .bluetooth:
+            JMCalendarPermissionManager.shared.requestPermission{authorized in
+                isPermissionGranted(authorized)
             }
         }
     }
