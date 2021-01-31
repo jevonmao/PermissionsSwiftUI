@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ModalView: View {
     @Binding var showModal:Bool
+    var permissions:[PermissionModel]
     var body: some View {
         VStack {
             HStack {
@@ -17,29 +18,21 @@ struct ModalView: View {
                     .bold()
                 
                 Spacer()
-                Button(action: {showModal.toggle()}, label: {
-                    Circle()
-                        .fill(Color.black.opacity(0.2))
-                        .frame(width:40, height: 40)
-                        .overlay(
-                            Image(systemName: "xmark")
-                                .font(.system(size: 18, weight: .bold, design: .rounded))
-                                .foregroundColor(Color.black)
-                        )
-                        
-                })
+                ExitButtonSection(action:{showModal.toggle()})
             }
             .padding()
-            .padding(.top,10)
+            .padding(.top,20)
             
             Text("In order for you use certain features of this app, you need to give permissions. See description for each permission")
                 .font(.system(.body, design: .rounded))
-                .foregroundColor(Color(.systemGray2))
+                .foregroundColor(Color(.systemGray))
                 .padding()
+            PermissionSection(permissions: permissions)
             Spacer()
         }
-        .background(Color(.systemGray4))
+        .background(Color(.systemGray6))
         .edgesIgnoringSafeArea(.all)
+
         
         
     }

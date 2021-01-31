@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-struct JMPermissions: View {
+struct MainView: View {
     private var showModal:Binding<Bool>
     private var bodyView:AnyView
-    private var permissions:[PermissionList]
-    
-    init(for bodyView:AnyView, show showModal:Binding<Bool>, permissions:[PermissionList]){
+    private var permissions:[PermissionModel]
+    init(for bodyView:AnyView, show showModal:Binding<Bool>, permissions:[PermissionModel]){
         self.bodyView = bodyView
         self.showModal = showModal
         self.permissions = permissions
@@ -20,7 +19,8 @@ struct JMPermissions: View {
     var body: some View {
         bodyView
             .sheet(isPresented: showModal, content: {
-                ModalView(showModal: showModal)
+                ModalView(showModal: showModal, permissions: permissions)
+                   
             })
            
     }
