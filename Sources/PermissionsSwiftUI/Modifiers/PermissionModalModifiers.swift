@@ -85,7 +85,7 @@ struct ButtonStatusColor:ViewModifier{
                 .padding(.horizontal,2)
                 .background(
                     Capsule()
-                        .fill(Color(.systemGray6))
+                        .fill(Color(.white))
                 )
                 .animation(.default)
                 .lineLimit(1)

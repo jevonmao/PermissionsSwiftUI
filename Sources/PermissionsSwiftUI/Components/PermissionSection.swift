@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 struct PermissionSection: View {
     var permissions:[PermissionModel]
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         VStack{
             ForEach(permissions, id:\.self){
@@ -18,8 +20,8 @@ struct PermissionSection: View {
                 }
             }
         }
-        .background(Color.white)
-        .cornerRadius(15, antialiased: true)
+        .background(Color(.secondarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 15))
         .padding()
         .padding(.horizontal, 5)
 
