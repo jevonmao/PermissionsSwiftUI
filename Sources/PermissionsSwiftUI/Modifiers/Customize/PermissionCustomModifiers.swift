@@ -1,20 +1,21 @@
 //
 //  PermissionCustomizeModifiers.swift
-//  
+//
 //
 //  Created by Jevon Mao on 1/31/21.
 //
 
 import SwiftUI
 
-struct PlaceholderModifier:ViewModifier{
+struct PlaceholderModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
     }
 }
+
 // MARK: Camera
-public extension View{
-    
+
+public extension View {
     /**
      Customizes the title and description text for camera permission component
      
@@ -39,11 +40,12 @@ public extension View{
         - description: The description text
      */
     
-    func permissionCamera(title:String, description:String) -> some View {
+    func permissionCamera(title: String, description: String) -> some View {
         PermissionModel.PermissionModelStore.cameraPermission.title = title
         PermissionModel.PermissionModelStore.cameraPermission.description = description
         return self.modifier(PlaceholderModifier())
     }
+
     /**
      Customizes only the title text for camera permission component
 
@@ -51,11 +53,11 @@ public extension View{
         - title: The title text
      */
     
-    func permissionCamera(title:String) -> some View{
+    func permissionCamera(title: String) -> some View {
         PermissionModel.PermissionModelStore.cameraPermission.title = title
         return self.modifier(PlaceholderModifier())
-
     }
+
     /**
      Customizes only the description text for camera permission component
      
@@ -63,16 +65,15 @@ public extension View{
         - description: The description text
      */
     
-    func permissionCamera(description:String) -> some View{
+    func permissionCamera(description: String) -> some View {
         PermissionModel.PermissionModelStore.cameraPermission.description = description
         return self.modifier(PlaceholderModifier())
-
     }
 }
 
 // MARK: Location
-public extension View{
-    
+
+public extension View {
     /**
      Customizes the title and description text for location permission component
      
@@ -97,11 +98,12 @@ public extension View{
         - description: The description text
      */
     
-    func permissionLocation(title:String, description:String) -> some View {
+    func permissionLocation(title: String, description: String) -> some View {
         PermissionModel.PermissionModelStore.locationPermission.title = title
         PermissionModel.PermissionModelStore.locationPermission.description = description
         return self.modifier(PlaceholderModifier())
     }
+
     /**
      Customizes only the title text for location permission component
 
@@ -110,11 +112,11 @@ public extension View{
         - title: The title text
      */
     
-    func permissionLocation(title:String) -> some View{
+    func permissionLocation(title: String) -> some View {
         PermissionModel.PermissionModelStore.locationPermission.title = title
         return self.modifier(PlaceholderModifier())
-
     }
+
     /**
      Customizes only the description text for location permission component
      
@@ -122,9 +124,8 @@ public extension View{
         - description: The description text
      */
     
-    func permissionLocation(description:String) -> some View{
+    func permissionLocation(description: String) -> some View {
         PermissionModel.PermissionModelStore.locationPermission.description = description
         return self.modifier(PlaceholderModifier())
-
     }
 }

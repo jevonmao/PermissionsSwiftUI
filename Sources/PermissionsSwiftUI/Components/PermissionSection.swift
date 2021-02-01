@@ -1,21 +1,21 @@
 //
 //  PermissionSection.swift
-//  
+//
 //
 //  Created by Jevon Mao on 1/30/21.
 //
 
-import SwiftUI
 import MapKit
+import SwiftUI
 struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        VStack{
+        VStack {
             let permissions = PermissionModel.PermissionModelStore.permissions
-            ForEach(permissions, id:\.self){
+            ForEach(permissions, id: \.self) {
                 PermissionSectionCell(permission: $0)
-                if permissions.count > 1{
+                if permissions.count > 1 {
                     Divider()
                 }
             }
@@ -24,27 +24,26 @@ struct PermissionSection: View {
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .padding()
         .padding(.horizontal, 5)
-
-
     }
 }
 
-enum AllowButtonStatus{
+enum AllowButtonStatus {
     case idle
     case allowed
     case denied
 }
-struct PermissionSectionCell: View{
-    var permission:PermissionModel
-    @State var allowButtonStatus:AllowButtonStatus = .idle
-    var body: some View{
+
+struct PermissionSectionCell: View {
+    var permission: PermissionModel
+    @State var allowButtonStatus: AllowButtonStatus = .idle
+    var body: some View {
         let currentPermission = self.permission.currentPermission
-        HStack{
+        HStack {
             currentPermission.imageIcon
                 .foregroundColor(Color.blue)
                 .font(.system(size: 40))
-                .frame(width:50)
-            VStack(alignment: .leading){
+                .frame(width: 50)
+            VStack(alignment: .leading) {
                 Text(currentPermission.title)
                     .font(.system(size: 20))
                     .bold()
@@ -56,21 +55,19 @@ struct PermissionSectionCell: View{
             .padding(.horizontal, 5)
 
             Spacer()
-            AllowButtonSection(action:{
-                permission.requestPermission{authed in
-                    if authed{
+            AllowButtonSection(action: {
+                permission.requestPermission { authed in
+                    if authed {
                         allowButtonStatus = .allowed
                     }
-                    else{
+                    else {
                         allowButtonStatus = .idle
                     }
                 }
             
             }, allowButtonStatus: $allowButtonStatus)
-
         }
         .padding(15)
-        .onAppear{
-        }
+        .onAppear {}
     }
 }

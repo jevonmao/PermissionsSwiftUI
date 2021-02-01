@@ -1,6 +1,6 @@
 //
 //  ModalView.swift
-//  
+//
 //
 //  Created by Jevon Mao on 1/30/21.
 //
@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ModalView: View {
-    @Binding var showModal:Bool
+    @Binding var showModal: Bool
     var body: some View {
-        ScrollView{
+        ScrollView {
             VStack {
                 HStack {
                     Text("Need Permissions")
@@ -18,10 +18,10 @@ struct ModalView: View {
                         .bold()
                     
                     Spacer()
-                    ExitButtonSection(action:{showModal.toggle()})
+                    ExitButtonSection(action: { showModal.toggle() })
                 }
                 .padding()
-                .padding(.top,20)
+                .padding(.top, 20)
                 
                 Text("In order for you use certain features of this app, you need to give permissions. See description for each permission")
                     .font(.system(.body, design: .rounded))
@@ -36,14 +36,8 @@ struct ModalView: View {
                     .padding(.horizontal)
                 Spacer()
             }
-      
         }
         .background(Color(.systemBackground))
         .edgesIgnoringSafeArea(.all)
-
-
-        
-        
     }
 }
-

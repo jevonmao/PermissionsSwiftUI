@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Jevon Mao on 1/31/21.
 //
@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 import UserNotifications
 
-struct JMNotificationPermissionManager{
-    
+struct JMNotificationPermissionManager {
     static let shared = JMNotificationPermissionManager()
     
     private func fetchAuthorizationStatus() -> UNAuthorizationStatus? {
@@ -28,15 +27,14 @@ struct JMNotificationPermissionManager{
         return notificationSettings?.authorizationStatus
     }
     
-    func requestPermission(completion: @escaping (Bool)->()?) {
-            let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-                DispatchQueue.main.async {
-                    completion(granted)
-                }
+    func requestPermission(completion: @escaping (Bool) -> Void?) {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.badge, .alert, .sound]) { granted, _ in
+            DispatchQueue.main.async {
+                completion(granted)
             }
+        }
        
-        
         UIApplication.shared.registerForRemoteNotifications()
     }
 }

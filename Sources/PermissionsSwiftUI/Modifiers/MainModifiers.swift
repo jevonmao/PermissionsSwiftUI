@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Jevon Mao on 1/30/21.
 //
@@ -8,15 +8,16 @@
 import SwiftUI
 
 // MARK: Public modifiers
-struct Permissions: ViewModifier{
-    @Binding var showModal:Bool
+
+struct Permissions: ViewModifier {
+    @Binding var showModal: Bool
 
     func body(content: Content) -> some View {
         MainView(for: AnyView(content), show: $showModal)
     }
 }
-public extension View{
-    
+
+public extension View {
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
      
@@ -43,23 +44,25 @@ public extension View{
      
      */
     
-    func JMPermissions(showModal:Binding<Bool>, for permissions:[PermissionModel]) -> some View{
+    func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionModel]) -> some View {
         PermissionModel.PermissionModelStore.permissions = permissions
-        return self.modifier(Permissions(showModal:showModal))
+        return self.modifier(Permissions(showModal: showModal))
     }
 }
+
 // MARK: - Package modifiers
-struct ButtonStatusColor:ViewModifier{
-    var allowButtonStatus:AllowButtonStatus
+
+struct ButtonStatusColor: ViewModifier {
+    var allowButtonStatus: AllowButtonStatus
     func body(content: Content) -> some View {
-        switch allowButtonStatus{
+        switch self.allowButtonStatus {
         case .idle:
             return content
-                .frame(width:70)
+                .frame(width: 70)
                 .font(.system(size: 15))
                 .foregroundColor(Color(.systemBlue))
                 .padding(4)
-                .padding(.horizontal,2)
+                .padding(.horizontal, 2)
                 .background(
                     Capsule()
                         .fill(Color(.white))
@@ -70,11 +73,11 @@ struct ButtonStatusColor:ViewModifier{
 
         case .allowed:
             return content
-                .frame(width:70)
+                .frame(width: 70)
                 .font(.system(size: 15))
                 .foregroundColor(.white)
                 .padding(4)
-                .padding(.horizontal,2)
+                .padding(.horizontal, 2)
                 .background(
                     Capsule()
                         .fill(Color(.systemBlue))
@@ -83,14 +86,13 @@ struct ButtonStatusColor:ViewModifier{
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
 
-
         case .denied:
             return content
-                .frame(width:70)
+                .frame(width: 70)
                 .font(.system(size: 15))
                 .foregroundColor(.white)
                 .padding(4)
-                .padding(.horizontal,2)
+                .padding(.horizontal, 2)
                 .background(
                     Capsule()
                         .fill(Color(.systemRed))
@@ -98,13 +100,12 @@ struct ButtonStatusColor:ViewModifier{
                 .animation(.default)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
-
         }
     }
 }
 
-extension View{
-    func buttonStatusColor(for allowButtonStatus:AllowButtonStatus) -> some View{
+extension View {
+    func buttonStatusColor(for allowButtonStatus: AllowButtonStatus) -> some View {
         self.modifier(ButtonStatusColor(allowButtonStatus: allowButtonStatus))
     }
 }

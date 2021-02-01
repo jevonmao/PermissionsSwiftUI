@@ -1,6 +1,6 @@
 //
 //  PermissionModel.swift
-//  
+//
 //
 //  Created by Jevon Mao on 1/30/21.
 //
@@ -17,7 +17,7 @@ import SwiftUI
  ```
  */
 
-public enum PermissionModel{
+public enum PermissionModel {
     case location
     case locationAlways
     case photo
@@ -27,8 +27,8 @@ public enum PermissionModel{
     case calendar
     case bluetooth
     
-    struct PermissionModelStore{
-        static var permissions:[PermissionModel] = []
+    enum PermissionModelStore {
+        static var permissions: [PermissionModel] = []
         static var cameraPermission = JMPermission(imageIcon: Image(systemName: "camera.fill"), title: "Camera", description: "Allow to use your camera")
         static var locationPermission = JMPermission(imageIcon: Image(systemName: "location.fill.viewfinder"), title: "Location", description: "Allow to access your location")
         static var locationAlwaysPermission = JMPermission(imageIcon: Image(systemName: "location.fill.viewfinder"), title: "Location Always", description: "Allow to access your location")
@@ -38,8 +38,9 @@ public enum PermissionModel{
         static var calendarPermisson = JMPermission(imageIcon: Image(systemName: "calendar"), title: "Calendar", description: "Allow to access calendar")
         static var bluetoothPermission = JMPermission(imageIcon: Image(systemName: "wave.3.left.circle.fill"), title: "Bluetooth", description: "Allow to use bluetooth")
     }
-    var currentPermission:JMPermission{
-        switch self{
+
+    var currentPermission: JMPermission {
+        switch self {
         case .location:
             return PermissionModelStore.locationPermission
         case .locationAlways:
@@ -58,53 +59,50 @@ public enum PermissionModel{
             return PermissionModelStore.bluetoothPermission
         }
     }
-    func requestPermission(isPermissionGranted: @escaping (Bool) -> Void){
-        switch self{
+
+    func requestPermission(isPermissionGranted: @escaping (Bool) -> Void) {
+        switch self {
         case .location:
-            JMLocationPermissionManager.shared.requestInUsePermission{authorized in
+            JMLocationPermissionManager.shared.requestInUsePermission { authorized in
                 print("Permission \(authorized)")
                 isPermissionGranted(authorized)
             }
         case .locationAlways:
-            JMLocationPermissionManager.shared.requestAlwaysPermission{authorized in
+            JMLocationPermissionManager.shared.requestAlwaysPermission { authorized in
                 print("Permission \(authorized)")
                 isPermissionGranted(authorized)
             }
         case .photo:
-            JMPhotoPermissionManager.shared.requestPermission{authorized in
+            JMPhotoPermissionManager.shared.requestPermission { authorized in
                 isPermissionGranted(authorized)
-                
             }
         case .microphone:
-            JMMicPermissionManager.shared.requestPermission{authorized in
+            JMMicPermissionManager.shared.requestPermission { authorized in
                 isPermissionGranted(authorized)
-                
             }
         case .camera:
-            JMCameraPermissionManager.shared.requestPermission{authorized in
+            JMCameraPermissionManager.shared.requestPermission { authorized in
                 isPermissionGranted(authorized)
             }
         case .notification:
-            JMNotificationPermissionManager.shared.requestPermission{authorized in
+            JMNotificationPermissionManager.shared.requestPermission { authorized in
                 isPermissionGranted(authorized)
             }
         case .calendar:
-            JMBluetoothPermissionManager.shared.requestPermission{authorized in
+            JMBluetoothPermissionManager.shared.requestPermission { authorized in
                 isPermissionGranted(authorized)
             }
          
         case .bluetooth:
-            JMCalendarPermissionManager.shared.requestPermission{authorized in
+            JMCalendarPermissionManager.shared.requestPermission { authorized in
                 isPermissionGranted(authorized)
             }
         }
     }
-    
-    
 }
 
-public struct JMPermission{
-    var imageIcon:Image
-    var title:String
-    var description:String
+public struct JMPermission {
+    var imageIcon: Image
+    var title: String
+    var description: String
 }

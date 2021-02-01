@@ -1,0 +1,13 @@
+--binarygrouping none
+--decimalgrouping none
+--elseposition next-line
+--hexgrouping none
+--ifdef no-indent
+--octalgrouping none
+--self insert
+--semicolons never
+--stripunusedargs closure-only
+--trimwhitespace nonblank-lines
+--wraparguments before-first
+--wrapcollections before-first
+
