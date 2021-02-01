@@ -12,7 +12,7 @@ struct ExitButtonSection: View {
     var body: some View {
         Button(action: action, label: {
             Circle()
-                .fill(Color.black.opacity(0.2))
+                .fill(Color(.systemGray4))
                 .frame(width:40, height: 40)
                 .overlay(
                     Image(systemName: "xmark")

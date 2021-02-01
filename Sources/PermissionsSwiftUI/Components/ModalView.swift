@@ -39,7 +39,7 @@ struct ModalView: View {
             }
       
         }
-        .background(Color(.systemGray6))
+        .background(Color(.systemBackground))
         .edgesIgnoringSafeArea(.all)
 
 
