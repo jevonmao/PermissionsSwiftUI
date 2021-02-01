@@ -32,6 +32,23 @@ Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions y
    }
  ```
 ## Usage
+### Customize permission texts
+⚠️ This feature is still very work in progress. It is only available for the camera and location
 
+To customize permission texts, use the modifier with syntax `permission+"permissionName"`. Ex. `permissionCamera` is for camera.
+
+You can change title and description:
+```Swift
+.JMPermissions(showModal: $showModal, for: [.camera])
+.permissionCamera(title: "Camcorder", description: "App needs to record videos")
+```
+<div style="text-align:center">
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-camera.png" height="100">
+</div>
+
+Or only change 1 of title and description.
+```Swift
+.permissionCamera(title: "Camcorder")
+```
 ## License
 PermissionsSwiftUI is created by Jingwen (Jevon) Mao and licensed under the [MIT License](https://jingwen-mao.mit-license.org)
