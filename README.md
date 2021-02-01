@@ -6,7 +6,8 @@
 
 # PermissionsSwiftUI: A SwiftUI package to handle permissions
 
-## About
+<img src="https://img.shields.io/github/workflow/status/jevonmao/PermissionsSwiftUI/Swift?label=CI%20Build"> <img src="https://img.shields.io/github/contributors/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/badge/License-MIT-blue.svg"> <img src="https://img.shields.io/github/issues/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/github/commit-activity/w/jevonmao/PermissionsSwiftUI?color=yellowgreen&logoColor=yellowgreen"> [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6fe1a84c136b4a99823e7d71a8d08625)](https://www.codacy.com/gh/jevonmao/PermissionsSwiftUI/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jevonmao/PermissionsSwiftUI&amp;utm_campaign=Badge_Grade)
+
 `PermissionsSwiftUI` displays and handles permissions in SwiftUI.
 The UI/UX is highly customizable and resembles an **Apple style**. If you like the project, don't forget to `put star ★` and follow me on GitHub. <br />
 <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot1.png" height="500"/>
@@ -15,10 +16,9 @@ The UI/UX is highly customizable and resembles an **Apple style**. If you like t
 <p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑dark mode. </p>
 
 ## Navigation
-- [About](#about)
-- [Quickstart](#quickstart) 
-- [Usage](#usage)
-- [License](#license)
+-  [Quickstart](#quickstart) 
+-  [Usage](#usage)
+-  [License](#license)
 
 ## Quickstart
 To use PermissionsSwiftUI, simply add the `JMPermission` modifier to any view. <br />
