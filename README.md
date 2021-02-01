@@ -1,18 +1,24 @@
-# PermissionsSwiftUI: A SwiftUI package to handle permissions
-> A simple, highly-customizable package to handle permissions. In native SwiftUI.
+<span align="center">
+  <br>
+<img src="https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png" width="150">
+  <br>
+</span>
 
-- [Quickstart](#quickstart) 
-- [Usage](#usage)
-- [License](#license)
+# PermissionsSwiftUI: A SwiftUI package to handle permissions
 
 ## About
-`PermissionsSwiftUI` is a SwiftUI API to ask for user permissions using Swift. The user will be presented a modal to handle permissions.
-
+`PermissionsSwiftUI` displays and handles permissions in SwiftUI.
 The UI/UX is highly customizable and resembles an **Apple style**. If you like the project, don't forget to `put star ★` and follow me on GitHub. <br />
 <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot1.png" height="500"/>
 &emsp; &emsp;
 <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-dark.png" height="500"/> <br />
 <p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑dark mode. </p>
+
+## Navigation
+- [About](#about)
+- [Quickstart](#quickstart) 
+- [Usage](#usage)
+- [License](#license)
 
 ## Quickstart
 To use PermissionsSwiftUI, simply add the `JMPermission` modifier to any view. <br />
