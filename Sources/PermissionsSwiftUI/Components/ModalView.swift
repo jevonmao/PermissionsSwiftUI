@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ModalView: View {
     @Binding var showModal:Bool
-    var permissions:[PermissionModel]
     var body: some View {
         ScrollView{
             VStack {
@@ -30,7 +29,7 @@ struct ModalView: View {
                     .foregroundColor(Color(.systemGray))
                     .padding()
                     
-                PermissionSection(permissions: permissions)
+                PermissionSection()
                 Text("Permission are necessary for all the features and functions to work properly. Without location permission, you won't be able to use the maps feature. Without photo permission, you can't send images in chat.")
                     .font(.system(.callout, design: .rounded))
                     .foregroundColor(Color(.systemGray))

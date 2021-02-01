@@ -8,11 +8,11 @@
 import SwiftUI
 import MapKit
 struct PermissionSection: View {
-    var permissions:[PermissionModel]
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         VStack{
+            let permissions = PermissionModel.PermissionModelStore.permissions
             ForEach(permissions, id:\.self){
                 PermissionSectionCell(permission: $0)
                 if permissions.count > 1{
@@ -49,7 +49,8 @@ struct PermissionSectionCell: View{
                     .font(.system(size: 20))
                     .bold()
                 Text(currentPermission.description)
-                    .font(.body)
+                    .font(.footnote)
+                    .lineLimit(3)
                     .foregroundColor(Color(.systemGray2))
             }
             .padding(.horizontal, 5)

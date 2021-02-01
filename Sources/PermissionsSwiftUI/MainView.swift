@@ -10,16 +10,14 @@ import SwiftUI
 struct MainView: View {
     private var showModal:Binding<Bool>
     private var bodyView:AnyView
-    private var permissions:[PermissionModel]
-    init(for bodyView:AnyView, show showModal:Binding<Bool>, permissions:[PermissionModel]){
+    init(for bodyView:AnyView, show showModal:Binding<Bool>){
         self.bodyView = bodyView
         self.showModal = showModal
-        self.permissions = permissions
     }
     var body: some View {
         bodyView
             .sheet(isPresented: showModal, content: {
-                ModalView(showModal: showModal, permissions: permissions)
+                ModalView(showModal: showModal)
                    
             })
            
