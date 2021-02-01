@@ -2,18 +2,19 @@
 > A simple, highly-customizable package to handle permissions. In native SwiftUI.
 
 - [Quickstart](#quickstart) 
+- [Usage](#usage)
 - [License](#license)
 
-<img align="left" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot1.png" height="600"/>
-
 ## About
-`JMPermissions` is a SwiftUI API to ask for user permissions using Swift. The user will be presented a modal to handle permissions.
+`PermissionsSwiftUI` is a SwiftUI API to ask for user permissions using Swift. The user will be presented a modal to handle permissions.
 
 The UI/UX is highly customizable and resembles an **Apple style**.
 
 If you like the project, don't forget to `put star ★` and follow me on GitHub. 
-<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot1.png" height="500"/>
+&emsp; &emsp;
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-dark.png" height="500"/> <br />
+<p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑dark mode. </p>
 
 ## Quickstart
 To use PermissionsSwiftUI, simply add the `JMPermission` modifier to any view. <br />
@@ -32,5 +33,7 @@ Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions y
        }
    }
  ```
+## Usage
+
 ## License
 PermissionsSwiftUI is created by Jingwen (Jevon) Mao and licensed under the [MIT License](https://jingwen-mao.mit-license.org)
