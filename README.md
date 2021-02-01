@@ -8,9 +8,7 @@
 ## About
 `PermissionsSwiftUI` is a SwiftUI API to ask for user permissions using Swift. The user will be presented a modal to handle permissions.
 
-The UI/UX is highly customizable and resembles an **Apple style**.
-
-If you like the project, don't forget to `put star ★` and follow me on GitHub. 
+The UI/UX is highly customizable and resembles an **Apple style**. If you like the project, don't forget to `put star ★` and follow me on GitHub. <br />
 <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot1.png" height="500"/>
 &emsp; &emsp;
 <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-dark.png" height="500"/> <br />
