@@ -46,23 +46,7 @@ public extension View{
     }
     /**
      Customizes only the title text for camera permission component
-     
-     For example, use this modifier on your existing view and pass in your custom text to show
-     ````
-         struct ContentView: View {
-             @State var showModal = false
-             var body: some View {
-                 Button(action: {
-                     showModal=true
-                 }, label: {
-                     Text("Ask user for permissions")
-                 })
-                 .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
-                 .permissionCamera(title: "Camcorder", description: "Allow to use the camera to film")
-             }
-             
-         }
-     ````
+
      - Parameters:
         - title: The title text
      */
@@ -75,22 +59,6 @@ public extension View{
     /**
      Customizes only the description text for camera permission component
      
-     For example, use this modifier on your existing view and pass in your custom text to show
-     ````
-         struct ContentView: View {
-             @State var showModal = false
-             var body: some View {
-                 Button(action: {
-                     showModal=true
-                 }, label: {
-                     Text("Ask user for permissions")
-                 })
-                 .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
-                 .permissionCamera(title: "Camcorder", description: "Allow to use the camera to film")
-             }
-             
-         }
-     ````
      - Parameters:
         - description: The description text
      */
@@ -136,22 +104,7 @@ public extension View{
     }
     /**
      Customizes only the title text for location permission component
-     
-     For example, use this modifier on your existing view and pass in your custom text to show
-     ````
-         struct ContentView: View {
-             @State var showModal = false
-             var body: some View {
-                 Button(action: {
-                     showModal=true
-                 }, label: {
-                     Text("Ask user for permissions")
-                 })
-                 .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
-                 .permissionCamera(title: "Camcorder", description: "Allow to use the camera to film")
-             }
-             
-         }
+
      ````
      - Parameters:
         - title: The title text
@@ -165,22 +118,6 @@ public extension View{
     /**
      Customizes only the description text for location permission component
      
-     For example, use this modifier on your existing view and pass in your custom text to show
-     ````
-         struct ContentView: View {
-             @State var showModal = false
-             var body: some View {
-                 Button(action: {
-                     showModal=true
-                 }, label: {
-                     Text("Ask user for permissions")
-                 })
-                 .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
-                 .permissionCamera(title: "Camcorder", description: "Allow to use the camera to film")
-             }
-             
-         }
-     ````
      - Parameters:
         - description: The description text
      */
