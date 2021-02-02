@@ -11,7 +11,6 @@ import UserNotifications
 
 struct JMNotificationPermissionManager {
     static let shared = JMNotificationPermissionManager()
-    
     private func fetchAuthorizationStatus() -> UNAuthorizationStatus? {
         var notificationSettings: UNNotificationSettings?
         let semaphore = DispatchSemaphore(value: 0)

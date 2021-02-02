@@ -19,7 +19,6 @@ struct ExitButtonSection: View {
                         .font(.system(size: 18, weight: .bold, design: .rounded))
                         .foregroundColor(Color(.systemGray))
                 )
-                
         })
     }
 }

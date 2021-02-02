@@ -10,7 +10,6 @@ import MapKit
 
 class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate {
     static var shared = JMLocationPermissionManager()
-    
     lazy var locationManager: CLLocationManager = {
         CLLocationManager()
     }()

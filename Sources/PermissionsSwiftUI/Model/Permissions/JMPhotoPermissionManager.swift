@@ -10,7 +10,6 @@ import Photos
 
 struct JMPhotoPermissionManager {
     static var shared = JMPhotoPermissionManager()
-    
     func requestPermission(completion: @escaping JMPermissionAuthorizationHandlerCompletionBlock) {
         PHPhotoLibrary.requestAuthorization { authStatus in
             switch authStatus {

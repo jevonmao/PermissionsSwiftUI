@@ -16,7 +16,6 @@ struct ModalView: View {
                     Text("Need Permissions")
                         .font(.system(.largeTitle, design: .rounded))
                         .bold()
-                    
                     Spacer()
                     ExitButtonSection(action: { showModal.toggle() })
                 }

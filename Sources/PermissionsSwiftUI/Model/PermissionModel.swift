@@ -29,14 +29,46 @@ public enum PermissionModel {
     
     enum PermissionModelStore {
         static var permissions: [PermissionModel] = []
-        static var cameraPermission = JMPermission(imageIcon: Image(systemName: "camera.fill"), title: "Camera", description: "Allow to use your camera")
-        static var locationPermission = JMPermission(imageIcon: Image(systemName: "location.fill.viewfinder"), title: "Location", description: "Allow to access your location")
-        static var locationAlwaysPermission = JMPermission(imageIcon: Image(systemName: "location.fill.viewfinder"), title: "Location Always", description: "Allow to access your location")
-        static var photoPermission = JMPermission(imageIcon: Image(systemName: "photo"), title: "Photo Library", description: "Allow to access your photos")
-        static var microphonePermisson = JMPermission(imageIcon: Image(systemName: "mic.fill"), title: "Microphone", description: "Allow to record with microphone")
-        static var notificationPermission = JMPermission(imageIcon: Image(systemName: "bell.fill"), title: "Notification", description: "Allow to send notifications")
-        static var calendarPermisson = JMPermission(imageIcon: Image(systemName: "calendar"), title: "Calendar", description: "Allow to access calendar")
-        static var bluetoothPermission = JMPermission(imageIcon: Image(systemName: "wave.3.left.circle.fill"), title: "Bluetooth", description: "Allow to use bluetooth")
+        static var cameraPermission = JMPermission(
+            imageIcon: Image(systemName: "camera.fill"),
+            title: "Camera",
+            description: "Allow to use your camera"
+        )
+        static var locationPermission = JMPermission(
+            imageIcon: Image(systemName: "location.fill.viewfinder"),
+            title: "Location",
+            description: "Allow to access your location"
+        )
+        static var locationAlwaysPermission = JMPermission(
+            imageIcon: Image(systemName: "location.fill.viewfinder"),
+            title: "Location Always",
+            description: "Allow to access your location"
+        )
+        static var photoPermission = JMPermission(
+            imageIcon: Image(systemName: "photo"),
+            title: "Photo Library",
+            description: "Allow to access your photos"
+        )
+        static var microphonePermisson = JMPermission(
+            imageIcon: Image(systemName: "mic.fill"),
+            title: "Microphone",
+            description: "Allow to record with microphone"
+        )
+        static var notificationPermission = JMPermission(
+            imageIcon: Image(systemName: "bell.fill"),
+            title: "Notification",
+            description: "Allow to send notifications"
+        )
+        static var calendarPermisson = JMPermission(
+            imageIcon: Image(systemName: "calendar"),
+            title: "Calendar",
+            description: "Allow to access calendar"
+        )
+        static var bluetoothPermission = JMPermission(
+            imageIcon: Image(systemName: "wave.3.left.circle.fill"),
+            title: "Bluetooth",
+            description: "Allow to use bluetooth"
+        )
     }
 
     var currentPermission: JMPermission {

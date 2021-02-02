@@ -10,7 +10,6 @@ import Foundation
 
 struct JMCameraPermissionManager {
     static var shared = JMCameraPermissionManager()
-    
     func requestPermission(completion: @escaping (Bool) -> Void?) {
         AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {
             authorized in
