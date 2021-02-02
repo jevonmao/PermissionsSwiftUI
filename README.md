@@ -19,8 +19,11 @@ The UI/UX is highly customizable and resembles an **Apple style**. If you like t
 -  [Quickstart](#quickstart) 
 -  [Usage](#usage)
 -  [License](#license)
+-  [Additional Information](#additional-information)
 
 ## Quickstart
+> Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.
+
 To use PermissionsSwiftUI, simply add the `JMPermission` modifier to any view. <br />
 Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions you want to show.
 ```Swift
@@ -56,5 +59,8 @@ Or only change 1 of title and description.
 ```Swift
 .permissionCamera(title: "Camcorder")
 ```
+## Additional Information
+Here is a list of all permissions PermissionsSwiftUI already supports/will support. By the 0.0.1 beta release, PermissionsSwiftUI will have all 12 iOS system permissions built in. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon. Stay tuned!
+<img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card.png" alt="A card of all the permissions" width="100%">
 ## License
 PermissionsSwiftUI is created by Jingwen (Jevon) Mao and licensed under the [MIT License](https://jingwen-mao.mit-license.org)

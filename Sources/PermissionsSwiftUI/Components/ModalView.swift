@@ -16,7 +16,6 @@ struct ModalView: View {
                     Text(PermissionModel.PermissionModelStore.headerText)
                         .font(.system(.largeTitle, design: .rounded))
                         .bold()
-                    
                     Spacer()
                     ExitButtonSection(action: { showModal.toggle() })
                 }

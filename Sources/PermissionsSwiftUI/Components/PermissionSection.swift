@@ -64,7 +64,6 @@ struct PermissionSectionCell: View {
                         allowButtonStatus = .idle
                     }
                 }
-            
             }, allowButtonStatus: $allowButtonStatus)
         }
         .padding(15)

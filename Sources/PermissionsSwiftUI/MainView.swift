@@ -19,7 +19,6 @@ struct MainView: View {
         bodyView
             .sheet(isPresented: showModal, content: {
                 ModalView(showModal: showModal)
-                   
             })
     }
 }
