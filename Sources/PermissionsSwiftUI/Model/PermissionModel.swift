@@ -29,6 +29,13 @@ public enum PermissionModel {
     
     enum PermissionModelStore {
         static var permissions: [PermissionModel] = []
+        static var headerText:String = "Need Permissions"
+        static var headerDescription:String = """
+                                       In order for you use certain features of this app, you need to give permissions. See description for each permission
+                                       """
+        static var bottomDescription:String = """
+                                            Permission are necessary for all the features and functions to work properly. If not allowed, you have to enable permissions in settings
+                                            """
         static var cameraPermission = JMPermission(
             imageIcon: Image(systemName: "camera.fill"),
             title: "Camera",
