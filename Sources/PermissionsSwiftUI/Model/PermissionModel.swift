@@ -123,6 +123,7 @@ extension PermissionModel{
             description: "Allow to access speech recognition", authorized: false
         )
         }
+
     var currentPermission: JMPermission {
         get{
             switch self {

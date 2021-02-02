@@ -29,6 +29,7 @@ struct ModalView: View {
                     .padding()
                     
                 PermissionSection(showModal:$showModal)
+
                 Text(PermissionModel.PermissionModelStore.bottomDescription)
                     .font(.system(.callout, design: .rounded))
                     .foregroundColor(Color(.systemGray))

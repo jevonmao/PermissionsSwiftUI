@@ -23,6 +23,7 @@ struct PlaceholderModifier: ViewModifier {
 //        return self.modifier(PlaceholderModifier())
 //    }
 //}
+
 // MARK: Camera
 
 public extension View {
@@ -55,6 +56,7 @@ public extension View {
         return self.modifier(PlaceholderModifier())
     }
     /**
+
      Customizes the title and description text for camera permission component
      
      For example, use this modifier on your existing view and pass in your custom text to show
@@ -508,7 +510,7 @@ public extension View {
 
     /**
      Customizes only the description text for the photo library permission component
-     
+
      - Parameters:
         - description: The description text
      */
