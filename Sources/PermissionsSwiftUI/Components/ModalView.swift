@@ -13,7 +13,7 @@ struct ModalView: View {
         ScrollView {
             VStack {
                 HStack {
-                    Text("Need Permissions")
+                    Text(PermissionModel.PermissionModelStore.headerText)
                         .font(.system(.largeTitle, design: .rounded))
                         .bold()
                     
@@ -23,14 +23,14 @@ struct ModalView: View {
                 .padding()
                 .padding(.top, 20)
                 
-                Text("In order for you use certain features of this app, you need to give permissions. See description for each permission")
+                Text(PermissionModel.PermissionModelStore.headerDescription)
                     .font(.system(.body, design: .rounded))
                     .fontWeight(.medium)
                     .foregroundColor(Color(.systemGray))
                     .padding()
                     
                 PermissionSection()
-                Text("Permission are necessary for all the features and functions to work properly. Without location permission, you won't be able to use the maps feature. Without photo permission, you can't send images in chat.")
+                Text(PermissionModel.PermissionModelStore.bottomDescription)
                     .font(.system(.callout, design: .rounded))
                     .foregroundColor(Color(.systemGray))
                     .padding(.horizontal)
