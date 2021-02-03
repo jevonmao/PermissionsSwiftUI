@@ -31,3 +31,18 @@ jobs:
 
       - name: Format Swift code
         run: swiftformat --verbose . --swiftversion 5.2
+  SwiftDoc:
+    name: Generate documentation
+    runs-on: macos-latest
+    steps:
+      - name: Swift Doc
+        uses: SwiftDocOrg/swift-doc@1.0.0-beta.5
+        with:
+          inputs: "Sources"
+          module-name: PermissionsSwiftUI
+          output: "Documentation"
+      - name: Upload Documentation to Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          path: "Documentation"
+
