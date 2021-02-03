@@ -38,7 +38,7 @@ jobs:
       - name: Swift Doc
         uses: SwiftDocOrg/swift-doc@1.0.0-beta.5
         with:
-          inputs: "Sources"
+          inputs: "Sources/PermissionsSwiftUI"
           module-name: PermissionsSwiftUI
           output: "Documentation"
       - name: Upload Documentation to Wiki
