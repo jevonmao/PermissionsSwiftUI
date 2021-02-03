@@ -16,8 +16,8 @@ struct ButtonStatusColor: ViewModifier {
                 .frame(width: 70)
                 .font(.system(size: 15))
                 .foregroundColor(Color(.systemBlue))
-                .padding(4)
-                .padding(.horizontal, 2)
+                .padding(.vertical,6)
+                .padding(.horizontal, 6)
                 .background(
                     Capsule()
                         .fill(Color(.white))
@@ -31,8 +31,8 @@ struct ButtonStatusColor: ViewModifier {
                 .frame(width: 70)
                 .font(.system(size: 15))
                 .foregroundColor(.white)
-                .padding(4)
-                .padding(.horizontal, 2)
+                .padding(.vertical,6)
+                .padding(.horizontal, 6)
                 .background(
                     Capsule()
                         .fill(Color(.systemBlue))
@@ -46,8 +46,8 @@ struct ButtonStatusColor: ViewModifier {
                 .frame(width: 70)
                 .font(.system(size: 15))
                 .foregroundColor(.white)
-                .padding(4)
-                .padding(.horizontal, 2)
+                .padding(.vertical,6)
+                .padding(.horizontal, 6)
                 .background(
                     Capsule()
                         .fill(Color(.systemRed))
