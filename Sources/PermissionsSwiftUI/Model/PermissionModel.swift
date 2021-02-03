@@ -186,7 +186,6 @@ extension PermissionModel{
             PermissionModelStore.remindersPermission = model
         case .speech:
             PermissionModelStore.speechPermission = model
-
         }
     }
     func requestPermission(isPermissionGranted: @escaping (Bool) -> Void) {
