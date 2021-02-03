@@ -67,6 +67,6 @@ struct PermissionSectionCell: View {
             }, allowButtonStatus: $allowButtonStatus)
         }
         .padding(15)
-        .onAppear {}
+        .frame(maxHeight:.infinity)
     }
 }

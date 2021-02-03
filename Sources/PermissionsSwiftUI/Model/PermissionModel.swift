@@ -17,15 +17,35 @@ import SwiftUI
  ```
  */
 
-public enum PermissionModel {
+public enum PermissionModel:CaseIterable {
+    ///The `location` permission allows the device's positoin to be tracked
     case location
+    ///The `locationAlways` permission provides location data even if app is in background
     case locationAlways
+    ///Used to access the user's photo library
     case photo
+    ///Permission allows developers to interact with the device microphone
     case microphone
+    ///Permission that allows developers to interact with on-device camera
     case camera
+    ///The `notification` permission allows the iOS system to receive notification from app
     case notification
+    ///Permission that allows app to read & write to device calendar
     case calendar
+    ///Permission that allows app to access device's bluetooth technologies
     case bluetooth
+    ///In order for app to track user's data across apps and websites, the tracking permission is needed
+    case tracking
+    ///A permission that allows developers to read & write to device contacts
+    case contacts
+    ///Permission that give app access to motion and fitness related sensor data
+    case motion
+    ///The `reminders` permission is needed to interact with device reminders
+    case reminders
+    ///Permission that allows app to use speech recognition
+    case speech
+}
+extension PermissionModel{
     
     enum PermissionModelStore {
         static var permissions: [PermissionModel] = []
@@ -76,8 +96,32 @@ public enum PermissionModel {
             title: "Bluetooth",
             description: "Allow to use bluetooth"
         )
-    }
-
+        static var trackingPermission = JMPermission(
+            imageIcon: Image(systemName: "person.circle.fill"),
+            title: "Tracking",
+            description: "Allow to track your data"
+        )
+        static var contactsPermission = JMPermission(
+            imageIcon: Image(systemName: "book.fill"),
+            title: "Contacts",
+            description: "Allow to access your contacts"
+        )
+        static var motionPermission = JMPermission(
+            imageIcon: Image(systemName: "hare.fill"),
+            title: "Motion",
+            description: "Allow to access your motion sensor data"
+        )
+        static var remindersPermission = JMPermission(
+            imageIcon: Image(systemName: "list.bullet.rectangle"),
+            title: "Reminderes",
+            description: "Allow to access your reminders"
+        )
+        static var speechPermission = JMPermission(
+            imageIcon: Image(systemName: "rectangle.3.offgrid.bubble.left.fill"),
+            title: "Speech",
+            description: "Allow to access speech recognition"
+        )
+        }
     var currentPermission: JMPermission {
         switch self {
         case .location:
@@ -96,6 +140,17 @@ public enum PermissionModel {
             return PermissionModelStore.calendarPermisson
         case .bluetooth:
             return PermissionModelStore.bluetoothPermission
+        case .tracking:
+            return PermissionModelStore.trackingPermission
+        case .contacts:
+            return PermissionModelStore.contactsPermission
+        case .motion:
+            return PermissionModelStore.motionPermission
+        case .reminders:
+            return PermissionModelStore.remindersPermission
+        case .speech:
+            return PermissionModelStore.speechPermission
+            
         }
     }
 
@@ -128,20 +183,44 @@ public enum PermissionModel {
                 isPermissionGranted(authorized)
             }
         case .calendar:
-            JMBluetoothPermissionManager.shared.requestPermission { authorized in
+            JMCalendarPermissionManager.shared.requestPermission { authorized in
                 isPermissionGranted(authorized)
             }
          
         case .bluetooth:
-            JMCalendarPermissionManager.shared.requestPermission { authorized in
+            JMBluetoothPermissionManager.shared.requestPermission { authorized in
                 isPermissionGranted(authorized)
+      
+            }
+        case .tracking:
+            if #available(iOS 14, *) {
+                JMTrackingPermissionManager.shared.requestPermission{authorized in
+                    print(authorized)
+                    isPermissionGranted(authorized)
+                }
+            }
+        case .contacts:
+            JMContactsPermissionManager.shared.requestPermission{authorized in
+                isPermissionGranted(authorized)
+            }
+        case .motion:
+            JMMotionPermissionManager.shared.requestPermission{authorized in
+                isPermissionGranted(authorized)
+            }
+        case .reminders:
+            JMRemindersPermissionManager.shared.requestPermission{
+                isPermissionGranted($0)
+            }
+        case .speech:
+            JMSpeechPermissionManager.shared.requestPermission{
+                isPermissionGranted($0)
             }
         }
     }
 }
-
-public struct JMPermission {
+public struct JMPermission{
     var imageIcon: Image
     var title: String
     var description: String
 }
+

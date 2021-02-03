@@ -12,11 +12,11 @@ class JMBluetoothPermissionManager: NSObject {
     typealias JMBluetoothPermissionHandler = (Bool) -> Void?
     private var completion: JMBluetoothPermissionHandler?
     private var manager: CBCentralManager?
-    static let shared = JMCalendarPermissionManager()
+    static let shared = JMBluetoothPermissionManager()
 
     func requestPermission(completion: @escaping (Bool) -> Void?) {
         self.completion = completion
-        self.manager = CBCentralManager(delegate: self, queue: nil, options: [:])
+        self.manager = CBCentralManager(delegate: self, queue: nil)
     }
 }
 
