@@ -35,6 +35,8 @@ struct ModalView: View {
                     .padding(.horizontal)
                 Spacer()
             }
+            .padding(.bottom,30)
+
         }
         .background(Color(.systemBackground))
         .edgesIgnoringSafeArea(.all)
