@@ -17,7 +17,7 @@ import SwiftUI
  ```
  */
 
-public enum PermissionModel:CaseIterable {
+public enum PermissionModel {
     ///The `location` permission allows the device's positoin to be tracked
     case location
     ///The `locationAlways` permission provides location data even if app is in background
@@ -34,8 +34,6 @@ public enum PermissionModel:CaseIterable {
     case calendar
     ///Permission that allows app to access device's bluetooth technologies
     case bluetooth
-    ///In order for app to track user's data across apps and websites, the tracking permission is needed
-    case tracking
     ///A permission that allows developers to read & write to device contacts
     case contacts
     ///Permission that give app access to motion and fitness related sensor data
@@ -44,6 +42,8 @@ public enum PermissionModel:CaseIterable {
     case reminders
     ///Permission that allows app to use speech recognition
     case speech
+    ///In order for app to track user's data across apps and websites, the tracking permission is needed
+    @available(iOS 14.5, *) case tracking
 }
 extension PermissionModel{
     
