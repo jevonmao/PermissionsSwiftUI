@@ -33,7 +33,7 @@ jobs:
         run: swiftformat --verbose . --swiftversion 5.2
   SwiftDoc:
     name: Generate documentation
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Swift Doc
         uses: SwiftDocOrg/swift-doc@1.0.0-beta.5
