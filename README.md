@@ -42,23 +42,47 @@ Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions y
  ```
 ## Usage
 ### Customize permission texts
-⚠️ This feature is still very work in progress. It is only available for the camera and location
+😱 Be aware. Features ahead will wow you - the customization is so advanced, yet so simple. Have fun!
 
-To customize permission texts, use the modifier with syntax `permission+"permissionName"`. Ex. `permissionCamera` is for camera.
+To customize permission texts, use the modifier with syntax `customize`"permission name"`PermissionWith`. Ex. `customizeCameraPermissionWith` is for camera, and `customizeLocationPermissionWith` is for location.
 
 You can change title and description:
 ```Swift
 .JMPermissions(showModal: $showModal, for: [.camera])
-.permissionCamera(title: "Camcorder", description: "App needs to record videos")
+.customizeCameraPermissionWith(title: "Camcorder", description: "App needs to record videos")
 ```
+and the result:
 <div style="text-align:center">
 <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-camera.png" height="100">
 </div>
 
-Or only change 1 of title and description.
+Or only change 1 of title and description:
 ```Swift
-.permissionCamera(title: "Camcorder")
+.customizeCameraPermissionWith(title: "Camcorder")
 ```
+the parameters you don't provide will show the default text
+```Swift
+.customizeCameraPermissionWith(description: "App needs to record videos")
+```
+You can use custom text for all the supported permissions, with a single line of code.
+### Customize header texts
+To customize the header title, use the modifier `changeHeaderTo`:
+<img align="right" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Header%20annotation.png?raw=true" alt="Annotated for headers screen" height="400" />
+```Swift
+.JMPermissions(showModal: $showModal, for: [.camera, .location, .calendar])
+.changeHeaderTo("App Permissions")
+```
+To customize the header description, use the modifier `changeHeaderDescriptionTo`:
+```Swift
+.JMPermissions(showModal: $showModal, for: [.camera, .location, .photo])
+.changeHeaderDescriptionTo("Instagram need certain permissions in order for all the features to work.")
+```
+To customize the bottom description, use the modifier `changeBottomDescriptionTo`:
+```Swift
+.JMPermissions(showModal: $showModal, for: [.camera, .location, .photo])
+.changeBottomDescriptionTo("If not allowed, you have to enable permissions in settings")
+```
+<br /> <br /> <br />
 ## Additional Information
 Here is a list of all permissions PermissionsSwiftUI already supports/will support. By the 0.0.1 beta release, PermissionsSwiftUI will have all 12 iOS system permissions built in. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon. Stay tuned!
 <img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card.png" alt="A card of all the permissions" width="100%">
