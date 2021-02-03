@@ -44,6 +44,7 @@ public enum PermissionModel {
     case speech
     ///In order for app to track user's data across apps and websites, the tracking permission is needed
     @available(iOS 14.5, *) case tracking
+
 }
 extension PermissionModel{
     
