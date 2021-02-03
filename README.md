@@ -16,10 +16,24 @@ The UI/UX is highly customizable and resembles an **Apple style**. If you like t
 <p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑dark mode. </p>
 
 ## Navigation
+-  [Installation](#installation)
 -  [Quickstart](#quickstart) 
 -  [Usage](#usage)
 -  [License](#license)
 -  [Additional Information](#additional-information)
+
+## Installation
+### Requirements
+* iOS 13 or iPadOS 13
+* Xcode 12 and Swift 5.3
+* No tvOS, MacOS, and WatchOS support for now
+### Install
+You can install PermissionsSwiftUI into your Xcode project via Swift Package Manager. To learn more about Swift Package Manager, click [here](https://swift.org/package-manager/)
+1. In Xcode, open your project and navigate to **File** → **Swift Packages** → **Add Package Dependency...**
+2. Paste the repository URL (`https://github.com/jevonmao/PermissionsSwiftUI`) and click **Next**.
+3. For **Version**, select **Up to next major**.
+4. Click **Next** and click **Finish**.
+5. You are all set, have fun using PermissionsSwiftUI!
 
 ## Quickstart
 > Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.
