@@ -9,12 +9,12 @@ import MapKit
 import SwiftUI
 struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
-
+    @Binding var showModal:Bool
     var body: some View {
         VStack {
             let permissions = PermissionModel.PermissionModelStore.permissions
-            ForEach(permissions, id: \.self) {
-                PermissionSectionCell(permission: $0)
+            ForEach(permissions.indices, id: \.self) {
+                PermissionSectionCell(permission: permissions[$0], showModal: $showModal)
                 if permissions.count > 1 {
                     Divider()
                 }
@@ -36,6 +36,17 @@ enum AllowButtonStatus {
 struct PermissionSectionCell: View {
     var permission: PermissionModel
     @State var allowButtonStatus: AllowButtonStatus = .idle
+    @Binding var showModal:Bool
+    var isLast:Bool{
+        ///Filter and only get unauthorized permissions
+        let permissions = PermissionModel.PermissionModelStore.permissions.filter{$0.currentPermission.authorized==false}
+        if permissions.count == 0{
+            return true
+        }
+        else{
+            return false
+        }
+    }
     var body: some View {
         let currentPermission = self.permission.currentPermission
         HStack {
@@ -57,12 +68,24 @@ struct PermissionSectionCell: View {
             Spacer()
             AllowButtonSection(action: {
                 permission.requestPermission { authed in
+                    var currentPermission = permission.currentPermission
                     if authed {
                         allowButtonStatus = .allowed
+                        currentPermission.authorized = true
                     }
                     else {
                         allowButtonStatus = .idle
+                        currentPermission.authorized = false
                     }
+                    permission.updatePermissionModelStore(to: currentPermission)
+
+                    if isLast{
+                        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+                            showModal = false
+                        }
+                    }
+                   
+                    
                 }
             }, allowButtonStatus: $allowButtonStatus)
         }

@@ -1,0 +1,12 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/jevonmao/Documents/Repo/PermissionsSwiftUI-test-app/PermissionsSwiftUI/Sources/PermissionsSwiftUI/Model/PermissionModel.swift",
+      "line": 221,
+      "symbol": "JMPermission",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/jevonmao/Documents/Repo/PermissionsSwiftUI-test-app/PermissionsSwiftUI"
+}

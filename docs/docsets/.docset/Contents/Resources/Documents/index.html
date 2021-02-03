@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a title="  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html"> Docs</a> (98% documented)</p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html"> Reference</a>
+        <img id="carat" src="img/carat.png" />
+          Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/PermissionModel.html">PermissionModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/View.html">View</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:18PermissionsSwiftUI12JMPermissionV">JMPermission</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <p><span align="center">
+  <br>
+<img src="https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png" width="150">
+  <br>
+</span></p>
+<h1 id='permissionsswiftui-a-swiftui-package-to-handle-permissions' class='heading'>PermissionsSwiftUI: A SwiftUI package to handle permissions</h1>
+
+<p><img src="https://img.shields.io/github/workflow/status/jevonmao/PermissionsSwiftUI/Swift?label=CI%20Build"> <img src="https://img.shields.io/github/contributors/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/badge/License-MIT-blue.svg"> <img src="https://img.shields.io/github/issues/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/github/commit-activity/w/jevonmao/PermissionsSwiftUI?color=yellowgreen&logoColor=yellowgreen"> <a href="https://www.codacy.com/gh/jevonmao/PermissionsSwiftUI/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jevonmao/PermissionsSwiftUI&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/6fe1a84c136b4a99823e7d71a8d08625" alt="Codacy Badge"></a></p>
+
+<p><code>PermissionsSwiftUI</code> displays and handles permissions in SwiftUI.
+The UI/UX is highly customizable and resembles an <strong>Apple style</strong>. If you like the project, don&rsquo;t forget to <code>put star ★</code> and follow me on GitHub. <br />
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot1.png" height="500"/>
+&emsp; &emsp;
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-dark.png" height="500"/> <br /></p>
+
+<p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑dark mode. </p>
+<h2 id='navigation' class='heading'>Navigation</h2>
+
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#quickstart">Quickstart</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#license">License</a></li>
+<li><a href="#additional-information">Additional Information</a></li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='requirements' class='heading'>Requirements</h3>
+
+<ul>
+<li>iOS 13 or iPadOS 13</li>
+<li>Xcode 12 and Swift 5.3</li>
+<li>No tvOS, MacOS, and WatchOS support for now
+### Install
+You can install PermissionsSwiftUI into your Xcode project via Swift Package Manager. To learn more about Swift Package Manager, click <a href="https://swift.org/package-manager/">here</a></li>
+<li>In Xcode, open your project and navigate to <strong>File</strong> → <strong>Swift Packages</strong> → <strong>Add Package Dependency&hellip;</strong></li>
+<li>Paste the repository URL (<code>https://github.com/jevonmao/PermissionsSwiftUI</code>) and click <strong>Next</strong>.</li>
+<li>For <strong>Version</strong>, select <strong>Up to next major</strong>.</li>
+<li>Click <strong>Next</strong> and click <strong>Finish</strong>.</li>
+<li>You are all set, have fun using PermissionsSwiftUI!</li>
+</ul>
+<h2 id='quickstart' class='heading'>Quickstart</h2>
+
+<blockquote>
+<p>Before you start, please <code>star ★</code> this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.</p>
+</blockquote>
+
+<p>To use PermissionsSwiftUI, simply add the <code><a href="Structs.html#/s:18PermissionsSwiftUI12JMPermissionV">JMPermission</a></code> modifier to any view. <br />
+Pass in a <code>Binding&lt;Bool&gt;</code> to show the modal view, and add whatever permissions you want to show.</p>
+<pre class="highlight plaintext"><code>   struct ContentView: View {
+       @State var showModal = false
+
+       var body: some View {
+           Button(action: {
+               showModal=true
+           }, label: {
+               Text("Ask user for permissions")
+           })
+           .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
+       }
+   }
+</code></pre>
+<h2 id='usage' class='heading'>Usage</h2>
+<h3 id='customize-permission-texts' class='heading'>Customize permission texts</h3>
+
+<p>😱 Be aware. Features ahead will wow you - the customization is so advanced, yet so simple. Have fun!</p>
+
+<p>To customize permission texts, use the modifier with syntax <code>customize</code>&ldquo;permission name&rdquo;<code>PermissionWith</code>. Ex. <code>customizeCameraPermissionWith</code> is for camera, and <code>customizeLocationPermissionWith</code> is for location.</p>
+
+<p>You can change title and description:</p>
+<pre class="highlight plaintext"><code>.JMPermissions(showModal: $showModal, for: [.camera])
+.customizeCameraPermissionWith(title: "Camcorder", description: "App needs to record videos")
+</code></pre>
+
+<p>and the result:</p>
+
+<div style="text-align:center">
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-camera.png" height="100">
+</div>
+
+<p>Or only change 1 of title and description:</p>
+<pre class="highlight plaintext"><code>.customizeCameraPermissionWith(title: "Camcorder")
+</code></pre>
+
+<p>the parameters you don&rsquo;t provide will show the default text</p>
+<pre class="highlight plaintext"><code>.customizeCameraPermissionWith(description: "App needs to record videos")
+</code></pre>
+
+<p>You can use custom text for all the supported permissions, with a single line of code.</p>
+<h3 id='customize-header-texts' class='heading'>Customize header texts</h3>
+
+<p>To customize the header title, use the modifier <code>changeHeaderTo</code>:
+<img align="right" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Header%20annotation.png?raw=true" alt="Annotated for headers screen" height="400" /></p>
+<pre class="highlight plaintext"><code>.JMPermissions(showModal: $showModal, for: [.camera, .location, .calendar])
+.changeHeaderTo("App Permissions")
+</code></pre>
+
+<p>To customize the header description, use the modifier <code>changeHeaderDescriptionTo</code>:</p>
+<pre class="highlight plaintext"><code>.JMPermissions(showModal: $showModal, for: [.camera, .location, .photo])
+.changeHeaderDescriptionTo("Instagram need certain permissions in order for all the features to work.")
+</code></pre>
+
+<p>To customize the bottom description, use the modifier <code>changeBottomDescriptionTo</code>:</p>
+<pre class="highlight plaintext"><code>.JMPermissions(showModal: $showModal, for: [.camera, .location, .photo])
+.changeBottomDescriptionTo("If not allowed, you have to enable permissions in settings")
+</code></pre>
+
+<p><br /> <br /> <br /></p>
+<h2 id='additional-information' class='heading'>Additional Information</h2>
+
+<p>Here is a list of all permissions PermissionsSwiftUI already supports/will support. By the 0.0.1 beta release, PermissionsSwiftUI will have all 12 iOS system permissions built in. Yup, even the newest <code>tracking</code> permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon. Stay tuned!
+<img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card.png" alt="A card of all the permissions" width="100%"></p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>PermissionsSwiftUI is created by Jingwen (Jevon) Mao and licensed under the <a href="https://jingwen-mao.mit-license.org">MIT License</a></p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2021-02-03)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
