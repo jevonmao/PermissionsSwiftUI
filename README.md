@@ -78,7 +78,11 @@ the parameters you don't provide will show the default text
 ```Swift
 .customizeCameraPermissionWith(description: "App needs to record videos")
 ```
-You can use custom text for all the supported permissions, with a single line of code.
+To change the icon image (The `image` parameter accepts **any SwiftUI Image**, so feel free to use [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/) or your custom asset):
+```Swift
+.customizeCameraPermissionWith(image: Image("your-image"))
+```
+You can use custom text and icon for all the supported permissions, with a single line of code.
 ### Customize header texts
 To customize the header title, use the modifier `changeHeaderTo`:
 <img align="right" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Header%20annotation.png?raw=true" alt="Annotated for headers screen" height="400" />
