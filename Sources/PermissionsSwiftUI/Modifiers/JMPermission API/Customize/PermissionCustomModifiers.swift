@@ -190,6 +190,44 @@ public extension View {
     }
 }
 
+// MARK: Location Always
+
+public extension View {
+    /**
+     Customizes the image icon for location always permission component
+     
+     Use this modifier on your existing view to customize the symbol image , and title (optional) and description (optional).
+     
+     - Parameters:
+        - image: The color to render the symbol image
+        - title: The title text (optional)
+        - description: The description text (optional)
+     */
+    
+    func customizeLocationAlwaysPermissionWith(image:Image, title: String?=nil, description: String?=nil) -> some View{
+        if let title = title{
+            PermissionModel.PermissionModelStore.locationAlwaysPermission.title = title
+        }
+        if let description = description{
+            PermissionModel.PermissionModelStore.locationAlwaysPermission.description = description
+        }
+        PermissionModel.PermissionModelStore.locationAlwaysPermission.imageIcon = AnyView(image)
+        return self.modifier(PlaceholderModifier())
+    }
+    /**
+     Customizes the title and description text for location always permission component
+     
+     - Parameters:
+        - title: The title text
+        - description: The description text
+     */
+    
+    func customizeLocationAlwaysPermissionWith(title: String, description: String) -> some View {
+        PermissionModel.PermissionModelStore.locationAlwaysPermission.title = title
+        PermissionModel.PermissionModelStore.locationAlwaysPermission.description = description
+        return self.modifier(PlaceholderModifier())
+    }
+}
 // MARK: Calendar
 
 public extension View {
@@ -364,7 +402,7 @@ public extension View {
         - description: The description text
      */
     
-    func customizeMicPermissionWith(title: String, description: String) -> some View {
+    func customizeMicrophonePermissionWith(title: String, description: String) -> some View {
         PermissionModel.PermissionModelStore.microphonePermisson.title = title
         PermissionModel.PermissionModelStore.microphonePermisson.description = description
         return self.modifier(PlaceholderModifier())
@@ -377,7 +415,7 @@ public extension View {
         - title: The title text
      */
     
-    func customizeMicPermissionWith(title: String) -> some View {
+    func customizeMicrophonePermissionWith(title: String) -> some View {
         PermissionModel.PermissionModelStore.microphonePermisson.title = title
         return self.modifier(PlaceholderModifier())
     }
@@ -517,6 +555,250 @@ public extension View {
     
     func customizePhotoPermissionWith(description: String) -> some View {
         PermissionModel.PermissionModelStore.photoPermission.description = description
+        return self.modifier(PlaceholderModifier())
+    }
+}
+
+// MARK: Tracking
+
+public extension View {
+    /**
+     Customizes the image icon for tracking permission component
+     
+     Use this modifier on your existing view to customize the symbol image , and title (optional) and description (optional).
+     
+     - Parameters:
+        - image: The color to render the symbol image
+        - title: The title text (optional)
+        - description: The description text (optional)
+     */
+    
+    func customizeTrackingPermissionWith(image:Image, title: String?=nil, description: String?=nil) -> some View{
+        if let title = title{
+            PermissionModel.PermissionModelStore.trackingPermission.title = title
+        }
+        if let description = description{
+            PermissionModel.PermissionModelStore.trackingPermission.description = description
+        }
+        PermissionModel.PermissionModelStore.trackingPermission.imageIcon = AnyView(image)
+        return self.modifier(PlaceholderModifier())
+    }
+    /**
+     Customizes the title and description text for the tracking permission component
+     
+     - Parameters:
+        - title: The title text
+        - description: The description text
+     */
+    
+    func customizeTrackingPermissionWith(title: String, description: String) -> some View {
+        PermissionModel.PermissionModelStore.trackingPermission.title = title
+        PermissionModel.PermissionModelStore.trackingPermission.description = description
+        return self.modifier(PlaceholderModifier())
+    }
+
+    /**
+     Customizes only the title text for the tracking permission component
+
+     - Parameters:
+        - title: The title text
+     */
+    
+    func customizeTrackingPermissionWith(title: String) -> some View {
+        PermissionModel.PermissionModelStore.trackingPermission.title = title
+        return self.modifier(PlaceholderModifier())
+    }
+
+    /**
+     Customizes only the description text for the tracking permission component
+
+     - Parameters:
+        - description: The description text
+     */
+    
+    func customizeTrackingPermissionWith(description: String) -> some View {
+        PermissionModel.PermissionModelStore.trackingPermission.description = description
+        return self.modifier(PlaceholderModifier())
+    }
+}
+
+// MARK: Contacts
+
+public extension View {
+    /**
+     Customizes the image icon for contacts permission component
+     
+     Use this modifier on your existing view to customize the symbol image , and title (optional) and description (optional).
+     
+     - Parameters:
+        - image: The color to render the symbol image
+        - title: The title text (optional)
+        - description: The description text (optional)
+     */
+    
+    func customizeContactsPermissionWith(image:Image, title: String?=nil, description: String?=nil) -> some View{
+        if let title = title{
+            PermissionModel.PermissionModelStore.contactsPermission.title = title
+        }
+        if let description = description{
+            PermissionModel.PermissionModelStore.contactsPermission.description = description
+        }
+        PermissionModel.PermissionModelStore.contactsPermission.imageIcon = AnyView(image)
+        return self.modifier(PlaceholderModifier())
+    }
+    /**
+     Customizes the title and description text for the contacts permission component
+     
+     - Parameters:
+        - title: The title text
+        - description: The description text
+     */
+    
+    func customizeContactsPermissionWith(title: String, description: String) -> some View {
+        PermissionModel.PermissionModelStore.contactsPermission.title = title
+        PermissionModel.PermissionModelStore.contactsPermission.description = description
+        return self.modifier(PlaceholderModifier())
+    }
+
+    /**
+     Customizes only the title text for the tracking permission component
+
+     - Parameters:
+        - title: The title text
+     */
+    
+    func customizeContactsPermissionWith(title: String) -> some View {
+        PermissionModel.PermissionModelStore.contactsPermission.title = title
+        return self.modifier(PlaceholderModifier())
+    }
+
+    /**
+     Customizes only the description text for the tracking permission component
+
+     - Parameters:
+        - description: The description text
+     */
+    
+    func customizeContactsPermissionWith(description: String) -> some View {
+        PermissionModel.PermissionModelStore.contactsPermission.description = description
+        return self.modifier(PlaceholderModifier())
+    }
+}
+
+// MARK: Motion
+
+public extension View {
+    /**
+     Customizes the image icon for contacts permission component
+     
+     Use this modifier on your existing view to customize the symbol image , and title (optional) and description (optional).
+     
+     - Parameters:
+        - image: The color to render the symbol image
+        - title: The title text (optional)
+        - description: The description text (optional)
+     */
+    
+    func customizeMotionPermissionWith(image:Image, title: String?=nil, description: String?=nil) -> some View{
+        if let title = title{
+            PermissionModel.PermissionModelStore.motionPermission.title = title
+        }
+        if let description = description{
+            PermissionModel.PermissionModelStore.motionPermission.description = description
+        }
+        PermissionModel.PermissionModelStore.motionPermission.imageIcon = AnyView(image)
+        return self.modifier(PlaceholderModifier())
+    }
+    /**
+     Customizes the title and description text for the contacts permission component
+     
+     - Parameters:
+        - title: The title text
+        - description: The description text
+     */
+    
+    func customizeMotionPermissionWith(title: String, description: String) -> some View {
+        PermissionModel.PermissionModelStore.motionPermission.title = title
+        PermissionModel.PermissionModelStore.motionPermission.description = description
+        return self.modifier(PlaceholderModifier())
+    }
+}
+
+
+// MARK: Reminders
+
+public extension View {
+    /**
+     Customizes the image icon for reminders permission component
+     
+     Use this modifier on your existing view to customize the symbol image , and title (optional) and description (optional).
+     
+     - Parameters:
+        - image: The color to render the symbol image
+        - title: The title text (optional)
+        - description: The description text (optional)
+     */
+    
+    func customizeRemindersPermissionWith(image:Image, title: String?=nil, description: String?=nil) -> some View{
+        if let title = title{
+            PermissionModel.PermissionModelStore.remindersPermission.title = title
+        }
+        if let description = description{
+            PermissionModel.PermissionModelStore.remindersPermission.description = description
+        }
+        PermissionModel.PermissionModelStore.remindersPermission.imageIcon = AnyView(image)
+        return self.modifier(PlaceholderModifier())
+    }
+    /**
+     Customizes the title and description text for the reminders permission component
+     
+     - Parameters:
+        - title: The title text
+        - description: The description text
+     */
+    
+    func customizeRemindersPermissionWith(title: String, description: String) -> some View {
+        PermissionModel.PermissionModelStore.remindersPermission.title = title
+        PermissionModel.PermissionModelStore.remindersPermission.description = description
+        return self.modifier(PlaceholderModifier())
+    }
+}
+
+// MARK: Speech
+
+public extension View {
+    /**
+     Customizes the image icon for speech permission component
+     
+     Use this modifier on your existing view to customize the symbol image , and title (optional) and description (optional).
+     
+     - Parameters:
+        - image: The color to render the symbol image
+        - title: The title text (optional)
+        - description: The description text (optional)
+     */
+    
+    func customizeSpeechPermissionWith(image:Image, title: String?=nil, description: String?=nil) -> some View{
+        if let title = title{
+            PermissionModel.PermissionModelStore.speechPermission.title = title
+        }
+        if let description = description{
+            PermissionModel.PermissionModelStore.speechPermission.description = description
+        }
+        PermissionModel.PermissionModelStore.speechPermission.imageIcon = AnyView(image)
+        return self.modifier(PlaceholderModifier())
+    }
+    /**
+     Customizes the title and description text for the speech permission component
+     
+     - Parameters:
+        - title: The title text
+        - description: The description text
+     */
+    
+    func customizeSpeechPermissionWith(title: String, description: String) -> some View {
+        PermissionModel.PermissionModelStore.speechPermission.title = title
+        PermissionModel.PermissionModelStore.speechPermission.description = description
         return self.modifier(PlaceholderModifier())
     }
 }
