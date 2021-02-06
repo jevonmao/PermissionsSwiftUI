@@ -58,103 +58,136 @@ extension PermissionModel{
                                             Permission are necessary for all the features and functions to work properly. If not allowed, you have to enable permissions in settings
                                             """
         static var cameraPermission = JMPermission(
-            imageIcon: Image(systemName: "camera.fill"),
+            imageIcon: AnyView(Image(systemName: "camera.fill")),
             title: "Camera",
-            description: "Allow to use your camera"
-        )
+            description: "Allow to use your camera", authorized: false)
+        
         static var locationPermission = JMPermission(
-            imageIcon: Image(systemName: "location.fill.viewfinder"),
+            imageIcon: AnyView(Image(systemName: "location.fill.viewfinder")),
             title: "Location",
-            description: "Allow to access your location"
+            description: "Allow to access your location", authorized: false
         )
         static var locationAlwaysPermission = JMPermission(
-            imageIcon: Image(systemName: "location.fill.viewfinder"),
+            imageIcon: AnyView(Image(systemName: "location.fill.viewfinder")),
             title: "Location Always",
-            description: "Allow to access your location"
+            description: "Allow to access your location", authorized: false
         )
         static var photoPermission = JMPermission(
-            imageIcon: Image(systemName: "photo"),
+            imageIcon: AnyView(Image(systemName: "photo")),
             title: "Photo Library",
-            description: "Allow to access your photos"
+            description: "Allow to access your photos", authorized: false
         )
         static var microphonePermisson = JMPermission(
-            imageIcon: Image(systemName: "mic.fill"),
+            imageIcon: AnyView(Image(systemName: "mic.fill")),
             title: "Microphone",
-            description: "Allow to record with microphone"
+            description: "Allow to record with microphone", authorized: false
         )
         static var notificationPermission = JMPermission(
-            imageIcon: Image(systemName: "bell.fill"),
+            imageIcon: AnyView(Image(systemName: "bell.fill")),
             title: "Notification",
-            description: "Allow to send notifications"
+            description: "Allow to send notifications", authorized: false
         )
         static var calendarPermisson = JMPermission(
-            imageIcon: Image(systemName: "calendar"),
+            imageIcon: AnyView(Image(systemName: "calendar")),
             title: "Calendar",
-            description: "Allow to access calendar"
+            description: "Allow to access calendar", authorized: false
         )
         static var bluetoothPermission = JMPermission(
-            imageIcon: Image(systemName: "wave.3.left.circle.fill"),
+            imageIcon: AnyView(Image(systemName: "wave.3.left.circle.fill")),
             title: "Bluetooth",
-            description: "Allow to use bluetooth"
+            description: "Allow to use bluetooth", authorized: false
         )
         static var trackingPermission = JMPermission(
-            imageIcon: Image(systemName: "person.circle.fill"),
+            imageIcon: AnyView(Image(systemName: "person.circle.fill")),
             title: "Tracking",
-            description: "Allow to track your data"
+            description: "Allow to track your data", authorized: false
         )
         static var contactsPermission = JMPermission(
-            imageIcon: Image(systemName: "book.fill"),
+            imageIcon: AnyView(Image(systemName: "book.fill")),
             title: "Contacts",
-            description: "Allow to access your contacts"
+            description: "Allow to access your contacts", authorized: false
         )
         static var motionPermission = JMPermission(
-            imageIcon: Image(systemName: "hare.fill"),
+            imageIcon: AnyView(Image(systemName: "hare.fill")),
             title: "Motion",
-            description: "Allow to access your motion sensor data"
+            description: "Allow to access your motion sensor data", authorized: false
         )
         static var remindersPermission = JMPermission(
-            imageIcon: Image(systemName: "list.bullet.rectangle"),
+            imageIcon: AnyView(Image(systemName: "list.bullet.rectangle")),
             title: "Reminderes",
-            description: "Allow to access your reminders"
+            description: "Allow to access your reminders", authorized: false
         )
         static var speechPermission = JMPermission(
-            imageIcon: Image(systemName: "rectangle.3.offgrid.bubble.left.fill"),
+            imageIcon: AnyView(Image(systemName: "rectangle.3.offgrid.bubble.left.fill")),
             title: "Speech",
-            description: "Allow to access speech recognition"
+            description: "Allow to access speech recognition", authorized: false
         )
         }
+
     var currentPermission: JMPermission {
+        get{
+            switch self {
+            case .location:
+                return PermissionModelStore.locationPermission
+            case .locationAlways:
+                return PermissionModelStore.locationAlwaysPermission
+            case .photo:
+                return PermissionModelStore.photoPermission
+            case .microphone:
+                return PermissionModelStore.microphonePermisson
+            case .camera:
+                return PermissionModelStore.cameraPermission
+            case .notification:
+                return PermissionModelStore.notificationPermission
+            case .calendar:
+                return PermissionModelStore.calendarPermisson
+            case .bluetooth:
+                return PermissionModelStore.bluetoothPermission
+            case .tracking:
+                return PermissionModelStore.trackingPermission
+            case .contacts:
+                return PermissionModelStore.contactsPermission
+            case .motion:
+                return PermissionModelStore.motionPermission
+            case .reminders:
+                return PermissionModelStore.remindersPermission
+            case .speech:
+                return PermissionModelStore.speechPermission
+                
+            }
+        }
+       
+    }
+    func updatePermissionModelStore(to model:JMPermission){
         switch self {
         case .location:
-            return PermissionModelStore.locationPermission
+            PermissionModelStore.locationPermission = model
         case .locationAlways:
-            return PermissionModelStore.locationAlwaysPermission
+            PermissionModelStore.locationAlwaysPermission = model
         case .photo:
-            return PermissionModelStore.photoPermission
+            PermissionModelStore.photoPermission = model
         case .microphone:
-            return PermissionModelStore.microphonePermisson
+            PermissionModelStore.microphonePermisson = model
         case .camera:
-            return PermissionModelStore.cameraPermission
+            PermissionModelStore.cameraPermission = model
         case .notification:
-            return PermissionModelStore.notificationPermission
+            PermissionModelStore.notificationPermission = model
         case .calendar:
-            return PermissionModelStore.calendarPermisson
+            PermissionModelStore.calendarPermisson = model
         case .bluetooth:
-            return PermissionModelStore.bluetoothPermission
+            PermissionModelStore.bluetoothPermission = model
         case .tracking:
-            return PermissionModelStore.trackingPermission
+            PermissionModelStore.trackingPermission = model
         case .contacts:
-            return PermissionModelStore.contactsPermission
+            PermissionModelStore.contactsPermission = model
         case .motion:
-            return PermissionModelStore.motionPermission
+            PermissionModelStore.motionPermission = model
         case .reminders:
-            return PermissionModelStore.remindersPermission
+            PermissionModelStore.remindersPermission = model
         case .speech:
-            return PermissionModelStore.speechPermission
-            
+            PermissionModelStore.speechPermission = model
         }
     }
-
     func requestPermission(isPermissionGranted: @escaping (Bool) -> Void) {
         switch self {
         case .location:
@@ -219,9 +252,16 @@ extension PermissionModel{
         }
     }
 }
+/**
+ A data model that defines a JPPermission component and its data
+ 
+ The `imageIcon` stores the symbol image displayed on each permission component
+ The `title` defines the title text for each permission component, and the `description` defines the detailed text for each permission component.
+ */
 public struct JMPermission{
-    var imageIcon: Image
+    var imageIcon: AnyView
     var title: String
     var description: String
+    var authorized:Bool
 }
 
