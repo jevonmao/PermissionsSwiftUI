@@ -46,8 +46,83 @@ public enum PermissionModel {
     @available(iOS 14.5, *) case tracking
 }
 extension PermissionModel{
-    
-    enum PermissionModelStore {
+    static func resetPermissionsModelStore(){
+        
+        PermissionModelStore.permissions = []
+        PermissionModelStore.headerText = "Need Permissions"
+        PermissionModelStore.headerDescription = """
+                                       In order for you use certain features of this app, you need to give permissions. See description for each permission
+                                       """
+        PermissionModelStore.bottomDescription = """
+                                            Permission are necessary for all the features and functions to work properly. If not allowed, you have to enable permissions in settings
+                                            """
+        PermissionModelStore.cameraPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "camera.fill")),
+            title: "Camera",
+            description: "Allow to use your camera", authorized: false)
+        
+        PermissionModelStore.locationPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "location.fill.viewfinder")),
+            title: "Location",
+            description: "Allow to access your location", authorized: false
+        )
+        PermissionModelStore.locationAlwaysPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "location.fill.viewfinder")),
+            title: "Location Always",
+            description: "Allow to access your location", authorized: false
+        )
+        PermissionModelStore.photoPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "photo")),
+            title: "Photo Library",
+            description: "Allow to access your photos", authorized: false
+        )
+        PermissionModelStore.microphonePermisson = JMPermission(
+            imageIcon: AnyView(Image(systemName: "mic.fill")),
+            title: "Microphone",
+            description: "Allow to record with microphone", authorized: false
+        )
+        PermissionModelStore.notificationPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "bell.fill")),
+            title: "Notification",
+            description: "Allow to send notifications", authorized: false
+        )
+        PermissionModelStore.calendarPermisson = JMPermission(
+            imageIcon: AnyView(Image(systemName: "calendar")),
+            title: "Calendar",
+            description: "Allow to access calendar", authorized: false
+        )
+        PermissionModelStore.bluetoothPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "wave.3.left.circle.fill")),
+            title: "Bluetooth",
+            description: "Allow to use bluetooth", authorized: false
+        )
+        PermissionModelStore.trackingPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "person.circle.fill")),
+            title: "Tracking",
+            description: "Allow to track your data", authorized: false
+        )
+        PermissionModelStore.contactsPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "book.fill")),
+            title: "Contacts",
+            description: "Allow to access your contacts", authorized: false
+        )
+        PermissionModelStore.motionPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "hare.fill")),
+            title: "Motion",
+            description: "Allow to access your motion sensor data", authorized: false
+        )
+        PermissionModelStore.remindersPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "list.bullet.rectangle")),
+            title: "Reminders",
+            description: "Allow to access your reminders", authorized: false
+        )
+        PermissionModelStore.speechPermission = JMPermission(
+            imageIcon: AnyView(Image(systemName: "rectangle.3.offgrid.bubble.left.fill")),
+            title: "Speech",
+            description: "Allow to access speech recognition", authorized: false
+        )
+    }
+    struct PermissionModelStore {
         static var permissions: [PermissionModel] = []
         static var headerText:String = "Need Permissions"
         static var headerDescription:String = """
@@ -113,7 +188,7 @@ extension PermissionModel{
         )
         static var remindersPermission = JMPermission(
             imageIcon: AnyView(Image(systemName: "list.bullet.rectangle")),
-            title: "Reminderes",
+            title: "Reminders",
             description: "Allow to access your reminders", authorized: false
         )
         static var speechPermission = JMPermission(
@@ -251,16 +326,40 @@ extension PermissionModel{
         }
     }
 }
+extension PermissionModel:CaseIterable{
+    public static var allCases: [PermissionModel]{
+        if #available(iOS 14.5, *) {
+            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking]
+        } else {
+            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
+        }
+    }
+}
 /**
  A data model that defines a JPPermission component and its data
  
  The `imageIcon` stores the symbol image displayed on each permission component
  The `title` defines the title text for each permission component, and the `description` defines the detailed text for each permission component.
  */
-public struct JMPermission{
+public struct JMPermission:Equatable, Hashable{
+    public static func == (lhs: JMPermission, rhs: JMPermission) -> Bool {
+        if lhs.title == rhs.title && lhs.description == rhs.description && lhs.authorized == rhs.authorized{
+            return true
+        }
+        else{
+            return false
+        }
+    }
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(title)
+        hasher.combine(description)
+        hasher.combine(authorized)
+    }
+    
     var imageIcon: AnyView
     var title: String
     var description: String
     var authorized:Bool
+    
 }
 
