@@ -7,8 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  build iOS:
     runs-on: macos-latest
 
     steps:
@@ -17,7 +16,7 @@ jobs:
       with:
         xcode-version: latest-stable
     - name: Build
-      run: xcodebuild -scheme PermissionsSwiftUI -destination generic/platform=iOS
+      run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.3' build test
       
   swiftformat:
     name: Check swiftformat
