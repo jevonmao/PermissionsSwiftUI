@@ -7,19 +7,29 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  build_iOS:
     runs-on: macos-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - uses: maxim-lobanov/setup-xcode@v1
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
     - name: Build
-      run: xcodebuild -scheme PermissionsSwiftUI -destination generic/platform=iOS
-      
-  swiftformat:
+      run: xcodebuild -scheme PermissionsSwiftUI -destination 'generic/platform=iOS' build
+  test_iOS:
+     runs-on: macos-latest
+     steps:
+     - name: Checkout Repo
+       uses: actions/checkout@v2
+     - name: Setup Xcode
+       uses: maxim-lobanov/setup-xcode@v1
+       with:
+         xcode-version: latest-stable
+     - name: Test
+       run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max' test
+  Swiftformat:
     name: Check swiftformat
     runs-on: macos-latest
     steps:

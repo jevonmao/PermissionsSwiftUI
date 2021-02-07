@@ -10,26 +10,22 @@ import MapKit
 
 class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate {
     static var shared = JMLocationPermissionManager()
-    lazy var locationManager: CLLocationManager = {
-        CLLocationManager()
-    }()
-    
+    var locationManager: CLLocationManager
     var completionHandler: JMPermissionAuthorizationHandlerCompletionBlock?
     var locationPermissionType: LocationPermissionType?
     enum LocationPermissionType {
         case whenInUse
         case always
     }
-
-    override init() {
+    init(locationManager:CLLocationManager = CLLocationManager()){
+        self.locationManager = locationManager
         super.init()
     }
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .notDetermined {
             return
         }
-        
+
         if let completionHandler = completionHandler {
             let status = CLLocationManager.authorizationStatus()
             if self.locationPermissionType == .always {
@@ -41,7 +37,6 @@ class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    private var whenInUseNotRealChangeStatus: Bool = false
     
     func requestAlwaysPermission(_ completionHandler: @escaping JMPermissionAuthorizationHandlerCompletionBlock) {
         self.completionHandler = completionHandler
@@ -55,7 +50,6 @@ class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate {
         case .authorizedWhenInUse:
             self.locationManager.delegate = self
             self.locationManager.requestAlwaysAuthorization()
-            self.whenInUseNotRealChangeStatus = true
         default:
             completionHandler(status == .authorizedAlways ? true : false)
         }
