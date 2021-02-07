@@ -28,7 +28,7 @@ jobs:
        with:
          xcode-version: latest-stable
      - name: Test
-       run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.3' test
+       run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max' test
   Swiftformat:
     name: Check swiftformat
     runs-on: macos-latest
