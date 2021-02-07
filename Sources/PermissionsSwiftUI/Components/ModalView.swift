@@ -9,11 +9,12 @@ import SwiftUI
 
 struct ModalView: View {
     @Binding var showModal: Bool
+    var mainText:PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
     var body: some View {
         ScrollView {
             VStack {
                 HStack {
-                    Text(PermissionModel.PermissionModelStore.headerText)
+                    Text(mainText.headerText)
                         .font(.system(.largeTitle, design: .rounded))
                         .bold()
                     Spacer()
@@ -22,7 +23,7 @@ struct ModalView: View {
                 .padding()
                 .padding(.top, 20)
                 
-                Text(PermissionModel.PermissionModelStore.headerDescription)
+                Text(mainText.headerDescription)
                     .font(.system(.body, design: .rounded))
                     .fontWeight(.medium)
                     .foregroundColor(Color(.systemGray))
@@ -30,7 +31,7 @@ struct ModalView: View {
                     
                 PermissionSection(showModal:$showModal)
 
-                Text(PermissionModel.PermissionModelStore.bottomDescription)
+                Text(mainText.bottomDescription)
                     .font(.system(.callout, design: .rounded))
                     .foregroundColor(Color(.systemGray))
                     .padding(.horizontal)

@@ -9,26 +9,26 @@ final class PermissionsSwiftUITests: XCTestCase {
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
 """
     func testPermissionStore(){
-        PermissionModel.resetPermissionsModelStore()
+        PermissionStore.resetPermissionsModelStore()
         if #available(iOS 14.5, *) {
-            let trackingPermission = PermissionModel.tracking.currentPermission
+            let trackingPermission = PermissionType.tracking.currentPermission
             XCTAssertEqual(trackingPermission, JMPermission(
                 imageIcon: AnyView(Image(systemName: "person.circle.fill")),
                 title: "Tracking",
                 description: "Allow to track your data", authorized: false
             ))
         }
-        let photoPermission = PermissionModel.photo.currentPermission
-        let cameraPermission = PermissionModel.camera.currentPermission
-        let locationPermission = PermissionModel.location.currentPermission
-        let reminderPermission = PermissionModel.reminders.currentPermission
-        let speechPermission = PermissionModel.speech.currentPermission
-        let bluetoothPermission = PermissionModel.bluetooth.currentPermission
-        let calendarPermission = PermissionModel.calendar.currentPermission
-        let contactsPermission = PermissionModel.contacts.currentPermission
-        let locationAlwaysPermission = PermissionModel.locationAlways.currentPermission
-        let microphonePermission = PermissionModel.microphone.currentPermission
-        let notificationPermission = PermissionModel.notification.currentPermission
+        let photoPermission = PermissionType.photo.currentPermission
+        let cameraPermission = PermissionType.camera.currentPermission
+        let locationPermission = PermissionType.location.currentPermission
+        let reminderPermission = PermissionType.reminders.currentPermission
+        let speechPermission = PermissionType.speech.currentPermission
+        let bluetoothPermission = PermissionType.bluetooth.currentPermission
+        let calendarPermission = PermissionType.calendar.currentPermission
+        let contactsPermission = PermissionType.contacts.currentPermission
+        let locationAlwaysPermission = PermissionType.locationAlways.currentPermission
+        let microphonePermission = PermissionType.microphone.currentPermission
+        let notificationPermission = PermissionType.notification.currentPermission
         XCTAssertEqual(photoPermission, JMPermission(
             imageIcon: AnyView(Image(systemName: "photo")),
             title: "Photo Library",
@@ -140,23 +140,27 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         
     }
     func testModalViewSnapshot(){
-        PermissionModel.resetPermissionsModelStore()
+        PermissionStore.resetPermissionsModelStore()
         let view = ModalView(showModal: .constant(true))
-        PermissionModel.PermissionModelStore.permissions = PermissionModel.allCases
+        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
         assertSnapshot(matching: view.referenceFrame(), as: .image)
     }
     func testCustomizeHeaderSnapshot(){
-        PermissionModel.resetPermissionsModelStore()
+        PermissionStore.resetPermissionsModelStore()
+        let newHeader = "Permissions Request"
         let view = ModalView(showModal: .constant(true))
             .referenceFrame()
-            .changeHeaderTo("Permissions Request")
+            .changeHeaderTo(newHeader)
             .changeHeaderDescriptionTo(placeholderText)
             .changeBottomDescriptionTo(placeholderText)
-        assertSnapshot(matching: view, as: .image)
+        XCTAssertEqual(newHeader, PermissionStore.shared.mainTexts.headerText)
+        XCTAssertEqual(placeholderText, PermissionStore.shared.mainTexts.headerDescription)
+        XCTAssertEqual(placeholderText, PermissionStore.shared.mainTexts.bottomDescription)
+        assertSnapshot(matching: view, as: .image) 
         
     }
     func testPermissionCell(){
-        for permission in PermissionModel.allCases{
+        for permission in PermissionType.allCases{
             let title = permission.currentPermission.title
             let view = getPermissionView(for: permission)
             let testingPermission = JMPermission(imageIcon: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText, authorized: false)
@@ -164,72 +168,72 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             assertSnapshot(matching: view, as: .image)
         }
     }
-    func getPermissionView(for permission:PermissionModel) -> AnyView{
+    func getPermissionView(for permission: PermissionType) -> AnyView{
         let title = permission.currentPermission.title
         switch permission {
         case .location:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeLocationPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .locationAlways:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeLocationAlwaysPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .photo:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizePhotoPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .microphone:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeMicrophonePermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .camera:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeCameraPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .notification:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeNotificationPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .calendar:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeCalendarPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .bluetooth:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeBluetoothPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .tracking:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeTrackingPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .contacts:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeContactsPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .motion:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeMotionPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .reminders:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeRemindersPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
         case .speech:
             let view = PermissionSectionCell(permission: permission, allowButtonStatus: .idle, showModal: .constant(true))
-                .customizeSpeechPermissionWith(image: Image(systemName: "gear"), title: "Testing \(title)", description: placeholderText)
+                .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                 .referenceFrameCell()
             return AnyView(view)
             
@@ -267,7 +271,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
 }
 private extension SwiftUI.View {
     func referenceFrame() -> some View {
-        let count = PermissionModel.PermissionModelStore.permissions.count
+        let count = PermissionStore.shared.permissions.count
         return self.frame(width: referenceSize.width, height: referenceSize.height+CGFloat(count*60))
     }
     func referenceFrameCell() -> some View{
