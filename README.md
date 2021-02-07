@@ -39,6 +39,7 @@ You can install PermissionsSwiftUI into your Xcode project via Swift Package Man
 > Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.
 
 To use PermissionsSwiftUI, simply add the `JMPermission` modifier to any view. <br />
+`.JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])`
 Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions you want to show.
 ```Swift
    struct ContentView: View {
@@ -58,29 +59,40 @@ Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions y
 ### Customize permission texts
 😱 Be aware. Features ahead will wow you - the customization is so advanced, yet so simple. Have fun!
 
-To customize permission texts, use the modifier with syntax `customize`"permission name"`PermissionWith`. Ex. `customizeCameraPermissionWith` is for camera, and `customizeLocationPermissionWith` is for location.
-
-You can change title and description:
+To customize permission texts, use the modifier `setPermissionComponent()`
+For example, you can change title, description, and image icon:
 ```Swift
-.JMPermissions(showModal: $showModal, for: [.camera])
-.customizeCameraPermissionWith(title: "Camcorder", description: "App needs to record videos")
+.setPermissionComponent(for: .camera, 
+                        image: AnyView(Image(systemName: "camera.fill")), 
+                        title: "Camcorder",
+                        description: "App needs to record videos")
 ```
 and the result:
 <div style="text-align:center">
 <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-camera.png" height="100">
 </div>
-
 Or only change 1 of title and description:
+
 ```Swift
-.customizeCameraPermissionWith(title: "Camcorder")
+setPermissionComponent(for: .tracking, title: "Trackers")
 ```
-the parameters you don't provide will show the default text
 ```Swift
-.customizeCameraPermissionWith(description: "App needs to record videos")
+setPermissionComponent(for: .tracking, description: "Tracking description")
 ```
-To change the icon image (The `image` parameter accepts **any SwiftUI Image**, so feel free to use [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/) or your custom asset):
+
+**Note:** 
+* The parameters you don't provide will show the default text
+* Add the `setPermissionComponent` modifier on your root level view, after `JMPermissions` modifier
+
+The `image` parameter accepts **AnyView**, so feel free to use [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/) or your custom asset:
 ```Swift
-.customizeCameraPermissionWith(image: Image("your-image"))
+.setPermissionComponent(for: .camera, 
+                        image: AnyView(Image("Your-cool-image"))
+```
+Even full SwiftUI views will work😱:
+```Swift
+.setPermissionComponent(for: .camera, 
+                        image: AnyView(YourCoolView())
 ```
 You can use custom text and icon for all the supported permissions, with a single line of code.
 ### Customize header texts
