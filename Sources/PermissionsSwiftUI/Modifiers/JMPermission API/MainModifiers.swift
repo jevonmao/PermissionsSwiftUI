@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// MARK: Public modifiers
-
 struct Permissions: ViewModifier {
     @Binding var showModal: Bool
 
@@ -44,8 +42,8 @@ public extension View {
      
      */
     
-    func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionModel]) -> some View {
-        PermissionModel.PermissionModelStore.permissions = permissions
+    func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View {
+        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         return self.modifier(Permissions(showModal: showModal))
     }
 }

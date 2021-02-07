@@ -12,7 +12,7 @@ struct PermissionSection: View {
     @Binding var showModal:Bool
     var body: some View {
         VStack {
-            let permissions = PermissionModel.PermissionModelStore.permissions
+            let permissions = PermissionStore.shared.permissions
             ForEach(permissions.indices, id: \.self) {
                 PermissionSectionCell(permission: permissions[$0], showModal: $showModal)
                 if permissions.count > 1 {
@@ -34,12 +34,12 @@ enum AllowButtonStatus {
 }
 
 struct PermissionSectionCell: View {
-    var permission: PermissionModel
+    @State var permission: PermissionType
     @State var allowButtonStatus: AllowButtonStatus = .idle
     @Binding var showModal:Bool
     var isLast:Bool{
         ///Filter and only get unauthorized permissions
-        let permissions = PermissionModel.PermissionModelStore.permissions.filter{$0.currentPermission.authorized==false}
+        let permissions = PermissionStore.shared.permissions.filter{$0.currentPermission.authorized==false}
         if permissions.count == 0{
             return true
         }
@@ -77,8 +77,7 @@ struct PermissionSectionCell: View {
                         allowButtonStatus = .idle
                         currentPermission.authorized = false
                     }
-                    permission.updatePermissionModelStore(to: currentPermission)
-
+                    permission.currentPermission = currentPermission
                     if isLast{
                         DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
                             showModal = false
