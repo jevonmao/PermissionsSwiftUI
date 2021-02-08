@@ -38,7 +38,7 @@ public extension View {
         - title: The title text
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeCameraPermissionWith(title: String, description: String) -> some View {
         PermissionModel.PermissionModelStore.cameraPermission.title = title
         PermissionModel.PermissionModelStore.cameraPermission.description = description
@@ -51,7 +51,7 @@ public extension View {
      - Parameters:
         - title: The title text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeCameraPermissionWith(title: String) -> some View {
         PermissionModel.PermissionModelStore.cameraPermission.title = title
         return self.modifier(PlaceholderModifier())
@@ -63,7 +63,7 @@ public extension View {
      - Parameters:
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeCameraPermissionWith(description: String) -> some View {
         PermissionModel.PermissionModelStore.cameraPermission.description = description
         return self.modifier(PlaceholderModifier())
@@ -96,7 +96,7 @@ public extension View {
         - title: The title text
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeLocationPermissionWith(title: String, description: String) -> some View {
         PermissionModel.PermissionModelStore.locationPermission.title = title
         PermissionModel.PermissionModelStore.locationPermission.description = description
@@ -109,7 +109,7 @@ public extension View {
      - Parameters:
         - title: The title text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeLocationPermissionWith(title: String) -> some View {
         PermissionModel.PermissionModelStore.locationPermission.title = title
         return self.modifier(PlaceholderModifier())
@@ -121,7 +121,7 @@ public extension View {
      - Parameters:
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeLocationPermissionWith(description: String) -> some View {
         PermissionModel.PermissionModelStore.locationPermission.description = description
         return self.modifier(PlaceholderModifier())
@@ -154,7 +154,7 @@ public extension View {
         - title: The title text
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeCalendarPermissionWith(title: String, description: String) -> some View {
         PermissionModel.PermissionModelStore.calendarPermisson.title = title
         PermissionModel.PermissionModelStore.calendarPermisson.description = description
@@ -167,7 +167,7 @@ public extension View {
      - Parameters:
         - title: The title text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeCalendarPermissionWith(title: String) -> some View {
         PermissionModel.PermissionModelStore.calendarPermisson.title = title
         return self.modifier(PlaceholderModifier())
@@ -179,7 +179,7 @@ public extension View {
      - Parameters:
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeCalendarPermissionWith(description: String) -> some View {
         PermissionModel.PermissionModelStore.calendarPermisson.description = description
         return self.modifier(PlaceholderModifier())
@@ -196,7 +196,7 @@ public extension View {
         - title: The title text
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeBluetoothPermissionWith(title: String, description: String) -> some View {
         PermissionModel.PermissionModelStore.bluetoothPermission.title = title
         PermissionModel.PermissionModelStore.bluetoothPermission.description = description
@@ -209,7 +209,7 @@ public extension View {
      - Parameters:
         - title: The title text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeBluetoothPermissionWith(title: String) -> some View {
         PermissionModel.PermissionModelStore.bluetoothPermission.title = title
         return self.modifier(PlaceholderModifier())
@@ -221,7 +221,7 @@ public extension View {
      - Parameters:
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeBluetoothPermissionWith(description: String) -> some View {
         PermissionModel.PermissionModelStore.bluetoothPermission.description = description
         return self.modifier(PlaceholderModifier())
@@ -238,7 +238,7 @@ public extension View {
         - title: The title text
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeMicPermissionWith(title: String, description: String) -> some View {
         PermissionModel.PermissionModelStore.microphonePermisson.title = title
         PermissionModel.PermissionModelStore.microphonePermisson.description = description
@@ -251,7 +251,7 @@ public extension View {
      - Parameters:
         - title: The title text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeMicPermissionWith(title: String) -> some View {
         PermissionModel.PermissionModelStore.microphonePermisson.title = title
         return self.modifier(PlaceholderModifier())
@@ -263,7 +263,7 @@ public extension View {
      - Parameters:
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeMicPermissionWith(description: String) -> some View {
         PermissionModel.PermissionModelStore.microphonePermisson.description = description
         return self.modifier(PlaceholderModifier())
@@ -280,7 +280,7 @@ public extension View {
         - title: The title text
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeNotificationPermissionWith(title: String, description: String) -> some View {
         PermissionModel.PermissionModelStore.notificationPermission.title = title
         PermissionModel.PermissionModelStore.notificationPermission.description = description
@@ -293,7 +293,7 @@ public extension View {
      - Parameters:
         - title: The title text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeNotificationPermissionWith(title: String) -> some View {
         PermissionModel.PermissionModelStore.notificationPermission.title = title
         return self.modifier(PlaceholderModifier())
@@ -305,7 +305,7 @@ public extension View {
      - Parameters:
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizeNotificationPermissionWith(description: String) -> some View {
         PermissionModel.PermissionModelStore.notificationPermission.description = description
         return self.modifier(PlaceholderModifier())
@@ -322,7 +322,7 @@ public extension View {
         - title: The title text
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizePhotoPermissionWith(title: String, description: String) -> some View {
         PermissionModel.PermissionModelStore.photoPermission.title = title
         PermissionModel.PermissionModelStore.photoPermission.description = description
@@ -335,7 +335,7 @@ public extension View {
      - Parameters:
         - title: The title text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizePhotoPermissionWith(title: String) -> some View {
         PermissionModel.PermissionModelStore.photoPermission.title = title
         return self.modifier(PlaceholderModifier())
@@ -347,7 +347,7 @@ public extension View {
      - Parameters:
         - description: The description text
      */
-    
+    @available(*, deprecated, message: "Please update PermissionsSwiftUI to 1.0.0 above.")
     func customizePhotoPermissionWith(description: String) -> some View {
         PermissionModel.PermissionModelStore.photoPermission.description = description
         return self.modifier(PlaceholderModifier())
