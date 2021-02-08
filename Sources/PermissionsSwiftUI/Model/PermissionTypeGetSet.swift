@@ -145,10 +145,11 @@ extension PermissionType{
 }
 extension PermissionType:CaseIterable{
     public static var allCases: [PermissionType]{
-        if #available(iOS 14.5, *) {
-            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking]
-        } else {
-            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
-        }
+        return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
+        //        if #available(iOS 14.5, *) {
+        //            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking]
+        //        } else {
+        //            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
+        //        }
     }
 }
