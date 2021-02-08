@@ -5,6 +5,7 @@ import SnapshotTesting
 
 fileprivate let referenceSize = UIScreen.main.bounds.size
 final class PermissionsSwiftUITests: XCTestCase {
+    @State var showModal = false
     let placeholderText = """
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
 """
@@ -239,31 +240,24 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             
         }
     }
-//    func testMicrophoneCell(){
-//        let permission = PermissionModel.microphone
-//        let view = PermissionSectionCell(permission:permission , allowButtonStatus: .idle, showModal: .constant(true))
-//            .customizeMicrophonePermissionWith(image: Image(systemName: "gear"), title: "Testing", description: placeholderText)
-//            .referenceFrameCell()
-//        let testingPermission = JMPermission(imageIcon: AnyView(Image(systemName: "gear")), title: "Testing", description: placeholderText, authorized: false)
-//        XCTAssertEqual(testingPermission, PermissionModel.PermissionModelStore.microphonePermisson)
-//        assertSnapshot(matching: view, as: .image)
-//    }
-//    func testBluetoothCell(){
-//        let permission = PermissionModel.bluetooth
-//        let view = PermissionSectionCell(permission:permission , allowButtonStatus: .idle, showModal: .constant(true))
-//            .customizeBluetoothPermissionWith(image: Image(systemName: "gear"), title: "Testing", description: placeholderText)
-//            .referenceFrameCell()
-//        XCTAssertEqual(testingPermission, PermissionModel.PermissionModelStore.bluetoothPermission)
-//        assertSnapshot(matching: view, as: .image)
-//    }
-//    func testCameraCell(){
-//        let permission = PermissionModel.camera
-//        let view = PermissionSectionCell(permission:permission , allowButtonStatus: .idle, showModal: .constant(true))
-//            .customizeCameraPermissionWith(image: Image(systemName: "gear"), title: "Testing", description: placeholderText)
-//            .referenceFrameCell()
-//        let testPermission =
-//        assertSnapshot(matching: view, as: .image)
-//    }
+    func testStateChangeClosures(){
+        XCTAssertNil(PermissionStore.shared.onAppear)
+        XCTAssertNil(PermissionStore.shared.onDisappear)
+        var testString = ""
+        let onAppear = {
+            testString = "appeared"
+        }
+        let onDisappear = {
+            testString = "disappeared"
+        }
+        let _ = EmptyView().JMPermissions(showModal: .constant(true), for: [], onAppear: onAppear, onDisappear: onDisappear)
+        XCTAssertNotNil(PermissionStore.shared.onAppear)
+        XCTAssertNotNil(PermissionStore.shared.onAppear)
+        MainView.testCallOnAppear()
+        XCTAssertEqual(testString, "appeared")
+        MainView.testCallOnDisappear()
+        XCTAssertEqual(testString, "disappeared")
+    }
     static var allTests = [
         ("testPermissionManagers", testPermissionManagers),
         ("testLocationPermissionManager",testLocationPermissionManager)

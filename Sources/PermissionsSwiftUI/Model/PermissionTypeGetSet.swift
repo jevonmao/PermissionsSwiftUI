@@ -8,7 +8,11 @@
 import Foundation
 import SwiftUI
 
-extension PermissionType{
+protocol PermissionTypeProtocol {
+    var permissions:[PermissionType]{get}
+    func requestPermission(isPermissionGranted: @escaping (Bool) -> Void)
+}
+extension PermissionType:PermissionTypeProtocol{
     var permissions:[PermissionType]{
         get{
             PermissionStore.shared.permissions 
@@ -82,12 +86,10 @@ extension PermissionType{
         switch self {
         case .location:
             JMLocationPermissionManager.shared.requestInUsePermission { authorized in
-                print("Permission \(authorized)")
                 isPermissionGranted(authorized)
             }
         case .locationAlways:
             JMLocationPermissionManager.shared.requestAlwaysPermission { authorized in
-                print("Permission \(authorized)")
                 isPermissionGranted(authorized)
             }
         case .photo:

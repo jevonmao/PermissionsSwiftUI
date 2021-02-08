@@ -19,6 +19,8 @@ struct PermissionStore {
     }
     var permissions: [PermissionType] = []
     var mainTexts = MainTexts()
+    var onAppear:(()->Void)?
+    var onDisappear:(()->Void)?
     struct MainTexts{
         var headerText:String = "Need Permissions"
         var headerDescription:String = """

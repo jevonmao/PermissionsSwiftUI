@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 
+#if DEBUG
 protocol LocationManager {
     var location:CLLocation? {get}
     func requestWhenInUseAuthorization()
@@ -26,3 +27,4 @@ class MockCLLocationManager:CLLocationManager{
         self.authStatus = .authorizedWhenInUse
     } 
 }
+#endif
