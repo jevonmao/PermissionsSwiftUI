@@ -8,7 +8,7 @@
 
 <img src="https://img.shields.io/github/workflow/status/jevonmao/PermissionsSwiftUI/Swift?label=CI%20Build"> <img src="https://img.shields.io/github/contributors/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/badge/License-MIT-blue.svg"> <img src="https://img.shields.io/github/issues/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/github/commit-activity/w/jevonmao/PermissionsSwiftUI?color=yellowgreen&logoColor=yellowgreen"> [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6fe1a84c136b4a99823e7d71a8d08625)](https://www.codacy.com/gh/jevonmao/PermissionsSwiftUI/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jevonmao/PermissionsSwiftUI&amp;utm_campaign=Badge_Grade)
 
-`PermissionsSwiftUI` displays and handles permissions in SwiftUI. It is largely inspired by SPPermissions.
+`PermissionsSwiftUI` displays and handles permissions in SwiftUI. It is largely inspired by [SPPermissions](https://github.com/varabeis/SPPermissions).
 The UI is highly customizable and resembles an **Apple style**. If you like the project, don't forget to `star ★` and follow me on GitHub. <br />
 <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot1.png" height="500"/>
 &emsp; &emsp;
@@ -19,8 +19,9 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
 -  [Installation](#installation)
 -  [Quickstart](#quickstart) 
 -  [Usage](#usage)
--  [License](#license)
 -  [Additional Information](#additional-information)
+-  [Acknowledgement](#acknowledgement)
+-  [License](#license)
 
 ## Installation
 ### Requirements
@@ -116,5 +117,7 @@ To customize the bottom description, use the modifier `changeBottomDescriptionTo
 ## Additional Information
 Here is a list of all permissions PermissionsSwiftUI already supports/will support. By the 0.0.1 beta release, PermissionsSwiftUI will have all 12 iOS system permissions built in. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon. Stay tuned!
 <img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card.png" alt="A card of all the permissions" width="100%">
+## Acknowledgement
+SPPermissions is in large a SwiftUI remake of famous Swift library **[SPPermissions](https://github.com/varabeis/SPPermissions)** by @verabeis. SPPermissions was initially created in 2017, and today on GitHub has over 4000 stars. PermissionsSwiftUI aims to deliver a just as beautiful and powerful library in SwiftUI. If you `star ★` my project PermissionsSwiftUI, be sure to checkout the original project SPPermissions where I borrowed the UI Design, some parts of README.md page, and important source code references along the way.
 ## License
 PermissionsSwiftUI is created by Jingwen (Jevon) Mao and licensed under the [MIT License](https://jingwen-mao.mit-license.org)
