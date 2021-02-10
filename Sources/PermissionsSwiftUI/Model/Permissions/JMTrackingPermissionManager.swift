@@ -9,7 +9,7 @@ import Foundation
 import AppTrackingTransparency
 import AdSupport
 
-@available(iOS 14, *)
+@available(iOS 14.5, *)
 struct JMTrackingPermissionManager {
     static var shared = JMTrackingPermissionManager()
     public static var advertisingIdentifier:UUID{

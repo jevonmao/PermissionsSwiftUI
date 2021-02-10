@@ -17,7 +17,7 @@ import SwiftUI
  ```
  */
 
-public enum PermissionType {
+public enum PermissionType:String {
     ///The `location` permission allows the device's positoin to be tracked
     case location
     ///The `locationAlways` permission provides location data even if app is in background

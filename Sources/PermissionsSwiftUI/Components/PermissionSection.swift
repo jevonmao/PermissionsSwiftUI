@@ -29,7 +29,7 @@ struct PermissionSection: View {
     }
 }
 
-enum AllowButtonStatus {
+enum AllowButtonStatus:CaseIterable {
     case idle
     case allowed
     case denied

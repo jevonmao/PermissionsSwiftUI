@@ -13,7 +13,7 @@ import SwiftUI
  
  `JMPermission` conforms to `Equatable` and `Hashable`. Is used for abstractly store data for each permission.
  */
-public struct JMPermission:Equatable, Hashable{
+public struct JMPermission:Equatable{
     
     /**
      Initializes a new instance of JMPermission
@@ -40,11 +40,6 @@ public struct JMPermission:Equatable, Hashable{
         else{
             return false
         }
-    }
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(title)
-        hasher.combine(description)
-        hasher.combine(authorized)
     }
     
     var imageIcon: AnyView
