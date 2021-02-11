@@ -24,10 +24,12 @@ struct PermissionSection: View {
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .padding()
         .padding(.horizontal, 5)
+        .frame(maxWidth:UIScreen.main.bounds.width-30)
+
     }
 }
 
-enum AllowButtonStatus {
+enum AllowButtonStatus:CaseIterable {
     case idle
     case allowed
     case denied
@@ -63,7 +65,7 @@ struct PermissionSectionCell: View {
                     .lineLimit(3)
                     .foregroundColor(Color(.systemGray2))
             }
-            .padding(.horizontal, 5)
+            .padding(.horizontal, 3)
 
             Spacer()
             AllowButtonSection(action: {
@@ -88,6 +90,7 @@ struct PermissionSectionCell: View {
                 }
             }, allowButtonStatus: $allowButtonStatus)
         }
+        .fixedSize(horizontal: false, vertical: true)
         .padding(15)
         .frame(maxHeight:.infinity)
     }

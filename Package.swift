@@ -22,7 +22,8 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "PermissionsSwiftUI",
-            dependencies: []
+            dependencies: [],
+            exclude: ["Tests/PermissionsSwiftUITests/__Snapshots__"]
         ),
         .testTarget(
             name: "PermissionsSwiftUITests",

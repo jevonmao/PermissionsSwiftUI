@@ -8,7 +8,12 @@
 import Foundation
 import SwiftUI
 
-extension PermissionType{
+protocol PermissionTypeProtocol {
+    var permissions:[PermissionType]{get}
+    func requestPermission(isPermissionGranted: @escaping (Bool) -> Void)
+}
+extension PermissionType:PermissionTypeProtocol{
+
     var permissions:[PermissionType]{
         get{
             PermissionStore.shared.permissions 
@@ -44,6 +49,9 @@ extension PermissionType{
                 return store.remindersPermission
             case .speech:
                 return store.speechPermission
+            case .health:
+                return store.healthPermission
+
             }
         }
         set{
@@ -74,6 +82,8 @@ extension PermissionType{
                 PermissionStore.shared.updateStore(property: {$0.remindersPermission=$1}, value: newValue)
             case .speech:
                 PermissionStore.shared.updateStore(property: {$0.speechPermission=$1}, value: newValue)
+            case .health:
+                PermissionStore.shared.updateStore(property: {$0.healthPermission=$1}, value: newValue)
             }
         }
         
@@ -82,12 +92,10 @@ extension PermissionType{
         switch self {
         case .location:
             JMLocationPermissionManager.shared.requestInUsePermission { authorized in
-                print("Permission \(authorized)")
                 isPermissionGranted(authorized)
             }
         case .locationAlways:
             JMLocationPermissionManager.shared.requestAlwaysPermission { authorized in
-                print("Permission \(authorized)")
                 isPermissionGranted(authorized)
             }
         case .photo:
@@ -117,7 +125,7 @@ extension PermissionType{
                 
             }
         case .tracking:
-            if #available(iOS 14, *) {
+            if #available(iOS 14.5, *) {
                 JMTrackingPermissionManager.shared.requestPermission{authorized in
                     print(authorized)
                     isPermissionGranted(authorized)
@@ -139,16 +147,21 @@ extension PermissionType{
             JMSpeechPermissionManager.shared.requestPermission{
                 isPermissionGranted($0)
             }
+        case .health:
+            JMHealthPermissionManager.shared.requestPermission{
+                isPermissionGranted($0)
+            }
         }
     }
     
 }
 extension PermissionType:CaseIterable{
     public static var allCases: [PermissionType]{
-        if #available(iOS 14.5, *) {
-            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking]
-        } else {
-            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
-        }
+        //return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
+                if #available(iOS 14.5, *) {
+                    return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking]
+                } else {
+                    return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
+                }
     }
 }

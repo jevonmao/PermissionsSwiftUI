@@ -9,20 +9,49 @@ import Foundation
 import MapKit
 
 protocol LocationManager {
-    var location:CLLocation? {get}
+    var delegate: CLLocationManagerDelegate? {get set}
+    func authorizationStatus() -> CLAuthorizationStatus
     func requestWhenInUseAuthorization()
     func requestAlwaysAuthorization()
 }
 
-class MockCLLocationManager:CLLocationManager{
-    var authStatus:CLAuthorizationStatus = .notDetermined
-    func authorizationStatus() -> CLAuthorizationStatus{
-        return authStatus
+
+extension CLLocationManager:LocationManager{
+    func authorizationStatus() -> CLAuthorizationStatus {
+        CLLocationManager.authorizationStatus()
     }
-    override func requestAlwaysAuthorization() {
-        self.authStatus = .authorizedAlways
-    }
-    override func requestWhenInUseAuthorization() {
-        self.authStatus = .authorizedWhenInUse
-    } 
+    
+    
 }
+struct MockCLLocationManager:LocationManager{
+    weak var delegate: CLLocationManagerDelegate?
+    
+    private static var status:CLAuthorizationStatus = .notDetermined
+    func authorizationStatus() -> CLAuthorizationStatus {
+        MockCLLocationManager.status
+    }
+    
+    func requestWhenInUseAuthorization() {
+        MockCLLocationManager.status = .authorizedWhenInUse
+    }
+    
+    func requestAlwaysAuthorization() {
+        MockCLLocationManager.status = .authorizedAlways
+
+    }
+    
+    
+}
+//class MockCLLocationManager:CLLocationManager{
+//    var authStatus:CLAuthorizationStatus = .notDetermined
+//    func authorizationStatus() -> CLAuthorizationStatus{
+//        return authStatus
+//    }
+//    override func requestAlwaysAuthorization() {
+//        self.authStatus = .authorizedAlways
+//    }
+//    override func requestWhenInUseAuthorization() {
+//        self.authStatus = .authorizedWhenInUse
+//    }
+//}
+

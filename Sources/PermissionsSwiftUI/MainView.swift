@@ -19,8 +19,22 @@ struct MainView: View {
         bodyView
             .sheet(isPresented: showModal, content: {
                 ModalView(showModal: showModal)
+                    .onAppear(perform:PermissionStore.shared.onAppear)
+                    .onDisappear(perform:PermissionStore.shared.onDisappear)
+
             })
             
             
     }
+    #if DEBUG
+    static func testCallOnAppear(){
+        guard let onAppear = PermissionStore.shared.onAppear else {return}
+        onAppear()
+    }
+    static func testCallOnDisappear(){
+        guard let onDisappear = PermissionStore.shared.onDisappear else {return}
+        onDisappear()
+    }
+    #endif
+
 }

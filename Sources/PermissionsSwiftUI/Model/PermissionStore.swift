@@ -19,6 +19,8 @@ struct PermissionStore {
     }
     var permissions: [PermissionType] = []
     var mainTexts = MainTexts()
+    var onAppear:(()->Void)?
+    var onDisappear:(()->Void)?
     struct MainTexts{
         var headerText:String = "Need Permissions"
         var headerDescription:String = """
@@ -93,6 +95,10 @@ struct PermissionStore {
         title: "Speech",
         description: "Allow to access speech recognition", authorized: false
     )
+    var healthPermission = JMPermission(imageIcon: AnyView(Image(systemName: "heart.fill")),
+                                        title: "Health",
+                                        description: "Allow to access your health information",
+                                        authorized: false)
     
 }
 // MARK: Updating methods

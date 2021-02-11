@@ -8,6 +8,7 @@
 import CoreBluetooth
 import UIKit
 
+
 class JMBluetoothPermissionManager: NSObject {
     typealias JMBluetoothPermissionHandler = (Bool) -> Void?
     private var completion: JMBluetoothPermissionHandler?
