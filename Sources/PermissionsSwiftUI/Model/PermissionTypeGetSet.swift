@@ -145,8 +145,8 @@ extension PermissionType:PermissionTypeProtocol{
             JMSpeechPermissionManager.shared.requestPermission{
                 isPermissionGranted($0)
             }
-        case .health:
-            JMHealthPermissionManager.shared.requestPermission{
+        case .health(let HKPermissions):
+            JMHealthPermissionManager.shared.requestPermission(for: HKPermissions){
                 isPermissionGranted($0)
             }
         }

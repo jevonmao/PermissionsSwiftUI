@@ -23,7 +23,7 @@ let package = Package(
         .target(
             name: "PermissionsSwiftUI",
             dependencies: [],
-            exclude: ["Tests/PermissionsSwiftUITests/__Snapshots__"]
+            exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
         ),
         .testTarget(
             name: "PermissionsSwiftUITests",
