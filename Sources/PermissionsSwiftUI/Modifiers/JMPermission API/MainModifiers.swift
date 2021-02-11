@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  MainModifiers.swift
 //
 //
 //  Created by Jevon Mao on 1/30/21.
@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct Permissions: ViewModifier {
+//MARK: Modal Style permissions
+struct PermissionsModal: ViewModifier {
     var showModal: Binding<Bool>
 
     init(showModal:Binding<Bool>){
@@ -23,7 +24,7 @@ public extension View {
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
      
-     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This view will show a PermissionsSwiftUI modal with 3 different permissions.
+     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.
      ````
          struct ContentView: View {
              @State var showModal = false
@@ -48,12 +49,12 @@ public extension View {
     
     func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        return self.modifier(Permissions(showModal: showModal))
+        return self.modifier(PermissionsModal(showModal: showModal))
     }
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
      
-     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This view will show a PermissionsSwiftUI modal with 3 different permissions.
+     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.
      ````
          struct ContentView: View {
              @State var showModal = false
@@ -82,6 +83,45 @@ public extension View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
-        return self.modifier(Permissions(showModal: showModal))
+        return self.modifier(PermissionsModal(showModal: showModal))
+    }
+}
+
+//MARK: - Alert Style permissions
+struct PermissionsAlert: ViewModifier{
+    var show:Binding<Bool>
+    func body(content: Content) -> some View {
+        AlertMainView(for: AnyView(content), show: show)
+    }
+}
+
+public extension View{
+    /**
+     Displays a PermissionsSwiftUI alert view that displays and handles permissions.
+     
+     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.
+     ````
+         struct ContentView: View {
+             @State var showModal = false
+             var body: some View {
+                 Button(action: {
+                     showModal=true
+                 }, label: {
+                     Text("Ask user for permissions")
+                 })
+                 .JMAlert(show: $showModal)
+             }
+             
+         }
+     ````
+     - Parameters:
+        - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
+     - Returns:
+        Returns a new view. Will show a alert pop up that will overlay your existing view to show PermissionsSwiftUI permission handling components.
+     
+     */
+    
+    func JMAlert(showModal:Binding<Bool>) -> some View{
+        return self.modifier(PermissionsAlert(show: showModal))
     }
 }

@@ -1,7 +1,7 @@
 @testable import PermissionsSwiftUI
 import XCTest
 import SwiftUI
-import SnapshotTesting
+import SnapshotTesting 
 
 fileprivate let referenceSize = UIScreen.main.bounds.size
 final class PermissionsSwiftUITests: XCTestCase {
