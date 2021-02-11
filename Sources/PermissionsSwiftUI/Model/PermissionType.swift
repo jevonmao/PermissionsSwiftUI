@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+import HealthKit
 /**
  The types of iOS system permission for show in the JMPermissions view
  
@@ -17,7 +17,7 @@ import SwiftUI
  ```
  */
 
-public enum PermissionType:String {
+public enum PermissionType {
     ///The `location` permission allows the device's positoin to be tracked
     case location
     ///The `locationAlways` permission provides location data even if app is in background
@@ -40,6 +40,21 @@ public enum PermissionType:String {
     case motion
     ///The `reminders` permission is needed to interact with device reminders
     case reminders
+    /**
+     Permission that allows app to access healthkit information
+     
+     - Note: Extensive Info.plist  values and configurations are required for HealthKit authorization. Please see Apple Developer [website](https://developer.apple.com/documentation/healthkit/authorizing_access_to_health_data) for details. \n
+     
+     For example, passing in a `Set` of `HKSampleType`:
+     ```
+     [.health(Set([HKObjectType.workoutType(),
+                         HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+                         HKObjectType.quantityType(forIdentifier: .distanceCycling)!,
+                         HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+                         HKObjectType.quantityType(forIdentifier: .heartRate)!]))]
+     ```
+     */
+    case health(Set<HKSampleType>)
     ///Permission that allows app to use speech recognition
     case speech
     ///In order for app to track user's data across apps and websites, the tracking permission is needed

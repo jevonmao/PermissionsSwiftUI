@@ -150,7 +150,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
     func permissionManagerMethod(for permission:PermissionType){
         switch permission {
         default:
-            let expectation = self.expectation(description: "\(permission.rawValue)")
+            let expectation = self.expectation(description: "Requesting permission access")
             var permissionGranted:Bool?
             DispatchQueue.main.async {
                 JMRemindersPermissionManager.shared.requestPermission{

@@ -48,6 +48,8 @@ extension PermissionType:PermissionTypeProtocol{
                 return store.remindersPermission
             case .speech:
                 return store.speechPermission
+            case .health:
+                return store.healthPermission
             }
         }
         set{
@@ -78,6 +80,8 @@ extension PermissionType:PermissionTypeProtocol{
                 PermissionStore.shared.updateStore(property: {$0.remindersPermission=$1}, value: newValue)
             case .speech:
                 PermissionStore.shared.updateStore(property: {$0.speechPermission=$1}, value: newValue)
+            case .health:
+                PermissionStore.shared.updateStore(property: {$0.healthPermission=$1}, value: newValue)
             }
         }
         
@@ -139,6 +143,10 @@ extension PermissionType:PermissionTypeProtocol{
             }
         case .speech:
             JMSpeechPermissionManager.shared.requestPermission{
+                isPermissionGranted($0)
+            }
+        case .health:
+            JMHealthPermissionManager.shared.requestPermission{
                 isPermissionGranted($0)
             }
         }
