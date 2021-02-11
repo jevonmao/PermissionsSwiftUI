@@ -13,14 +13,13 @@ class JMHealthPermissionManager{
     static let shared = JMHealthPermissionManager()
     typealias JMBluetoothPermissionHandler = (Bool) -> Void?
 
-    func requestPermission(completion: @escaping (Bool) -> Void?) {
+    func requestPermission(for HKPermissions:Set<HKSampleType>, completion: @escaping (Bool) -> Void?) {
         guard HKHealthStore.isHealthDataAvailable() else {
-            print("PermissionsSwiftUI - Health data is not available")
+            print("PermissionsSwiftUI - Health data is not available") 
             completion(false)
             return
         }
-        let allTypes = Set([HKObjectType.workoutType(), HKObjectType.quantityType(forIdentifier: .dietaryFatTotal)!])
-        healthStore.requestAuthorization(toShare: allTypes, read: allTypes){authorized, error in
+        healthStore.requestAuthorization(toShare: HKPermissions, read: HKPermissions){authorized, error in
             guard error == nil else{
                 print("PermissionSwiftUI - \(String(describing: error))")
                 completion(false)
