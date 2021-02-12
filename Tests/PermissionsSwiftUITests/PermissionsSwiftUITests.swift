@@ -1,7 +1,7 @@
 @testable import PermissionsSwiftUI
 import XCTest
 import SwiftUI
-import SnapshotTesting
+import SnapshotTesting 
 
 fileprivate let referenceSize = UIScreen.main.bounds.size
 final class PermissionsSwiftUITests: XCTestCase {
@@ -244,7 +244,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         switch permission {
         default:
             let views:[AnyView] = AllowButtonStatus.allCases.map{
-                let view = PermissionSectionCell(permission: permission, allowButtonStatus: $0, showModal: .constant(true))
+                let view = PermissionSectionCell(permission: permission, allowButtonStatus: $0, showModal: .constant(true), isAlert: false)
                     .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
                     .referenceFrameCell()
                 return AnyView(view)

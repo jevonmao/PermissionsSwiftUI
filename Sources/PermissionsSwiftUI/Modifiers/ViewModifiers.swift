@@ -22,7 +22,6 @@ struct ButtonStatusColor: ViewModifier {
                     Capsule()
                         .fill(Color(.white))
                 )
-                .animation(.default)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
 
@@ -37,7 +36,6 @@ struct ButtonStatusColor: ViewModifier {
                     Capsule()
                         .fill(Color(.systemBlue))
                 )
-                .animation(.default)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
 
@@ -52,7 +50,6 @@ struct ButtonStatusColor: ViewModifier {
                     Capsule()
                         .fill(Color(.systemRed))
                 )
-                .animation(.default)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
         }
