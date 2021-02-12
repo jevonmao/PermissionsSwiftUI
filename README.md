@@ -19,9 +19,13 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
 -  [Installation](#installation)
 -  [Quickstart](#quickstart) 
 -  [Usage](#usage)
+    -  [Customize Permission Texts](#customize-permission-texts)
+    -  [Customize header texts](#customize-header-texts)
+    -  [`onAppear` and `onDisappear` Override](#onappear-and-ondisappear-override)
+-  [Supported Permissions](#supported-permissions)
 -  [Additional Information](#additional-information)
--  [Acknowledgement](#acknowledgement)
--  [License](#license)
+    -  [Acknowledgement](#acknowledgement)
+    -  [License](#license)
 
 ## Installation
 ### Requirements
@@ -39,13 +43,13 @@ You can install PermissionsSwiftUI into your Xcode project via Swift Package Man
 ## Quickstart
 > Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.
 
-To use PermissionsSwiftUI, simply add the `JMPermission` modifier to any view. <br />
+### Modal Style
+To use PermissionsSwiftUI to show a beauitful permission modal, simply add the `JMPermission`to any view. <br />
 `.JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])`
 Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions you want to show.
 ```Swift
    struct ContentView: View {
        @State var showModal = false
-       
        var body: some View {
            Button(action: {
                showModal=true
@@ -56,8 +60,19 @@ Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions y
        }
    }
  ```
+### Alert Style
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/alert_view_screenshot.png?raw=true" height="400" align="left" />
+The alert style is equally gorgeous, and allows for more versatile use. It is recommended when you have less than 3 permissions.  <br />
+To show a permission pop up alert, use: 
+
+```Swift
+.JMAlert(showModal: $showModal, for: [.locationAlways, .photo])
+```
+Similar to the previous `JMPermissions`, you need to pass in a `Binding<Bool>` to show the view, and add whatever permissions you want to show.
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+
 ## Usage
-### Customize permission texts
+### Customize Permission Texts
 😱 Be aware. Features ahead will wow you - the customization is so advanced, yet so simple. Have fun!
 
 To customize permission texts, use the modifier `setPermissionComponent()`
@@ -70,8 +85,9 @@ For example, you can change title, description, and image icon:
 ```
 and the result:
 <div style="text-align:center">
-<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-camera.png" height="100">
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-camera.png" height="70">
 </div>
+<br />
 Or only change 1 of title and description:
 
 ```Swift
@@ -96,7 +112,7 @@ Even full SwiftUI views will work😱:
                         image: AnyView(YourCoolView())
 ```
 You can use custom text and icon for all the supported permissions, with a single line of code.
-### Customize header texts
+### Customize Header Texts
 To customize the header title, use the modifier `changeHeaderTo`:
 <img align="right" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Header%20annotation.png?raw=true" alt="Annotated for headers screen" height="400" />
 ```Swift
@@ -113,11 +129,28 @@ To customize the bottom description, use the modifier `changeBottomDescriptionTo
 .JMPermissions(showModal: $showModal, for: [.camera, .location, .photo])
 .changeBottomDescriptionTo("If not allowed, you have to enable permissions in settings")
 ```
+### `onAppear` and `onDisappear` Override
+You might find it incredibly useful to execute your code, or perform some update action when a PermissionsSwiftUI view appears and disappears. <br />
+You can perform some action when PermissionsSwiftUI view appears or disappears by:
+```Swift
+.JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone], onAppear: {}, onDisappear: {})
+```
+The `onAppear` and `onDisappear` **closure parameters will be executed** everytime PermissionsSwiftUI view **appears and disappears.** <br />
+The same view modifier closure for state changes are available for the `JMAlert` modifier:
+```Swift
+.JMAlert(showModal: $showModal,
+                     for: [.locationAlways, .photo],
+                     onAppear: {print("Appeared")},
+                     onDisappear: {print("Disappeared")})
+```
 <br /> <br /> <br />
-## Additional Information
+## Supported Permissions
 Here is a list of all permissions PermissionsSwiftUI already supports/will support. By the 0.0.1 beta release, PermissionsSwiftUI will have all 12 iOS system permissions built in. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon. Stay tuned!
 <img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card.png" alt="A card of all the permissions" width="100%">
-## Acknowledgement
+
+## Additional Information
+
+### Acknowledgement
 SPPermissions is in large a SwiftUI remake of famous Swift library **[SPPermissions](https://github.com/varabeis/SPPermissions)** by @verabeis. SPPermissions was initially created in 2017, and today on GitHub has over 4000 stars. PermissionsSwiftUI aims to deliver a just as beautiful and powerful library in SwiftUI. If you `star ★` my project PermissionsSwiftUI, be sure to checkout the original project SPPermissions where I borrowed the UI Design, some parts of README.md page, and important source code references along the way.
-## License
+### License
 PermissionsSwiftUI is created by Jingwen (Jevon) Mao and licensed under the [MIT License](https://jingwen-mao.mit-license.org)
