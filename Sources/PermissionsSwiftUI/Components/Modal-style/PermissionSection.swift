@@ -10,21 +10,18 @@ import SwiftUI
 struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showModal:Bool
+    var isAlert:Bool
     var body: some View {
         VStack {
             let permissions = PermissionStore.shared.permissions
             ForEach(permissions.indices, id: \.self) {
-                PermissionSectionCell(permission: permissions[$0], showModal: $showModal)
+                PermissionSectionCell(permission: permissions[$0], showModal: $showModal, isAlert: isAlert)
+                
                 if permissions.count > 1 {
                     Divider()
                 }
             }
         }
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 15))
-        .padding()
-        .padding(.horizontal, 5)
-        .frame(maxWidth:UIScreen.main.bounds.width-30)
 
     }
 }
@@ -39,6 +36,7 @@ struct PermissionSectionCell: View {
     @State var permission: PermissionType
     @State var allowButtonStatus: AllowButtonStatus = .idle
     @Binding var showModal:Bool
+    var isAlert:Bool
     var isLast:Bool{
         ///Filter and only get unauthorized permissions
         let permissions = PermissionStore.shared.permissions.filter{$0.currentPermission.authorized==false}
@@ -68,30 +66,37 @@ struct PermissionSectionCell: View {
             .padding(.horizontal, 3)
 
             Spacer()
-            AllowButtonSection(action: {
-                permission.requestPermission { authed in
-                    var currentPermission = permission.currentPermission
-                    if authed {
-                        allowButtonStatus = .allowed
-                        currentPermission.authorized = true
-                    }
-                    else {
-                        allowButtonStatus = .idle
-                        currentPermission.authorized = false
-                    }
-                    permission.currentPermission = currentPermission
-                    if isLast{
-                        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
-                            showModal = false
-                        }
-                    }
-                   
-                    
-                }
-            }, allowButtonStatus: $allowButtonStatus)
+            if isAlert{
+                AllowButtonSection(action: {
+                    permission.requestPermission(isPermissionGranted: {handleButtonState(for: $0)})
+                }, allowButtonStatus: $allowButtonStatus)
+            }
+            else{
+                AllowButtonSection(action: {
+                    permission.requestPermission(isPermissionGranted: {handleButtonState(for: $0)})
+                }, allowButtonStatus: $allowButtonStatus)
+                .animation(.default)
+            }
+      
         }
         .fixedSize(horizontal: false, vertical: true)
         .padding(15)
-        .frame(maxHeight:.infinity)
+    }
+    func handleButtonState(for authorized:Bool){
+        var currentPermission = permission.currentPermission
+        if authorized {
+            allowButtonStatus = .allowed
+            currentPermission.authorized = true
+        }
+        else {
+            allowButtonStatus = .idle
+            currentPermission.authorized = false
+        }
+        permission.currentPermission = currentPermission
+        if isLast{
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+                showModal = false
+            }
+        }
     }
 }
