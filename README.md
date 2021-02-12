@@ -69,7 +69,7 @@ To show a permission pop up alert, use:
 .JMAlert(showModal: $showModal, for: [.locationAlways, .photo])
 ```
 Similar to the previous `JMPermissions`, you need to pass in a `Binding<Bool>` to show the view, and add whatever permissions you want to show.
-<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 
 ## Usage
 ### Customize Permission Texts
