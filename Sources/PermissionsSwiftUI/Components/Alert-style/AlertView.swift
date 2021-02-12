@@ -30,7 +30,7 @@ struct AlertView: View {
             }
             .padding(5)
             .background(Color(.systemBackground).opacity(0.8))
-            .frame(width: screenSize.width-60)
+            .frame(width: screenSize.width > 375 ? 375 : screenSize.width-60)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
         }
 

@@ -23,19 +23,13 @@ struct HeaderText: View {
                         .padding(.vertical, -3)
                 }
                 HStack {
-                    if #available(iOS 14.0, *) {
                         Text(mainText.headerText)
                             .font(.system(isAlert ? .title : .largeTitle, design: .rounded))
-                            .fontWeight(isAlert ? .semibold : .bold)
+                            .fontWeight(.bold)
                             .lineLimit(1)
+                            .minimumScaleFactor(0.5)
 
-                    } else {
-                        #warning("Fix Me - correctly adjust font point size.")
-                        Text(mainText.headerText)
-                            .font(.system(size: isAlert ? 20 : 25, design: .rounded))
-                            .fontWeight(isAlert ? .semibold : .bold)
-                            .lineLimit(1)
-                    }
+                    
                     Spacer()
                     ExitButtonSection(action: { exitButtonAction() })
                 }
