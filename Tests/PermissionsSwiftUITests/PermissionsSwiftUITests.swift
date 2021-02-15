@@ -30,6 +30,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         let locationAlwaysPermission = PermissionType.locationAlways.currentPermission
         let microphonePermission = PermissionType.microphone.currentPermission
         let notificationPermission = PermissionType.notification.currentPermission
+        let healthPermission = PermissionType.health(Set([])).currentPermission
         XCTAssertEqual(photoPermission, JMPermission(
             imageIcon: AnyView(Image(systemName: "photo")),
             title: "Photo Library",
@@ -84,6 +85,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             title: "Notification",
             description: "Allow to send notifications", authorized: false
         ))
+        XCTAssertEqual(healthPermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "heart.fill")),
+            title: "Health",
+            description: "Allow to access your health information",
+            authorized: false))
         //Additional test for failing case
         XCTAssertNotEqual(notificationPermission, JMPermission(
             imageIcon: AnyView(Image(systemName: "bell.fill")),
@@ -137,14 +143,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             JMSpeechPermissionManager.shared.requestPermission{
                 XCTAssertTrue($0)
             }
+//            let healthPermissions:Set<HKSampleType> = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!])
+//            JMHealthPermissionManager.shared.requestPermission(for: healthPermissions){
+//                XCTAssertTrue($0)
+//            }
             if #available(iOS 14.5, *) {
                 JMTrackingPermissionManager.shared.requestPermission{
                     XCTAssertTrue($0)
                 }
             }
         }
-
-        
         
     }
     func permissionManagerMethod(for permission:PermissionType){
@@ -214,7 +222,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         XCTAssertEqual(newHeader, PermissionStore.shared.mainTexts.headerText)
         XCTAssertEqual(placeholderText, PermissionStore.shared.mainTexts.headerDescription)
         XCTAssertEqual(placeholderText, PermissionStore.shared.mainTexts.bottomDescription)
-        assertSnapshot(matching: view, as: .image) 
+        assertSnapshot(matching: view, as: .image)
         
     }
     func testPermissionCell(){
@@ -252,7 +260,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         let onDisappear = {
             testString = "disappeared"
         }
-        let _ = EmptyView().JMPermissions(showModal: .constant(true), for: [], onAppear: onAppear, onDisappear: onDisappear)
+        let _ = EmptyView().JMModal(showModal: .constant(true), for: [], onAppear: onAppear, onDisappear: onDisappear)
         XCTAssertNotNil(PermissionStore.shared.onAppear)
         XCTAssertNotNil(PermissionStore.shared.onAppear)
         MainView.testCallOnAppear()
@@ -275,6 +283,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         
         
     }
+//    func testAlertView(){
+//        let view = EmptyView().JMAlert(showModal: .constant(true), for: [.bluetooth])
+//        assertSnapshot(matching: view, as: .image, record: true)
+//    }
     static var allTests = [
         ("testPermissionManagers", testPermissionManagers),
         ("testLocationPermissionManager",testLocationPermissionManager)

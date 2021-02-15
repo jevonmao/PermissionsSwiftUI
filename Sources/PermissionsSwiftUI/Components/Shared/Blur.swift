@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let screenSize = UIScreen.main.bounds.size
+let screenSize = UIScreen.main.bounds
 struct Blur: UIViewRepresentable {
     var style: UIBlurEffect.Style = .systemMaterial
     func makeUIView(context: Context) -> UIVisualEffectView {

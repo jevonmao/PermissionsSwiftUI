@@ -17,10 +17,9 @@ struct ModalView: View {
                 HeaderText(exitButtonAction: {showModal=false})
                     
                 PermissionSection(showModal:$showModal, isAlert:false)
-                    .background(Color(.secondarySystemBackground))
+                    .background(Color(.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 15))
                     .padding()
-                    .padding(.horizontal, 5)
                     .frame(maxWidth:UIScreen.main.bounds.width-30)
 
                 Text(mainText.bottomDescription)
@@ -32,7 +31,7 @@ struct ModalView: View {
             .padding(.bottom,30)
 
         }
-        .background(Color(.systemBackground))
+        .background(Color(.secondarySystemBackground))
         .edgesIgnoringSafeArea(.all)
     }
 }

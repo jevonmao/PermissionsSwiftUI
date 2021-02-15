@@ -12,52 +12,59 @@ struct ButtonStatusColor: ViewModifier {
     func body(content: Content) -> some View {
         switch self.allowButtonStatus {
         case .idle:
-            return content
-                .frame(width: 70)
-                .font(.system(size: 15))
-                .foregroundColor(Color(.systemBlue))
-                .padding(.vertical,6)
-                .padding(.horizontal, 6)
-                .background(
-                    Capsule()
-                        .fill(Color(.white))
-                )
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
+            return content.allowButton(foregroundColor: Color(.systemBlue))
 
         case .allowed:
-            return content
-                .frame(width: 70)
-                .font(.system(size: 15))
-                .foregroundColor(.white)
-                .padding(.vertical,6)
-                .padding(.horizontal, 6)
-                .background(
-                    Capsule()
-                        .fill(Color(.systemBlue))
-                )
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
+            return content.allowButton(backgroundColor: Color(.systemBlue))
+
 
         case .denied:
-            return content
-                .frame(width: 70)
-                .font(.system(size: 15))
-                .foregroundColor(.white)
-                .padding(.vertical,6)
-                .padding(.horizontal, 6)
-                .background(
-                    Capsule()
-                        .fill(Color(.systemRed))
-                )
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
+            return content.allowButton(backgroundColor: Color(.systemRed))
         }
+    }
+}
+
+struct AllowButton: ViewModifier{
+    var foregroundColor:Color
+    var backgroundColor:Color
+    var buttonSizeConstant:CGFloat{
+        return screenSize.width < 400 ?  70-(1000-screenSize.width)/30 : 70
+    }
+    func body(content: Content) -> some View {
+        content
+        .frame(width: buttonSizeConstant)
+        .font(.system(size: 15))
+        .minimumScaleFactor(0.2)
+        .lineLimit(1)
+        .foregroundColor(foregroundColor)
+        .padding(.vertical,6)
+        .padding(.horizontal, 6)
+        .background(
+            Capsule()
+                .fill(backgroundColor)
+        )
+       
+    }
+}
+
+struct JMAlertViewFrame: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .background(Color(.systemBackground).opacity(0.8))
+            .frame(width: screenSize.width > 375 ? 375 : screenSize.width-60)
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
 extension View {
     func buttonStatusColor(for allowButtonStatus: AllowButtonStatus) -> some View {
         self.modifier(ButtonStatusColor(allowButtonStatus: allowButtonStatus))
+    }
+    func allowButton(foregroundColor:Color = Color.white, backgroundColor:Color = Color(.secondarySystemBackground)) -> some View{
+        self.modifier(AllowButton(foregroundColor: foregroundColor, backgroundColor: backgroundColor))
+    }
+    func alertViewFrame() -> some View{
+        self.modifier(JMAlertViewFrame())
     }
 }
