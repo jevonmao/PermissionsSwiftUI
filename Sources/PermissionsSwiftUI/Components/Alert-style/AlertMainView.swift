@@ -9,14 +9,6 @@ import SwiftUI
 
 struct AlertMainView: View {
     private var showAlert: Binding<Bool>
-    var show:Bool{
-        get{
-            showAlert.wrappedValue
-        }
-        set{
-            showAlert.wrappedValue = newValue
-        }
-    }
     private var bodyView: AnyView
     init(for bodyView: AnyView, show showAlert: Binding<Bool>) {
         self.bodyView = bodyView
@@ -25,7 +17,8 @@ struct AlertMainView: View {
     var body: some View {
         ZStack{
             bodyView
-            if show{
+
+            if showAlert.wrappedValue{
                 Group{
                     Blur(style: .systemUltraThinMaterialDark)
                         .edgesIgnoringSafeArea(.all)
@@ -35,10 +28,12 @@ struct AlertMainView: View {
                         .onAppear(perform: PermissionStore.shared.onAppear)
                         .onDisappear(perform: PermissionStore.shared.onDisappear)
                 }
-               
- 
+
             }
         }
+        .edgesIgnoringSafeArea(.all)
+        .animation(.default)
+
 
     }
 }

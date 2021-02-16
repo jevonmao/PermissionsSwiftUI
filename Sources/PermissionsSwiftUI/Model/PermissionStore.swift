@@ -1,6 +1,6 @@
 //
 //  PermissionModelSet.swift
-//  
+//
 //
 //  Created by Jevon Mao on 2/6/21.
 //
@@ -19,6 +19,8 @@ struct PermissionStore {
     }
     var permissions: [PermissionType] = []
     var mainTexts = MainTexts()
+    var autoDismissModal:Bool = true
+    var autoDismissAlert:Bool = true
     var onAppear:(()->Void)?
     var onDisappear:(()->Void)?
     struct MainTexts{

@@ -16,5 +16,7 @@ struct AllowButtonSection: View {
                 .fontWeight(.bold)
                 .buttonStatusColor(for: allowButtonStatus)
         })
+        .layoutPriority(-1)
+        
     }
 }
