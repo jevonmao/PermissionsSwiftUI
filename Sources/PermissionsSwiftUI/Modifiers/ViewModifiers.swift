@@ -24,7 +24,7 @@ struct ButtonStatusColor: ViewModifier {
     }
 }
 
-struct AllowButton: ViewModifier{
+struct AllowButton: ViewModifier {
     var foregroundColor: Color
     var backgroundColor: Color
     var buttonSizeConstant: CGFloat {

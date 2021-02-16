@@ -141,7 +141,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             JMSpeechPermissionManager.shared.requestPermission{
                 XCTAssertTrue($0)
             }
-//            let healthPermissions:Set<HKSampleType> = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!])
+//            let healthPermissions:Set<HKSampleType> = Set(
+//            [HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!])
 //            JMHealthPermissionManager.shared.requestPermission(for: healthPermissions){
 //                XCTAssertTrue($0)
 //            }
