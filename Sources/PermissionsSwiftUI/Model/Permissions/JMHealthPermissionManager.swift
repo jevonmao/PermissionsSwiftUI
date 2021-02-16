@@ -13,13 +13,14 @@ class JMHealthPermissionManager{
     static let shared = JMHealthPermissionManager()
     typealias JMBluetoothPermissionHandler = (Bool) -> Void?
 
-    func requestPermission(for HKPermissions:Set<HKSampleType>, completion: @escaping (Bool) -> Void?) {
+    func requestPermission(toShare: Set<HKSampleType>, read: Set<HKSampleType>, completion: @escaping (Bool) -> Void?) {
         guard HKHealthStore.isHealthDataAvailable() else {
             print("PermissionsSwiftUI - Health data is not available") 
             completion(false)
             return
         }
-        healthStore.requestAuthorization(toShare: HKPermissions, read: HKPermissions){authorized, error in
+        
+        healthStore.requestAuthorization(toShare: toShare, read: read) { authorized, error in
             guard error == nil else{
                 print("PermissionSwiftUI - \(String(describing: error))")
                 completion(false)
