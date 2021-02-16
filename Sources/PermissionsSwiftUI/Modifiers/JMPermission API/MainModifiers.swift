@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//MARK: Modal Style permissions
+// MARK: Modal Style permissions
 struct PermissionsModal: ViewModifier {
     var showModal: Binding<Bool>
 
@@ -77,7 +77,7 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss:Bool) -> some View {
+    func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss)
         return self.modifier(PermissionsModal(showModal: showModal))
@@ -109,7 +109,10 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], onAppear: @escaping ()->Void, onDisappear: @escaping ()->Void) -> some View {
+    func JMModal(showModal: Binding<Bool>,
+                 for permissions: [PermissionType],
+                 onAppear: @escaping ()->Void,
+                 onDisappear: @escaping ()->Void) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
@@ -144,7 +147,11 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss:Bool, onAppear: @escaping ()->Void, onDisappear: @escaping ()->Void) -> some View {
+    func JMModal(showModal: Binding<Bool>,
+                 for permissions: [PermissionType],
+                 autoDismiss: Bool,
+                 onAppear: @escaping ()->Void
+                 , onDisappear: @escaping ()->Void) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
@@ -153,7 +160,7 @@ public extension View {
     }
 }
 
-//MARK: Deprecated
+// MARK: Deprecated
 public extension View {
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
@@ -213,7 +220,7 @@ public extension View {
      
      */
     @available(iOS, deprecated, obsoleted:15, renamed: "JMModal")
-    func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss:Bool) -> some View {
+    func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss)
         return self.modifier(PermissionsModal(showModal: showModal))
@@ -247,7 +254,7 @@ public extension View {
      
      */
     @available(iOS, deprecated, obsoleted:15, renamed: "JMModal")
-    func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], onAppear: @escaping ()->Void, onDisappear: @escaping ()->Void) -> some View {
+    func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], onAppear: @escaping () -> Void, onDisappear: @escaping () -> Void) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
@@ -283,7 +290,7 @@ public extension View {
      
      */
     @available(iOS, deprecated, obsoleted:15, renamed: "JMModal")
-    func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss:Bool, onAppear: @escaping ()->Void, onDisappear: @escaping ()->Void) -> some View {
+    func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool, onAppear: @escaping () -> Void, onDisappear: @escaping () -> Void) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
@@ -292,7 +299,7 @@ public extension View {
     }
 }
 
-//MARK: - Alert Style permissions
+// MARK: - Alert Style permissions
 struct PermissionsAlert: ViewModifier{
     var show:Binding<Bool>
     func body(content: Content) -> some View {
@@ -348,7 +355,7 @@ public extension View{
      
      */
 
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss:Bool) -> some View{
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View{
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss)
         return self.modifier(PermissionsAlert(show: showModal))
@@ -367,7 +374,10 @@ public extension View{
      
      */
     
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], onAppear: (()->Void)?, onDisappear: (()->Void)?) -> some View{
+    func JMAlert(showModal: Binding<Bool>,
+                 for permissions: [PermissionType],
+                 onAppear: (() -> Void)?,
+                 onDisappear: (() -> Void)?) -> some View{
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
@@ -388,7 +398,11 @@ public extension View{
         Returns a new view. Will show a alert pop up that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss:Bool, onAppear: (()->Void)?, onDisappear: (()->Void)?) -> some View{
+    func JMAlert(showModal: Binding<Bool>,
+                 for permissions: [PermissionType],
+                 autoDismiss: Bool,
+                 onAppear: (() -> Void)?,
+                 onDisappear: (() -> Void)?) -> some View{
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)

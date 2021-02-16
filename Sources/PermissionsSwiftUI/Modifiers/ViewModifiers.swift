@@ -25,9 +25,9 @@ struct ButtonStatusColor: ViewModifier {
 }
 
 struct AllowButton: ViewModifier{
-    var foregroundColor:Color
-    var backgroundColor:Color
-    var buttonSizeConstant:CGFloat{
+    var foregroundColor: Color
+    var backgroundColor: Color
+    var buttonSizeConstant: CGFloat{
         return screenSize.width < 400 ?  70-(1000-screenSize.width)/30 : 70
     }
     func body(content: Content) -> some View {
@@ -43,11 +43,10 @@ struct AllowButton: ViewModifier{
             Capsule()
                 .fill(backgroundColor)
         )
-       
     }
 }
 
-struct JMAlertViewFrame: ViewModifier{
+struct JMAlertViewFrame: ViewModifier {
     func body(content: Content) -> some View {
         content
             .background(Color(.systemBackground).opacity(0.8))
@@ -61,7 +60,7 @@ extension View {
     func buttonStatusColor(for allowButtonStatus: AllowButtonStatus) -> some View {
         self.modifier(ButtonStatusColor(allowButtonStatus: allowButtonStatus))
     }
-    func allowButton(foregroundColor:Color, backgroundColor:Color) -> some View{
+    func allowButton(foregroundColor: Color, backgroundColor: Color) -> some View{
         self.modifier(AllowButton(foregroundColor: foregroundColor, backgroundColor: backgroundColor))
     }
     func alertViewFrame() -> some View{

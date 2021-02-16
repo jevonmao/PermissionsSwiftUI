@@ -269,7 +269,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         let onDisappear = {
             testString = "disappeared"
         }
-        let _ = EmptyView().JMModal(showModal: .constant(true), for: [], onAppear: onAppear, onDisappear: onDisappear)
+        _ = EmptyView().JMModal(showModal: .constant(true), for: [], onAppear: onAppear, onDisappear: onDisappear)
         XCTAssertNotNil(PermissionStore.shared.onAppear)
         XCTAssertNotNil(PermissionStore.shared.onAppear)
         MainView.testCallOnAppear()

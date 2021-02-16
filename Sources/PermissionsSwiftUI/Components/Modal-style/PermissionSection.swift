@@ -35,37 +35,37 @@ enum AllowButtonStatus:CaseIterable {
 struct PermissionSectionCell: View {
     @State var permission: PermissionType
     @State var allowButtonStatus: AllowButtonStatus = .idle
-    @Binding var showModal:Bool
-    var isAlert:Bool
-    var isLast:Bool{
+    @Binding var showModal: Bool
+    var isAlert: Bool
+    var isLast: Bool {
         ///Filter and only get unauthorized permissions
         let permissions = PermissionStore.shared.permissions.filter{$0.currentPermission.authorized==false}
-        if permissions.count == 0{
+        if permissions.count == 0 {
             return true
         }
         else{
             return false
         }
     }
-    var screenSizeConstant:CGFloat{
+    var screenSizeConstant: CGFloat {
         screenSize.width < 400 ? 40-(1000-screenSize.width)/80 : 40
 }
-    var fontSizeConstant:CGFloat{
+    var fontSizeConstant: CGFloat {
         screenSize.width < 400 ? 20-(1000-screenSize.width)/150 : 20
     }
-    var smallFontSizeConstant:CGFloat{
+    var smallFontSizeConstant: CGFloat {
         fontSizeConstant - fontSizeConstant/2.8
     }
-    var vertPaddingConstant:CGFloat{
-        if isAlert{
+    var vertPaddingConstant: CGFloat {
+        if isAlert {
             return screenSize.width < 400 ? 0 : 10
         }
         else{
             return 15
         }
     }
-    var horiPaddingConstant:CGFloat{
-        if isAlert{
+    var horiPaddingConstant: CGFloat {
+        if isAlert {
             return 0
         }
         else{
@@ -96,7 +96,7 @@ struct PermissionSectionCell: View {
             .padding(.horizontal, 3)
 
             Spacer()
-            if isAlert{
+            if isAlert {
                 AllowButtonSection(action: {
                     permission.requestPermission(isPermissionGranted: {handleButtonState(for: $0)})
                 }, allowButtonStatus: $allowButtonStatus)

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct AlertView: View {
-    @Binding var showAlert:Bool
-    var mainText:PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
+    @Binding var showAlert: Bool
+    var mainText: PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
 
-    var paddingSize:CGFloat{
+    var paddingSize: CGFloat {
         screenSize.width < 400 ? 20-(1000-screenSize.width)/120 : 20
     }
     var body: some View {

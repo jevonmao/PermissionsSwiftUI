@@ -19,16 +19,16 @@ struct PermissionStore {
     }
     var permissions: [PermissionType] = []
     var mainTexts = MainTexts()
-    var autoDismissModal:Bool = true
-    var autoDismissAlert:Bool = true
-    var onAppear:(()->Void)?
-    var onDisappear:(()->Void)?
+    var autoDismissModal: Bool = true
+    var autoDismissAlert: Bool = true
+    var onAppear: (()->Void)?
+    var onDisappear: (()->Void)?
     struct MainTexts{
-        var headerText:String = "Need Permissions"
-        var headerDescription:String = """
+        var headerText: String = "Need Permissions"
+        var headerDescription: String = """
                                        In order for you use certain features of this app, you need to give permissions. See description for each permission
                                        """
-        var bottomDescription:String = """
+        var bottomDescription: String = """
                                             Permission are necessary for all the features and functions to work properly. If not allowed, you have to enable permissions in settings
                                             """
     }

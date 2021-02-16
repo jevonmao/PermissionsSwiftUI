@@ -18,7 +18,7 @@ struct AlertMainView: View {
         ZStack{
             bodyView
 
-            if showAlert.wrappedValue{
+            if showAlert.wrappedValue {
                 Group{
                     Blur(style: .systemUltraThinMaterialDark)
                         .edgesIgnoringSafeArea(.all)
