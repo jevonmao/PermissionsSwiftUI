@@ -125,13 +125,12 @@ extension PermissionType:PermissionTypeProtocol{
         case .tracking:
             if #available(iOS 14.5, *) {
                 JMTrackingPermissionManager.shared.requestPermission{authorized in
-                    print(authorized)
                     isPermissionGranted(authorized)
                 }
             }
         case .contacts:
             JMContactsPermissionManager.shared.requestPermission{authorized in
-                isPermissionGranted(false)
+                isPermissionGranted(authorized)
             }
         case .motion:
             JMMotionPermissionManager.shared.requestPermission{authorized in

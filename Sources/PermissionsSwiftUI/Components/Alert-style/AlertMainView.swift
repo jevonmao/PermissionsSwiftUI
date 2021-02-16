@@ -27,11 +27,10 @@ struct AlertMainView: View {
                         .onAppear(perform: PermissionStore.shared.onAppear)
                         .onDisappear(perform: PermissionStore.shared.onDisappear)
                 }
-               
- 
             }
         }
         .edgesIgnoringSafeArea(.all)
+        .animation(.default)
 
 
     }

@@ -12,14 +12,14 @@ struct ButtonStatusColor: ViewModifier {
     func body(content: Content) -> some View {
         switch self.allowButtonStatus {
         case .idle:
-            return content.allowButton(foregroundColor: Color(.systemBlue))
+            return content.allowButton(foregroundColor: Color(.systemBlue), backgroundColor: Color(.systemGray5))
 
         case .allowed:
-            return content.allowButton(backgroundColor: Color(.systemBlue))
+            return content.allowButton(foregroundColor: Color(.white), backgroundColor: Color(.systemBlue))
 
 
         case .denied:
-            return content.allowButton(backgroundColor: Color(.systemRed))
+            return content.allowButton(foregroundColor: Color(.white), backgroundColor: Color(.systemRed))
         }
     }
 }
@@ -61,7 +61,7 @@ extension View {
     func buttonStatusColor(for allowButtonStatus: AllowButtonStatus) -> some View {
         self.modifier(ButtonStatusColor(allowButtonStatus: allowButtonStatus))
     }
-    func allowButton(foregroundColor:Color = Color.white, backgroundColor:Color = Color(.secondarySystemBackground)) -> some View{
+    func allowButton(foregroundColor:Color, backgroundColor:Color) -> some View{
         self.modifier(AllowButton(foregroundColor: foregroundColor, backgroundColor: backgroundColor))
     }
     func alertViewFrame() -> some View{

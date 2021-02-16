@@ -14,8 +14,6 @@ struct AlertView: View {
         screenSize.width < 400 ? 20-(1000-screenSize.width)/120 : 20
     }
     var body: some View {
-
-
             VStack{
                 HeaderText(exitButtonAction: {showAlert = false}, isAlert: true)
                     .padding(.bottom, paddingSize/1.5)
