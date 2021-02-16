@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 let screenSize = UIScreen.main.bounds
 
 struct Blur: UIViewRepresentable {

@@ -111,8 +111,8 @@ public extension View {
      */
     func JMModal(showModal: Binding<Bool>,
                  for permissions: [PermissionType],
-                 onAppear: @escaping ()->Void,
-                 onDisappear: @escaping ()->Void) -> some View {
+                 onAppear: @escaping () -> Void,
+                 onDisappear: @escaping () -> Void) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
@@ -150,8 +150,8 @@ public extension View {
     func JMModal(showModal: Binding<Bool>,
                  for permissions: [PermissionType],
                  autoDismiss: Bool,
-                 onAppear: @escaping ()->Void
-                 , onDisappear: @escaping ()->Void) -> some View {
+                 onAppear: @escaping () -> Void
+                 , onDisappear: @escaping () -> Void) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
@@ -290,7 +290,11 @@ public extension View {
      
      */
     @available(iOS, deprecated, obsoleted:15, renamed: "JMModal")
-    func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool, onAppear: @escaping () -> Void, onDisappear: @escaping () -> Void) -> some View {
+    func JMPermissions(showModal: Binding<Bool>,
+                       for permissions: [PermissionType],
+                       autoDismiss: Bool,
+                       onAppear: @escaping () -> Void,
+                       onDisappear: @escaping () -> Void) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
@@ -311,8 +315,11 @@ public extension View{
     /**
      Displays a PermissionsSwiftUI alert view that displays and handles permissions.
      
-     Compared to the `JMModal` permissions, the `JMAlert` displays permissions in a pop up alert style. It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.
-     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI alert with 3 different permissions.
+     Compared to the `JMModal` permissions, the `JMAlert` displays permissions in a pop up alert style.
+     It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.
+     
+     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable.
+     This example view will show a PermissionsSwiftUI alert with 3 different permissions.
      ````
          struct ContentView: View {
              @State var showModal = false
@@ -343,7 +350,11 @@ public extension View{
     /**
      Displays a PermissionsSwiftUI alert view that displays and handles permissions.
      
-     Compared to the `JMModal` permissions, the `JMAlert` displays permissions in a pop up alert style. It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.
+     Compared to the `JMModal` permissions, the `JMAlert` displays permissions in a pop up alert style.
+     It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.
+     
+     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable.
+     This example view will show a PermissionsSwiftUI alert with 3 different permissions.
 
      - Parameters:
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
@@ -363,7 +374,11 @@ public extension View{
     /**
      Displays a PermissionsSwiftUI alert view that displays and handles permissions.
      
-     Compared to the `JMModal` permissions, the `JMAlert` displays permissions in a pop up alert style. It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.
+     Compared to the `JMModal` permissions, the `JMAlert` displays permissions in a pop up alert style.
+     It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.
+     
+     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable.
+     This example view will show a PermissionsSwiftUI alert with 3 different permissions.
      - Parameters:
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
@@ -387,7 +402,11 @@ public extension View{
     /**
      Displays a PermissionsSwiftUI alert view that displays and handles permissions.
      
-     Compared to the `JMModal` permissions, the `JMAlert` displays permissions in a pop up alert style. It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.
+     Compared to the `JMModal` permissions, the `JMAlert` displays permissions in a pop up alert style.
+     It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.
+     
+     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable.
+     This example view will show a PermissionsSwiftUI alert with 3 different permissions.
      - Parameters:
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show

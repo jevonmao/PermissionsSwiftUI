@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ExitButtonSection: View {
     var action: () -> Void
-    var buttonSizeConstant:CGFloat{
+    var buttonSizeConstant: CGFloat {
         screenSize.width < 400 ? 40-(1000-screenSize.width)/80 : 40
     }
     var body: some View {
         Button(action: action, label: {
             Circle()
                 .fill(Color(.systemGray4))
-                .frame(width:buttonSizeConstant, height: buttonSizeConstant)
+                .frame(width: buttonSizeConstant, height: buttonSizeConstant)
                 .overlay(
                     Image(systemName: "xmark")
                         .font(.system(size: 18, weight: .bold, design: .rounded))

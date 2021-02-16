@@ -125,15 +125,15 @@ struct PermissionSectionCell: View {
         }
         permission.currentPermission = currentPermission
         if isAlert{
-            if isLast && PermissionStore.shared.autoDismissAlert{
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+            if isLast && PermissionStore.shared.autoDismissAlert {
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                     showModal = false
                 }
             }
         }
         else{
-            if isLast && PermissionStore.shared.autoDismissModal{
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+            if isLast && PermissionStore.shared.autoDismissModal {
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                     showModal = false
                 }
             }
