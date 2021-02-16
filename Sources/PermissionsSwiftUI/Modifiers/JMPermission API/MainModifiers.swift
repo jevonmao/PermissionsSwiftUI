@@ -421,7 +421,7 @@ public extension View{
                  for permissions: [PermissionType],
                  autoDismiss: Bool,
                  onAppear: (() -> Void)?,
-                 onDisappear: (() -> Void)?) -> some View{
+                 onDisappear: (() -> Void)?) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
