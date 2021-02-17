@@ -8,6 +8,7 @@
 import AVFoundation
 import Foundation
 
+//Contributors: please see JMLocationPermissionManager.swift for code comments
 struct JMMicPermissionManager {
     static var shared = JMMicPermissionManager()
     

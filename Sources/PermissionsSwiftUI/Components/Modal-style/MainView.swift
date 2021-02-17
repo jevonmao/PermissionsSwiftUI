@@ -26,6 +26,7 @@ struct MainView: View {
             
             
     }
+    //if DEBUG to ensure these functions are never used in production. They are for unit testing only.
     #if DEBUG
     static func testCallOnAppear(){
         guard let onAppear = PermissionStore.shared.onAppear else {return}

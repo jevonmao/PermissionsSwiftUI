@@ -8,6 +8,7 @@
 import AVFoundation
 import Foundation
 
+//Contributors: please see JMLocationPermissionManager.swift for code comments
 struct JMCameraPermissionManager {
     static var shared = JMCameraPermissionManager()
     func requestPermission(completion: @escaping (Bool) -> Void?) {

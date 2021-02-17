@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import UserNotifications
 
+//Contributors: please see JMLocationPermissionManager.swift for code comments
 struct JMNotificationPermissionManager {
     static let shared = JMNotificationPermissionManager()
     var notificationManager:NotificationManager

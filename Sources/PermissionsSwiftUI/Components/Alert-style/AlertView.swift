@@ -10,6 +10,8 @@ import SwiftUI
 struct AlertView: View {
     @Binding var showAlert:Bool
     var mainText:PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
+    
+    //Calculating the padding size, scale down propotionately if screen width is less than 400, else use 20 paddding
     var paddingSize:CGFloat{
         screenSize.width < 400 ? 20-(1000-screenSize.width)/120 : 20
     }

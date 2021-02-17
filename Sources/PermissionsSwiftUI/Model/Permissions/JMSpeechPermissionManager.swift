@@ -8,6 +8,7 @@
 import Foundation
 import Speech
 
+//Contributors: please see JMLocationPermissionManager.swift for code comments
 struct JMSpeechPermissionManager{
     static let shared = JMSpeechPermissionManager()
     func requestPermission(completion: @escaping (Bool)->()) {

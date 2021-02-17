@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//Custom view modifier for the button component
 struct ButtonStatusColor: ViewModifier {
     var allowButtonStatus: AllowButtonStatus
     func body(content: Content) -> some View {
@@ -23,7 +24,7 @@ struct ButtonStatusColor: ViewModifier {
         }
     }
 }
-
+//Custom modifier that nests within ButtonStatusColor to further extract code
 struct AllowButton: ViewModifier{
     var foregroundColor:Color
     var backgroundColor:Color
@@ -46,7 +47,7 @@ struct AllowButton: ViewModifier{
        
     }
 }
-
+//Custom modifier for the JMAlert popup view
 struct JMAlertViewFrame: ViewModifier{
     func body(content: Content) -> some View {
         content

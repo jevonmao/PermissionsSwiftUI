@@ -8,6 +8,7 @@
 import Foundation
 import Photos
 
+//Contributors: please see JMLocationPermissionManager.swift for code comments
 struct JMPhotoPermissionManager {
     static var shared = JMPhotoPermissionManager()
     var photoLibrary:PHPhotoLibrary.Type

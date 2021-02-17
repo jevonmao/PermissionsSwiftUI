@@ -8,6 +8,7 @@
 import Foundation
 import CoreMotion
 
+//Contributors: please see JMLocationPermissionManager.swift for code comments
 struct JMMotionPermissionManager {
     static let shared = JMMotionPermissionManager()
     var isAuthorized: Bool {

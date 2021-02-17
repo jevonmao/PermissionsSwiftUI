@@ -12,12 +12,15 @@ protocol PermissionTypeProtocol {
     var permissions:[PermissionType]{get}
     func requestPermission(isPermissionGranted: @escaping (Bool) -> Void)
 }
+//Additional dynamic functionalities for PermissionType
 extension PermissionType:PermissionTypeProtocol{
+    //Get all permissions user selected
     var permissions:[PermissionType]{
         get{
             PermissionStore.shared.permissions 
         }
     }
+    //Get and set value for current permission type's store
     var currentPermission: JMPermission {
         get{
             let store = PermissionStore.shared
@@ -55,6 +58,8 @@ extension PermissionType:PermissionTypeProtocol{
         set{
             switch self {
             case .location:
+                //$0 is first parameter get back from closure, it is the PermissionStore storage instance
+                //$1 is second parameter and is a generic for the new value to set
                 PermissionStore.shared.updateStore(property: {$0.locationPermission=$1}, value: newValue)
             case .locationAlways:
                 PermissionStore.shared.updateStore(property: {$0.locationAlwaysPermission=$1}, value: newValue)
@@ -86,7 +91,9 @@ extension PermissionType:PermissionTypeProtocol{
         }
         
     }
+    //Request permission for the current enum type
     func requestPermission(isPermissionGranted: @escaping (Bool) -> Void) {
+        //Actual system API calls and logic handled in permission managers
         switch self {
         case .location:
             JMLocationPermissionManager.shared.requestInUsePermission { authorized in
