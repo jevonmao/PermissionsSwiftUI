@@ -6,16 +6,13 @@ Please note we have a code of conduct, please follow it in all your interactions
 
 ## Pull Request Process
 
-`put star ★` if you haven't done so.
-For programmer:
-
 1.  Find an issue to work on
 
 2.  If you want, you can open a new issue or email me about a feature or bug fix
 
 3.  Fork and clone this repository
 
-4.  Make a new branch and name it (optional, ex. 23-feature-new-color)
+4.  Make a new branch and name it with issue number + short description (ex. #23-feature-new-color)
 
 5.  Get to work and write some code!
 
@@ -24,9 +21,7 @@ For programmer:
 7.  If needed, update the README.md with details of changes of APIs
 We have branch protection in place for main, I will merge your PR if all CI checks have passed and get 1 approving review. 
 
-8.  If you contribute a few times and I like you, I might add you as a collaborator:)
-
-For non-programmers & beginners:
+For non-programmers:
 
 1.  Your contributions are also 100% welcome! I appreciate any effort to make this project better.
 
