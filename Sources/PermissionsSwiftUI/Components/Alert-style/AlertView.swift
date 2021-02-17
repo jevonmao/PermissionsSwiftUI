@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct AlertView: View {
-    @Binding var showAlert:Bool
-    var mainText:PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
-    var body: some View {
-        ZStack{
+    @Binding var showAlert: Bool
+    var mainText: PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
 
+    var paddingSize: CGFloat {
+        screenSize.width < 400 ? 20-(1000-screenSize.width)/120 : 20
+    }
+    var body: some View {
             VStack{
                 HeaderText(exitButtonAction: {showAlert = false}, isAlert: true)
+                    .padding(.bottom, paddingSize/1.5)
                 PermissionSection(showModal: $showAlert, isAlert:true)
                 
                 if PermissionStore.shared.permissions.count < 2{
@@ -24,15 +27,16 @@ struct AlertView: View {
                     .font(.system(.caption, design: .rounded))
                     .fontWeight(.regular)
                     .foregroundColor(Color(.systemGray))
-                    .padding()
+
                     .lineLimit(3)
                     .frame(maxWidth:.infinity, alignment: .leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .minimumScaleFactor(0.5)
             }
-            .padding(5)
-            .background(Color(.systemBackground).opacity(0.8))
-            .frame(width: screenSize.width > 375 ? 375 : screenSize.width-60)
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-        }
+            .padding(paddingSize)
+            .alertViewFrame()
+
+        
 
         
     }
