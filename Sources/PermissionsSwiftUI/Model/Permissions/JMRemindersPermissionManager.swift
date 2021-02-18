@@ -8,7 +8,6 @@
 import Foundation
 import EventKit
 
-//Contributors: please see JMLocationPermissionManager.swift for code comments
 struct JMRemindersPermissionManager{
     static let shared = JMRemindersPermissionManager()
 

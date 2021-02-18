@@ -9,7 +9,6 @@ import Foundation
 import AppTrackingTransparency
 import AdSupport
 
-//Contributors: please see JMLocationPermissionManager.swift for code comments
 @available(iOS 14.5, *)
 struct JMTrackingPermissionManager {
     static var shared = JMTrackingPermissionManager()

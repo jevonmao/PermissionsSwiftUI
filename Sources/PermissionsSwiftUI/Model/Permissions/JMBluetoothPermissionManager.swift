@@ -8,7 +8,6 @@
 import CoreBluetooth
 import UIKit
 
-//Contributors: please see JMLocationPermissionManager.swift for code comments
 class JMBluetoothPermissionManager: NSObject {
     typealias JMBluetoothPermissionHandler = (Bool) -> Void?
     private var completion: JMBluetoothPermissionHandler?

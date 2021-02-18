@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 //MARK: Storage
-//The source of truth global storage for program
 struct PermissionStore {
     private init(){}
     //a private singleton instance that allows read & write, but for this file's methods only
@@ -112,8 +111,9 @@ extension PermissionStore{
     static func resetPermissionsModelStore(){
         mutableShared = PermissionStore()
     }
-    //The only way to update content of PermissionStore.
+    //inout enables caller to modify PermissionStore
     func updateStore<T>(property:(inout PermissionStore, T)->Void, value:T){
+        //Closure passes back PermissionStore instance, and the generic value passed in method
         property(&PermissionStore.mutableShared, value)
     }
 

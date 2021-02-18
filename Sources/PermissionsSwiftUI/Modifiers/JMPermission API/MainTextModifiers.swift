@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-// MARK: Header text
+// MARK: Header & Description Texts
+
 public extension View{
     /**
      Displays a customized main header text
@@ -24,7 +25,6 @@ public extension View{
     }
 }
 
-// MARK: Header description text
 public extension View{
     /**
      Displays a customized header description text
@@ -44,7 +44,6 @@ public extension View{
     }
 }
 
-// MARK: Bottom description text
 public extension View{
     /**
      Displays a customized bottom header description text

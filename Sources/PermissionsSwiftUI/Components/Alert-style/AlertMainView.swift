@@ -9,7 +9,6 @@ import SwiftUI
 
 //The root level view for alert-style
 struct AlertMainView: View {
-    //showAlert binding and bodyView both received from modifier
     private var showAlert: Binding<Bool>
     private var bodyView: AnyView
     init(for bodyView: AnyView, show showAlert: Binding<Bool>) {

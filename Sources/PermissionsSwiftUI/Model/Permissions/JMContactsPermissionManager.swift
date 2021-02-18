@@ -9,7 +9,6 @@ import Foundation
 import Contacts
 import AddressBook
 
-//Contributors: please see JMLocationPermissionManager.swift for code comments
 struct JMContactsPermissionManager {
     static let shared = JMContactsPermissionManager()
     func requestPermission(completion: @escaping JMPermissionAuthorizationHandlerCompletionBlock) {

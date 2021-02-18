@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//MARK: Modal Style permissions
 struct PermissionsModal: ViewModifier {
     var showModal: Binding<Bool>
 
@@ -20,6 +19,7 @@ struct PermissionsModal: ViewModifier {
     }
 }
 
+//MARK: - Modal Style Permissions
 public extension View {
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
@@ -153,7 +153,7 @@ public extension View {
     }
 }
 
-//MARK: Deprecated
+//MARK: - Deprecated
 public extension View {
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
@@ -176,6 +176,7 @@ public extension View {
      - Parameters:
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
+     - Warning: Deprecated. The name is changed to `JMModal`
      - Returns:
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
@@ -208,6 +209,7 @@ public extension View {
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
         - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
+     - Warning: Deprecated. The name is changed to `JMModal`
      - Returns:
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
@@ -242,6 +244,7 @@ public extension View {
         - for: An array of type `PermissionModel` to specify permissions to show
         - onAppear: Override point for when JMPermission modal appears
         - onDisappear: Override point for when JMPermission modal disappears
+     - Warning: Deprecated. The name is changed to `JMModal`
      - Returns:
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
@@ -278,6 +281,7 @@ public extension View {
         - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
         - onAppear: Override point for when JMPermission modal appears
         - onDisappear: Override point for when JMPermission modal disappears
+     - Warning: Deprecated. The name is changed to `JMModal`
      - Returns:
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
@@ -292,14 +296,13 @@ public extension View {
     }
 }
 
-//MARK: - Alert Style permissions
 struct PermissionsAlert: ViewModifier{
     var show:Binding<Bool>
     func body(content: Content) -> some View {
         AlertMainView(for: AnyView(content), show: show)
     }
 }
-
+//MARK: - Alert Style Permissions
 public extension View{
     /**
      Displays a PermissionsSwiftUI alert view that displays and handles permissions.

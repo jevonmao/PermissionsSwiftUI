@@ -8,7 +8,6 @@
 import Foundation
 import HealthKit
 
-//Contributors: please see JMLocationPermissionManager.swift for code comments
 class JMHealthPermissionManager{
     let healthStore = HKHealthStore()
     static let shared = JMHealthPermissionManager()
