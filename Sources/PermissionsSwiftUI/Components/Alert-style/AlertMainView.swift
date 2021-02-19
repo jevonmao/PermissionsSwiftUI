@@ -18,7 +18,8 @@ struct AlertMainView: View {
     var body: some View {
         ZStack{
             bodyView
-            if showAlert.wrappedValue{
+
+            if showAlert.wrappedValue {
                 Group{
                     Blur(style: .systemUltraThinMaterialDark)
                         .edgesIgnoringSafeArea(.all)
@@ -28,6 +29,7 @@ struct AlertMainView: View {
                         .onAppear(perform: PermissionStore.shared.onAppear)
                         .onDisappear(perform: PermissionStore.shared.onDisappear)
                 }
+
             }
         }
         .edgesIgnoringSafeArea(.all)

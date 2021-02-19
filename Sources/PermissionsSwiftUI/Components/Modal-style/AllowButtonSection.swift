@@ -17,6 +17,5 @@ struct AllowButtonSection: View {
                 .buttonStatusColor(for: allowButtonStatus)
         })
         .layoutPriority(-1)
-        
     }
 }

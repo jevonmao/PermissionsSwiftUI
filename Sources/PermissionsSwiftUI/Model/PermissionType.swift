@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import HealthKit
+
 /**
  The types of iOS system permission for show in the JMPermissions view
  
@@ -54,7 +55,7 @@ public enum PermissionType {
                          HKObjectType.quantityType(forIdentifier: .heartRate)!]))]
      ```
      */
-    case health(Set<HKSampleType>)
+    case health(toShare: Set<HKSampleType>, read: Set<HKSampleType>)
     ///Permission that allows app to use speech recognition
     case speech
     ///In order for app to track user's data across apps and websites, the tracking permission is needed

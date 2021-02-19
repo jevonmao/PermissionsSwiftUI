@@ -15,6 +15,7 @@ protocol LocationManager {
     func requestAlwaysAuthorization()
 }
 
+
 extension CLLocationManager:LocationManager{
     func authorizationStatus() -> CLAuthorizationStatus {
         CLLocationManager.authorizationStatus()

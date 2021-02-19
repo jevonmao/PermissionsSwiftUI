@@ -5,7 +5,6 @@ import SnapshotTesting
 
 fileprivate let referenceSize = UIScreen.main.bounds.size
 final class PermissionsSwiftUITests: XCTestCase {
-    
     let placeholderText = """
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
 """
@@ -30,7 +29,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         let locationAlwaysPermission = PermissionType.locationAlways.currentPermission
         let microphonePermission = PermissionType.microphone.currentPermission
         let notificationPermission = PermissionType.notification.currentPermission
-        let healthPermission = PermissionType.health(Set([])).currentPermission
         XCTAssertEqual(photoPermission, JMPermission(
             imageIcon: AnyView(Image(systemName: "photo")),
             title: "Photo Library",
@@ -85,11 +83,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             title: "Notification",
             description: "Allow to send notifications", authorized: false
         ))
-        XCTAssertEqual(healthPermission, JMPermission(
-            imageIcon: AnyView(Image(systemName: "heart.fill")),
-            title: "Health",
-            description: "Allow to access your health information",
-            authorized: false))
+//        XCTAssertEqual(healthPermission, JMPermission(
+//            imageIcon: AnyView(Image(systemName: "heart.fill")),
+//            title: "Health",
+//            description: "Allow to access your health information",
+//            authorized: false))
         //Additional test for failing case
         XCTAssertNotEqual(notificationPermission, JMPermission(
             imageIcon: AnyView(Image(systemName: "bell.fill")),
@@ -143,7 +141,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             JMSpeechPermissionManager.shared.requestPermission{
                 XCTAssertTrue($0)
             }
-//            let healthPermissions:Set<HKSampleType> = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!])
+//            let healthPermissions:Set<HKSampleType> = Set(
+//            [HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!])
 //            JMHealthPermissionManager.shared.requestPermission(for: healthPermissions){
 //                XCTAssertTrue($0)
 //            }
@@ -205,11 +204,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             XCTAssert($0)
         }
     }
-    func testModalViewSnapshot(){
-        PermissionStore.resetPermissionsModelStore()
-        let view = ModalView(showModal: .constant(true))
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
-        assertSnapshot(matching: view.referenceFrame(), as: .image)
+    func testModalViewSnapshot14_0(){
+        if #available(iOS 14.5, *) {}
+        else{
+            PermissionStore.resetPermissionsModelStore()
+            let view = ModalView(showModal: .constant(true))
+            PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
+            assertSnapshot(matching: view.referenceFrame(), as: .image)
+        }
+    }
+    func testModalViewSnapshot14_5(){
+        if #available(iOS 14.5, *) {
+            PermissionStore.resetPermissionsModelStore()
+            let view = ModalView(showModal: .constant(true))
+            PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
+            assertSnapshot(matching: view.referenceFrame(), as: .image)
+        }
     }
     func testCustomizeHeaderSnapshot(){
         PermissionStore.resetPermissionsModelStore()
@@ -260,7 +270,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         let onDisappear = {
             testString = "disappeared"
         }
-        let _ = EmptyView().JMModal(showModal: .constant(true), for: [], onAppear: onAppear, onDisappear: onDisappear)
+        _ = EmptyView().JMModal(showModal: .constant(true), for: [], onAppear: onAppear, onDisappear: onDisappear)
         XCTAssertNotNil(PermissionStore.shared.onAppear)
         XCTAssertNotNil(PermissionStore.shared.onAppear)
         MainView.testCallOnAppear()
@@ -283,15 +293,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         
         
     }
-//    func testAlertView(){
-//        let view = EmptyView().JMAlert(showModal: .constant(true), for: [.bluetooth])
-//        assertSnapshot(matching: view, as: .image, record: true)
-//    }
+
+    func testAlertView(){
+        let view = EmptyView().JMAlert(showModal: .constant(true), for: [.bluetooth])
+        assertSnapshot(matching: view, as: .image)
+    }
+
     static var allTests = [
         ("testPermissionManagers", testPermissionManagers),
         ("testLocationPermissionManager",testLocationPermissionManager)
     ]
 }
+
 struct testViewRedBG:View{
     var body: some View{
         ZStack {

@@ -9,11 +9,10 @@ import SwiftUI
 
 //The body view of the alert pop up, child view of AlertMainView
 struct AlertView: View {
-    @Binding var showAlert:Bool
-    var mainText:PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
-    
-    //Calculating the padding size, scale down propotionately if screen width is less than 400
-    var paddingSize:CGFloat{
+    @Binding var showAlert: Bool
+    var mainText: PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
+
+    var paddingSize: CGFloat {
         screenSize.width < 400 ? 20-(1000-screenSize.width)/120 : 20
     }
     var body: some View {
@@ -29,6 +28,7 @@ struct AlertView: View {
                     .font(.system(.caption, design: .rounded))
                     .fontWeight(.regular)
                     .foregroundColor(Color(.systemGray))
+
                     .lineLimit(3)
                     .frame(maxWidth:.infinity, alignment: .leading)
                     .fixedSize(horizontal: false, vertical: true)
@@ -42,4 +42,3 @@ struct AlertView: View {
         
     }
 }
-

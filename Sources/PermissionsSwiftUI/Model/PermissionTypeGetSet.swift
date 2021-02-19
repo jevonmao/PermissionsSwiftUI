@@ -14,7 +14,7 @@ protocol PermissionTypeProtocol {
 }
 //Additional dynamic functionalities for PermissionType
 extension PermissionType:PermissionTypeProtocol{
-    //Get all permissions user selected
+
     var permissions:[PermissionType]{
         get{
             PermissionStore.shared.permissions 
@@ -53,6 +53,7 @@ extension PermissionType:PermissionTypeProtocol{
                 return store.speechPermission
             case .health:
                 return store.healthPermission
+
             }
         }
         set{
@@ -151,8 +152,8 @@ extension PermissionType:PermissionTypeProtocol{
             JMSpeechPermissionManager.shared.requestPermission{
                 isPermissionGranted($0)
             }
-        case .health(let HKPermissions):
-            JMHealthPermissionManager.shared.requestPermission(for: HKPermissions){
+        case let .health(toShare, read):
+            JMHealthPermissionManager.shared.requestPermission(toShare: toShare, read: read) {
                 isPermissionGranted($0)
             }
         }
@@ -161,11 +162,11 @@ extension PermissionType:PermissionTypeProtocol{
 }
 extension PermissionType:CaseIterable{
     public static var allCases: [PermissionType]{
-        return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
-        //        if #available(iOS 14.5, *) {
-        //            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking]
-        //        } else {
-        //            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
-        //        }
+        //return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
+                if #available(iOS 14.5, *) {
+                    return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking]
+                } else {
+                    return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
+                }
     }
 }
