@@ -11,9 +11,25 @@ struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showModal:Bool
     var isAlert:Bool
+    var permissions:[PermissionType]{
+        let store = PermissionStore.shared
+        if isAlert{
+            if store.autoCheckAlertAuth{
+                return store.permissionsToAsk
+            }
+            else {
+                return store.permissions
+            }
+        }
+        if store.autoCheckModalAuth{
+            return store.permissionsToAsk
+        }
+        else {
+            return store.permissions
+        }
+    }
     var body: some View {
         VStack {
-            let permissions = PermissionStore.shared.permissions
             ForEach(permissions.indices, id: \.self) {
                 PermissionSectionCell(permission: permissions[$0], showModal: $showModal, isAlert: isAlert)
                 
@@ -117,7 +133,7 @@ struct PermissionSectionCell: View {
             currentPermission.authorized = true
         }
         else {
-            allowButtonStatus = .idle
+            allowButtonStatus = .denied
             currentPermission.authorized = false
         }
         permission.currentPermission = currentPermission

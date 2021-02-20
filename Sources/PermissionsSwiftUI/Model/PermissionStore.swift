@@ -26,6 +26,8 @@ struct PermissionStore {
     var mainTexts = MainTexts()
     var autoDismissModal: Bool = true
     var autoDismissAlert: Bool = true
+    var autoCheckModalAuth: Bool = true
+    var autoCheckAlertAuth: Bool = true
     var onAppear: (()->Void)?
     var onDisappear: (()->Void)?
     struct MainTexts{

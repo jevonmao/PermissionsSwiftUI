@@ -11,6 +11,24 @@ import SwiftUI
 struct AlertMainView: View {
     private var showAlert: Binding<Bool>
     private var bodyView: AnyView
+    var shouldShowPermission:Bool{
+        if PermissionStore.shared.autoCheckAlertAuth{
+            if showAlert.wrappedValue &&
+                !PermissionStore.shared.permissionsToAsk.isEmpty {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        if showAlert.wrappedValue{
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
     init(for bodyView: AnyView, show showAlert: Binding<Bool>) {
         self.bodyView = bodyView
         self.showAlert = showAlert
@@ -19,7 +37,7 @@ struct AlertMainView: View {
         ZStack{
             bodyView
 
-            if showAlert.wrappedValue {
+            if shouldShowPermission{
                 Group{
                     Blur(style: .systemUltraThinMaterialDark)
                         .edgesIgnoringSafeArea(.all)
