@@ -22,6 +22,7 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
     -  [Customize Permission Texts](#customize-permission-texts)
     -  [Customize header texts](#customize-header-texts)
     -  [`onAppear` and `onDisappear` Override](#onappear-and-ondisappear-override)
+    -  [Auto Dismiss](#auto-dismiss)
 -  [Supported Permissions](#supported-permissions)
 -  [Additional Information](#additional-information)
     -  [Acknowledgement](#acknowledgement)
@@ -143,6 +144,12 @@ The same view modifier closure for state changes are available for the `JMAlert`
                      onAppear: {print("Appeared")},
                      onDisappear: {print("Disappeared")})
 ```
+### Auto Dismiss
+PermissionsSwiftUI by default will automatically dismiss the modal or alert after user allows the last permission item. However, you can override this behavior.
+```Swift
+func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View
+```
+Pass in `true` or `false` to select whether to automatically dismiss the view.
 <br /> <br /> <br />
 ## Supported Permissions
 Here is a list of all permissions PermissionsSwiftUI already supports/will support. By the 0.0.1 beta release, PermissionsSwiftUI will have all 12 iOS system permissions built in. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon. Stay tuned!
