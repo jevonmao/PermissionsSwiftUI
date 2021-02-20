@@ -98,14 +98,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
     }
     func testLocationPermissionManager(){
         let manager = MockCLLocationManager()
-        let JMManager = JMLocationPermissionManager(locationManager: manager)
+        let JMManager = JMLocationPermissionAlwaysManager(locationManager: manager)
+        let JMAlwaysManager = JMLocationInUsePermissionManager(locationManager: manager)
         //FIXME: Dummy test will always pass
         //TODO: Mock location manager delegate
         //TODO: Reimplement XCTAssert to check for Bool callback (whether permission is authorized)
-            JMManager.requestInUsePermission{_ in
-                XCTAssert(true)
-            }
-            JMManager.requestAlwaysPermission{_ in
+        JMManager.requestPermission{_ in
+            XCTAssert(true)
+        }
+        JMAlwaysManager.requestPermission{_ in
                 XCTAssert(true)
             }
             
@@ -282,14 +283,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         let mockManager = MockNotificationManager()
         var notificationManager = JMNotificationPermissionManager(notificationManager: mockManager)
         notificationManager.requestPermission{XCTAssertTrue($0)}
-        var status = notificationManager.fetchAuthorizationStatus()
-        XCTAssertEqual(status, UNAuthorizationStatus.authorized)
+        var status = notificationManager.authorizationStatus
+        XCTAssertEqual(status, .authorized)
         
         mockManager.authStatus = .denied
         notificationManager = JMNotificationPermissionManager(notificationManager: mockManager)
         notificationManager.requestPermission{XCTAssertFalse($0)}
-        status = notificationManager.fetchAuthorizationStatus()
-        XCTAssertEqual(status, UNAuthorizationStatus.denied)
+        status = notificationManager.authorizationStatus
+        XCTAssertEqual(status, .denied)
         
         
     }

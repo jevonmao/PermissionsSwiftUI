@@ -10,7 +10,6 @@ import SwiftUI
 struct ModalView: View {
     @Binding var showModal: Bool
     var mainText:PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
-
     var body: some View {
         ScrollView {
             VStack {

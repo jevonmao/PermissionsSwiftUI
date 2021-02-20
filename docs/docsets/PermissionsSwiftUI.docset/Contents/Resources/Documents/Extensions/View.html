@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>View Extension Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Extension/View" class="dashAnchor"></a>
+    <a title="View Extension Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">PermissionsSwiftUI Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/jevonmao/PermissionsSwiftUI"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">PermissionsSwiftUI Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        View Extension Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/PermissionType.html">PermissionType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/View.html">View</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/JMPermission.html">JMPermission</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>View</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">View</span></code></pre>
+
+                </div>
+              </div>
+            
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E7JMModal9showModal3forQrAA7BindingVySbG_SayAD14PermissionTypeOGtF"></a>
+                    <a name="//apple_ref/swift/Method/JMModal(showModal:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E7JMModal9showModal3forQrAA7BindingVySbG_SayAD14PermissionTypeOGtF">JMModal(showModal:<wbr>for:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI modal view that displays and handles permissions.</p>
+
+<p>For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.</p>
+<pre class="highlight swift"><code>    <span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kd">@State</span> <span class="k">var</span> <span class="nv">showModal</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+            <span class="kt">Button</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">showModal</span><span class="o">=</span><span class="kc">true</span>
+            <span class="p">},</span> <span class="nv">label</span><span class="p">:</span> <span class="p">{</span>
+                <span class="kt">Text</span><span class="p">(</span><span class="s">"Ask user for permissions"</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="o">.</span><span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="err">$</span><span class="n">showModal</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">locationAlways</span><span class="p">,</span> <span class="o">.</span><span class="n">photo</span><span class="p">,</span> <span class="o">.</span><span class="n">microphone</span><span class="p">])</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">JMModal</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E7JMModal9showModal3for11autoDismissQrAA7BindingVySbG_SayAD14PermissionTypeOGSbtF"></a>
+                    <a name="//apple_ref/swift/Method/JMModal(showModal:for:autoDismiss:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E7JMModal9showModal3for11autoDismissQrAA7BindingVySbG_SayAD14PermissionTypeOGSbtF">JMModal(showModal:<wbr>for:<wbr>autoDismiss:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI modal view that displays and handles permissions.</p>
+
+<p>For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.</p>
+<pre class="highlight swift"><code>    <span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kd">@State</span> <span class="k">var</span> <span class="nv">showModal</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+            <span class="kt">Button</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">showModal</span><span class="o">=</span><span class="kc">true</span>
+            <span class="p">},</span> <span class="nv">label</span><span class="p">:</span> <span class="p">{</span>
+                <span class="kt">Text</span><span class="p">(</span><span class="s">"Ask user for permissions"</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="o">.</span><span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="err">$</span><span class="n">showModal</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">locationAlways</span><span class="p">,</span> <span class="o">.</span><span class="n">photo</span><span class="p">,</span> <span class="o">.</span><span class="n">microphone</span><span class="p">])</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">JMModal</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">],</span> <span class="nv">autoDismiss</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>autoDismiss</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specify whether to auto dismiss modal after user allowing the last item. Default is <code>true</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E7JMModal9showModal3for8onAppear0I9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGyycyyctF"></a>
+                    <a name="//apple_ref/swift/Method/JMModal(showModal:for:onAppear:onDisappear:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E7JMModal9showModal3for8onAppear0I9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGyycyyctF">JMModal(showModal:<wbr>for:<wbr>onAppear:<wbr>onDisappear:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI modal view that displays and handles permissions.</p>
+
+<p>For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.</p>
+<pre class="highlight swift"><code>    <span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kd">@State</span> <span class="k">var</span> <span class="nv">showModal</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+            <span class="kt">Button</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">showModal</span><span class="o">=</span><span class="kc">true</span>
+            <span class="p">},</span> <span class="nv">label</span><span class="p">:</span> <span class="p">{</span>
+                <span class="kt">Text</span><span class="p">(</span><span class="s">"Ask user for permissions"</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="o">.</span><span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="err">$</span><span class="n">showModal</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">locationAlways</span><span class="p">,</span> <span class="o">.</span><span class="n">photo</span><span class="p">,</span> <span class="o">.</span><span class="n">microphone</span><span class="p">])</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">JMModal</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">],</span> <span class="nv">onAppear</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">onDisappear</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onAppear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal appears</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onDisappear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal disappears</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E7JMModal9showModal3for11autoDismiss8onAppear0K9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGSbyycyyctF"></a>
+                    <a name="//apple_ref/swift/Method/JMModal(showModal:for:autoDismiss:onAppear:onDisappear:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E7JMModal9showModal3for11autoDismiss8onAppear0K9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGSbyycyyctF">JMModal(showModal:<wbr>for:<wbr>autoDismiss:<wbr>onAppear:<wbr>onDisappear:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI modal view that displays and handles permissions.</p>
+
+<p>For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.</p>
+<pre class="highlight swift"><code>    <span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kd">@State</span> <span class="k">var</span> <span class="nv">showModal</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+            <span class="kt">Button</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">showModal</span><span class="o">=</span><span class="kc">true</span>
+            <span class="p">},</span> <span class="nv">label</span><span class="p">:</span> <span class="p">{</span>
+                <span class="kt">Text</span><span class="p">(</span><span class="s">"Ask user for permissions"</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="o">.</span><span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="err">$</span><span class="n">showModal</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">locationAlways</span><span class="p">,</span> <span class="o">.</span><span class="n">photo</span><span class="p">,</span> <span class="o">.</span><span class="n">microphone</span><span class="p">])</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">JMModal</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">],</span> <span class="nv">autoDismiss</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">onAppear</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">onDisappear</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>autoDismiss</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specify whether to auto dismiss modal after user allowing the last item. Default is <code>true</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onAppear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal appears</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onDisappear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal disappears</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Deprecated"></a>
+                <a name="//apple_ref/swift/Section/Deprecated" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Deprecated"></a>
+                  <h3 class="section-name"><p>Deprecated</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E13JMPermissions9showModal3forQrAA7BindingVySbG_SayAD14PermissionTypeOGtF"></a>
+                    <a name="//apple_ref/swift/Method/JMPermissions(showModal:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E13JMPermissions9showModal3forQrAA7BindingVySbG_SayAD14PermissionTypeOGtF">JMPermissions(showModal:<wbr>for:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI modal view that displays and handles permissions.</p>
+
+<p>For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.</p>
+<pre class="highlight swift"><code>    <span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kd">@State</span> <span class="k">var</span> <span class="nv">showModal</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+            <span class="kt">Button</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">showModal</span><span class="o">=</span><span class="kc">true</span>
+            <span class="p">},</span> <span class="nv">label</span><span class="p">:</span> <span class="p">{</span>
+                <span class="kt">Text</span><span class="p">(</span><span class="s">"Ask user for permissions"</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="o">.</span><span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="err">$</span><span class="n">showModal</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">locationAlways</span><span class="p">,</span> <span class="o">.</span><span class="n">photo</span><span class="p">,</span> <span class="o">.</span><span class="n">microphone</span><span class="p">])</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    Deprecated. The name is changed to <code>JMModal</code>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">obsoleted</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="nv">renamed</span><span class="p">:</span> <span class="s">"JMModal"</span><span class="p">)</span>
+<span class="kd">func</span> <span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E13JMPermissions9showModal3for11autoDismissQrAA7BindingVySbG_SayAD14PermissionTypeOGSbtF"></a>
+                    <a name="//apple_ref/swift/Method/JMPermissions(showModal:for:autoDismiss:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E13JMPermissions9showModal3for11autoDismissQrAA7BindingVySbG_SayAD14PermissionTypeOGSbtF">JMPermissions(showModal:<wbr>for:<wbr>autoDismiss:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI modal view that displays and handles permissions.</p>
+
+<p>For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.</p>
+<pre class="highlight swift"><code>    <span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kd">@State</span> <span class="k">var</span> <span class="nv">showModal</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+            <span class="kt">Button</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">showModal</span><span class="o">=</span><span class="kc">true</span>
+            <span class="p">},</span> <span class="nv">label</span><span class="p">:</span> <span class="p">{</span>
+                <span class="kt">Text</span><span class="p">(</span><span class="s">"Ask user for permissions"</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="o">.</span><span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="err">$</span><span class="n">showModal</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">locationAlways</span><span class="p">,</span> <span class="o">.</span><span class="n">photo</span><span class="p">,</span> <span class="o">.</span><span class="n">microphone</span><span class="p">])</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    Deprecated. The name is changed to <code>JMModal</code>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">obsoleted</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="nv">renamed</span><span class="p">:</span> <span class="s">"JMModal"</span><span class="p">)</span>
+<span class="kd">func</span> <span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">],</span> <span class="nv">autoDismiss</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>autoDismiss</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specify whether to auto dismiss modal after user allowing the last item. Default is <code>true</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E13JMPermissions9showModal3for8onAppear0I9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGyycyyctF"></a>
+                    <a name="//apple_ref/swift/Method/JMPermissions(showModal:for:onAppear:onDisappear:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E13JMPermissions9showModal3for8onAppear0I9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGyycyyctF">JMPermissions(showModal:<wbr>for:<wbr>onAppear:<wbr>onDisappear:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI modal view that displays and handles permissions.</p>
+
+<p>For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.</p>
+<pre class="highlight swift"><code>    <span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kd">@State</span> <span class="k">var</span> <span class="nv">showModal</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+            <span class="kt">Button</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">showModal</span><span class="o">=</span><span class="kc">true</span>
+            <span class="p">},</span> <span class="nv">label</span><span class="p">:</span> <span class="p">{</span>
+                <span class="kt">Text</span><span class="p">(</span><span class="s">"Ask user for permissions"</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="o">.</span><span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="err">$</span><span class="n">showModal</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">locationAlways</span><span class="p">,</span> <span class="o">.</span><span class="n">photo</span><span class="p">,</span> <span class="o">.</span><span class="n">microphone</span><span class="p">])</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    Deprecated. The name is changed to <code>JMModal</code>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">obsoleted</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="nv">renamed</span><span class="p">:</span> <span class="s">"JMModal"</span><span class="p">)</span>
+<span class="kd">func</span> <span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">],</span> <span class="nv">onAppear</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">onDisappear</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onAppear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal appears</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onDisappear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal disappears</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E13JMPermissions9showModal3for11autoDismiss8onAppear0K9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGSbyycyyctF"></a>
+                    <a name="//apple_ref/swift/Method/JMPermissions(showModal:for:autoDismiss:onAppear:onDisappear:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E13JMPermissions9showModal3for11autoDismiss8onAppear0K9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGSbyycyyctF">JMPermissions(showModal:<wbr>for:<wbr>autoDismiss:<wbr>onAppear:<wbr>onDisappear:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI modal view that displays and handles permissions.</p>
+
+<p>For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.</p>
+<pre class="highlight swift"><code>    <span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kd">@State</span> <span class="k">var</span> <span class="nv">showModal</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+            <span class="kt">Button</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">showModal</span><span class="o">=</span><span class="kc">true</span>
+            <span class="p">},</span> <span class="nv">label</span><span class="p">:</span> <span class="p">{</span>
+                <span class="kt">Text</span><span class="p">(</span><span class="s">"Ask user for permissions"</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="o">.</span><span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="err">$</span><span class="n">showModal</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">locationAlways</span><span class="p">,</span> <span class="o">.</span><span class="n">photo</span><span class="p">,</span> <span class="o">.</span><span class="n">microphone</span><span class="p">])</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    Deprecated. The name is changed to <code>JMModal</code>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">obsoleted</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="nv">renamed</span><span class="p">:</span> <span class="s">"JMModal"</span><span class="p">)</span>
+<span class="kd">func</span> <span class="kt">JMPermissions</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">],</span> <span class="nv">autoDismiss</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">onAppear</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span> <span class="nv">onDisappear</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>autoDismiss</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specify whether to auto dismiss modal after user allowing the last item. Default is <code>true</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onAppear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal appears</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onDisappear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal disappears</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Alert%20Style%20Permissions"></a>
+                <a name="//apple_ref/swift/Section/Alert Style Permissions" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Alert%20Style%20Permissions"></a>
+                  <h3 class="section-name"><p>Alert Style Permissions</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E7JMAlert9showModal3forQrAA7BindingVySbG_SayAD14PermissionTypeOGtF"></a>
+                    <a name="//apple_ref/swift/Method/JMAlert(showModal:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E7JMAlert9showModal3forQrAA7BindingVySbG_SayAD14PermissionTypeOGtF">JMAlert(showModal:<wbr>for:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI alert view that displays and handles permissions.</p>
+
+<p>Compared to the <code>JMModal</code> permissions, the <code>JMAlert</code> displays permissions in a pop up alert style. It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.
+For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI alert with 3 different permissions.</p>
+<pre class="highlight swift"><code>    <span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kd">@State</span> <span class="k">var</span> <span class="nv">showModal</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+            <span class="kt">Button</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">showModal</span><span class="o">=</span><span class="kc">true</span>
+            <span class="p">},</span> <span class="nv">label</span><span class="p">:</span> <span class="p">{</span>
+                <span class="kt">Text</span><span class="p">(</span><span class="s">"Ask user for permissions"</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="o">.</span><span class="kt">JMAlert</span><span class="p">(</span><span class="nv">show</span><span class="p">:</span> <span class="err">$</span><span class="n">showModal</span><span class="p">)</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">JMAlert</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a alert pop up that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E7JMAlert9showModal3for11autoDismissQrAA7BindingVySbG_SayAD14PermissionTypeOGSbtF"></a>
+                    <a name="//apple_ref/swift/Method/JMAlert(showModal:for:autoDismiss:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E7JMAlert9showModal3for11autoDismissQrAA7BindingVySbG_SayAD14PermissionTypeOGSbtF">JMAlert(showModal:<wbr>for:<wbr>autoDismiss:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI alert view that displays and handles permissions.</p>
+
+<p>Compared to the <code>JMModal</code> permissions, the <code>JMAlert</code> displays permissions in a pop up alert style. It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">JMAlert</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">],</span> <span class="nv">autoDismiss</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>autoDismiss</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specify whether to auto dismiss modal after user allowing the last item. Default is <code>true</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a alert pop up that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E7JMAlert9showModal3for8onAppear0I9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGyycSgAPtF"></a>
+                    <a name="//apple_ref/swift/Method/JMAlert(showModal:for:onAppear:onDisappear:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E7JMAlert9showModal3for8onAppear0I9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGyycSgAPtF">JMAlert(showModal:<wbr>for:<wbr>onAppear:<wbr>onDisappear:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI alert view that displays and handles permissions.</p>
+
+<p>Compared to the <code>JMModal</code> permissions, the <code>JMAlert</code> displays permissions in a pop up alert style. It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">JMAlert</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">],</span> <span class="nv">onAppear</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?,</span> <span class="nv">onDisappear</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onAppear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal appears</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onDisappear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal disappears</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a alert pop up that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E7JMAlert9showModal3for11autoDismiss8onAppear0K9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGSbyycSgAQtF"></a>
+                    <a name="//apple_ref/swift/Method/JMAlert(showModal:for:autoDismiss:onAppear:onDisappear:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E7JMAlert9showModal3for11autoDismiss8onAppear0K9DisappearQrAA7BindingVySbG_SayAD14PermissionTypeOGSbyycSgAQtF">JMAlert(showModal:<wbr>for:<wbr>autoDismiss:<wbr>onAppear:<wbr>onDisappear:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a PermissionsSwiftUI alert view that displays and handles permissions.</p>
+
+<p>Compared to the <code>JMModal</code> permissions, the <code>JMAlert</code> displays permissions in a pop up alert style. It is recommended when you have less than 3 permissions, or need a more versatile UI/UX.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">JMAlert</span><span class="p">(</span><span class="nv">showModal</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">for</span> <span class="nv">permissions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">],</span> <span class="nv">autoDismiss</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">onAppear</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?,</span> <span class="nv">onDisappear</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>showModal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Binding&lt;Bool&gt;</code> value to toggle show the JMPermission view</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of type <code>PermissionModel</code> to specify permissions to show</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>autoDismiss</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specify whether to auto dismiss modal after user allowing the last item. Default is <code>true</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onAppear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal appears</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onDisappear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Override point for when JMPermission modal disappears</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns a new view. Will show a alert pop up that will overlay your existing view to show PermissionsSwiftUI permission handling components.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Header%20%26%20Description%20Texts"></a>
+                <a name="//apple_ref/swift/Section/Header &amp; Description Texts" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Header%20%26%20Description%20Texts"></a>
+                  <h3 class="section-name"><p>Header &amp; Description Texts</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E14changeHeaderToyQrSSF"></a>
+                    <a name="//apple_ref/swift/Method/changeHeaderTo(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E14changeHeaderToyQrSSF">changeHeaderTo(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a customized main header text</p>
+
+<p>The default header text is <strong>Need Permissions</strong></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">changeHeaderTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>_</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The custom text to change to</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E25changeHeaderDescriptionToyQrSSF"></a>
+                    <a name="//apple_ref/swift/Method/changeHeaderDescriptionTo(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E25changeHeaderDescriptionToyQrSSF">changeHeaderDescriptionTo(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a customized header description text</p>
+
+<p>The default header text is:</p>
+<pre class="highlight swift"><code><span class="kt">In</span> <span class="n">order</span> <span class="k">for</span> <span class="n">you</span> <span class="n">use</span> <span class="n">certain</span> <span class="n">features</span> <span class="n">of</span> <span class="n">this</span> <span class="n">app</span><span class="p">,</span> <span class="n">you</span> <span class="n">need</span> <span class="n">to</span> <span class="n">give</span> <span class="n">permissions</span><span class="o">.</span> <span class="kt">See</span> <span class="n">description</span> <span class="k">for</span> <span class="n">each</span> <span class="n">permission</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">changeHeaderDescriptionTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>_</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The custom text to change to</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E25changeBottomDescriptionToyQrSSF"></a>
+                    <a name="//apple_ref/swift/Method/changeBottomDescriptionTo(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E25changeBottomDescriptionToyQrSSF">changeBottomDescriptionTo(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a customized bottom header description text</p>
+
+<p>The default bottom header text is:</p>
+<pre class="highlight swift"><code><span class="kt">Permission</span> <span class="n">are</span> <span class="n">necessary</span> <span class="k">for</span> <span class="n">all</span> <span class="n">the</span> <span class="n">features</span> <span class="n">and</span> <span class="n">functions</span> <span class="n">to</span> <span class="n">work</span> <span class="n">properly</span><span class="o">.</span> <span class="kt">If</span> <span class="n">not</span> <span class="n">allowed</span><span class="p">,</span> <span class="n">you</span> <span class="n">have</span> <span class="n">to</span> <span class="n">enable</span> <span class="n">permissions</span> <span class="k">in</span> <span class="n">settings</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">changeBottomDescriptionTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>_</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The custom text to change to</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E22setPermissionComponent3for5image5title11descriptionQrAD0F4TypeO_AA03AnyC0VSSSgANtF"></a>
+                    <a name="//apple_ref/swift/Method/setPermissionComponent(for:image:title:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E22setPermissionComponent3for5image5title11descriptionQrAD0F4TypeO_AA03AnyC0VSSSgANtF">setPermissionComponent(for:<wbr>image:<wbr>title:<wbr>description:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Customizes the image view, title (optional), and description (optional) of any permission component</p>
+
+<p>Use this modifier on your existing view to set all the available customizations–the symbol image , and title (optional) and description (optional).</p>
+
+<p>For example,</p>
+<pre class="highlight swift"><code><span class="kt">YourTopLevelView</span><span class="p">()</span>
+<span class="o">.</span><span class="nf">setPermissionComponents</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">camera</span><span class="p">,</span>
+                         <span class="nv">image</span><span class="p">:</span> <span class="kt">AnyView</span><span class="p">(</span><span class="kt">Image</span><span class="p">(</span><span class="nv">systemName</span><span class="p">:</span> <span class="s">"camera.fill"</span><span class="p">)),</span>
+                         <span class="nv">title</span><span class="p">:</span> <span class="s">"Camera"</span><span class="p">,</span>
+                         <span class="nv">description</span><span class="p">:</span> <span class="s">"Camera description"</span><span class="p">)</span>
+</code></pre>
+
+<p>will override the default image, title , and description for the <code>camera</code> permission. It will result in a camera image symbol, and the custom title and description</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setPermissionComponent</span><span class="p">(</span><span class="k">for</span> <span class="nv">permission</span><span class="p">:</span> <span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">,</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">AnyView</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>PermissonType</code> specifying the permission component</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>image</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The color to render the symbol image</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>title</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The title text (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description text (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E22setPermissionComponent3for5titleQrAD0F4TypeO_SStF"></a>
+                    <a name="//apple_ref/swift/Method/setPermissionComponent(for:title:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E22setPermissionComponent3for5titleQrAD0F4TypeO_SStF">setPermissionComponent(for:<wbr>title:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Customizes only the title of any permission component</p>
+
+<p>Use this modifier on your existing view to set the title customization.</p>
+
+<p>For example,</p>
+<pre class="highlight swift"><code><span class="kt">YourTopLevelView</span><span class="p">()</span>
+<span class="o">.</span><span class="nf">setPermissionComponents</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">camera</span><span class="p">,</span>
+                         <span class="nv">title</span><span class="p">:</span> <span class="s">"Camera"</span><span class="p">)</span>
+</code></pre>
+
+<p>will override the default title for the <code>camera</code> permission. It will result in a custom title.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setPermissionComponent</span><span class="p">(</span><span class="k">for</span> <span class="nv">permission</span><span class="p">:</span> <span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>PermissonType</code> specifying the permission component</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>title</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The title text</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP011PermissionsaB0E22setPermissionComponent3for11descriptionQrAD0F4TypeO_SStF"></a>
+                    <a name="//apple_ref/swift/Method/setPermissionComponent(for:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP011PermissionsaB0E22setPermissionComponent3for11descriptionQrAD0F4TypeO_SStF">setPermissionComponent(for:<wbr>description:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Customizes only the description of any permission component</p>
+
+<p>Use this modifier on your existing view to set the description customization.</p>
+
+<p>For example,</p>
+<pre class="highlight swift"><code><span class="kt">YourTopLevelView</span><span class="p">()</span>
+<span class="o">.</span><span class="nf">setPermissionComponents</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">camera</span><span class="p">,</span>
+                         <span class="nv">description</span><span class="p">:</span> <span class="s">"Camera description"</span><span class="p">)</span>
+</code></pre>
+
+<p>will override the default title for the <code>camera</code> permission. It will result in a custom description.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setPermissionComponent</span><span class="p">(</span><span class="k">for</span> <span class="nv">permission</span><span class="p">:</span> <span class="kt"><a href="../Enums/PermissionType.html">PermissionType</a></span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>PermissonType</code> specifying the permission component</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description text</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external">Jevon Mao</a>. All rights reserved. (Last updated: 2021-02-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

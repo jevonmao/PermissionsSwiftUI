@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//Custom view modifier for the button component
 struct ButtonStatusColor: ViewModifier {
     var allowButtonStatus: AllowButtonStatus
     func body(content: Content) -> some View {
@@ -23,11 +24,11 @@ struct ButtonStatusColor: ViewModifier {
         }
     }
 }
-
+//Custom modifier that nests within ButtonStatusColor to further extract code
 struct AllowButton: ViewModifier {
     var foregroundColor: Color
     var backgroundColor: Color
-    var buttonSizeConstant: CGFloat {
+    var buttonSizeConstant :CGFloat {
         return screenSize.width < 400 ?  70-(1000-screenSize.width)/30 : 70
     }
     func body(content: Content) -> some View {

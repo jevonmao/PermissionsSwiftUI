@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ExitButtonSection: View {
+    //Action is closing the alert or modal on tap
     var action: () -> Void
     var buttonSizeConstant: CGFloat {
         screenSize.width < 400 ? 40-(1000-screenSize.width)/80 : 40
@@ -28,16 +29,3 @@ struct ExitButtonSection: View {
     }
 }
 
-//
-//Circle()
-//    .fill(Color(.systemGray4))
-//    .frame(maxWidth:40, maxHeight: 40)
-//    .overlay( Image(systemName: "xmark")
-//                .font(.system(size: 18, weight: .bold, design: .rounded))
-//                .foregroundColor(Color(.systemGray))
-//                .minimumScaleFactor(0.1)
-//                .padding(6)
-//
-//
-//
-//            )

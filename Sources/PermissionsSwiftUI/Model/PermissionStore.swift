@@ -11,16 +11,23 @@ import SwiftUI
 //MARK: Storage
 struct PermissionStore {
     private init(){}
+    //a private singleton instance that allows read & write, but for this file's methods only
     fileprivate static var mutableShared = PermissionStore()
+    //Read only singleton exposed to other parts of program
     static var shared:PermissionStore{
         get{
             mutableShared
         }
     }
     var permissions: [PermissionType] = []
+    var permissionsToAsk: [PermissionType]{
+        FilterPermissions.filterForShouldAskPermission(for: permissions)
+    }
     var mainTexts = MainTexts()
     var autoDismissModal: Bool = true
     var autoDismissAlert: Bool = true
+    var autoCheckModalAuth: Bool = true
+    var autoCheckAlertAuth: Bool = true
     var onAppear: (()->Void)?
     var onDisappear: (()->Void)?
     struct MainTexts{
@@ -105,11 +112,13 @@ struct PermissionStore {
 }
 // MARK: Updating methods
 extension PermissionStore{
+    //Used for unit testing, need to reset storage before each subtest
     static func resetPermissionsModelStore(){
         mutableShared = PermissionStore()
     }
+    //inout enables caller to modify PermissionStore
     func updateStore<T>(property:(inout PermissionStore, T)->Void, value:T){
+        //Closure passes back PermissionStore instance, and the generic value passed in method
         property(&PermissionStore.mutableShared, value)
     }
-
 }

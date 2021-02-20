@@ -12,6 +12,7 @@ protocol PermissionTypeProtocol {
     var permissions:[PermissionType]{get}
     func requestPermission(isPermissionGranted: @escaping (Bool) -> Void)
 }
+//Additional dynamic functionalities for PermissionType
 extension PermissionType:PermissionTypeProtocol{
 
     var permissions:[PermissionType]{
@@ -19,6 +20,7 @@ extension PermissionType:PermissionTypeProtocol{
             PermissionStore.shared.permissions 
         }
     }
+    //Get and set value for current permission type's store
     var currentPermission: JMPermission {
         get{
             let store = PermissionStore.shared
@@ -57,6 +59,8 @@ extension PermissionType:PermissionTypeProtocol{
         set{
             switch self {
             case .location:
+                //$0 is first parameter get back from closure, it is the PermissionStore storage instance
+                //$1 is second parameter and is a generic for the new value to set
                 PermissionStore.shared.updateStore(property: {$0.locationPermission=$1}, value: newValue)
             case .locationAlways:
                 PermissionStore.shared.updateStore(property: {$0.locationAlwaysPermission=$1}, value: newValue)
@@ -89,74 +93,51 @@ extension PermissionType:PermissionTypeProtocol{
         
     }
     func requestPermission(isPermissionGranted: @escaping (Bool) -> Void) {
+        //Pass the $0 argument that specify isPermissionGranted back to UI layer
+        getPermissionManager()?.requestPermission{isPermissionGranted($0)}
+    }
+    
+    func getPermissionManager() -> PermissionManager?{
         switch self {
         case .location:
-            JMLocationPermissionManager.shared.requestInUsePermission { authorized in
-                isPermissionGranted(authorized)
-            }
+            return JMLocationPermissionAlwaysManager.shared
         case .locationAlways:
-            JMLocationPermissionManager.shared.requestAlwaysPermission { authorized in
-                isPermissionGranted(authorized)
-            }
+            return JMLocationPermissionAlwaysManager.shared
         case .photo:
-            JMPhotoPermissionManager.shared.requestPermission { authorized in
-                isPermissionGranted(authorized)
-            }
+            return JMPhotoPermissionManager.shared
         case .microphone:
-            JMMicPermissionManager.shared.requestPermission { authorized in
-                isPermissionGranted(authorized)
-            }
+            return JMMicPermissionManager.shared
         case .camera:
-            JMCameraPermissionManager.shared.requestPermission { authorized in
-                isPermissionGranted(authorized)
-            }
+            return JMCameraPermissionManager.shared
         case .notification:
-            JMNotificationPermissionManager.shared.requestPermission { authorized in
-                isPermissionGranted(authorized)
-            }
+            return JMNotificationPermissionManager.shared
         case .calendar:
-            JMCalendarPermissionManager.shared.requestPermission { authorized in
-                isPermissionGranted(authorized)
-            }
-            
+            return JMCalendarPermissionManager.shared
         case .bluetooth:
-            JMBluetoothPermissionManager.shared.requestPermission { authorized in
-                isPermissionGranted(authorized)
-                
-            }
+            return JMBluetoothPermissionManager.shared
+
         case .tracking:
             if #available(iOS 14.5, *) {
-                JMTrackingPermissionManager.shared.requestPermission{authorized in
-                    isPermissionGranted(authorized)
-                }
+                return JMTrackingPermissionManager.shared
             }
         case .contacts:
-            JMContactsPermissionManager.shared.requestPermission{authorized in
-                isPermissionGranted(authorized)
-            }
+            return JMContactsPermissionManager.shared
         case .motion:
-            JMMotionPermissionManager.shared.requestPermission{authorized in
-                isPermissionGranted(authorized)
-            }
+            return JMMotionPermissionManager.shared
         case .reminders:
-            JMRemindersPermissionManager.shared.requestPermission{
-                isPermissionGranted($0)
-            }
+            return JMRemindersPermissionManager.shared
         case .speech:
-            JMSpeechPermissionManager.shared.requestPermission{
-                isPermissionGranted($0)
-            }
-        case let .health(toShare, read):
-            JMHealthPermissionManager.shared.requestPermission(toShare: toShare, read: read) {
-                isPermissionGranted($0)
-            }
+            return JMSpeechPermissionManager.shared
+        case .health:
+            return JMHealthPermissionManager.shared
         }
+        return nil
+
     }
     
 }
 extension PermissionType:CaseIterable{
     public static var allCases: [PermissionType]{
-        //return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
                 if #available(iOS 14.5, *) {
                     return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking]
                 } else {
@@ -164,3 +145,65 @@ extension PermissionType:CaseIterable{
                 }
     }
 }
+//switch self {
+//case .location:
+//    JMLocationPermissionAlwaysManager.shared.requestInUsePermission { authorized in
+//        isPermissionGranted(authorized)
+//    }
+//case .locationAlways:
+//    JMLocationPermissionAlwaysManager.shared.requestAlwaysPermission { authorized in
+//        isPermissionGranted(authorized)
+//    }
+//case .photo:
+//    JMPhotoPermissionManager.shared.requestPermission { authorized in
+//        isPermissionGranted(authorized)
+//    }
+//case .microphone:
+//    JMMicPermissionManager.shared.requestPermission { authorized in
+//        isPermissionGranted(authorized)
+//    }
+//case .camera:
+//    JMCameraPermissionManager.shared.requestPermission { authorized in
+//        isPermissionGranted(authorized)
+//    }
+//case .notification:
+//    JMNotificationPermissionManager.shared.requestPermission { authorized in
+//        isPermissionGranted(authorized)
+//    }
+//case .calendar:
+//    JMCalendarPermissionManager.shared.requestPermission { authorized in
+//        isPermissionGranted(authorized)
+//    }
+//
+//case .bluetooth:
+//    JMBluetoothPermissionManager.shared.requestPermission { authorized in
+//        isPermissionGranted(authorized)
+//
+//    }
+//case .tracking:
+//    if #available(iOS 14.5, *) {
+//        JMTrackingPermissionManager.shared.requestPermission{authorized in
+//            isPermissionGranted(authorized)
+//        }
+//    }
+//case .contacts:
+//    JMContactsPermissionManager.shared.requestPermission{authorized in
+//        isPermissionGranted(authorized)
+//    }
+//case .motion:
+//    JMMotionPermissionManager.shared.requestPermission{authorized in
+//        isPermissionGranted(authorized)
+//    }
+//case .reminders:
+//    JMRemindersPermissionManager.shared.requestPermission{
+//        isPermissionGranted($0)
+//    }
+//case .speech:
+//    JMSpeechPermissionManager.shared.requestPermission{
+//        isPermissionGranted($0)
+//    }
+//case let .health:
+//    JMHealthPermissionManager.shared.requestPermission{
+//        isPermissionGranted($0)
+//    }
+//}

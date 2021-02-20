@@ -8,10 +8,21 @@
 import AVFoundation
 import Foundation
 
-struct JMMicPermissionManager {
-    static var shared = JMMicPermissionManager()
+struct JMMicPermissionManager: PermissionManager {
     
-    func requestPermission(completion: @escaping JMPermissionAuthorizationHandlerCompletionBlock) {
+    static var shared: PermissionManager = JMMicPermissionManager()
+    var authorizationStatus: AuthorizationStatus{
+        switch AVCaptureDevice.authorizationStatus(for: .audio){
+        case .authorized:
+            return .authorized
+        case .notDetermined:
+            return .notDetermined
+        default:
+            return .denied
+        }
+    }
+    
+    func requestPermission(_ completion: @escaping (Bool) -> Void) {
         AVAudioSession.sharedInstance().requestRecordPermission {
             granted in
             DispatchQueue.main.async {
@@ -19,8 +30,4 @@ struct JMMicPermissionManager {
             }
         }
     }
-}
-
-extension JMMicPermissionManager {
-    typealias JMPermissionAuthorizationHandlerCompletionBlock = (Bool) -> Void
 }

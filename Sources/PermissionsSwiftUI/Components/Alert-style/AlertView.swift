@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//The body view of the alert pop up, child view of AlertMainView
 struct AlertView: View {
     @Binding var showAlert: Bool
     var mainText: PermissionStore.MainTexts{PermissionStore.shared.mainTexts}

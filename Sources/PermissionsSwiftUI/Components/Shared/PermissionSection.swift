@@ -11,9 +11,25 @@ struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showModal:Bool
     var isAlert:Bool
+    var permissions:[PermissionType]{
+        let store = PermissionStore.shared
+        if isAlert{
+            if store.autoCheckAlertAuth{
+                return store.permissionsToAsk
+            }
+            else {
+                return store.permissions
+            }
+        }
+        if store.autoCheckModalAuth{
+            return store.permissionsToAsk
+        }
+        else {
+            return store.permissions
+        }
+    }
     var body: some View {
         VStack {
-            let permissions = PermissionStore.shared.permissions
             ForEach(permissions.indices, id: \.self) {
                 PermissionSectionCell(permission: permissions[$0], showModal: $showModal, isAlert: isAlert)
                 
@@ -36,18 +52,14 @@ struct PermissionSectionCell: View {
     @State var permission: PermissionType
     @State var allowButtonStatus: AllowButtonStatus = .idle
     @Binding var showModal: Bool
+    //Whether used for modal or alert style component
     var isAlert: Bool
-    var isLast: Bool {
-        ///Filter and only get unauthorized permissions
-        let permissions = PermissionStore.shared.permissions.filter{$0.currentPermission.authorized==false}
-        if permissions.count == 0 {
-            return true
-        }
-        else{
-            return false
-        }
-    }
+    //Empty unauthorized array means all permissions have been interacted
+    var shouldAutoDismiss: Bool{FilterPermissions.filterForUnauthorized(for: PermissionStore.shared.permissions).isEmpty}
+    
+    //Computed constants based on device size for dynamic UI
     var screenSizeConstant: CGFloat {
+        //Weirdass formulas that simply work
         screenSize.width < 400 ? 40-(1000-screenSize.width)/80 : 40
 }
     var fontSizeConstant: CGFloat {
@@ -113,6 +125,7 @@ struct PermissionSectionCell: View {
         .padding(.vertical, vertPaddingConstant)
         .padding(.horizontal, horiPaddingConstant)
     }
+    
     func handleButtonState(for authorized:Bool){
         var currentPermission = permission.currentPermission
         if authorized {
@@ -120,19 +133,19 @@ struct PermissionSectionCell: View {
             currentPermission.authorized = true
         }
         else {
-            allowButtonStatus = .idle
+            allowButtonStatus = .denied
             currentPermission.authorized = false
         }
         permission.currentPermission = currentPermission
         if isAlert{
-            if isLast && PermissionStore.shared.autoDismissAlert {
+            if shouldAutoDismiss && PermissionStore.shared.autoDismissAlert {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                     showModal = false
                 }
             }
         }
         else{
-            if isLast && PermissionStore.shared.autoDismissModal {
+            if shouldAutoDismiss && PermissionStore.shared.autoDismissModal {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                     showModal = false
                 }
