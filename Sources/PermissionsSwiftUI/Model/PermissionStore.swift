@@ -20,6 +20,9 @@ struct PermissionStore {
         }
     }
     var permissions: [PermissionType] = []
+    var permissionsToAsk: [PermissionType]{
+        FilterPermissions.filterForShouldAskPermission(for: permissions)
+    }
     var mainTexts = MainTexts()
     var autoDismissModal: Bool = true
     var autoDismissAlert: Bool = true
@@ -116,5 +119,4 @@ extension PermissionStore{
         //Closure passes back PermissionStore instance, and the generic value passed in method
         property(&PermissionStore.mutableShared, value)
     }
-
 }

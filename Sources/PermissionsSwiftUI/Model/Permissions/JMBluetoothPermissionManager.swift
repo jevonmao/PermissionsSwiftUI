@@ -8,13 +8,23 @@
 import CoreBluetooth
 import UIKit
 
-class JMBluetoothPermissionManager: NSObject {
-    typealias JMBluetoothPermissionHandler = (Bool) -> Void?
-    private var completion: JMBluetoothPermissionHandler?
-    private var manager: CBCentralManager?
-    static let shared = JMBluetoothPermissionManager()
+class JMBluetoothPermissionManager: NSObject, PermissionManager { 
 
-    func requestPermission(completion: @escaping (Bool) -> Void?) {
+    private var completion: ((Bool) -> Void)?
+    private var manager: CBCentralManager?
+    var authorizationStatus: AuthorizationStatus{
+        switch CBCentralManager().authorization{
+        case .allowedAlways:
+            return .authorized
+        case .notDetermined:
+            return .notDetermined
+        default:
+            return .denied
+        }
+    }
+    static let shared: PermissionManager = JMBluetoothPermissionManager()
+    
+    func requestPermission(_ completion: @escaping (Bool) -> Void) {
         self.completion = completion
         self.manager = CBCentralManager(delegate: self, queue: nil)
     }

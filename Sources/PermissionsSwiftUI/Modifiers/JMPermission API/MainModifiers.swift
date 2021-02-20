@@ -16,7 +16,9 @@ struct PermissionsModal: ViewModifier {
     }
 
     func body(content: Content) -> some View {
-        MainView(for: AnyView(content), show: showModal)
+        let currentPermissions = PermissionStore.shared.permissions
+        return MainView(for: AnyView(content), show: showModal)
+
     }
 }
 

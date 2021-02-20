@@ -48,11 +48,7 @@ public enum PermissionType {
      
      For example, passing in a `Set` of `HKSampleType`:
      ```
-     [.health(Set([HKObjectType.workoutType(),
-                         HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
-                         HKObjectType.quantityType(forIdentifier: .distanceCycling)!,
-                         HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-                         HKObjectType.quantityType(forIdentifier: .heartRate)!]))]
+     [.health(toShare: Set([HKObjectType.workoutType()]), read: Set([HKObjectType.workoutType()]))]
      ```
      */
     case health(toShare: Set<HKSampleType>, read: Set<HKSampleType>)

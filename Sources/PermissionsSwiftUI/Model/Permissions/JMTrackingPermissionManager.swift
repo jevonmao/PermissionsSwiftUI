@@ -10,12 +10,24 @@ import AppTrackingTransparency
 import AdSupport
 
 @available(iOS 14.5, *)
-struct JMTrackingPermissionManager {
-    static var shared = JMTrackingPermissionManager()
+struct JMTrackingPermissionManager: PermissionManager {
+
+    static var shared: PermissionManager = JMTrackingPermissionManager()
+    var authorizationStatus: AuthorizationStatus{
+        switch ATTrackingManager.trackingAuthorizationStatus{
+        case .authorized:
+            return .authorized
+        case .notDetermined:
+            return .notDetermined
+        default:
+            return .denied
+        }
+    }
+    
     public static var advertisingIdentifier:UUID{
         ASIdentifierManager.shared().advertisingIdentifier
     }
-    func requestPermission(completion: @escaping (Bool) -> Void) {
+    func requestPermission(_ completion: @escaping (Bool) -> Void) {
         ATTrackingManager.requestTrackingAuthorization { status in
                   switch status {
                   case .authorized:

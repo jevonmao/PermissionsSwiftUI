@@ -10,21 +10,24 @@ import SwiftUI
 struct MainView: View {
     private var showModal: Binding<Bool>
     private var bodyView: AnyView
+    var shouldShowPermission:Bool{
+        PermissionStore.shared.permissionsToAsk.isEmpty ? false : true
+    }
     init(for bodyView: AnyView, show showModal: Binding<Bool>) {
         self.bodyView = bodyView
         self.showModal = showModal
     }
 
     var body: some View {
-        bodyView
-            .sheet(isPresented: showModal, content: {
-                ModalView(showModal: showModal)
-                    .onAppear(perform:PermissionStore.shared.onAppear)
-                    .onDisappear(perform:PermissionStore.shared.onDisappear)
+        if shouldShowPermission{
+            bodyView
+                .sheet(isPresented: showModal, content: {
+                    ModalView(showModal: showModal)
+                        .onAppear(perform: PermissionStore.shared.onAppear)
+                        .onDisappear(perform:PermissionStore.shared.onDisappear)
 
-            })
-            
-            
+                })
+        }
     }
     //if DEBUG to ensure these functions are never used in production. They are for unit testing only.
     #if DEBUG
