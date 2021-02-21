@@ -41,12 +41,3 @@ jobs:
 
       - name: Format Swift code
         run: swiftformat --verbose . --swiftversion 5.2
-  SwiftDoc:
-    name: Generate documentation
-    runs-on: macos-latest
-    steps:
-      - name: Install Jazzy
-        run: sudo gem install jazzy
-      - name: Jazzy Doc
-        run: jazzy --module PermissionsSwiftUI --swift-build-tool xcodebuild --build-tool-arguments -scheme,PermissionsSwiftUI,-sdk,iphoneos
-
