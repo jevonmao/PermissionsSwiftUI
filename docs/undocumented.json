@@ -1,6 +1,47 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/jevonmao/Documents/Repo/PermisssionsSwiftUI-example-proj/PermissionsSwiftUI/Sources/PermissionsSwiftUI/Model/PermissionStore.swift",
+      "line": 135,
+      "symbol": "AllButtonColors.buttonIdle",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jevonmao/Documents/Repo/PermisssionsSwiftUI-example-proj/PermissionsSwiftUI/Sources/PermissionsSwiftUI/Model/PermissionStore.swift",
+      "line": 137,
+      "symbol": "AllButtonColors.buttonAllowed",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jevonmao/Documents/Repo/PermisssionsSwiftUI-example-proj/PermissionsSwiftUI/Sources/PermissionsSwiftUI/Model/PermissionStore.swift",
+      "line": 139,
+      "symbol": "AllButtonColors.buttonDenied",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jevonmao/Documents/Repo/PermisssionsSwiftUI-example-proj/PermissionsSwiftUI/Sources/PermissionsSwiftUI/Model/PermissionStore.swift",
+      "line": 173,
+      "symbol": "AllButtonColors.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jevonmao/Documents/Repo/PermisssionsSwiftUI-example-proj/PermissionsSwiftUI/Sources/PermissionsSwiftUI/Model/PermissionStore.swift",
+      "line": 184,
+      "symbol": "ButtonColor.foregroundColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jevonmao/Documents/Repo/PermisssionsSwiftUI-example-proj/PermissionsSwiftUI/Sources/PermissionsSwiftUI/Model/PermissionStore.swift",
+      "line": 186,
+      "symbol": "ButtonColor.backgroundColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/jevonmao/Documents/Repo/PermisssionsSwiftUI-example-proj/PermissionsSwiftUI"
 }
