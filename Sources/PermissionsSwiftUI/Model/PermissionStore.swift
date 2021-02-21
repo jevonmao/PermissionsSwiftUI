@@ -24,6 +24,7 @@ struct PermissionStore {
         FilterPermissions.filterForShouldAskPermission(for: permissions)
     }
     var mainTexts = MainTexts()
+    var allButtonColors = AllButtonColors()
     var autoDismissModal: Bool = true
     var autoDismissAlert: Bool = true
     var autoCheckModalAuth: Bool = true
@@ -120,5 +121,76 @@ extension PermissionStore{
     func updateStore<T>(property:(inout PermissionStore, T)->Void, value:T){
         //Closure passes back PermissionStore instance, and the generic value passed in method
         property(&PermissionStore.mutableShared, value)
+    }
+}
+/**
+ `AllButtonColors` encapsulates the color configuration for all states of the allow button
+    
+ To customize button colors:
+ 1. Define a new instance of the `AllButtonColors` struct
+ 2. Add the `setAllowButtonColor(to colors:AllButtonColors)` modifier to your view
+ 3. Pass in the `AllButtonColors` struct previously into the proper parameter
+ */
+public struct AllButtonColors{
+    public var buttonIdle = ButtonColor(foregroundColor: Color(.systemBlue),
+                                 backgroundColor: Color(.systemGray5))
+    public var buttonAllowed = ButtonColor(foregroundColor: Color(.white),
+                                    backgroundColor: Color(.systemBlue))
+    public var buttonDenied = ButtonColor(foregroundColor: Color(.white),
+                                   backgroundColor: Color(.systemRed))
+    /**
+     - parameters:
+        - buttonIdle: The button color configuration for the default, idle state
+        - buttonAllowed: The button color configuration for the highlighted, allowed state
+        - buttonDenied: The button color configuration for the user explicitly denied state
+     */
+    public init(buttonIdle: ButtonColor, buttonAllowed: ButtonColor, buttonDenied: ButtonColor){
+        self.buttonIdle = buttonIdle
+        self.buttonAllowed = buttonAllowed
+        self.buttonDenied = buttonDenied
+    }
+    /**
+     - parameters:
+        - buttonIdle: The button color configuration for the default, idle state
+     */
+    public init(buttonIdle: ButtonColor){
+        self.buttonIdle = buttonIdle
+    }
+    /**
+     - parameters:
+        - buttonAllowed: The button color configuration for the highlighted, allowed state
+     */
+    public init(buttonAllowed: ButtonColor){
+        self.buttonAllowed = buttonAllowed
+    }
+    /**
+     - parameters:
+        - buttonDenied: The button color configuration for the user explicitly denied state
+     */
+    public init(buttonDenied: ButtonColor){
+        self.buttonDenied = buttonDenied
+    }
+    public init(){}
+}
+
+/**
+ `ButtonColor` represents the color configuration for the allow button in a single state
+  
+  Declared within parent struct  `AllButtonColors` and should only be used within a `AllButtonColors` struct instance.
+  To customize
+ */
+public struct ButtonColor{
+    //The color of type `Color` for the foreground text
+    public var foregroundColor: Color
+    //The color of type `Color` for the foreground text
+    public var backgroundColor: Color
+    /**
+     - parameters:
+        - foregroundColor: The color of type `Color` for the foreground text
+        - backgroundColor: The color of type `Color` for the background
+     */
+    public init(foregroundColor: Color, backgroundColor: Color){
+        self.foregroundColor = foregroundColor
+        self.backgroundColor = backgroundColor
     }
 }
