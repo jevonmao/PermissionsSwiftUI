@@ -95,4 +95,24 @@ public extension View{
         )
         return self
     }
+    
+    /**
+     Customizes the color of allow buttons for all status states
+
+     The customization of button colors with this modifier applies to both `JMAlert` and `JMModal` views
+     
+     To customize button colors:
+     1. Define a new instance of the `AllButtonColors` struct
+     2. Add the `setAllowButtonColor(to colors:AllButtonColors)` modifier to your view
+     3. Pass in the `AllButtonColors` struct previously into the proper parameter
+     
+     - Parameters:
+        - for: `PermissonType` specifying the permission component
+        - description: The description text
+     */
+    
+    func setAllowButtonColor(to colors:AllButtonColors) -> some View {
+        PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: colors)
+        return self
+    }
 }
