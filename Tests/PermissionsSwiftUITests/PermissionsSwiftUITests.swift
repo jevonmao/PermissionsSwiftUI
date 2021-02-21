@@ -209,8 +209,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         if #available(iOS 14.5, *) {}
         else{
             PermissionStore.resetPermissionsModelStore()
-            let view = ModalView(showModal: .constant(true))
             PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
+            PermissionStore.shared.updateStore(property: {$0.autoCheckModalAuth=$1}, value: false)
+            let view = ModalView(showModal: .constant(true))
             assertSnapshot(matching: view.referenceFrame(), as: .image)
         }
     }

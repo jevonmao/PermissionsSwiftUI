@@ -15,7 +15,7 @@ protocol NotificationManager {
 }
 extension UNUserNotificationCenter:NotificationManager{
     static func shared() -> NotificationManager {
-        UNUserNotificationCenter.current()
+        return UNUserNotificationCenter.current()
     }
     func requestPermission(options: UNAuthorizationOptions=[], completionHandler: @escaping (Bool, Error?) -> Void) {
         self.requestAuthorization(options: options) { granted, error in
