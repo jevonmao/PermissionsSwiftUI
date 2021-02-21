@@ -10,9 +10,9 @@
 
 `PermissionsSwiftUI` displays and handles permissions in SwiftUI. It is largely inspired by [SPPermissions](https://github.com/varabeis/SPPermissions).
 The UI is highly customizable and resembles an **Apple style**. If you like the project, don't forget to `star ★` and follow me on GitHub. <br />
-<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot1.png" height="500"/>
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_modal.PNG?raw=true" height="500"/>
 &emsp; &emsp;
-<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Screenshot-dark.png" height="500"/> <br />
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_alert.PNG?raw=true" height="500"/> <br />
 <p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑dark mode. </p>
 
 ## Navigation
@@ -22,6 +22,7 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
     -  [Customize Permission Texts](#customize-permission-texts)
     -  [Customize header texts](#customize-header-texts)
     -  [`onAppear` and `onDisappear` Override](#onappear-and-ondisappear-override)
+    -  [Auto Check Authorization](#auto-check-authorization)
     -  [Auto Dismiss](#auto-dismiss)
 -  [Supported Permissions](#supported-permissions)
 -  [Additional Information](#additional-information)
@@ -57,7 +58,7 @@ Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions y
            }, label: {
                Text("Ask user for permissions")
            })
-           .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
+           .JMModal(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
        }
    }
  ```
@@ -144,6 +145,16 @@ The same view modifier closure for state changes are available for the `JMAlert`
                      onAppear: {print("Appeared")},
                      onDisappear: {print("Disappeared")})
 ```
+### Auto Check Authorization
+PermissionsSwiftUI by default will automatically check for authorization status. It will only show permissions that are currently `notDetermined` status. (iOS system prevent developers from asking denied permissions. Allowed permissions will also be ignored by PermissionsSwiftUI). If all permissions are allowed or denied, PermissionsSwiftUI will not show the modal or alert at all.
+To set auto check authorization, use the `autoCheckAuthorization` parameter:
+```Swift
+.JMModal(showModal: $showModal, for: [.camera], autoCheckAuthorization: false)
+```
+same applies for JMAlert
+```Swift
+.JMAlert(showModal: $showModal, for: [.camera], autoCheckAuthorization: false)
+```
 ### Auto Dismiss
 PermissionsSwiftUI by default will automatically dismiss the modal or alert after user allows the last permission item. However, you can override this behavior.
 ```Swift
@@ -152,7 +163,7 @@ func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], autoDi
 Pass in `true` or `false` to select whether to automatically dismiss the view.
 <br /> <br /> <br />
 ## Supported Permissions
-Here is a list of all permissions PermissionsSwiftUI already supports/will support. By the 0.0.1 beta release, PermissionsSwiftUI will have all 12 iOS system permissions built in. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon. Stay tuned!
+Here is a list of all permissions PermissionsSwiftUI already supports support(health not in image but is supported). Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon.
 <img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card.png" alt="A card of all the permissions" width="100%">
 
 ## Additional Information
