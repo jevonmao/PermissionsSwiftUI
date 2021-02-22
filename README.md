@@ -10,9 +10,9 @@
 
 `PermissionsSwiftUI` displays and handles permissions in SwiftUI. It is largely inspired by [SPPermissions](https://github.com/varabeis/SPPermissions).
 The UI is highly customizable and resembles an **Apple style**. If you like the project, don't forget to `star ★` and follow me on GitHub. <br />
-<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_modal.PNG?raw=true" height="500"/>
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_modal.PNG?raw=true" height="550"/>
 &emsp; &emsp;
-<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_alert.PNG?raw=true" height="500"/> <br />
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_alert.PNG?raw=true" height="550"/> <br />
 <p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑dark mode. </p>
 
 ## Navigation
@@ -24,6 +24,7 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
     -  [`onAppear` and `onDisappear` Override](#onappear-and-ondisappear-override)
     -  [Auto Check Authorization](#auto-check-authorization)
     -  [Auto Dismiss](#auto-dismiss)
+    -  [Customize Colors](#customize-colors)
 -  [Supported Permissions](#supported-permissions)
 -  [Additional Information](#additional-information)
     -  [Acknowledgement](#acknowledgement)
@@ -63,7 +64,7 @@ Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions y
    }
  ```
 ### Alert Style
-<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/alert_view_screenshot.png?raw=true" height="400" align="left" />
+<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/alert_view_screenshot.png?raw=true" height="300" align="left" />
 The alert style is equally gorgeous, and allows for more versatile use. It is recommended when you have less than 3 permissions.  <br />
 To show a permission pop up alert, use: 
 
@@ -71,7 +72,6 @@ To show a permission pop up alert, use:
 .JMAlert(showModal: $showModal, for: [.locationAlways, .photo])
 ```
 Similar to the previous `JMPermissions`, you need to pass in a `Binding<Bool>` to show the view, and add whatever permissions you want to show.
-<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 
 ## Usage
 ### Customize Permission Texts
@@ -161,9 +161,35 @@ PermissionsSwiftUI by default will automatically dismiss the modal or alert afte
 func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View
 ```
 Pass in `true` or `false` to select whether to automatically dismiss the view.
-<br /> <br /> <br />
+
+### Customize Colors
+Using PermissionSwiftUI's capabilities, developers and designers can customize all the UI colors with incredible flexibility. You can fully configure all color at all states with your custom colors. <br />
+To easily change the accent color:
+```Swift
+.setAccentColor(to: Color(.systemPurple))
+```
+To change the primary (default Apple blue) and tertiary (default Apple red) colors:
+```Swift
+.setAccentColor(toPrimary: Color(.systemPurple),
+                toTertiary: Color(.systemPink))
+```
+<img align src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Button_color_customize_showcase.png?raw=true" alt="Alert pop up with customized colors" height="300">
+
+> ⚠️ `.setAccentColor()` and `.setAllowButtonColor()` should never be used at the same time.
+
+To unleash the full customization of all button colors under all states, you need to pass in the `AllButtonColors` struct:
+```Swift
+.setAllowButtonColor(to: .init(buttonIdle: ButtonColor(foregroundColor: Color,
+                                                               backgroundColor: Color),
+                                       buttonAllowed: ButtonColor(foregroundColor: Color,
+                                                                  backgroundColor: Color),
+                                       buttonDenied: ButtonColor(foregroundColor: Color,
+                                                                 backgroundColor: Color)))
+```
+For more information regarding the above method, reference the [official documentation](https://jevonmao.github.io/PermissionsSwiftUI/Structs/AllButtonColors.html).
 ## Supported Permissions
 Here is a list of all permissions PermissionsSwiftUI already supports support(health not in image but is supported). Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon.
+<br /> <br /> <br />
 <img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card.png" alt="A card of all the permissions" width="100%">
 
 ## Additional Information
