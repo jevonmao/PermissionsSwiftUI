@@ -23,7 +23,7 @@ struct ButtonStatusColor: ViewModifier {
 
 
         case .denied:
-            return content.allowButton(foregroundColor: colorStore.buttonIdle.foregroundColor,
+            return content.allowButton(foregroundColor: colorStore.buttonDenied.foregroundColor,
                                        backgroundColor: colorStore.buttonDenied.backgroundColor)
         }
     }

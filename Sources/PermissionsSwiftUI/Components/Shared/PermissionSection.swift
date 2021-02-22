@@ -88,7 +88,7 @@ struct PermissionSectionCell: View {
         let currentPermission = self.permission.currentPermission
         HStack {
             currentPermission.imageIcon
-                .foregroundColor(Color.blue)
+                .foregroundColor(PermissionStore.shared.allButtonColors.primaryColor)
                 .font(.system(size: screenSizeConstant))
                 .frame(width: screenSizeConstant)
                 .padding(.horizontal, 5)

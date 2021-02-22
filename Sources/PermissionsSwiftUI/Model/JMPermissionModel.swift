@@ -28,13 +28,17 @@ public struct JMPermission:Equatable{
      - Attention:
         The `JMPermission` structure is made public only for obervation purposes. Users of PermissionsSwiftUI should not be calling `JMPermission` constructor directly.
      */
-    public init(imageIcon: AnyView, title: String, description: String, authorized: Bool) {
+    public init(imageIcon: AnyView, title: String, description: String) {
+        self.imageIcon = imageIcon
+        self.title = title
+        self.description = description
+    }
+    internal init(imageIcon: AnyView, title: String, description: String, authorized: Bool) {
         self.imageIcon = imageIcon
         self.title = title
         self.description = description
         self.authorized = authorized
     }
-    
     public static func == (lhs: JMPermission, rhs: JMPermission) -> Bool {
         if lhs.title == rhs.title && lhs.description == rhs.description && lhs.authorized == rhs.authorized{
             return true
@@ -44,10 +48,9 @@ public struct JMPermission:Equatable{
         }
     }
 
-    
-    var imageIcon: AnyView
-    var title: String
-    var description: String
-    var authorized:Bool
+    public var imageIcon: AnyView
+    public var title: String
+    public var description: String
+    internal var authorized:Bool = false
     
 }

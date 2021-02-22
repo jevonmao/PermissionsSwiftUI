@@ -115,4 +115,39 @@ public extension View{
         PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: colors)
         return self
     }
+    
+    /**
+     Customizes the overall accent color of PermissionsSwiftUI views.
+
+     The customization of accent color with this modifier applies to both `JMAlert` and `JMModal` views. The new accent color will replace the default Apple system blue color for image icons, as well as button foreground and background colors.
+     
+     - Parameters:
+        - to: The new customized accent color
+     */
+    
+    func setAccentColor(to color: Color) -> some View {
+        let buttonColors = AllButtonColors(primaryColor: color)
+        PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: buttonColors)
+        return self
+    }
+    
+    /**
+     Customizes the primary and tertiary color of PermissionsSwiftUI views.
+
+     The customization of colors with this modifier applies to both `JMAlert` and `JMModal` views.
+     * The new primary color will replace the default Apple system blue color for image icons, as well as button foreground and background colors.
+     * The new tertiary color will replace the default Apple system red color for the `Denied` state of buttons.
+     
+     - Parameters:
+        - toPrimary: The new customized primary color
+        - toTertiary: The new customized tertiary color
+        
+     */
+    
+    func setAccentColor(toPrimary primaryColor: Color, toTertiary tertiaryColor: Color) -> some View {
+        let buttonColors = AllButtonColors(primaryColor: primaryColor,
+                                           tertiaryColor: tertiaryColor)
+        PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: buttonColors)
+        return self
+    }
 }

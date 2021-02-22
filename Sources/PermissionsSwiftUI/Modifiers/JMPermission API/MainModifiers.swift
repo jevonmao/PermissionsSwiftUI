@@ -36,7 +36,7 @@ public extension View {
                  }, label: {
                      Text("Ask user for permissions")
                  })
-                 .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
+                 .JMModal(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
              }
              
          }
@@ -56,21 +56,38 @@ public extension View {
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
      
-     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.
+     For example, declare a computed property of type `PermissionStore` to configure data that is reflected on the UI components. Use this modifier on your existing view and pass in the previously declared model object.
      ````
          struct ContentView: View {
              @State var showModal = false
+             var model: PermissionStore {
+                 var model = PermissionStore()
+                 model.permissions = [.camera, .calendar, .location]
+                 model.mainTexts.headerText = "Some title"
+                 return model
+             }
              var body: some View {
-                 Button(action: {
-                     showModal=true
-                 }, label: {
-                     Text("Ask user for permissions")
-                 })
-                 .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
+                 YourView()
+                 .JMModal(showModal: $showModal, withModel: model)
              }
              
          }
      ````
+     - Parameters:
+        - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
+        - withModel: A data model of type `PermissionStore` to configure PermissionsSwiftUI's UI view
+     - Returns:
+        Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
+     
+     */
+    func JMModal(showModal: Binding<Bool>, withModel model: PermissionStore) -> some View {
+        PermissionStore.shared.updateStore(property: {$0=$1}, value: model)
+        return self.modifier(PermissionsModal(showModal: showModal))
+    }
+    
+    /**
+     Displays a PermissionsSwiftUI modal view that displays and handles permissions.
+     
      - Parameters:
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
@@ -88,21 +105,6 @@ public extension View {
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
      
-     For example, use this modifier on your existing view and pass in a SwiftUI Binding boolean variable. This example view will show a PermissionsSwiftUI modal with 3 different permissions.
-     ````
-         struct ContentView: View {
-             @State var showModal = false
-             var body: some View {
-                 Button(action: {
-                     showModal=true
-                 }, label: {
-                     Text("Ask user for permissions")
-                 })
-                 .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
-             }
-             
-         }
-     ````
      - Parameters:
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
