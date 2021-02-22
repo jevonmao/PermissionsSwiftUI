@@ -171,7 +171,7 @@ To easily change the accent color:
 To change the primary (default Apple blue) and tertiary (default Apple red) colors:
 ```Swift
 .setAccentColor(toPrimary: Color(.systemPurple),
-                toTertiary: Color(.systemPink))
+                toTertiary: Color(.systemGreen))
 ```
 <img align src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Button_color_customize_showcase.png?raw=true" alt="Alert pop up with customized colors" height="300">
 
