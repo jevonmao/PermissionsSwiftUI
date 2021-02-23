@@ -162,6 +162,7 @@ extension PermissionStore{
         //Closure passes back PermissionStore instance, and the generic value passed in method
         property(&PermissionStore.mutableShared, value)
     }
+    
 }
 // MARK: - Button Customizations
 /**
