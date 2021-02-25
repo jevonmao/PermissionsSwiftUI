@@ -17,25 +17,18 @@ class JMHealthPermissionManager: PermissionManager{
     static let shared: PermissionManager = JMHealthPermissionManager()
     
     //Get the health permission from stored permissions array
-    let healthPermission = PermissionStore.shared.permissions.first(where: {
-        if case .health = $0{
-            return true
+
+    var healthPermission: HKAccess? {
+        let health = PermissionStore.shared.permissions.first(where: {
+            if case .health = $0{
+                return true
+            }
+            return false
+        })
+        if case .health(let permissionCategories) = health {
+            return permissionCategories
         }
-        return false
-    })
-    var writePermissions:Array<HKSampleType>{
-        //toShare is permission to write health record
-        if case .health(let toShare, _) = healthPermission{
-            return Array(toShare)
-        }
-        return []
-    }
-    var readPermissions:Array<HKSampleType>{
-        //read is permission to read health record
-        if case .health(_, let read) = healthPermission{
-            return Array(read)
-        }
-        return []
+        return nil
     }
     var authorizationStatus: AuthorizationStatus{
         var defaultStatus = AuthorizationStatus.notDetermined
@@ -43,7 +36,8 @@ class JMHealthPermissionManager: PermissionManager{
         Iterating over writePermissions.
          - Note: From Apple Developer Documentation: "to help prevent possible leaks of sensitive health information, your app cannot determine whether or not a user has granted permission to read data. If you are not given permission, it simply appears as if there is no data of the requested type in the HealthKit store."
          */
-        _ = writePermissions.map {
+        let readAndWrite = Array(healthPermission!.readPermissions.union(healthPermission!.writePermissions))
+        _ = readAndWrite.map {
             switch healthStore.authorizationStatus(for: $0){ 
             case .sharingAuthorized:
                 defaultStatus = .authorized
@@ -65,8 +59,7 @@ class JMHealthPermissionManager: PermissionManager{
             completion(false)
             return
         }
-        healthStore.requestAuthorization(toShare: Set(writePermissions), read: Set(readPermissions)) { authorized, error in
-            
+        healthStore.requestAuthorization(toShare: Set(healthPermission!.readPermissions), read: Set(healthPermission!.writePermissions)) { authorized, error in
             guard error == nil else{
                 print("PermissionSwiftUI - \(String(describing: error))")
                 completion(false)
