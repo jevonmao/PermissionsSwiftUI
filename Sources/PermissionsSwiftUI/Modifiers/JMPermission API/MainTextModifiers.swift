@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-// MARK: Header & Description Texts
-
+// MARK: Configure Header and Description Texts
 public extension View{
     /**
      Displays a customized main header text
