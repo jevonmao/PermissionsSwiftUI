@@ -8,30 +8,36 @@
 import SwiftUI
 
 struct MainView: View {
-    private var showModal: Binding<Bool>
-    private var bodyView: AnyView
-    var shouldShowPermission:Binding<Bool> = Binding(get: {
-        let store = PermissionStore.shared
-        if store.autoCheckModalAuth{
-            return !PermissionStore.shared.permissionsToAsk.isEmpty
-        }
-        return true
-    }, set: {_ in})
-    init(for bodyView: AnyView, show showModal: Binding<Bool>) {
+    var showModal: Binding<Bool>
+    var bodyView: AnyView
+    var permissionsToAsk: [PermissionType]
+    var shouldShowPermission:Binding<Bool>{
+        Binding(get: {
+            let store = PermissionStore.shared
+            if store.autoCheckModalAuth{
+                return !permissionsToAsk.isEmpty
+            }
+            return true
+        }, set: {_ in})
+    }
+    init(for bodyView: AnyView,
+         show showModal: Binding<Bool>,
+         permissionsToAsk: [PermissionType]=PermissionStore.shared.permissionsToAsk) {
         self.bodyView = bodyView
         self.showModal = showModal
+        self.permissionsToAsk = permissionsToAsk
     }
-
+    
     var body: some View {
-            bodyView
-                .sheet(isPresented: showModal.combine(with: shouldShowPermission), content: {
-                    ModalView(showModal: showModal)
-                        .onAppear(perform: PermissionStore.shared.onAppear)
-                        .onDisappear(perform:PermissionStore.shared.onDisappear)
-                        .onDisappear{showModal.wrappedValue = false}
-
-                })
-     
+        bodyView
+            .sheet(isPresented: showModal.combine(with: shouldShowPermission), content: {
+                ModalView(showModal: showModal)
+                    .onAppear(perform: PermissionStore.shared.onAppear)
+                    .onDisappear(perform:PermissionStore.shared.onDisappear)
+                    .onDisappear{showModal.wrappedValue = false}
+                
+            })
+        
     }
     //if DEBUG to ensure these functions are never used in production. They are for unit testing only.
     #if DEBUG
@@ -44,7 +50,7 @@ struct MainView: View {
         onDisappear()
     }
     #endif
-
+    
 }
 //Extension Binding wrapper for Binding booleans
 extension Binding where Value == Bool{

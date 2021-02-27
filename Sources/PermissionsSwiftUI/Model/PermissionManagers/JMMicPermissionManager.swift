@@ -8,9 +8,9 @@
 import AVFoundation
 import Foundation
 
-struct JMMicPermissionManager: PermissionManager {
+struct JMMicrophonePermissionManager: PermissionManager {
     
-    static var shared: PermissionManager = JMMicPermissionManager()
+    static var shared: PermissionManager = JMMicrophonePermissionManager()
     var authorizationStatus: AuthorizationStatus{
         switch AVCaptureDevice.authorizationStatus(for: .audio){
         case .authorized:

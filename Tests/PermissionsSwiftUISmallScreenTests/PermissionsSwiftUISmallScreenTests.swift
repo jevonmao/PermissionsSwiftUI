@@ -1,11 +1,11 @@
 @testable import PermissionsSwiftUI
 import XCTest
 import SwiftUI
-import SnapshotTesting 
+import SnapshotTesting
 import HealthKit
 
 fileprivate let referenceSize = UIScreen.main.bounds.size
-final class PermissionsSwiftUITests: XCTestCase {
+final class PermissionsSwiftUISmallScreenTests: XCTestCase {
     let placeholderText = """
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
 """
@@ -477,7 +477,7 @@ struct testViewGreenBG:View{
 private extension SwiftUI.View {
     func referenceFrame() -> some View {
         let count = PermissionStore.shared.permissions.count
-        return self.frame(width: referenceSize.width, height: referenceSize.height+CGFloat(count*60))
+        return self.frame(width: referenceSize.width, height: referenceSize.height+CGFloat(count*70))
     }
     func referenceFrameCell() -> some View{
         return self.frame(width: referenceSize.width, height: 70)
@@ -488,23 +488,23 @@ public extension UIDevice {
     enum DeviceType{
         case iPod7, iPhone12ProMax, iPhone11, unknown
     }
-    static var modelName: DeviceType{
-        var systemInfo = utsname()
-        uname(&systemInfo)
-        let machineMirror = Mirror(reflecting: systemInfo.machine)
-        let identifier = machineMirror.children.reduce("") { identifier, element in
-            guard let value = element.value as? Int8, value != 0 else { return identifier }
-            return identifier + String(UnicodeScalar(UInt8(value)))
-        }
-        func mapToDevice(identifier: String) -> DeviceType {
-            switch identifier {
-            case "iPod9,1": return .iPod7
-            case "iPhone13,4": return .iPhone12ProMax
-            case "iPhone12,1": return .iPhone11
-            default: return .unknown
-            }
-        }
-        
-        return mapToDevice(identifier: identifier)
+  static var modelName: DeviceType{
+    var systemInfo = utsname()
+    uname(&systemInfo)
+    let machineMirror = Mirror(reflecting: systemInfo.machine)
+    let identifier = machineMirror.children.reduce("") { identifier, element in
+      guard let value = element.value as? Int8, value != 0 else { return identifier }
+      return identifier + String(UnicodeScalar(UInt8(value)))
     }
+    func mapToDevice(identifier: String) -> DeviceType {
+      switch identifier {
+      case "iPod9,1": return .iPod7
+      case "iPhone13,4": return .iPhone12ProMax
+      case "iPhone12,1": return .iPhone11
+      default: return .unknown
+      }
+    }
+    
+    return mapToDevice(identifier: identifier)
+  }
 }

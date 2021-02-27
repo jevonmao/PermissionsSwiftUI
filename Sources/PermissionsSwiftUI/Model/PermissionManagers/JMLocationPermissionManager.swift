@@ -1,40 +1,40 @@
 //
-//  JMLocationPermissionManager.swift
+//  JMLocationInUsePermissionManager.swift
+//  
 //
+//  Created by Jevon Mao on 2/18/21.
 //
-//  Created by Jevon Mao on 1/31/21.
-//
+
 
 import Foundation
 import MapKit
 
-class JMLocationPermissionAlwaysManager: NSObject, CLLocationManagerDelegate, PermissionManager {
-    
+class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate, PermissionManager {
     typealias authorizationStatus = CLAuthorizationStatus
-    typealias permissionManagerInstance = JMLocationPermissionAlwaysManager
+    typealias permissionManagerInstance = JMLocationPermissionManager
     
-    static var shared: PermissionManager = JMLocationPermissionAlwaysManager()
+    static var shared: PermissionManager = JMLocationPermissionManager()
     var authorizationStatus: AuthorizationStatus{
-        switch CLLocationManager.authorizationStatus(){
+        switch locationManager.authorizationStatus(){
         case .authorizedAlways:
+            return .authorized
+        case .authorizedWhenInUse:
             return .authorized
         case .notDetermined:
             return .notDetermined
         default:
-            //In use only permission will be counted as denied
             return .denied
         }
     }
-    
-    var locationManager: LocationManager
-    //Completion block for is authorized or not authorized
+
     var completionHandler: ((Bool) -> Void)?
+    var locationManager: LocationManager
     
     init(locationManager:LocationManager = CLLocationManager()){
         self.locationManager = locationManager
         super.init()
     }
-    //CLLocationManagerDelegate method triggered when user approve or deny permission
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .notDetermined {
             return
@@ -42,26 +42,25 @@ class JMLocationPermissionAlwaysManager: NSObject, CLLocationManagerDelegate, Pe
         
         if let completionHandler = completionHandler {
             let status = CLLocationManager.authorizationStatus()
-            completionHandler(status == .authorizedAlways ? true : false)
+            completionHandler(status == .authorizedAlways || status == .authorizedWhenInUse ? true : false)
+            
         }
     }
-    
+    //Used to request in use permission (1 of 2 types of iOS location permission)
     func requestPermission(_ completionHandler: @escaping (Bool) -> Void) {
         self.completionHandler = completionHandler
-        var status:CLAuthorizationStatus{ 
-            locationManager.authorizationStatus()
-        }
+        let status = CLLocationManager.authorizationStatus()
         
         switch status {
         case .notDetermined:
             self.locationManager.delegate = self
-            self.locationManager.requestAlwaysAuthorization()
-        case .authorizedWhenInUse:
-            self.locationManager.delegate = self
-            self.locationManager.requestAlwaysAuthorization()
+            self.locationManager.requestWhenInUseAuthorization()
         default:
-            completionHandler(status == .authorizedAlways ? true : false)
+            completionHandler(status == .authorizedWhenInUse || status == .authorizedAlways ? true : false)
         }
     }
 
+    deinit {
+        locationManager.delegate = nil
+    }
 }
