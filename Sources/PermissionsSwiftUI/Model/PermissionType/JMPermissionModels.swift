@@ -84,8 +84,8 @@ public struct HKAccess {
         - write: The HealthKit sample types for write permission
      */
     public init(read: Set<HKSampleType>, write: Set<HKSampleType>){
-        self.init(read: read)
-        self.init(write: write)
+        self.readPermissions = read
+        self.writePermissions = write
     }
     /**
      Initializes a new `HKAccess` with read permissions
@@ -107,12 +107,15 @@ public struct HKAccess {
     public init(write: Set<HKSampleType>){
         self.writePermissions = write
     }
+}
+
+extension HKAccess {
+
     /**
      Initializes a new `HKAccess` with same read and write permissions
      
      - parameters:
-        - read: The HealthKit sample types for read permission
-        - write: The HealthKit sample types for write permission
+        - readAndWrite: sample types for read permission
      */
     public init(readAndWrite sharedPermissions: Set<HKSampleType>){
         self.init(read: sharedPermissions, write: sharedPermissions)

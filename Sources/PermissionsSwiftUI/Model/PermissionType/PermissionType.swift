@@ -51,7 +51,7 @@ public enum PermissionType {
      [.health(categories: .init(readAndWrite: Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!])))]
      ```
      */
-    case health(categories: HKAccess)
+    case health(categories: HKAccess?=nil)
     ///Permission that allows app to use speech recognition
     case speech
     ///In order for app to track user's data across apps and websites, the tracking permission is needed
