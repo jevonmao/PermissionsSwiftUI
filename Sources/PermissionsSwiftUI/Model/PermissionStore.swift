@@ -13,7 +13,7 @@ import SwiftUI
  The global shared storage for PermissionsSwiftUI
  */
 public struct PermissionStore {
-    //MARK: Init and Singleton Management
+    //MARK: Creating a new store
     /**
      Initalizes and returns a new instance of `PermissionStore`
      
@@ -31,28 +31,18 @@ public struct PermissionStore {
             mutableShared
         }
     }
+    //MARK: All Permissions
     ///A global array of permissions that configures the permissions to request
     public var permissions: [PermissionType] = []
     var permissionsToAsk: [PermissionType]{
         FilterPermissions.filterForShouldAskPermission(for: permissions)
     }
-    //MARK: Secondary Components
+    //MARK: Configuring View Texts
     ///The text for text label components, including header and descriptions
     public var mainTexts = MainTexts()
-    ///The color configuration for permission allow buttons
-    public var allButtonColors = AllButtonColors()
-    ///Whether to auto dismiss the modal after last permission is allowed
-    public var autoDismissModal: Bool = true
-    ///Whether to auto dismiss the alert after last permission is allowed
-    public var autoDismissAlert: Bool = true
-    ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
-    public var autoCheckModalAuth: Bool = true
-    ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
-    public var autoCheckAlertAuth: Bool = true
-    ///Override point for executing action when PermissionsSwiftUI view appears
-    public var onAppear: (()->Void)?
-    ///Override point for executing action when PermissionsSwiftUI view disappears
-    public var onDisappear: (()->Void)?
+    /**
+     Encapsulates the surrounding texts and title
+     */
     public struct MainTexts{
         ///Text to display for header text
         public var headerText: String = "Need Permissions"
@@ -65,6 +55,28 @@ public struct PermissionStore {
                                             Permission are necessary for all the features and functions to work properly. If not allowed, you have to enable permissions in settings
                                             """
     }
+    //MARK: Customizing Colors
+    ///The color configuration for permission allow buttons
+    public var allButtonColors = AllButtonColors()
+    
+    //MARK: Change Auto Dismiss Behaviors
+    ///Whether to auto dismiss the modal after last permission is allowed
+    public var autoDismissModal: Bool = true
+    ///Whether to auto dismiss the alert after last permission is allowed
+    public var autoDismissAlert: Bool = true
+    
+    //MARK: Configure Auto Authorization Checking
+    ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
+    public var autoCheckModalAuth: Bool = true
+    ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
+    public var autoCheckAlertAuth: Bool = true
+    
+    //MARK: `onAppear` and `onDisappear` Executions
+    ///Override point for executing action when PermissionsSwiftUI view appears
+    public var onAppear: (()->Void)?
+    ///Override point for executing action when PermissionsSwiftUI view disappears
+    public var onDisappear: (()->Void)?
+    
     //MARK: Permission Components
     ///The displayed text and image icon for the camera permission
     public var cameraPermission = JMPermission(
@@ -162,6 +174,7 @@ extension PermissionStore{
         //Closure passes back PermissionStore instance, and the generic value passed in method
         property(&PermissionStore.mutableShared, value)
     }
+    
 }
 // MARK: - Button Customizations
 /**
@@ -210,7 +223,15 @@ public struct AllButtonColors{
         self.init()
         self.buttonDenied = buttonDenied
     }
-    
+    /**
+     Initializes a new `AllbuttonColors` from the primary and tertiary colors
+     
+     Both `primaryColor` and `tertiaryColor` are non-required parameters. Colors without a given initializer parameter will be displayed with the default color.
+     
+     - parameters:
+        - primaryColor: The primary color, characterized by the default blue
+        - tertiaryColor: The tertiary color, characterized by the default alert red
+     */
     public init(primaryColor: Color?=nil, tertiaryColor: Color?=nil){
         self.primaryColor = primaryColor ?? Color(.systemBlue)
         self.tertiaryColor = tertiaryColor ?? Color(.systemRed)

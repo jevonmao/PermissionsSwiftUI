@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//MARK: Customize Permission Components
 public extension View{
     /**
      Customizes the image view, title (optional), and description (optional) of any permission component
@@ -95,7 +96,10 @@ public extension View{
         )
         return self
     }
-    
+}
+
+//MARK: Configure Allow Button Colors
+public extension View {
     /**
      Customizes the color of allow buttons for all status states
 
@@ -115,7 +119,10 @@ public extension View{
         PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: colors)
         return self
     }
-    
+}
+
+//MARK: Set Overall Accent Color
+public extension View {
     /**
      Customizes the overall accent color of PermissionsSwiftUI views.
 
