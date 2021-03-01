@@ -100,13 +100,13 @@ extension PermissionType:PermissionTypeProtocol{
     func getPermissionManager() -> PermissionManager?{
         switch self {
         case .location:
-            return JMLocationPermissionAlwaysManager.shared
+            return JMLocationPermissionManager.shared
         case .locationAlways:
-            return JMLocationPermissionAlwaysManager.shared
+            return JMLocationAlwaysPermissionManager.shared
         case .photo:
             return JMPhotoPermissionManager.shared
         case .microphone:
-            return JMMicPermissionManager.shared
+            return JMMicrophonePermissionManager.shared
         case .camera:
             return JMCameraPermissionManager.shared
         case .notification:
@@ -139,9 +139,15 @@ extension PermissionType:PermissionTypeProtocol{
 extension PermissionType:CaseIterable{
     public static var allCases: [PermissionType]{
                 if #available(iOS 14.5, *) {
-                    return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking]
+                    return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking, .health(categories: nil)]
                 } else {
-                    return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech]
+                    return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech, .health(categories: nil)]
                 }
     }
+    var rawValue: String {
+            guard let label = Mirror(reflecting: self).children.first?.label else {
+                return .init(describing: self)
+            }
+            return label
+        }
 }

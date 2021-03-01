@@ -24,6 +24,7 @@ class MockHealthManager: HealthManager {
     var requestSuccessOverride: Bool = true
     static var healthDataAvailableOverride: Bool = true
     
+    var requestedPermissions: HKAccess?
     var lastStatus: HKAuthorizationStatus = .notDetermined
     func authorizationStatus(for type: HKObjectType) -> HKAuthorizationStatus {
         switch authStatusOverride {
@@ -59,6 +60,17 @@ class MockHealthManager: HealthManager {
         let healthDataAvailable = MockHealthManager.healthDataAvailableOverride
         if requestSuccessOverride {
             completion(requestSuccessOverride, healthDataAvailable ? nil : fatalError("MockHealthManager - health data is not available"))
+            guard typesToShare != nil || typesToRead != nil else {return}
+            if let typesToShare = typesToShare, let typesToRead = typesToRead {
+                requestedPermissions = .init(read: typesToRead as! Set<HKSampleType>, write: typesToShare)
+            }
+            else if let typesToShare = typesToShare {
+                requestedPermissions = .init(write: typesToShare)
+            }
+            else if let typesToRead = typesToRead {
+                requestedPermissions = .init(read: typesToRead as! Set<HKSampleType>)
+            }
+            
         }
         else {
             completion(false, NSError(domain: "", code: 0, userInfo: nil))

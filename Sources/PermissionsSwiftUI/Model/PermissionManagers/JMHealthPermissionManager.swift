@@ -90,8 +90,8 @@ class JMHealthPermissionManager: PermissionManager{
             completion(false)
             return
         }
-        healthStore.requestAuthorization(toShare: Set(healthPermission?.readPermissions ?? []),
-                                         read: Set(healthPermission?.writePermissions ?? [])) { authorized, error in
+        healthStore.requestAuthorization(toShare: Set(healthPermission?.writePermissions ?? []),
+                                         read: Set(healthPermission?.readPermissions ?? [])) { authorized, error in
             guard error == nil else{
                 print("PermissionSwiftUI - \(error!)")
                 completion(false)

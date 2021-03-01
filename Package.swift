@@ -29,5 +29,9 @@ let package = Package(
             name: "PermissionsSwiftUITests",
             dependencies: ["PermissionsSwiftUI","SnapshotTesting"]
         ),
+        .testTarget(
+            name: "PermissionsSwiftUISmallScreenTests",
+            dependencies: ["PermissionsSwiftUI","SnapshotTesting"]
+        ),
     ]
 )
