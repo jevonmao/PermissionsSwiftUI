@@ -28,14 +28,9 @@ jobs:
        with:
          xcode-version: latest-stable
      - name: Test large screen device
-       run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS  Simulator,name=iPhone 12 Pro Max' \
-            -only-testing:PermissionsSwiftUITests \
-            test
+       run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'  -only-testing:PermissionsSwiftUITests test
      - name: Test small screen device
-       run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPod touch (7th generation)' \
-            -only-testing:PermissionsSwiftUISmallScreenTests \
-            test
-            
+       run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPod touch (7th generation)' -only-testing:PermissionsSwiftUISmallScreenTests test
   Swiftformat:
     name: Check swiftformat
     runs-on: macos-latest
