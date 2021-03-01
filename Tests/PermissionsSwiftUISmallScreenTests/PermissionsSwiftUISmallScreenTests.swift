@@ -162,16 +162,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         mockManager.authStatusOverride = .denied
         XCTAssertEqual(manager.authorizationStatus, .denied)
     }
-    func testHealthManagerReqestReadWrite() {
-        let (manager, sharedType, mockManager) = setupHealthPermissionReadWrite()
-        let readType = Array(Array(sharedType)[0..<1])
-        let writeType = Array(Array(sharedType)[1...])
-        let healthPermission = PermissionType.health(categories: .init(read: Set(readType),
-                                                                    write: Set(writeType)))
-        PermissionStore.shared.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
-        manager.requestPermission{_=$0}
-        XCTAssertEqual(mockManager.requestedPermissions?.readPermissions, Set(readType))
-        XCTAssertEqual(mockManager.requestedPermissions?.writePermissions, Set(writeType))
     func testHealthManagerAuthMixedAuthorized(){
         let (mockManager, manager) = setupHealthPermissionStore()
         mockManager.authStatusOverride = .mixedAuthorized
@@ -182,7 +172,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         mockManager.authStatusOverride = .mixedDenied
         XCTAssertEqual(manager.authorizationStatus, .denied)
     }
-    func setupHealthPermissionReadWrite() -> (JMHealthPermissionManager, Set<HKSampleType>) {
+    func testHealthManagerReqestReadWrite() {
+        let (manager, sharedType, mockManager) = setupHealthPermissionReadWrite()
+        let readType = Array(Array(sharedType)[0..<1])
+        let writeType = Array(Array(sharedType)[1...])
+        let healthPermission = PermissionType.health(categories: .init(read: Set(readType),
+                                                                    write: Set(writeType)))
+        PermissionStore.shared.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
+        manager.requestPermission{_=$0}
+        XCTAssertEqual(mockManager.requestedPermissions?.readPermissions, Set(readType))
+        XCTAssertEqual(mockManager.requestedPermissions?.writePermissions, Set(writeType))
+
+    }
+    func setupHealthPermissionReadWrite() -> (JMHealthPermissionManager, Set<HKSampleType>, MockHealthManager) {
         let sharedType = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!,
                               HKSampleType.quantityType(forIdentifier: .bodyFatPercentage)!,
                               HKSampleType.quantityType(forIdentifier: .bloodGlucose)!])
@@ -190,15 +192,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         let mockManager = MockHealthManager()
         let manager = JMHealthPermissionManager(healthManager: mockManager)
         PermissionStore.shared.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
-        return (manager, sharedType)
+        return (manager, sharedType, mockManager)
     }
     func testHealthManagerReadWriteSame(){
-        let (manager, sharedType) = setupHealthPermissionReadWrite()
+        let (manager, sharedType, _) = setupHealthPermissionReadWrite()
         XCTAssertEqual(manager.healthPermission?.readPermissions, sharedType)
         XCTAssertEqual(manager.healthPermission?.writePermissions, sharedType)
     }
     func testHealthManagerReadWriteDifferent(){
-        let (manager, sharedType) = setupHealthPermissionReadWrite()
+        let (manager, sharedType, _) = setupHealthPermissionReadWrite()
         let readType = Array(Array(sharedType)[0..<1])
         let writeType = Array(Array(sharedType)[1...])
         let healthPermission = PermissionType.health(categories: .init(read: Set(readType),
