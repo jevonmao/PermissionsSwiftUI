@@ -22,9 +22,9 @@ struct PermissionsModal: ViewModifier {
 }
 
 struct PermissionsAlert: ViewModifier{
-    var show:Binding<Bool>
+    var showModal:Binding<Bool>
     func body(content: Content) -> some View {
-        AlertMainView(for: AnyView(content), show: show)
+        AlertMainView(for: AnyView(content), show: showModal)
     }
 }
 
@@ -264,7 +264,7 @@ public extension View{
     
     func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View{
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        return self.modifier(PermissionsAlert(show: showModal))
+        return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
     /**
@@ -289,7 +289,7 @@ public extension View{
     func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss)
-        return self.modifier(PermissionsAlert(show: showModal))
+        return self.modifier(PermissionsAlert(showModal: showModal))
     }
     /**
      Displays a PermissionsSwiftUI alert view that displays and handles permissions.
@@ -314,7 +314,7 @@ public extension View{
     func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoCheckAuthorization: Bool) -> some View {
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: autoCheckAuthorization)
-        return self.modifier(PermissionsAlert(show: showModal))
+        return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
     /**
@@ -343,7 +343,7 @@ public extension View{
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss ?? true)
         PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: autoCheckAuthorization ?? true)
-        return self.modifier(PermissionsAlert(show: showModal))
+        return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
     /**
@@ -371,7 +371,7 @@ public extension View{
         PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
-        return self.modifier(PermissionsAlert(show: showModal))
+        return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
     /**
@@ -401,7 +401,7 @@ public extension View{
         PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
         PermissionStore.shared.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss)
-        return self.modifier(PermissionsAlert(show: showModal))
+        return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
     /**
@@ -437,7 +437,7 @@ public extension View{
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
         PermissionStore.shared.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss ?? true)
         PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: autoCheckAuthorization ?? true)
-        return self.modifier(PermissionsAlert(show: showModal))
+        return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
     /**
@@ -469,7 +469,7 @@ public extension View{
      */
     func JMAlert(showModal: Binding<Bool>, withConfig model: PermissionStore) -> some View {
         PermissionStore.shared.updateStore(property: {$0=$1}, value: model)
-        return self.modifier(PermissionsAlert(show: showModal))
+        return self.modifier(PermissionsAlert(showModal: showModal))
     }
 }
 
