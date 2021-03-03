@@ -76,7 +76,7 @@ public class PermissionStore: ObservableObject {
     /**
      Encapsulates the surrounding texts and title
      */
-    public struct MainTexts{
+    public struct MainTexts: Equatable {
         ///Text to display for header text
         public var headerText: String = "Need Permissions"
         ///Text to display for header description text
@@ -225,7 +225,7 @@ extension PermissionStore{
  2. Add the `setAllowButtonColor(to colors:AllButtonColors)` modifier to your view
  3. Pass in the `AllButtonColors` struct previously into the proper parameter
  */
-public struct AllButtonColors{
+public struct AllButtonColors: Equatable {
     //MARK: Creating New Button Configs
     /**
      - parameters:
@@ -301,7 +301,7 @@ public struct AllButtonColors{
   Declared within parent struct  `AllButtonColors` and should only be used within a `AllButtonColors` struct instance.
   To customize
  */
-public struct ButtonColor{
+public struct ButtonColor: Equatable {
     // MARK: Creating New Button Color
     /**
      - parameters:
