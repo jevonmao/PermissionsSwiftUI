@@ -106,9 +106,9 @@ public class PermissionStore: ObservableObject {
     
     //MARK: Prevent Dismissal Before All Permissions Interacted
     ///Whether to prevent dismissal of modal view (along with an error haptic) before all permissions have been interacted (explict deny or allow)
-    public var restrictModalDismissal: Bool = false
+    public var restrictModalDismissal: Bool = true
     ///Whether to prevent dismissal of alert view (along with an error haptic) before all permissions have been interacted (explict deny or allow)
-    public var restrictAlertDismissal: Bool = false
+    public var restrictAlertDismissal: Bool = true
     //MARK: `onAppear` and `onDisappear` Executions
     ///Override point for executing action when PermissionsSwiftUI view appears
     public var onAppear: (()->Void)?

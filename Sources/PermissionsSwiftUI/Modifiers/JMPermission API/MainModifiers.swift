@@ -63,6 +63,25 @@ public extension View {
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
      
+     - Parameters:
+        - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
+        - for: An array of type `PermissionModel` to specify permissions to show
+        - restrictDismissal: Specify whether to prevent dismissal of modal view before all permissions have been interacted. Default is `true`.
+     - Returns:
+        Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
+     
+     */
+    func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], restrictDismissal: Bool) -> some View {
+        let store = PermissionStore()
+        store.permissions = permissions
+        store.restrictModalDismissal = restrictDismissal
+        PermissionStore.shared.updateStore(property: {$0=$1}, value: store)
+        return self.modifier(PermissionsModal(showModal: showModal))
+    }
+    
+    /**
+     Displays a PermissionsSwiftUI modal view that displays and handles permissions.
+     
      For example, declare an instance of type `PermissionStore` to configure data that is reflected on the UI components. Use this modifier on your existing view and pass in the previously declared model object.
      ````
          struct ContentView: View {
@@ -116,7 +135,7 @@ public extension View {
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
         - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
-        - autoCheckAuthorization: Specify whether to auto check for authorization status before showing. The alert will seamlessly only display permission UI for permission that are in `notDetermined` status. If no permission meet the criteria, the alert will not show at all. Default is `true`
+        - autoCheckAuthorization: Specify whether to auto check for authorization status before showing. The modal will seamlessly only display permission UI for permission that are in `notDetermined` status. If no permission meet the criteria, the alert will not show at all. Default is `true`
      - Note:
         The `autoDismiss` feature currently will not auto dismiss, if the user has not allowed all permissions. If the user denied or ignored some permissions, the modal or alert will not auto dismiss. This encourages the user to go to settings and manually re-allow denied permissions.
         The `authCheckAuthorization` is highly recommended for best user experience.
@@ -134,6 +153,33 @@ public extension View {
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     
+    /**
+     Displays a PermissionsSwiftUI modal view that displays and handles permissions.
+     
+     - Parameters:
+        - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
+        - for: An array of type `PermissionModel` to specify permissions to show
+        - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
+        - autoCheckAuthorization: Specify whether to auto check for authorization status before showing. The modal will seamlessly only display permission UI for permission that are in `notDetermined` status. If no permission meet the criteria, the alert will not show at all. Default is `true`
+        - restrictDismissal: Specify whether to prevent dismissal of modal view before all permissions have been interacted. Default is `true`.
+     - Note:
+        The `autoDismiss` feature currently will not auto dismiss, if the user has not allowed all permissions. If the user denied or ignored some permissions, the modal or alert will not auto dismiss. This encourages the user to go to settings and manually re-allow denied permissions.
+        The `authCheckAuthorization` is highly recommended for best user experience.
+     - Returns:
+        Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
+     
+     */
+    func JMModal(showModal: Binding<Bool>,
+                 for permissions: [PermissionType],
+                 autoDismiss: Bool?=nil,
+                 autoCheckAuthorization: Bool?=nil,
+                 restrictDismissal: Bool?=nil) -> some View {
+        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
+        PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss ?? true)
+        PermissionStore.shared.updateStore(property: {$0.autoCheckModalAuth=$1}, value: autoCheckAuthorization ?? true)
+        PermissionStore.shared.updateStore(property: {$0.restrictModalDismissal=$1}, value: restrictDismissal ?? true)
+        return self.modifier(PermissionsModal(showModal: showModal))
+    }
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
      
@@ -204,11 +250,12 @@ public extension View {
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
         - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
-        - autoCheckAuthorization: Specify whether to auto check for authorization status before showing. The alert will seamlessly only display permission UI for permission that are in `notDetermined` status. If no permission meet the criteria, the alert will not show at all. Default is `true`
+        - restrictDismissal: Specify whether to prevent dismissal of modal view before all permissions have been interacted. Default is `true`.
+        - autoCheckAuthorization: Specify whether to auto check for authorization status before showing. The modal will seamlessly only display permission UI for permission that are in `notDetermined` status. If no permission meet the criteria, the alert will not show at all. Default is `true`
         - onAppear: Override point for when JMPermission modal appears
         - onDisappear: Override point for when JMPermission modal disappears
      - Note:
-        The `autoDismiss` feature currently will not auto dismiss, if the user has not allowed all permissions. If the user denied or ignored some permissions, the modal or alert will not auto dismiss. This encourages the user to go to settings and manually re-allow denied permissions.
+        The `autoDismiss` feature currently will not auto dismiss if the user has not allowed all permissions. If the user denied or ignored some permissions, the modal or alert will not auto dismiss. This encourages the user to go to settings and manually re-allow denied permissions.
         The `authCheckAuthorization` is highly recommended for best user experience.
      - Returns:
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
@@ -225,6 +272,38 @@ public extension View {
         PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
         PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss ?? true)
         PermissionStore.shared.updateStore(property: {$0.autoCheckModalAuth=$1}, value: autoCheckAuthorization ?? true)
+        return self.modifier(PermissionsModal(showModal: showModal))
+    }
+    /**
+     Displays a PermissionsSwiftUI modal view that displays and handles permissions.
+     
+     - Parameters:
+        - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
+        - for: An array of type `PermissionModel` to specify permissions to show
+        - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
+        - autoCheckAuthorization: Specify whether to auto check for authorization status before showing. The modal will seamlessly only display permission UI for permission that are in `notDetermined` status. If no permission meet the criteria, the alert will not show at all. Default is `true`
+        - onAppear: Override point for when JMPermission modal appears
+        - onDisappear: Override point for when JMPermission modal disappears
+     - Note:
+        The `autoDismiss` feature currently will not auto dismiss, if the user has not allowed all permissions. If the user denied or ignored some permissions, the modal or alert will not auto dismiss. This encourages the user to go to settings and manually re-allow denied permissions.
+        The `authCheckAuthorization` is highly recommended for best user experience.
+     - Returns:
+        Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
+     
+     */
+    func JMModal(showModal: Binding<Bool>,
+                 for permissions: [PermissionType],
+                 autoDismiss: Bool?=nil,
+                 autoCheckAuthorization: Bool?=nil,
+                 restrictDismissal: Bool?=nil,
+                 onAppear: @escaping () -> Void,
+                 onDisappear: @escaping () -> Void) -> some View {
+        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
+        PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
+        PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
+        PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss ?? true)
+        PermissionStore.shared.updateStore(property: {$0.autoCheckModalAuth=$1}, value: autoCheckAuthorization ?? true)
+        PermissionStore.shared.updateStore(property: {$0.restrictModalDismissal=$1}, value: restrictDismissal ?? true)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     
