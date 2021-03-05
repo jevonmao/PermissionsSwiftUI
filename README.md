@@ -196,7 +196,7 @@ To unleash the full customization of all button colors under all states, you nee
 For more information regarding the above method, reference the [official documentation](https://jevonmao.github.io/PermissionsSwiftUI/Structs/AllButtonColors.html).
 
 ### Restrict Dismissal
-PermissionsSwiftUI will by default, prevent the user from dismissing the modal and alert. This restrict dismissal behavior and be overriden by the `var restrictModalDismissal: Bool` or `var restrictAlertDismissal: Bool` properties.
+PermissionsSwiftUI will by default, prevent the user from dismissing the modal and alert, before all permissions have been interacted. This means if the user has not explictly denied or allowed EVERY permission shown, they will not be able to dismiss the PermissionsSwiftUI view. This restrict dismissal behavior can be overriden by the `var restrictModalDismissal: Bool` or `var restrictAlertDismissal: Bool` properties.
 To disable the default restrict dismiss behavior:
 ```Swift
 .JMModal(showModal: $show, for permissions: [.camera], restrictDismissal: false)
