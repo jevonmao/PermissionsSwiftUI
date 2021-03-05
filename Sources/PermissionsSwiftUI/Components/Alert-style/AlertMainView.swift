@@ -14,7 +14,7 @@ struct AlertMainView: View {
     var shouldShowPermission:Bool{
         if PermissionStore.shared.autoCheckAlertAuth{
             if showAlert.wrappedValue &&
-                !PermissionStore.shared.permissionsToAsk.isEmpty {
+                !PermissionStore.shared.undeterminedPermissions.isEmpty {
                 return true
             }
             else {
@@ -37,7 +37,7 @@ struct AlertMainView: View {
         ZStack{
             bodyView
 
-            if shouldShowPermission{
+            if shouldShowPermission {
                 Group{
                     Blur(style: .systemUltraThinMaterialDark)
                         .edgesIgnoringSafeArea(.all)

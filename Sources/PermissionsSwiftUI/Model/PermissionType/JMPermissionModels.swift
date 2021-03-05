@@ -63,7 +63,11 @@ public struct JMPermission: Equatable{
     ///The permission description displayed
     public var description: String
     internal var authorized:Bool = false
-    
+    internal var interacted:Bool = false {
+        didSet {
+            PermissionStore.shared.objectWillChange.send()
+        }
+    }
 }
 /**
  Encapsulates different subtypes of permission for health permission

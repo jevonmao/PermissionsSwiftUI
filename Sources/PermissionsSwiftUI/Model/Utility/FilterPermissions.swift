@@ -13,10 +13,16 @@ struct FilterPermissions {
         let filteredPermissions = permissions.filter { $0.currentPermission.authorized == false }
         return filteredPermissions
     }
-
+    
+//    static func filterForInteracted(for permissions: [PermissionType]) -> [PermissionType] {
+//        var filteredPermissions = [PermissionType]()
+//        for permission in permissions {
+//            if permission.getPermissionManager()?.authorizationStatus ==
+//        }
+//    }
     // Based on system API query, independent from memory
     static func filterForShouldAskPermission(for permissions: [PermissionType]) -> [PermissionType] {
-        var filteredPermissions: [PermissionType] = []
+        var filteredPermissions = [PermissionType]()
         for permission in permissions {
             if permission.getPermissionManager()?.authorizationStatus == .notDetermined {
                 filteredPermissions.append(permission)

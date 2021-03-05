@@ -469,7 +469,7 @@ public extension View{
      */
     func JMAlert(showModal: Binding<Bool>, withConfig model: PermissionStore) -> some View {
         PermissionStore.shared.updateStore(property: {$0=$1}, value: model)
-        return self.modifier(PermissionsModal(showModal: showModal))
+        return self.modifier(PermissionsAlert(show: showModal))
     }
 }
 

@@ -11,18 +11,18 @@ struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showModal:Bool
     var isAlert:Bool
-    var permissions:[PermissionType]{
+    var permissions:[PermissionType] {
         let store = PermissionStore.shared
         if isAlert{
             if store.autoCheckAlertAuth{
-                return store.permissionsToAsk
+                return store.undeterminedPermissions
             }
             else {
                 return store.permissions
             }
         }
         if store.autoCheckModalAuth{
-            return store.permissionsToAsk
+            return store.undeterminedPermissions
         }
         else {
             return store.permissions
@@ -38,6 +38,9 @@ struct PermissionSection: View {
                 }
             }
         }
+//        .onAppear{
+//            PermissionStore
+//        }
 
     }
 }
@@ -109,6 +112,8 @@ struct PermissionSectionCell: View {
 
             Spacer()
             if isAlert {
+                //Call requestPermission (enum function) to make request to Apple API
+                //The handleButtonState function will be executed based on result of request
                 AllowButtonSection(action: {
                     permission.requestPermission(isPermissionGranted: {handleButtonState(for: $0)})
                 }, allowButtonStatus: $allowButtonStatus)
@@ -128,6 +133,7 @@ struct PermissionSectionCell: View {
     
     func handleButtonState(for authorized:Bool){
         var currentPermission = permission.currentPermission
+        currentPermission.interacted = true
         if authorized {
             allowButtonStatus = .allowed
             currentPermission.authorized = true
