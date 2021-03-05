@@ -5,7 +5,7 @@
 </span>
 
 # PermissionsSwiftUI: A SwiftUI package to handle permissions
-<img src="https://img.shields.io/github/workflow/status/jevonmao/PermissionsSwiftUI/Swift?label=CI%20Build"> <img src="https://img.shields.io/github/contributors/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/badge/License-MIT-blue.svg"> <img src="https://img.shields.io/github/issues/jevonmao/PermissionsSwiftUI?color=orange"> <img src="https://img.shields.io/github/commit-activity/w/jevonmao/PermissionsSwiftUI?color=yellowgreen&logoColor=yellowgreen"> [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6fe1a84c136b4a99823e7d71a8d08625)](https://www.codacy.com/gh/jevonmao/PermissionsSwiftUI/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jevonmao/PermissionsSwiftUI&amp;utm_campaign=Badge_Grade)
+<img src="https://img.shields.io/github/workflow/status/jevonmao/PermissionsSwiftUI/Swift?label=CI%20Build"> <img src="https://img.shields.io/github/contributors/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/badge/License-MIT-blue.svg"> <img src="https://img.shields.io/github/issues/jevonmao/PermissionsSwiftUI?color=orange"> <img src="https://img.shields.io/github/commit-activity/w/jevonmao/PermissionsSwiftUI?color=yellowgreen&logoColor=yellowgreen"> 
 
 `PermissionsSwiftUI` displays and handles permissions in SwiftUI. It is largely inspired by [SPPermissions](https://github.com/varabeis/SPPermissions).
 The UI is highly customizable and resembles an **Apple style**. If you like the project, don't forget to `star ★` and follow me on GitHub. <br />
@@ -18,6 +18,9 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
 ## Navigation
 -  [Installation](#installation)
 -  [Quickstart](#quickstart) 
+<details>
+  <summary>Usage</summary>
+  
 -  [Usage](#usage)
     -  [Customize Permission Texts](#customize-permission-texts)
     -  [Customize header texts](#customize-header-texts)
@@ -25,6 +28,10 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
     -  [Auto Check Authorization](#auto-check-authorization)
     -  [Auto Dismiss](#auto-dismiss)
     -  [Customize Colors](#customize-colors)
+    -  [Restrict Dismissal](#restrict-dismissal)
+    -  [Configuring Health Permissions](#configuring-health-permissions)
+</details>
+
 -  [Supported Permissions](#supported-permissions)
 -  [Additional Information](#additional-information)
     -  [Acknowledgement](#acknowledgement)
@@ -187,6 +194,52 @@ To unleash the full customization of all button colors under all states, you nee
                                                                  backgroundColor: Color)))
 ```
 For more information regarding the above method, reference the [official documentation](https://jevonmao.github.io/PermissionsSwiftUI/Structs/AllButtonColors.html).
+
+### Restrict Dismissal
+PermissionsSwiftUI will by default, prevent the user from dismissing the modal and alert. This restrict dismissal behavior and be overriden by the `var restrictModalDismissal: Bool` or `var restrictAlertDismissal: Bool` properties.
+To disable the default restrict dismiss behavior:
+```Swift
+.JMModal(showModal: $show, for permissions: [.camera], restrictDismissal: false)
+```
+You can also configure with the model:
+```Swift
+let model: PermissionStore = {
+        var model = PermissionStore()
+        model.permissions = [.camera]
+        model.restrictModalDismissal = false
+        model.restrictAlertDismissal = false
+        return model
+    }
+    ......
+
+    .JMModal(showModal: $showModal, forModel: model)
+```
+### Configuring Health Permissions
+Unlike all the other permissions, the configuration for health permission is a little different. Because Apple require developers to explictly set read and write types, PermissionsSwiftUI greatly simplifies the process.
+#### `HKAccess`
+The structure HKAccess is required when initalizing health permission’s enum associated values. It encapsulates the read and write type permissions for the health permission.
+
+To set read and write health types (`activeEnergyBurned` is used as example here):
+```Swift
+let healthTypes = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!])
+.JMModal(showModal: $show, for: [.health(categories: .init(readAndWrite: healthTypes))])
+
+//Same exact syntax for JMAlert styles
+.JMAlert(showModal: $show, for: [.health(categories: .init(readAndWrite: healthTypes))])
+
+```
+To set read or write individually:
+```Swift
+let readTypes = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!])
+let writeTypes = Set([HKSampleType.quantityType(forIdentifier: .appleStandTime)!])
+.JMModal(showModal: $showModal, for: [.health(categories: .init(read: readTypes, write: writeTypes))])
+```
+You may also set only read or write type:
+```Swift
+let readTypes = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!])
+.JMModal(showModal: $showModal, for: [.health(categories: .init(read: readTypes))])
+
+```
 ## Supported Permissions
 Here is a list of all permissions PermissionsSwiftUI already supports support(health not in image but is supported). Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon.
 <br /> <br /> <br />

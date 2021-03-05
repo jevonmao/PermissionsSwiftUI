@@ -14,7 +14,7 @@ struct AlertMainView: View {
     var shouldShowPermission:Bool{
         if PermissionStore.shared.autoCheckAlertAuth{
             if showAlert.wrappedValue &&
-                !PermissionStore.shared.permissionsToAsk.isEmpty {
+                !PermissionStore.shared.undeterminedPermissions.isEmpty {
                 return true
             }
             else {
@@ -35,23 +35,23 @@ struct AlertMainView: View {
     }
     var body: some View {
         ZStack{
+            let insertTransition = AnyTransition.opacity.combined(with: .scale(scale: 1.1)).animation(Animation.default.speed(1.6))
+            let removalTransiton = AnyTransition.opacity.combined(with: .scale(scale: 0.9)).animation(Animation.default.speed(1.8))
             bodyView
-
-            if shouldShowPermission{
+            if shouldShowPermission {
                 Group{
                     Blur(style: .systemUltraThinMaterialDark)
-                        .edgesIgnoringSafeArea(.all)
-                        .transition(AnyTransition.opacity.animation(Animation.default.speed(1.8)))
+                        .transition(AnyTransition.opacity.animation(Animation.default.speed(1.6)))
                     AlertView(showAlert:showAlert)
-                        .transition(AnyTransition.opacity.combined(with: .scale(scale: 0.92)).animation(Animation.default.speed(1.5)))
                         .onAppear(perform: PermissionStore.shared.onAppear)
                         .onDisappear(perform: PermissionStore.shared.onDisappear)
                 }
+                .transition(.asymmetric(insertion: insertTransition, removal: removalTransiton))
+                .edgesIgnoringSafeArea(.all)
+                .animation(.default)
 
             }
         }
-        .edgesIgnoringSafeArea(.all)
-        .animation(.default)
 
 
     }

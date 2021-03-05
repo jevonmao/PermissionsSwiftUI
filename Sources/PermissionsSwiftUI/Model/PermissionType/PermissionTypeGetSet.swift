@@ -97,6 +97,7 @@ extension PermissionType:PermissionTypeProtocol{
         getPermissionManager()?.requestPermission{isPermissionGranted($0)}
     }
     
+    //Gets the correct permission manager for current permission type
     func getPermissionManager() -> PermissionManager?{
         switch self {
         case .location:

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HeaderText: View {
+struct HeaderView: View {
     var exitButtonAction:() -> Void
     //HeaderText component have slightly different UI for alert and modal.
     var isAlert:Bool = false

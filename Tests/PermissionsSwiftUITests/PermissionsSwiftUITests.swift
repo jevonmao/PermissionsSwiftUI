@@ -447,22 +447,104 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         XCTAssertFalse(falseBinding.combine(with: .constant(false)).wrappedValue)
     }
     func testAlertViewSinglePermission(){
+        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
         let view = EmptyView()
             .background(Color.red.edgesIgnoringSafeArea(.all))
-            .JMAlert(showModal: .constant(true), for: [.bluetooth], autoCheckAuthorization: false)
+            .JMAlert(showModal: .constant(true), for: [.bluetooth])
         assertSnapshot(matching: view, as: .image)
     }
     func testAlertViewTwoPermissions(){
+        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
         let view = EmptyView()
             .background(Color.red.edgesIgnoringSafeArea(.all))
-            .JMAlert(showModal: .constant(true), for: [.bluetooth, .camera], autoCheckAuthorization: false)
+            .JMAlert(showModal: .constant(true), for: [.bluetooth, .camera])
         assertSnapshot(matching: view, as: .image)
     }
     func testAlertViewThreePermissions(){
+        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
         let view = EmptyView()
             .background(Color.red.edgesIgnoringSafeArea(.all))
-            .JMAlert(showModal: .constant(true), for: [.bluetooth, .camera, .location], autoCheckAuthorization: false)
+            .JMAlert(showModal: .constant(true), for: [.bluetooth, .camera, .location])
         assertSnapshot(matching: view, as: .image)
+    }
+    func testAlertViewInitializers(){
+        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
+        let view1 = EmptyView()
+            .background(Color.red.edgesIgnoringSafeArea(.all))
+            .JMAlert(showModal: .constant(true), for: [.bluetooth])
+        assertSnapshot(matching: view1, as: .image)
+        let view2 = EmptyView()
+            .background(Color.red.edgesIgnoringSafeArea(.all))
+            .JMAlert(showModal: .constant(true), for: [.bluetooth], autoDismiss: true)
+        assertSnapshot(matching: view2, as: .image)
+        let view3 = EmptyView()
+            .background(Color.red.edgesIgnoringSafeArea(.all))
+            .JMAlert(showModal: .constant(true), for: [.bluetooth], autoDismiss: false)
+        assertSnapshot(matching: view3, as: .image)
+        let view4 = EmptyView()
+            .background(Color.red.edgesIgnoringSafeArea(.all))
+            .JMAlert(showModal: .constant(true), for: [.bluetooth], autoDismiss: true, autoCheckAuthorization: false)
+        assertSnapshot(matching: view4, as: .image)
+        let view5 = EmptyView()
+            .background(Color.red.edgesIgnoringSafeArea(.all))
+            .JMAlert(showModal: .constant(true), for: [.bluetooth], autoDismiss: true, autoCheckAuthorization: false)
+        assertSnapshot(matching: view5, as: .image)
+        let view6 = EmptyView()
+            .background(Color.red.edgesIgnoringSafeArea(.all))
+            .JMAlert(showModal: .constant(true), for: [.bluetooth], onAppear: {}, onDisappear: {})
+        assertSnapshot(matching: view6, as: .image)
+        let view7 = EmptyView()
+            .background(Color.red.edgesIgnoringSafeArea(.all))
+            .JMAlert(showModal: .constant(true),
+                     for: [.bluetooth],
+                     autoDismiss: false,
+                     autoCheckAuthorization: false,
+                     onAppear: {},
+                     onDisappear: {})
+        assertSnapshot(matching: view7, as: .image)
+    }
+    func testAlertViewAutpDismissInit(){
+        
+    }
+    func testPermissionSectionButtonAuthorized(){
+        let permission = PermissionType.camera
+
+        let sectionCell = PermissionSectionCell(permission: permission,
+                                                showModal: .constant(false), isAlert: false)
+        let queue = DispatchQueue(label: "testPermissionSectionHandling")
+        sectionCell.handleButtonState(for: true)
+        queue.sync {}
+        XCTAssert(permission.currentPermission.authorized)
+    }
+    func testPermissionSectionButtonDenied(){
+        let permission = PermissionType.camera
+        
+        let sectionCell = PermissionSectionCell(permission: permission,
+                                                showModal: .constant(false), isAlert: false)
+        let queue = DispatchQueue(label: "testPermissionSectionHandling")
+        sectionCell.handleButtonState(for: false)
+        queue.sync {}
+        XCTAssertFalse(permission.currentPermission.authorized)
+    }
+    func testAlertPermissionSectionButtonAuthorized(){
+        let permission = PermissionType.camera
+        
+        let sectionCell = PermissionSectionCell(permission: permission,
+                                                showModal: .constant(false), isAlert: true)
+        let queue = DispatchQueue(label: "testPermissionSectionHandling")
+        sectionCell.handleButtonState(for: true)
+        queue.sync {}
+        XCTAssert(permission.currentPermission.authorized)
+    }
+    func testAlertPermissionSectionButtonDenied(){
+        let permission = PermissionType.camera
+        
+        let sectionCell = PermissionSectionCell(permission: permission,
+                                                showModal: .constant(false), isAlert: true)
+        let queue = DispatchQueue(label: "testPermissionSectionHandling")
+        sectionCell.handleButtonState(for: false)
+        queue.sync {}
+        XCTAssertFalse(permission.currentPermission.authorized)
     }
     static var allTests = [
         ("testPermissionManagers", testPermissionManagers),

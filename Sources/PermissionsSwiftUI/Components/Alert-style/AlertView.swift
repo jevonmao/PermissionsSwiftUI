@@ -16,8 +16,9 @@ struct AlertView: View {
         screenSize.width < 400 ? 20-(1000-screenSize.width)/120 : 20
     }
     var body: some View {
+        let store = PermissionStore.shared
             VStack{
-                HeaderText(exitButtonAction: {showAlert = false}, isAlert: true)
+                HeaderView(exitButtonAction: {showAlert = store.isAlertDismissalRestricted}, isAlert: true)
                     .padding(.bottom, paddingSize/1.5)
                 PermissionSection(showModal: $showAlert, isAlert:true)
                 

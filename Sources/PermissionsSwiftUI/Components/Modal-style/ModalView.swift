@@ -10,10 +10,12 @@ import SwiftUI
 struct ModalView: View {
     @Binding var showModal: Bool
     var mainText:PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
+
     var body: some View {
         ScrollView {
             VStack {
-                HeaderText(exitButtonAction: {showModal=false})
+                let store = PermissionStore.shared
+                HeaderView(exitButtonAction: {showModal = store.isModalDismissalRestricted})
                     
                 PermissionSection(showModal:$showModal, isAlert:false)
                     .background(Color(.systemBackground))

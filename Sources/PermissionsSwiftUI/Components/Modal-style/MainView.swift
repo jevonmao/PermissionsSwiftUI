@@ -6,26 +6,36 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct MainView: View {
+    @State var isModalNotShown = true
     var showModal: Binding<Bool>
     var bodyView: AnyView
-    var permissionsToAsk: [PermissionType]
-    var shouldShowPermission:Binding<Bool>{
+    var _permissionsToAsk: [PermissionType]?
+    var permissionsToAsk: [PermissionType] {
+        guard _permissionsToAsk == nil else {
+            return _permissionsToAsk!
+        }
+        return PermissionStore.shared.undeterminedPermissions
+    }
+    var shouldShowPermission: Binding<Bool>{
         Binding(get: {
             let store = PermissionStore.shared
-            if store.autoCheckModalAuth{
+            if store.autoCheckModalAuth && isModalNotShown {
                 return !permissionsToAsk.isEmpty
             }
             return true
         }, set: {_ in})
     }
+    @ObservedObject var store = PermissionStore.shared
+    
     init(for bodyView: AnyView,
          show showModal: Binding<Bool>,
-         permissionsToAsk: [PermissionType]=PermissionStore.shared.permissionsToAsk) {
+         permissionsToAsk: [PermissionType]?=nil) {
         self.bodyView = bodyView
         self.showModal = showModal
-        self.permissionsToAsk = permissionsToAsk
+        self._permissionsToAsk = permissionsToAsk
     }
     
     var body: some View {
@@ -34,9 +44,16 @@ struct MainView: View {
                 ModalView(showModal: showModal)
                     .onAppear(perform: PermissionStore.shared.onAppear)
                     .onDisappear(perform:PermissionStore.shared.onDisappear)
-                    .onDisappear{showModal.wrappedValue = false}
+                    .onAppear{isModalNotShown=false}
+                    .onDisappear{showModal.wrappedValue = false; isModalNotShown=true}
+                    .introspectViewController{
+                        if store.restrictModalDismissal {
+                            $0.isModalInPresentation = store.isModalDismissalRestricted
+                        }
+                    }
                 
             })
+           
         
     }
     //if DEBUG to ensure these functions are never used in production. They are for unit testing only.

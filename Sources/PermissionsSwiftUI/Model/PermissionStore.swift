@@ -12,7 +12,7 @@ import SwiftUI
 /**
  The global shared storage for PermissionsSwiftUI
  */
-public struct PermissionStore {
+public class PermissionStore: ObservableObject {
     //MARK: Creating a new store
     /**
      Initalizes and returns a new instance of `PermissionStore`
@@ -26,16 +26,49 @@ public struct PermissionStore {
     //a private singleton instance that allows read & write, but for this file's methods only
     fileprivate static var mutableShared = PermissionStore()
     //Read only singleton exposed to other parts of program
-    static var shared:PermissionStore{
+    static var shared: PermissionStore {
         get{
             mutableShared
         }
     }
     //MARK: All Permissions
-    ///A global array of permissions that configures the permissions to request
-    public var permissions: [PermissionType] = []
-    var permissionsToAsk: [PermissionType]{
+
+    ///An  array of permissions that configures the permissions to request
+    @Published public var permissions: [PermissionType] = []
+    /**
+     A global array of permissions that configures the permissions to request
+     
+     - Warning: `permissionsToAsk` property is deprecated, renamed to `undeterminedPermissions`
+     */
+    @available(iOS, deprecated: 13.0, obsoleted: 15.0, renamed: "undeterminedPermissions")
+    ///An array of undetermined permissions filtered out from `permissions`
+    var permissionsToAsk: [PermissionType] {
+        return undeterminedPermissions
+    }
+    var undeterminedPermissions: [PermissionType] {
         FilterPermissions.filterForShouldAskPermission(for: permissions)
+    }
+    var interactedPermissions: [PermissionType] {
+        //Filter for permissions that are not interacted
+        permissions.filter{!$0.currentPermission.interacted}
+    }
+    var isModalDismissalRestricted: Bool {
+        let store = PermissionStore.shared
+        let dismiss = store.restrictModalDismissal
+        if dismiss {
+            //interactedPermissions array not empty means some permissions are still not interacted
+            return !store.interactedPermissions.isEmpty
+        }
+        return false
+    }
+    var isAlertDismissalRestricted: Bool {
+        let store = PermissionStore.shared
+        let dismiss = store.restrictAlertDismissal
+        if dismiss {
+            //interactedPermissions array not empty means some permissions are still not interacted
+            return !store.interactedPermissions.isEmpty
+        }
+        return false
     }
     //MARK: Configuring View Texts
     ///The text for text label components, including header and descriptions
@@ -43,7 +76,7 @@ public struct PermissionStore {
     /**
      Encapsulates the surrounding texts and title
      */
-    public struct MainTexts{
+    public struct MainTexts: Equatable {
         ///Text to display for header text
         public var headerText: String = "Need Permissions"
         ///Text to display for header description text
@@ -71,6 +104,11 @@ public struct PermissionStore {
     ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
     public var autoCheckAlertAuth: Bool = true
     
+    //MARK: Prevent Dismissal Before All Permissions Interacted
+    ///Whether to prevent dismissal of modal view (along with an error haptic) before all permissions have been interacted (explict deny or allow)
+    public var restrictModalDismissal: Bool = true
+    ///Whether to prevent dismissal of alert view (along with an error haptic) before all permissions have been interacted (explict deny or allow)
+    public var restrictAlertDismissal: Bool = true
     //MARK: `onAppear` and `onDisappear` Executions
     ///Override point for executing action when PermissionsSwiftUI view appears
     public var onAppear: (()->Void)?
@@ -162,6 +200,7 @@ public struct PermissionStore {
         description: "Allow to access your health information",
         authorized: false)
     
+
 }
 // MARK: - Updating methods
 extension PermissionStore{
@@ -173,6 +212,7 @@ extension PermissionStore{
     func updateStore<T>(property:(inout PermissionStore, T)->Void, value:T){
         //Closure passes back PermissionStore instance, and the generic value passed in method
         property(&PermissionStore.mutableShared, value)
+        
     }
     
 }
@@ -185,7 +225,7 @@ extension PermissionStore{
  2. Add the `setAllowButtonColor(to colors:AllButtonColors)` modifier to your view
  3. Pass in the `AllButtonColors` struct previously into the proper parameter
  */
-public struct AllButtonColors{
+public struct AllButtonColors: Equatable {
     //MARK: Creating New Button Configs
     /**
      - parameters:
@@ -261,7 +301,7 @@ public struct AllButtonColors{
   Declared within parent struct  `AllButtonColors` and should only be used within a `AllButtonColors` struct instance.
   To customize
  */
-public struct ButtonColor{
+public struct ButtonColor: Equatable {
     // MARK: Creating New Button Color
     /**
      - parameters:
