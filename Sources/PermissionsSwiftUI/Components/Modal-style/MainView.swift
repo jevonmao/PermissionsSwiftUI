@@ -22,7 +22,7 @@ struct MainView: View {
     var shouldShowPermission: Binding<Bool>{
         Binding(get: {
             let store = PermissionStore.shared
-            if store.autoCheckModalAuth && showModal.wrappedValue && isModalNotShown {
+            if store.autoCheckModalAuth && isModalNotShown {
                 return !permissionsToAsk.isEmpty
             }
             return true
