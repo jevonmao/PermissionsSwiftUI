@@ -22,11 +22,11 @@ struct JMMicrophonePermissionManager: PermissionManager {
         }
     }
     
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         AVAudioSession.sharedInstance().requestRecordPermission {
             granted in
             DispatchQueue.main.async {
-                completion(granted)
+                completion(granted, nil)
             }
         }
     }

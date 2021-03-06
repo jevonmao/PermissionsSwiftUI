@@ -46,9 +46,9 @@ struct JMNotificationPermissionManager: PermissionManager {
         self.notificationManager = notificationManager
     }
     
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
-        notificationManager.requestPermission(options: [.badge,.alert,.sound]){ granted, _ in
-                completion(granted)
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
+        notificationManager.requestPermission(options: [.badge,.alert,.sound]){ granted, error in
+            completion(granted, error)
             
         }
        

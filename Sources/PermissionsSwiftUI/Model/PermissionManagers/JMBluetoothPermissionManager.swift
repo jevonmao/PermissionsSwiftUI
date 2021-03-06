@@ -10,7 +10,7 @@ import UIKit
 
 class JMBluetoothPermissionManager: NSObject, PermissionManager { 
 
-    private var completion: ((Bool) -> Void)?
+    private var completion: ((Bool, Error?) -> Void)?
     private var manager: CBCentralManager?
     var authorizationStatus: AuthorizationStatus{
         switch CBCentralManager().authorization{
@@ -24,7 +24,7 @@ class JMBluetoothPermissionManager: NSObject, PermissionManager {
     }
     static let shared: PermissionManager = JMBluetoothPermissionManager()
     
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         self.completion = completion
         self.manager = CBCentralManager(delegate: self, queue: nil)
     }
@@ -36,9 +36,9 @@ extension JMBluetoothPermissionManager: CBCentralManagerDelegate {
         case .notDetermined:
             break
         case .allowedAlways:
-            self.completion?(true)
+            self.completion?(true, nil)
         default:
-            self.completion?(false)
+            self.completion?(false, nil)
         }
     }
 }

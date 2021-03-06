@@ -29,11 +29,11 @@ struct JMContactsPermissionManager:PermissionManager {
             let store = CNContactStore()
             store.requestAccess(for: .contacts, completionHandler: { (authStatus, error) in
                 DispatchQueue.main.async {
-                    completion(authStatus)
+                    completion(authStatus, error)
                 }
             })
     }
 }
 extension JMContactsPermissionManager {
-    typealias JMPermissionAuthorizationHandlerCompletionBlock = (Bool) -> Void
+    typealias JMPermissionAuthorizationHandlerCompletionBlock = (Bool, Error?) -> Void
 }

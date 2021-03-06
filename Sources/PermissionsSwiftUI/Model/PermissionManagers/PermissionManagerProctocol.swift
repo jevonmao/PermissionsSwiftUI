@@ -13,5 +13,6 @@ enum AuthorizationStatus{
 protocol PermissionManager {
     static var shared:PermissionManager{get}
     var authorizationStatus:AuthorizationStatus {get}
-    func requestPermission(_ completion: @escaping (Bool) -> Void)
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void)
 }
+ 

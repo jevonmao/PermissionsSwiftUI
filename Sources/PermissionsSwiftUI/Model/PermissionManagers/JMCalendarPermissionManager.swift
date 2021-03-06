@@ -22,12 +22,12 @@ struct JMCalendarPermissionManager: PermissionManager {
             return .denied
         }
     }
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         let eventStore = EKEventStore()
         eventStore.requestAccess(to: EKEntityType.event, completion: {
-            (accessGranted: Bool, _: Error?) in
+            (accessGranted: Bool, error: Error?) in
             DispatchQueue.main.async {
-                completion(accessGranted)
+                completion(accessGranted, error)
             }
         })
     }

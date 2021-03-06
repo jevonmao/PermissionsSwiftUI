@@ -84,22 +84,31 @@ class JMHealthPermissionManager: PermissionManager{
             }
         }
     }
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         guard type(of: healthStore).isHealthDataAvailable() else {
             print("PermissionsSwiftUI - Health data is not available")
-            completion(false)
+            completion(false, createUnavailableError())
             return
         }
         healthStore.requestAuthorization(toShare: Set(healthPermission?.writePermissions ?? []),
                                          read: Set(healthPermission?.readPermissions ?? [])) { authorized, error in
-            guard error == nil else{
-                print("PermissionSwiftUI - \(error!)")
-                completion(false)
-                return
-            }
-            completion(true)
+            completion(authorized, error)
         }
         
+    }
+    func createUnavailableError() -> NSError {
+        let userInfo: [String: Any] = [
+            NSLocalizedDescriptionKey:
+              NSLocalizedString("Health permission request couldn't be completed.",
+                                comment: "localizedErrorDescription"),
+            NSLocalizedFailureReasonErrorKey:
+                NSLocalizedString("Health data is not available on the current device, the permission cannot be requested.", 
+                                  comment: "localizedErrorFailureReason"),
+            NSLocalizedRecoverySuggestionErrorKey:
+              NSLocalizedString("Verify that HealthKit is available on the current device.",
+                                comment: "localizedErrorRecoverSuggestion")
+          ]
+        return NSError(domain: "com.jevonmao.permissionsswiftui", code: 1, userInfo: userInfo)
     }
 }
 

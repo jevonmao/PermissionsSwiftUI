@@ -94,7 +94,10 @@ extension PermissionType:PermissionTypeProtocol{
     }
     func requestPermission(isPermissionGranted: @escaping (Bool) -> Void) {
         //Pass the $0 argument that specify isPermissionGranted back to UI layer
-        getPermissionManager()?.requestPermission{isPermissionGranted($0)}
+        getPermissionManager()?.requestPermission{authorized, error in
+            isPermissionGranted(authorized)
+            
+        }
     }
     
     //Gets the correct permission manager for current permission type

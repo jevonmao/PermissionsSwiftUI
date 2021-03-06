@@ -30,15 +30,15 @@ struct JMPhotoPermissionManager: PermissionManager {
         }
     }
     
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         photoLibrary.requestAuthorization { authStatus in
             switch authStatus {
             case .authorized:
-                completion(true)
+                completion(true, nil)
             case .limited:
-                completion(true)
+                completion(true, nil)
             default:
-                completion(false)
+                completion(false, nil)
             }
         }
     }

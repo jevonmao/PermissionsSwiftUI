@@ -28,7 +28,7 @@ class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelegate, Pe
     
     var locationManager: LocationManager
     //Completion block for is authorized or not authorized
-    var completionHandler: ((Bool) -> Void)?
+    var completionHandler: ((Bool, Error?) -> Void)?
     
     init(locationManager:LocationManager = CLLocationManager()){
         self.locationManager = locationManager
@@ -42,11 +42,11 @@ class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelegate, Pe
         
         if let completionHandler = completionHandler {
             let status = CLLocationManager.authorizationStatus()
-            completionHandler(status == .authorizedAlways ? true : false)
+            completionHandler(status == .authorizedAlways ? true : false, nil)
         }
     }
     
-    func requestPermission(_ completionHandler: @escaping (Bool) -> Void) {
+    func requestPermission(_ completionHandler: @escaping (Bool, Error?) -> Void) {
         self.completionHandler = completionHandler
         var status:CLAuthorizationStatus{ 
             locationManager.authorizationStatus()
@@ -60,7 +60,7 @@ class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelegate, Pe
             self.locationManager.delegate = self
             self.locationManager.requestAlwaysAuthorization()
         default:
-            completionHandler(status == .authorizedAlways ? true : false)
+            completionHandler(status == .authorizedAlways ? true : false, nil)
         }
     }
 

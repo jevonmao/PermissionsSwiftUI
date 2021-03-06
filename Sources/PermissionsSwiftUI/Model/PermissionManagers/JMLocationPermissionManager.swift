@@ -27,7 +27,7 @@ class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate, Permissi
         }
     }
 
-    var completionHandler: ((Bool) -> Void)?
+    var completionHandler: ((Bool, Error?) -> Void)?
     var locationManager: LocationManager
     
     init(locationManager:LocationManager = CLLocationManager()){
@@ -42,12 +42,12 @@ class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate, Permissi
         
         if let completionHandler = completionHandler {
             let status = locationManager.authorizationStatus()
-            completionHandler(status == .authorizedAlways || status == .authorizedWhenInUse ? true : false)
+            completionHandler(status == .authorizedAlways || status == .authorizedWhenInUse ? true : false, nil)
             
         }
     }
     //Used to request in use permission (1 of 2 types of iOS location permission)
-    func requestPermission(_ completionHandler: @escaping (Bool) -> Void) {
+    func requestPermission(_ completionHandler: @escaping (Bool, Error?) -> Void) {
         self.completionHandler = completionHandler
         let status = locationManager.authorizationStatus()
         
@@ -56,7 +56,7 @@ class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate, Permissi
             self.locationManager.delegate = self
             self.locationManager.requestWhenInUseAuthorization()
         default:
-            completionHandler(status == .authorizedWhenInUse || status == .authorizedAlways ? true : false)
+            completionHandler(status == .authorizedWhenInUse || status == .authorizedAlways ? true : false, nil)
         }
     }
 

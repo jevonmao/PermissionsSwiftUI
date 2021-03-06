@@ -21,11 +21,11 @@ struct JMCameraPermissionManager: PermissionManager {
         }
     }
     static var shared: PermissionManager = JMCameraPermissionManager()
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {
             authorized in
             DispatchQueue.main.async {
-                completion(authorized)
+                completion(authorized, nil)
             }
         })
     }
