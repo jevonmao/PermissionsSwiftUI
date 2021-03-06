@@ -56,7 +56,7 @@ public extension View {
      
      */
     func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
+        initializeJMModal(showModal: showModal, for: permissions)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     
@@ -72,10 +72,7 @@ public extension View {
      
      */
     func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], restrictDismissal: Bool) -> some View {
-        let store = PermissionStore()
-        store.permissions = permissions
-        store.restrictModalDismissal = restrictDismissal
-        PermissionStore.shared.updateStore(property: {$0=$1}, value: store)
+        initializeJMModal(showModal: showModal, for: permissions, restrictDismissal: restrictDismissal)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     
@@ -107,7 +104,7 @@ public extension View {
      
      */
     func JMModal(showModal: Binding<Bool>, withConfig model: PermissionStore) -> some View {
-        PermissionStore.shared.updateStore(property: {$0=$1}, value: model)
+        initializeJMModal(showModal: showModal, withConfig: model)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     
@@ -123,8 +120,7 @@ public extension View {
      
      */
     func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss)
+        initializeJMModal(showModal: showModal, for: permissions, autoDismiss: autoDismiss)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     
@@ -147,9 +143,7 @@ public extension View {
                  for permissions: [PermissionType],
                  autoDismiss: Bool?=nil,
                  autoCheckAuthorization: Bool?=nil) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss ?? true)
-        PermissionStore.shared.updateStore(property: {$0.autoCheckModalAuth=$1}, value: autoCheckAuthorization ?? true)
+        initializeJMModal(showModal: showModal, for: permissions, autoDismiss: autoDismiss, autoCheckAuthorization: autoCheckAuthorization)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     
@@ -174,10 +168,11 @@ public extension View {
                  autoDismiss: Bool?=nil,
                  autoCheckAuthorization: Bool?=nil,
                  restrictDismissal: Bool?=nil) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss ?? true)
-        PermissionStore.shared.updateStore(property: {$0.autoCheckModalAuth=$1}, value: autoCheckAuthorization ?? true)
-        PermissionStore.shared.updateStore(property: {$0.restrictModalDismissal=$1}, value: restrictDismissal ?? true)
+        initializeJMModal(showModal: showModal,
+                          for: permissions,
+                          autoDismiss: autoDismiss,
+                          autoCheckAuthorization: autoCheckAuthorization,
+                          restrictDismissal: restrictDismissal)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     /**
@@ -193,7 +188,7 @@ public extension View {
                  }, label: {
                      Text("Ask user for permissions")
                  })
-                 .JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
+                 .JMModal(showModal: $showModal, for: [.locationAlways, .photo, .microphone])
              }
              
          }
@@ -211,12 +206,50 @@ public extension View {
                  for permissions: [PermissionType],
                  onAppear: @escaping () -> Void,
                  onDisappear: @escaping () -> Void) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
-        PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
+        initializeJMModal(showModal: showModal,
+                          for: permissions,
+                          onAppear: onAppear,
+                          onDisappear: onDisappear)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
-    
+    /**
+     Displays a PermissionsSwiftUI modal view that displays and handles permissions.
+     
+     Use this modifier on your existing view, pass in the permissions to show, and handle the result in the trailing closure. The trailing closure will be called and executed when the PermissionsSwiftUI view disappears. Depending on your needs, you can perform further action with the separate `successPermissions` and `errorPermissions` which are both of type `[PermissionType: JMResult]`.
+     
+     For example, show a `JMModal` with camera and location permissions:
+     ````
+     .JMModal(showModal: $showModal, for: [.camera, .location], onAppear: {}){successPermissions, errorPermissions in
+         guard errorPermissions.isEmpty else {
+             print(errorResult)
+             return
+         }
+         for permission in successPermisisons.keys{
+             //Do something with the results - ex. ask user to enable denied permissions in settings
+         }
+     }
+     ````
+     - Parameters:
+        - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
+        - for: An array of type `PermissionModel` to specify permissions to show
+        - onAppear: Override point for when the JMmodal modal appears
+        - onDisappearHandler: The completion handler to be called when the JMModal disappears and permission requests are finished. The handler takes the following parameters:
+        - successPermissions: A dictionary object that encapsulates the authorization status and error(nil) of all successed permisisons
+        - errorPermissions: A dictionary object that encapsulates the authorization status and error of all erroneous permisisons
+     - Returns:
+        Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
+     
+     */
+    func JMModal(showModal: Binding<Bool>,
+                 for permissions: [PermissionType],
+                 onAppear: @escaping () -> Void,
+                 _ onDisappearHandler: @escaping (successPermissions, errorPermissions) -> Void) -> some View {
+        initializeJMModal(showModal: showModal,
+                          for: permissions,
+                          onAppear: onAppear,
+                          onDisappearHandler: onDisappearHandler) 
+        return self.modifier(PermissionsModal(showModal: showModal))
+    }
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
      
@@ -236,10 +269,11 @@ public extension View {
                  autoDismiss: Bool,
                  onAppear: @escaping () -> Void,
                  onDisappear: @escaping () -> Void) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
-        PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss)
+        initializeJMModal(showModal: showModal,
+                          for: permissions,
+                          autoDismiss: autoDismiss,
+                          onAppear: onAppear,
+                          onDisappear: onDisappear)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     
@@ -267,11 +301,12 @@ public extension View {
                  autoCheckAuthorization: Bool?=nil,
                  onAppear: @escaping () -> Void,
                  onDisappear: @escaping () -> Void) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
-        PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss ?? true)
-        PermissionStore.shared.updateStore(property: {$0.autoCheckModalAuth=$1}, value: autoCheckAuthorization ?? true)
+        initializeJMModal(showModal: showModal,
+                       for: permissions,
+                       autoDismiss: autoDismiss,
+                       autoCheckAuthorization: autoCheckAuthorization,
+                       onAppear: onAppear,
+                       onDisappear: onDisappear)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     /**
@@ -298,13 +333,38 @@ public extension View {
                  restrictDismissal: Bool?=nil,
                  onAppear: @escaping () -> Void,
                  onDisappear: @escaping () -> Void) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
-        PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss ?? true)
-        PermissionStore.shared.updateStore(property: {$0.autoCheckModalAuth=$1}, value: autoCheckAuthorization ?? true)
-        PermissionStore.shared.updateStore(property: {$0.restrictModalDismissal=$1}, value: restrictDismissal ?? true)
+        initializeJMModal(showModal: showModal,
+                for: permissions,
+                autoDismiss: autoDismiss,
+                autoCheckAuthorization: autoCheckAuthorization,
+                restrictDismissal: restrictDismissal,
+                onAppear: onAppear,
+                onDisappear: onDisappear)
         return self.modifier(PermissionsModal(showModal: showModal))
+    }
+    private func initializeJMModal(showModal: Binding<Bool>,
+                         for permissions: [PermissionType]?=nil,
+                         autoDismiss: Bool?=nil,
+                         autoCheckAuthorization: Bool?=nil,
+                         restrictDismissal: Bool?=nil,
+                         onAppear: (() -> Void)?=nil,
+                         onDisappear: (() -> Void)?=nil,
+                         withConfig model: PermissionStore?=nil,
+                         onDisappearHandler: ((successPermissions, errorPermissions) -> Void)?=nil) {
+        guard let model = model else {
+            let store = PermissionStore()
+            store.permissions = permissions ?? []
+            store.onAppear = onAppear
+            store.onDisappear = onDisappear
+            store.autoDismissModal = autoDismiss ?? true
+            store.autoCheckModalAuth = autoCheckAuthorization ?? true
+            store.restrictModalDismissal = restrictDismissal ?? true
+            store.onDisappearHandler = onDisappearHandler 
+            store.updateStore(property: {$0=$1}, value: store)
+            return
+        }
+        store.updateStore(property: {$0=$1}, value: model)
+
     }
     
 }
@@ -342,7 +402,7 @@ public extension View{
      */
     
     func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View{
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
         return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
@@ -366,8 +426,8 @@ public extension View{
      */
 
     func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss)
         return self.modifier(PermissionsAlert(showModal: showModal))
     }
     /**
@@ -391,8 +451,8 @@ public extension View{
      */
 
     func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoCheckAuthorization: Bool) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: autoCheckAuthorization)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: autoCheckAuthorization)
         return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
@@ -419,9 +479,9 @@ public extension View{
      */
 
     func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool?=nil, autoCheckAuthorization: Bool?=nil) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss ?? true)
-        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: autoCheckAuthorization ?? true)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss ?? true)
+        store.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: autoCheckAuthorization ?? true)
         return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
@@ -447,9 +507,9 @@ public extension View{
                  for permissions: [PermissionType],
                  onAppear: (() -> Void)?=nil,
                  onDisappear: (() -> Void)?=nil) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
-        PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.onAppear=$1}, value: onAppear)
+        store.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
         return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
@@ -476,10 +536,10 @@ public extension View{
                  autoDismiss: Bool,
                  onAppear: (() -> Void)?=nil,
                  onDisappear: (() -> Void)?=nil) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
-        PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.onAppear=$1}, value: onAppear)
+        store.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
+        store.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss)
         return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
@@ -511,11 +571,11 @@ public extension View{
                  autoCheckAuthorization: Bool?=nil,
                  onAppear: (() -> Void)?=nil,
                  onDisappear: (() -> Void)?=nil) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
-        PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss ?? true)
-        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: autoCheckAuthorization ?? true)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.onAppear=$1}, value: onAppear)
+        store.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
+        store.updateStore(property: {$0.autoDismissAlert=$1}, value: autoDismiss ?? true)
+        store.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: autoCheckAuthorization ?? true)
         return self.modifier(PermissionsAlert(showModal: showModal))
     }
     
@@ -547,7 +607,7 @@ public extension View{
      
      */
     func JMAlert(showModal: Binding<Bool>, withConfig model: PermissionStore) -> some View {
-        PermissionStore.shared.updateStore(property: {$0=$1}, value: model)
+        store.updateStore(property: {$0=$1}, value: model)
         return self.modifier(PermissionsAlert(showModal: showModal))
     }
 }
@@ -582,7 +642,7 @@ public extension View {
      */
     @available(iOS, deprecated, obsoleted:15, renamed: "JMModal")
     func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     
@@ -615,8 +675,8 @@ public extension View {
      */
     @available(iOS, deprecated, obsoleted:15, renamed: "JMModal")
     func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
     
@@ -650,9 +710,9 @@ public extension View {
      */
     @available(iOS, deprecated, obsoleted:15, renamed: "JMModal")
     func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], onAppear: @escaping () -> Void, onDisappear: @escaping () -> Void) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
-        PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.onAppear=$1}, value: onAppear)
+        store.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
 
@@ -691,10 +751,10 @@ public extension View {
                        autoDismiss: Bool,
                        onAppear: @escaping () -> Void,
                        onDisappear: @escaping () -> Void) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: permissions)
-        PermissionStore.shared.updateStore(property: {$0.onAppear=$1}, value: onAppear)
-        PermissionStore.shared.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
-        PermissionStore.shared.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss)
+        store.updateStore(property: {$0.permissions=$1}, value: permissions)
+        store.updateStore(property: {$0.onAppear=$1}, value: onAppear)
+        store.updateStore(property: {$0.onDisappear=$1}, value: onDisappear)
+        store.updateStore(property: {$0.autoDismissModal=$1}, value: autoDismiss)
         return self.modifier(PermissionsModal(showModal: showModal))
     }
 }

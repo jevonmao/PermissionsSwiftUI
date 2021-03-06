@@ -11,7 +11,7 @@ import SwiftUI
 struct ButtonStatusColor: ViewModifier {
     var allowButtonStatus: AllowButtonStatus
     func body(content: Content) -> some View {
-        let colorStore = PermissionStore.shared.allButtonColors
+        let colorStore = store.allButtonColors
         switch self.allowButtonStatus {
         case .idle:
             return content.allowButton(foregroundColor: colorStore.buttonIdle.foregroundColor,

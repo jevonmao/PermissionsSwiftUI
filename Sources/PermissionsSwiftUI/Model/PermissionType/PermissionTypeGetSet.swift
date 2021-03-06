@@ -17,13 +17,12 @@ extension PermissionType:PermissionTypeProtocol{
 
     var permissions:[PermissionType]{
         get{
-            PermissionStore.shared.permissions 
+            store.permissions 
         }
     }
     //Get and set value for current permission type's store
     var currentPermission: JMPermission {
         get{
-            let store = PermissionStore.shared
             switch self {
             case .location:
                 return store.locationPermission
@@ -61,33 +60,33 @@ extension PermissionType:PermissionTypeProtocol{
             case .location:
                 //$0 is first parameter get back from closure, it is the PermissionStore storage instance
                 //$1 is second parameter and is a generic for the new value to set
-                PermissionStore.shared.updateStore(property: {$0.locationPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.locationPermission=$1}, value: newValue)
             case .locationAlways:
-                PermissionStore.shared.updateStore(property: {$0.locationAlwaysPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.locationAlwaysPermission=$1}, value: newValue)
             case .photo:
-                PermissionStore.shared.updateStore(property: {$0.photoPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.photoPermission=$1}, value: newValue)
             case .microphone:
-                PermissionStore.shared.updateStore(property: {$0.microphonePermisson=$1}, value: newValue)
+                store.updateStore(property: {$0.microphonePermisson=$1}, value: newValue)
             case .camera:
-                PermissionStore.shared.updateStore(property: {$0.cameraPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.cameraPermission=$1}, value: newValue)
             case .notification:
-                PermissionStore.shared.updateStore(property: {$0.notificationPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.notificationPermission=$1}, value: newValue)
             case .calendar:
-                PermissionStore.shared.updateStore(property: {$0.calendarPermisson=$1}, value: newValue)
+                store.updateStore(property: {$0.calendarPermisson=$1}, value: newValue)
             case .bluetooth:
-                PermissionStore.shared.updateStore(property: {$0.bluetoothPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.bluetoothPermission=$1}, value: newValue)
             case .tracking:
-                PermissionStore.shared.updateStore(property: {$0.trackingPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.trackingPermission=$1}, value: newValue)
             case .contacts:
-                PermissionStore.shared.updateStore(property: {$0.contactsPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.contactsPermission=$1}, value: newValue)
             case .motion:
-                PermissionStore.shared.updateStore(property: {$0.motionPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.motionPermission=$1}, value: newValue)
             case .reminders:
-                PermissionStore.shared.updateStore(property: {$0.remindersPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.remindersPermission=$1}, value: newValue)
             case .speech:
-                PermissionStore.shared.updateStore(property: {$0.speechPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.speechPermission=$1}, value: newValue)
             case .health:
-                PermissionStore.shared.updateStore(property: {$0.healthPermission=$1}, value: newValue)
+                store.updateStore(property: {$0.healthPermission=$1}, value: newValue)
             }
         }
         

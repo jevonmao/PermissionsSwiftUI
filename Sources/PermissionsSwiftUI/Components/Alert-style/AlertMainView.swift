@@ -12,9 +12,9 @@ struct AlertMainView: View {
     private var showAlert: Binding<Bool>
     private var bodyView: AnyView
     var shouldShowPermission:Bool{
-        if PermissionStore.shared.autoCheckAlertAuth{
+        if store.autoCheckAlertAuth{
             if showAlert.wrappedValue &&
-                !PermissionStore.shared.undeterminedPermissions.isEmpty {
+                !store.undeterminedPermissions.isEmpty {
                 return true
             }
             else {
@@ -43,8 +43,8 @@ struct AlertMainView: View {
                     Blur(style: .systemUltraThinMaterialDark)
                         .transition(AnyTransition.opacity.animation(Animation.default.speed(1.6)))
                     AlertView(showAlert:showAlert)
-                        .onAppear(perform: PermissionStore.shared.onAppear)
-                        .onDisappear(perform: PermissionStore.shared.onDisappear)
+                        .onAppear(perform: store.onAppear)
+                        .onDisappear(perform: store.onDisappear)
                 }
                 .transition(.asymmetric(insertion: insertTransition, removal: removalTransiton))
                 .edgesIgnoringSafeArea(.all)

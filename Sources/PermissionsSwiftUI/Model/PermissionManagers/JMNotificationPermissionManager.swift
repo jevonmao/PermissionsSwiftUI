@@ -16,8 +16,8 @@ struct JMNotificationPermissionManager: PermissionManager {
         let semaphore = DispatchSemaphore(value: 0)
         
         DispatchQueue.global().async {
-            notificationManager.getNotificationSettings { setttings in
-                notificationSettings = setttings
+            notificationManager.getNotificationSettings { settings in
+                notificationSettings = settings
                 semaphore.signal()
             }
         }

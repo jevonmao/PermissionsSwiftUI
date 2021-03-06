@@ -103,10 +103,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
     func testPermissionStoreAllPermissions(){
         let permissionType = PermissionType.camera
         var testingPermissions: [PermissionType] = [.camera, .bluetooth]
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: testingPermissions)
+        store.updateStore(property: {$0.permissions=$1}, value: testingPermissions)
         XCTAssertEqual(permissionType.permissions.description, testingPermissions.description)
         testingPermissions = PermissionType.allCases
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: testingPermissions)
+        store.updateStore(property: {$0.permissions=$1}, value: testingPermissions)
         XCTAssertEqual(permissionType.permissions.description, testingPermissions.description)
     }
     func testPermissionStorePermissionManager(){
@@ -153,7 +153,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
                                 HKSampleType.quantityType(forIdentifier: .bodyFatPercentage)!,
                                 HKSampleType.quantityType(forIdentifier: .bloodGlucose)!])
         let healthPermission = PermissionType.health(categories: .init(readAndWrite: quantityType))
-        PermissionStore.shared.updateStore(property: {$0.permissions.append($1)}, value: healthPermission)
+        store.updateStore(property: {$0.permissions.append($1)}, value: healthPermission)
         return (mockManager, manager)
     }
     func testHealthManagerAuthNotDetermined(){
@@ -187,7 +187,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         let writeType = Array(Array(sharedType)[1...])
         let healthPermission = PermissionType.health(categories: .init(read: Set(readType),
                                                                     write: Set(writeType)))
-        PermissionStore.shared.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
+        store.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
         manager.requestPermission{_=$0}
         XCTAssertEqual(mockManager.requestedPermissions?.readPermissions, Set(readType))
         XCTAssertEqual(mockManager.requestedPermissions?.writePermissions, Set(writeType))
@@ -200,7 +200,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         let healthPermission = PermissionType.health(categories: .init(readAndWrite: sharedType))
         let mockManager = MockHealthManager()
         let manager = JMHealthPermissionManager(healthManager: mockManager)
-        PermissionStore.shared.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
+        store.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
         return (manager, sharedType, mockManager)
     }
     func testHealthManagerReadWriteSame(){
@@ -214,7 +214,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         let writeType = Array(Array(sharedType)[1...])
         let healthPermission = PermissionType.health(categories: .init(read: Set(readType),
                                                                        write: Set(writeType)))
-        PermissionStore.shared.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
+        store.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
         XCTAssertEqual(manager.healthPermission?.readPermissions, Set(readType))
         XCTAssertEqual(manager.healthPermission?.writePermissions, Set(writeType))
     }
@@ -258,7 +258,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
     func testHealthManagerNoHealthPermission(){
         let mockManager = MockHealthManager()
         let manager = JMHealthPermissionManager(healthManager: mockManager)
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: [PermissionType]())
+        store.updateStore(property: {$0.permissions=$1}, value: [PermissionType]())
         XCTAssertNil(manager.healthPermission)
         XCTAssertEqual(manager.authorizationStatus, .notDetermined)
         let expectation = self.expectation(description: "Wait for true result")
@@ -273,7 +273,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
     func testHealthManagerEmptyPermissions(){
         let mockManager = MockHealthManager()
         let manager = JMHealthPermissionManager(healthManager: mockManager)
-        PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: [.camera,.calendar])
+        store.updateStore(property: {$0.permissions=$1}, value: [.camera,.calendar])
         XCTAssertNil(manager.healthPermission)
         XCTAssertEqual(manager.authorizationStatus, .notDetermined)
         let expectation = self.expectation(description: "Wait for true result")
@@ -345,8 +345,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
     func testModalViewSnapshot14_0(){
         if #available(iOS 14.5, *) {}
         else{
-            PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
-            PermissionStore.shared.updateStore(property: {$0.autoCheckModalAuth=$1}, value: false)
+            store.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
+            store.updateStore(property: {$0.autoCheckModalAuth=$1}, value: false)
             let view = ModalView(showModal: .constant(true))
             assertSnapshot(matching: view.referenceFrame(), as: .image)
         }
@@ -354,7 +354,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
     func testModalViewSnapshot14_5(){
         if #available(iOS 14.5, *) {
             let view = ModalView(showModal: .constant(true))
-            PermissionStore.shared.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
+            store.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
             assertSnapshot(matching: view.referenceFrame(), as: .image)
         }
     }
@@ -366,9 +366,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             .changeHeaderTo(newHeader)
             .changeHeaderDescriptionTo(placeholderText)
             .changeBottomDescriptionTo(placeholderText)
-        XCTAssertEqual(newHeader, PermissionStore.shared.mainTexts.headerText)
-        XCTAssertEqual(placeholderText, PermissionStore.shared.mainTexts.headerDescription)
-        XCTAssertEqual(placeholderText, PermissionStore.shared.mainTexts.bottomDescription)
+        XCTAssertEqual(newHeader, store.mainTexts.headerText)
+        XCTAssertEqual(placeholderText, store.mainTexts.headerDescription)
+        XCTAssertEqual(placeholderText, store.mainTexts.bottomDescription)
         assertSnapshot(matching: view, as: .image)
         
     }
@@ -398,8 +398,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         }
     }
     func testStateChangeClosures(){
-        XCTAssertNil(PermissionStore.shared.onAppear)
-        XCTAssertNil(PermissionStore.shared.onDisappear)
+        XCTAssertNil(store.onAppear)
+        XCTAssertNil(store.onDisappear)
         var testString = ""
         let onAppear = {
             testString = "appeared"
@@ -408,8 +408,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             testString = "disappeared"
         }
         _ = EmptyView().JMModal(showModal: .constant(true), for: [], onAppear: onAppear, onDisappear: onDisappear)
-        XCTAssertNotNil(PermissionStore.shared.onAppear)
-        XCTAssertNotNil(PermissionStore.shared.onAppear)
+        XCTAssertNotNil(store.onAppear)
+        XCTAssertNotNil(store.onAppear)
         MainView.testCallOnAppear()
         XCTAssertEqual(testString, "appeared")
         MainView.testCallOnDisappear()
@@ -441,7 +441,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
     }
     func testMainViewShouldShowPermissionDisabled(){
         var permissions: [PermissionType] = [.calendar, .camera, .microphone]
-        PermissionStore.shared.updateStore(property: {$0.autoCheckModalAuth=$1}, value: false)
+        store.updateStore(property: {$0.autoCheckModalAuth=$1}, value: false)
         let mainView = MainView(for: AnyView(EmptyView()), show: .constant(false), permissionsToAsk: permissions)
         XCTAssert(mainView.shouldShowPermission.wrappedValue)
         permissions = []
@@ -456,28 +456,28 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
         XCTAssertFalse(falseBinding.combine(with: .constant(false)).wrappedValue)
     }
     func testAlertViewSinglePermission(){
-        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
+        store.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
         let view = EmptyView()
             .background(Color.red.edgesIgnoringSafeArea(.all))
             .JMAlert(showModal: .constant(true), for: [.bluetooth])
         assertSnapshot(matching: view, as: .image)
     }
     func testAlertViewTwoPermissions(){
-        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
+        store.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
         let view = EmptyView()
             .background(Color.red.edgesIgnoringSafeArea(.all))
             .JMAlert(showModal: .constant(true), for: [.bluetooth, .camera])
         assertSnapshot(matching: view, as: .image)
     }
     func testAlertViewThreePermissions(){
-        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
+        store.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
         let view = EmptyView()
             .background(Color.red.edgesIgnoringSafeArea(.all))
             .JMAlert(showModal: .constant(true), for: [.bluetooth, .camera, .location])
         assertSnapshot(matching: view, as: .image)
     }
     func testAlertViewInitializers(){
-        PermissionStore.shared.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
+        store.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
         let view1 = EmptyView()
             .background(Color.red.edgesIgnoringSafeArea(.all))
             .JMAlert(showModal: .constant(true), for: [.bluetooth])
@@ -578,7 +578,7 @@ struct testViewGreenBG:View{
 }
 private extension SwiftUI.View {
     func referenceFrame() -> some View {
-        let count = PermissionStore.shared.permissions.count
+        let count = store.permissions.count
         return self.frame(width: referenceSize.width, height: referenceSize.height+CGFloat(count*70))
     }
     func referenceFrameCell() -> some View{

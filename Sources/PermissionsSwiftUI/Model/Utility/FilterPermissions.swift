@@ -7,6 +7,9 @@
 
 import Foundation
 
+var store: PermissionStore {
+    PermissionStore.shared
+}
 struct FilterPermissions {
     // Based on struct boolean property, dependent on memory
     static func filterForUnauthorized(for permissions: [PermissionType]) -> [PermissionType] {

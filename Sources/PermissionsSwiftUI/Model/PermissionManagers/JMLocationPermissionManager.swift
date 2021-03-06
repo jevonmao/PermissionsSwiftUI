@@ -42,6 +42,9 @@ class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate, Permissi
         
         if let completionHandler = completionHandler {
             let status = locationManager.authorizationStatus()
+            
+            //Completion handler called from this delegate function
+            //Both authorizedAlways and authorizedWhenInUse will be acceptable
             completionHandler(status == .authorizedAlways || status == .authorizedWhenInUse ? true : false, nil)
             
         }

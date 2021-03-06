@@ -65,7 +65,7 @@ public struct JMPermission: Equatable{
     internal var authorized:Bool = false
     internal var interacted:Bool = false {
         didSet {
-            PermissionStore.shared.objectWillChange.send()
+            store.objectWillChange.send()
         }
     }
 }
@@ -74,7 +74,7 @@ public struct JMPermission: Equatable{
  
  The structure `HKAccess` is required when initalizing health permission's enum associated values. It encapsulates the read and write type permissions for the health permission.
  */
-public struct HKAccess {
+public struct HKAccess: Hashable {
     ///The HealthKit sample types for read permission
     public var readPermissions: Set<HKSampleType> = Set()
     ///The HealthKit sample types for write permission

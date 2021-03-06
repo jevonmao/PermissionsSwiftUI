@@ -17,18 +17,17 @@ struct MainView: View {
         guard _permissionsToAsk == nil else {
             return _permissionsToAsk!
         }
-        return PermissionStore.shared.undeterminedPermissions
+        return store.undeterminedPermissions
     }
     var shouldShowPermission: Binding<Bool>{
         Binding(get: {
-            let store = PermissionStore.shared
             if store.autoCheckModalAuth && isModalNotShown {
                 return !permissionsToAsk.isEmpty
             }
             return true
         }, set: {_ in})
     }
-    @ObservedObject var store = PermissionStore.shared
+    @ObservedObject var permissionStore = store
     
     init(for bodyView: AnyView,
          show showModal: Binding<Bool>,
@@ -42,8 +41,8 @@ struct MainView: View {
         bodyView
             .sheet(isPresented: showModal.combine(with: shouldShowPermission), content: {
                 ModalView(showModal: showModal)
-                    .onAppear(perform: PermissionStore.shared.onAppear)
-                    .onDisappear(perform:PermissionStore.shared.onDisappear)
+                    .onAppear(perform: permissionStore.onAppear)
+                    .onDisappear(perform:permissionStore.onDisappear)
                     .onAppear{isModalNotShown=false}
                     .onDisappear{showModal.wrappedValue = false; isModalNotShown=true}
                     .introspectViewController{
@@ -59,12 +58,12 @@ struct MainView: View {
     //if DEBUG to ensure these functions are never used in production. They are for unit testing only.
     #if DEBUG
     static func testCallOnAppear(){
-        guard let onAppear = PermissionStore.shared.onAppear else {return}
+        guard let onAppear = store.onAppear else {return}
         onAppear()
     }
     static func testCallOnDisappear(){
-        guard let onDisappear = PermissionStore.shared.onDisappear else {return}
-        onDisappear()
+        guard let onDisappear = store.onDisappear else {return}
+        onDisappear() 
     }
     #endif
     

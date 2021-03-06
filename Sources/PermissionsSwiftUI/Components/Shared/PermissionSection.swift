@@ -12,8 +12,7 @@ struct PermissionSection: View {
     @Binding var showModal:Bool
     var isAlert:Bool
     var permissions:[PermissionType] {
-        let store = PermissionStore.shared
-        if isAlert{
+        if isAlert {
             if store.autoCheckAlertAuth{
                 return store.undeterminedPermissions
             }
@@ -58,7 +57,7 @@ struct PermissionSectionCell: View {
     //Whether used for modal or alert style component
     var isAlert: Bool
     //Empty unauthorized array means all permissions have been interacted
-    var shouldAutoDismiss: Bool{FilterPermissions.filterForUnauthorized(for: PermissionStore.shared.permissions).isEmpty}
+    var shouldAutoDismiss: Bool{FilterPermissions.filterForUnauthorized(for: store.permissions).isEmpty}
     
     //Computed constants based on device size for dynamic UI
     var screenSizeConstant: CGFloat {
@@ -91,7 +90,7 @@ struct PermissionSectionCell: View {
         let currentPermission = self.permission.currentPermission
         HStack {
             currentPermission.imageIcon
-                .foregroundColor(PermissionStore.shared.allButtonColors.primaryColor)
+                .foregroundColor(store.allButtonColors.primaryColor)
                 .font(.system(size: screenSizeConstant))
                 .frame(width: screenSizeConstant)
                 .padding(.horizontal, 5)
@@ -144,14 +143,14 @@ struct PermissionSectionCell: View {
         }
         permission.currentPermission = currentPermission
         if isAlert{
-            if shouldAutoDismiss && PermissionStore.shared.autoDismissAlert {
+            if shouldAutoDismiss && store.autoDismissAlert {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                     showModal = false
                 }
             }
         }
         else{
-            if shouldAutoDismiss && PermissionStore.shared.autoDismissModal {
+            if shouldAutoDismiss && store.autoDismissModal {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                     showModal = false
                 }

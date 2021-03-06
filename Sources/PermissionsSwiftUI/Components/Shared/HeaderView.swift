@@ -11,7 +11,7 @@ struct HeaderView: View {
     var exitButtonAction:() -> Void
     //HeaderText component have slightly different UI for alert and modal.
     var isAlert:Bool = false
-    var mainText:PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
+    var mainText:PermissionStore.MainTexts{store.mainTexts}
     var body: some View {
         VStack{
             VStack{

@@ -9,12 +9,11 @@ import SwiftUI
 
 struct ModalView: View {
     @Binding var showModal: Bool
-    var mainText:PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
+    var mainText:PermissionStore.MainTexts{store.mainTexts}
 
     var body: some View {
         ScrollView {
             VStack {
-                let store = PermissionStore.shared
                 HeaderView(exitButtonAction: {showModal = store.isModalDismissalRestricted})
                     
                 PermissionSection(showModal:$showModal, isAlert:false)

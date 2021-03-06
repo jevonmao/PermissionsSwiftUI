@@ -116,7 +116,7 @@ public extension View {
      */
     
     func setAllowButtonColor(to colors:AllButtonColors) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: colors)
+        store.updateStore(property: {$0.allButtonColors=$1}, value: colors)
         return self
     }
 }
@@ -134,7 +134,7 @@ public extension View {
     
     func setAccentColor(to color: Color) -> some View {
         let buttonColors = AllButtonColors(primaryColor: color)
-        PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: buttonColors)
+        store.updateStore(property: {$0.allButtonColors=$1}, value: buttonColors)
         return self
     }
     
@@ -154,7 +154,7 @@ public extension View {
     func setAccentColor(toPrimary primaryColor: Color, toTertiary tertiaryColor: Color) -> some View {
         let buttonColors = AllButtonColors(primaryColor: primaryColor,
                                            tertiaryColor: tertiaryColor)
-        PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: buttonColors)
+        store.updateStore(property: {$0.allButtonColors=$1}, value: buttonColors)
         return self
     }
 }

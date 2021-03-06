@@ -24,7 +24,7 @@ class JMHealthPermissionManager: PermissionManager{
     var healthPermission: HKAccess? {
         get {
             //Search and get health permission from all permissions
-            let health = PermissionStore.shared.permissions.first(where: {
+            let health = store.permissions.first(where: {
                 if case .health = $0{
                     return true
                 }

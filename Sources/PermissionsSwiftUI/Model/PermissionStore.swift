@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 
+public typealias successPermissions = [PermissionType: JMResult]
+public typealias errorPermissions = [PermissionType: JMResult]
+
 //MARK: - Storage
 /**
  The global shared storage for PermissionsSwiftUI
@@ -53,7 +56,6 @@ public class PermissionStore: ObservableObject {
         permissions.filter{!$0.currentPermission.interacted}
     }
     var isModalDismissalRestricted: Bool {
-        let store = PermissionStore.shared
         let dismiss = store.restrictModalDismissal
         if dismiss {
             //interactedPermissions array not empty means some permissions are still not interacted
@@ -62,7 +64,6 @@ public class PermissionStore: ObservableObject {
         return false
     }
     var isAlertDismissalRestricted: Bool {
-        let store = PermissionStore.shared
         let dismiss = store.restrictAlertDismissal
         if dismiss {
             //interactedPermissions array not empty means some permissions are still not interacted
@@ -109,12 +110,14 @@ public class PermissionStore: ObservableObject {
     public var restrictModalDismissal: Bool = true
     ///Whether to prevent dismissal of alert view (along with an error haptic) before all permissions have been interacted (explict deny or allow)
     public var restrictAlertDismissal: Bool = true
+    
     //MARK: `onAppear` and `onDisappear` Executions
     ///Override point for executing action when PermissionsSwiftUI view appears
     public var onAppear: (()->Void)?
     ///Override point for executing action when PermissionsSwiftUI view disappears
     public var onDisappear: (()->Void)?
-    
+    ///Called when PermissionsSwiftUI view disappears with additional parameters that encapsulates the results
+    public var onDisappearHandler: ((successPermissions, errorPermissions)->Void)?
     //MARK: Permission Components
     ///The displayed text and image icon for the camera permission
     public var cameraPermission = JMPermission(

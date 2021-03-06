@@ -18,7 +18,7 @@ public extension View{
      */
     
     func changeHeaderTo(_ text:String) -> some View{
-        PermissionStore.shared.updateStore(property: {$0.mainTexts.headerText=$1}, value: text)
+        store.updateStore(property: {$0.mainTexts.headerText=$1}, value: text)
 
         return self
     }
@@ -37,7 +37,7 @@ public extension View{
      */
     
     func changeHeaderDescriptionTo(_ text:String) -> some View{
-        PermissionStore.shared.updateStore(property: {$0.mainTexts.headerDescription=$1}, value: text)
+        store.updateStore(property: {$0.mainTexts.headerDescription=$1}, value: text)
 
         return self
     }
@@ -56,7 +56,7 @@ public extension View{
      */
     
     func changeBottomDescriptionTo(_ text:String) -> some View{
-        PermissionStore.shared.updateStore(property: {$0.mainTexts.bottomDescription=$1}, value: text)
+        store.updateStore(property: {$0.mainTexts.bottomDescription=$1}, value: text)
         return self
     }
 }
