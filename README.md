@@ -54,8 +54,8 @@ You can install PermissionsSwiftUI into your Xcode project via Swift Package Man
 > Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.
 
 ### Modal Style
-To use PermissionsSwiftUI to show a beauitful permission modal, simply add the `JMPermission`to any view. <br />
-`.JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])`
+To use PermissionsSwiftUI, simply add the `JMModal` modifier to any view. <br />
+`.JMModal(showModal: $showModal, for: [.locationAlways, .photo, .microphone])`
 Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions you want to show.
 ```Swift
    struct ContentView: View {
