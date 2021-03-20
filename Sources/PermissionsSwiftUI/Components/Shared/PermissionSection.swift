@@ -10,21 +10,16 @@ import SwiftUI
 struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showModal:Bool
+    @EnvironmentObject var store: PermissionStore
     var isAlert:Bool
+    var _permissions: [PermissionType]?
     var permissions:[PermissionType] {
-        if isAlert {
-            if store.autoCheckAlertAuth{
-                return store.undeterminedPermissions
-            }
-            else {
-                return store.permissions
-            }
-        }
-        if store.autoCheckModalAuth{
-            return store.undeterminedPermissions
+        #warning("Fix this awkward computed property.")
+        if store.configStore.autoCheckAuth{
+            return _permissions == nil ? store.undeterminedPermissions : _permissions!
         }
         else {
-            return store.permissions
+            return _permissions == nil ? store.permissions : _permissions!
         }
     }
     var body: some View {
@@ -37,9 +32,7 @@ struct PermissionSection: View {
                 }
             }
         }
-//        .onAppear{
-//            PermissionStore
-//        }
+
 
     }
 }
@@ -54,10 +47,11 @@ struct PermissionSectionCell: View {
     @State var permission: PermissionType
     @State var allowButtonStatus: AllowButtonStatus = .idle
     @Binding var showModal: Bool
+    @EnvironmentObject var store: PermissionStore
     //Whether used for modal or alert style component
     var isAlert: Bool
     //Empty unauthorized array means all permissions have been interacted
-    var shouldAutoDismiss: Bool{FilterPermissions.filterForUnauthorized(for: store.permissions).isEmpty}
+    var shouldAutoDismiss: Bool {FilterPermissions.filterForUnauthorized(with: store.permissions, store: store).isEmpty}
     
     //Computed constants based on device size for dynamic UI
     var screenSizeConstant: CGFloat {
@@ -87,10 +81,10 @@ struct PermissionSectionCell: View {
         }
     }
     var body: some View {
-        let currentPermission = self.permission.currentPermission
+        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
         HStack {
             currentPermission.imageIcon
-                .foregroundColor(store.allButtonColors.primaryColor)
+                .foregroundColor(store.configStore.allButtonColors.primaryColor)
                 .font(.system(size: screenSizeConstant))
                 .frame(width: screenSizeConstant)
                 .padding(.horizontal, 5)
@@ -131,7 +125,7 @@ struct PermissionSectionCell: View {
     }
     
     func handleButtonState(for authorized:Bool){
-        var currentPermission = permission.currentPermission
+        var currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
         currentPermission.interacted = true
         if authorized {
             allowButtonStatus = .allowed
@@ -141,16 +135,20 @@ struct PermissionSectionCell: View {
             allowButtonStatus = .denied
             currentPermission.authorized = false
         }
-        permission.currentPermission = currentPermission
+        store.permissionComponentsStore.setPermissionComponent(currentPermission, for: permission)
+        DispatchQueue.main.async {
+            store.objectWillChange.send()
+
+        }
         if isAlert{
-            if shouldAutoDismiss && store.autoDismissAlert {
+            if shouldAutoDismiss && store.configStore.autoDismiss {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                     showModal = false
                 }
             }
         }
         else{
-            if shouldAutoDismiss && store.autoDismissModal {
+            if shouldAutoDismiss && store.configStore.autoDismiss {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                     showModal = false
                 }

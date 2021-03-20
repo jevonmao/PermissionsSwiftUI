@@ -9,130 +9,51 @@ import Foundation
 import SwiftUI
 
 protocol PermissionTypeProtocol {
-    var permissions:[PermissionType]{get}
     func requestPermission(isPermissionGranted: @escaping (Bool) -> Void)
 }
 //Additional dynamic functionalities for PermissionType
-extension PermissionType:PermissionTypeProtocol{
-
-    var permissions:[PermissionType]{
-        get{
-            store.permissions 
-        }
-    }
-    //Get and set value for current permission type's store
-    var currentPermission: JMPermission {
-        get{
-            switch self {
-            case .location:
-                return store.locationPermission
-            case .locationAlways:
-                return store.locationAlwaysPermission
-            case .photo:
-                return store.photoPermission
-            case .microphone:
-                return store.microphonePermisson
-            case .camera:
-                return store.cameraPermission
-            case .notification:
-                return store.notificationPermission
-            case .calendar:
-                return store.calendarPermisson
-            case .bluetooth:
-                return store.bluetoothPermission
-            case .tracking:
-                return store.trackingPermission
-            case .contacts:
-                return store.contactsPermission
-            case .motion:
-                return store.motionPermission
-            case .reminders:
-                return store.remindersPermission
-            case .speech:
-                return store.speechPermission
-            case .health:
-                return store.healthPermission
-
-            }
-        }
-        set{
-            switch self {
-            case .location:
-                //$0 is first parameter get back from closure, it is the PermissionStore storage instance
-                //$1 is second parameter and is a generic for the new value to set
-                store.updateStore(property: {$0.locationPermission=$1}, value: newValue)
-            case .locationAlways:
-                store.updateStore(property: {$0.locationAlwaysPermission=$1}, value: newValue)
-            case .photo:
-                store.updateStore(property: {$0.photoPermission=$1}, value: newValue)
-            case .microphone:
-                store.updateStore(property: {$0.microphonePermisson=$1}, value: newValue)
-            case .camera:
-                store.updateStore(property: {$0.cameraPermission=$1}, value: newValue)
-            case .notification:
-                store.updateStore(property: {$0.notificationPermission=$1}, value: newValue)
-            case .calendar:
-                store.updateStore(property: {$0.calendarPermisson=$1}, value: newValue)
-            case .bluetooth:
-                store.updateStore(property: {$0.bluetoothPermission=$1}, value: newValue)
-            case .tracking:
-                store.updateStore(property: {$0.trackingPermission=$1}, value: newValue)
-            case .contacts:
-                store.updateStore(property: {$0.contactsPermission=$1}, value: newValue)
-            case .motion:
-                store.updateStore(property: {$0.motionPermission=$1}, value: newValue)
-            case .reminders:
-                store.updateStore(property: {$0.remindersPermission=$1}, value: newValue)
-            case .speech:
-                store.updateStore(property: {$0.speechPermission=$1}, value: newValue)
-            case .health:
-                store.updateStore(property: {$0.healthPermission=$1}, value: newValue)
-            }
-        }
-        
-    }
+extension PermissionType: PermissionTypeProtocol{
     func requestPermission(isPermissionGranted: @escaping (Bool) -> Void) {
         //Pass the $0 argument that specify isPermissionGranted back to UI layer
-        getPermissionManager()?.requestPermission{authorized, error in
+        getPermissionManager()?.init(permissionType: self).requestPermission{authorized, error in
             isPermissionGranted(authorized)
             
         }
     }
     
     //Gets the correct permission manager for current permission type
-    func getPermissionManager() -> PermissionManager?{
+    func getPermissionManager() -> PermissionManager.Type?{
         switch self {
         case .location:
-            return JMLocationPermissionManager.shared
+            return JMLocationPermissionManager.self
         case .locationAlways:
-            return JMLocationAlwaysPermissionManager.shared
+            return JMLocationAlwaysPermissionManager.self
         case .photo:
-            return JMPhotoPermissionManager.shared
+            return JMPhotoPermissionManager.self
         case .microphone:
-            return JMMicrophonePermissionManager.shared
+            return JMMicrophonePermissionManager.self
         case .camera:
-            return JMCameraPermissionManager.shared
+            return JMCameraPermissionManager.self
         case .notification:
-            return JMNotificationPermissionManager.shared
+            return JMNotificationPermissionManager.self
         case .calendar:
-            return JMCalendarPermissionManager.shared
+            return JMCalendarPermissionManager.self
         case .bluetooth:
-            return JMBluetoothPermissionManager.shared
-
+            return JMBluetoothPermissionManager.self  
         case .tracking:
             if #available(iOS 14.5, *) {
-                return JMTrackingPermissionManager.shared
+                return JMTrackingPermissionManager.self
             }
         case .contacts:
-            return JMContactsPermissionManager.shared
+            return JMContactsPermissionManager.self
         case .motion:
-            return JMMotionPermissionManager.shared
+            return JMMotionPermissionManager.self
         case .reminders:
-            return JMRemindersPermissionManager.shared
+            return JMRemindersPermissionManager.self
         case .speech:
-            return JMSpeechPermissionManager.shared
+            return JMSpeechPermissionManager.self
         case .health:
-            return JMHealthPermissionManager.shared
+            return JMHealthPermissionManager.self
         }
         return nil
 

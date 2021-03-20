@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 import UserNotifications
 
-struct JMNotificationPermissionManager: PermissionManager { 
-    static let shared: PermissionManager = JMNotificationPermissionManager()
+struct JMNotificationPermissionManager: PermissionManager {
     var authorizationStatus: AuthorizationStatus{
         var notificationSettings: UNNotificationSettings?
         let semaphore = DispatchSemaphore(value: 0)
@@ -45,7 +44,10 @@ struct JMNotificationPermissionManager: PermissionManager {
     init(notificationManager:NotificationManager=UNUserNotificationCenter.shared()){
         self.notificationManager = notificationManager
     }
-    
+    init(permissionType: PermissionType?=nil){
+        self.init(notificationManager: UNUserNotificationCenter.shared())
+    }
+
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         notificationManager.requestPermission(options: [.badge,.alert,.sound]){ granted, error in
             completion(granted, error)

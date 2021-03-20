@@ -10,7 +10,7 @@ import Foundation
 /**
  The authorization status for any iOS system permission
  */
-public enum AuthorizationStatus{
+public enum AuthorizationStatus {
     ///The explicitly allowed or `authorized` permission state
     case authorized
     ///The explicitly denied permission state
@@ -20,9 +20,21 @@ public enum AuthorizationStatus{
     ///The `notDetermined` permission state, and the only state where it is possible to ask permission
     case notDetermined
 }
+
 protocol PermissionManager {
-    static var shared:PermissionManager{get}
-    var authorizationStatus:AuthorizationStatus {get}
+    var permissionType: PermissionType? {get set}
+    var authorizationStatus: AuthorizationStatus {get}
+    #warning("Fix the initializer default implementation bug. Posted on Reddit.")
+    init(permissionType: PermissionType?)
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void)
 }
  
+extension PermissionManager {
+    var permissionType: PermissionType? {
+        get {nil}
+        set{}
+    }
+    
+}
+
+

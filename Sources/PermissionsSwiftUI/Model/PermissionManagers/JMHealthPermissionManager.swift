@@ -8,30 +8,28 @@
 import Foundation
 import HealthKit
 
-class JMHealthPermissionManager: PermissionManager{
+final class JMHealthPermissionManager: PermissionManager{
     
     typealias authorizationStatus = HKAuthorizationStatus
     typealias permissionManagerInstance = JMHealthPermissionManager
     typealias CountComparison = (Int, Int)
 
     let healthStore: HealthManager
-    static let shared: PermissionManager = JMHealthPermissionManager()
-    
-    init(healthManager: HealthManager = HKHealthStore()) {
+    var permissionType: PermissionType
+    convenience init(permissionType: PermissionType?=nil){
+        #warning("Refactor to avoid force unwrapping.")
+        self.init(healthManager: HKHealthStore(), permissionType: permissionType!)
+    }
+
+    init(healthManager: HealthManager = HKHealthStore(), permissionType: PermissionType) {
         self.healthStore = healthManager
+        self.permissionType = permissionType
     }
     //Get the health permission from stored permissions array
     var healthPermission: HKAccess? {
         get {
-            //Search and get health permission from all permissions
-            let health = store.permissions.first(where: {
-                if case .health = $0{
-                    return true
-                }
-                return false
-            })
             //Get the associated value of health permission
-            if case .health(let permissionCategories) = health {
+            if case .health(let permissionCategories) = permissionType {
                 return permissionCategories
             }
             return nil

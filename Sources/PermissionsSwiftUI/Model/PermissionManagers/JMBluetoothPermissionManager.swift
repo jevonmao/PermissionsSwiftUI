@@ -8,8 +8,8 @@
 import CoreBluetooth
 import UIKit
 
-class JMBluetoothPermissionManager: NSObject, PermissionManager { 
-
+final class JMBluetoothPermissionManager: NSObject, PermissionManager {
+    
     private var completion: ((Bool, Error?) -> Void)?
     private var manager: CBCentralManager?
     var authorizationStatus: AuthorizationStatus{
@@ -22,8 +22,8 @@ class JMBluetoothPermissionManager: NSObject, PermissionManager {
             return .denied
         }
     }
-    static let shared: PermissionManager = JMBluetoothPermissionManager()
-    
+    init(permissionType: PermissionType?=nil){}
+
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         self.completion = completion
         self.manager = CBCentralManager(delegate: self, queue: nil)

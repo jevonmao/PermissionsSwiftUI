@@ -11,7 +11,6 @@ import UIKit
 struct JMCalendarPermissionManager: PermissionManager {  
     
     static let shared: PermissionManager = JMCalendarPermissionManager()
-
     var authorizationStatus: AuthorizationStatus{
         switch EKEventStore.authorizationStatus(for: .event){
         case .authorized:
@@ -22,6 +21,8 @@ struct JMCalendarPermissionManager: PermissionManager {
             return .denied
         }
     }
+    init(permissionType: PermissionType?=nil){}
+
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         let eventStore = EKEventStore()
         eventStore.requestAccess(to: EKEntityType.event, completion: {

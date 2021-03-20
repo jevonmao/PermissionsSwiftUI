@@ -10,8 +10,10 @@ import SwiftUI
 //Custom view modifier for the button component
 struct ButtonStatusColor: ViewModifier {
     var allowButtonStatus: AllowButtonStatus
+    @EnvironmentObject var store: PermissionStore
+
     func body(content: Content) -> some View {
-        let colorStore = store.allButtonColors
+        let colorStore = store.configStore.allButtonColors
         switch self.allowButtonStatus {
         case .idle:
             return content.allowButton(foregroundColor: colorStore.buttonIdle.foregroundColor,

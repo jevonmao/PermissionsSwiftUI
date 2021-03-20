@@ -20,7 +20,8 @@ struct JMCameraPermissionManager: PermissionManager {
             return .denied
         }
     }
-    static var shared: PermissionManager = JMCameraPermissionManager()
+    init(permissionType: PermissionType?=nil){}
+
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {
             authorized in

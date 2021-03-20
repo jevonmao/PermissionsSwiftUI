@@ -8,13 +8,11 @@
 import Foundation
 import MapKit
 
-class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelegate, PermissionManager {
+final class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelegate, PermissionManager {
     
     typealias authorizationStatus = CLAuthorizationStatus
     typealias permissionManagerInstance = JMLocationAlwaysPermissionManager
-    
-    static var shared: PermissionManager = JMLocationAlwaysPermissionManager()
-    var authorizationStatus: AuthorizationStatus{
+        var authorizationStatus: AuthorizationStatus{
         switch CLLocationManager.authorizationStatus(){
         case .authorizedAlways:
             return .authorized
@@ -29,10 +27,12 @@ class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelegate, Pe
     var locationManager: LocationManager
     //Completion block for is authorized or not authorized
     var completionHandler: ((Bool, Error?) -> Void)?
-    
+    convenience init(permissionType: PermissionType?=nil){
+        self.init(locationManager: CLLocationManager())
+    }
+
     init(locationManager:LocationManager = CLLocationManager()){
         self.locationManager = locationManager
-        super.init()
     }
     //CLLocationManagerDelegate method triggered when user approve or deny permission
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

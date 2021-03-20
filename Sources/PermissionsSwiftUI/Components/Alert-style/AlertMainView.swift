@@ -8,12 +8,13 @@
 import SwiftUI
 
 //The root level view for alert-style
-struct AlertMainView: View {
+struct AlertMainView<Body: View>: View, CustomizableView {
+    @EnvironmentObject var store: PermissionStore
     private var showAlert: Binding<Bool>
-    private var bodyView: AnyView
+    private var bodyView: Body
     var shouldShowPermission:Bool{
-        if store.autoCheckAlertAuth{
-            if showAlert.wrappedValue &&
+        if store.configStore.autoCheckAuth{
+            if showAlert.wrappedValue && 
                 !store.undeterminedPermissions.isEmpty {
                 return true
             }
@@ -29,7 +30,7 @@ struct AlertMainView: View {
         }
     }
     
-    init(for bodyView: AnyView, show showAlert: Binding<Bool>) {
+    init(for bodyView: Body, show showAlert: Binding<Bool>) {
         self.bodyView = bodyView
         self.showAlert = showAlert
     }
@@ -43,8 +44,8 @@ struct AlertMainView: View {
                     Blur(style: .systemUltraThinMaterialDark)
                         .transition(AnyTransition.opacity.animation(Animation.default.speed(1.6)))
                     AlertView(showAlert:showAlert)
-                        .onAppear(perform: store.onAppear)
-                        .onDisappear(perform: store.onDisappear)
+                        .onAppear(perform: store.configStore.onAppear)
+                        .onDisappear(perform: store.configStore.onDisappear)
                 }
                 .transition(.asymmetric(insertion: insertTransition, removal: removalTransiton))
                 .edgesIgnoringSafeArea(.all)

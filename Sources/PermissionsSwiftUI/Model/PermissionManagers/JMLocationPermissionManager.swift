@@ -9,11 +9,14 @@
 import Foundation
 import MapKit
 
-class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate, PermissionManager {
+#warning("Location and location always permission don't work")
+final class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate, PermissionManager {
     typealias authorizationStatus = CLAuthorizationStatus
     typealias permissionManagerInstance = JMLocationPermissionManager
-    
-    static var shared: PermissionManager = JMLocationPermissionManager()
+    convenience init(permissionType: PermissionType?=nil){
+        self.init(locationManager: CLLocationManager())
+    }
+
     var authorizationStatus: AuthorizationStatus{
         switch locationManager.authorizationStatus(){
         case .authorizedAlways:
