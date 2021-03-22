@@ -5,7 +5,7 @@
 </span>
 
 # PermissionsSwiftUI: A SwiftUI package to handle permissions
-<img src="https://img.shields.io/github/workflow/status/jevonmao/PermissionsSwiftUI/Swift?label=CI%20Build"> <img src="https://img.shields.io/github/contributors/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/badge/License-MIT-blue.svg"> <img src="https://img.shields.io/github/issues/jevonmao/PermissionsSwiftUI?color=orange"> <img src="https://img.shields.io/github/commit-activity/w/jevonmao/PermissionsSwiftUI?color=yellowgreen&logoColor=yellowgreen"> 
+<img src="https://img.shields.io/github/workflow/status/jevonmao/PermissionsSwiftUI/Swift?label=CI%20Build"> <img src="https://img.shields.io/github/contributors/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/badge/License-MIT-blue.svg"> <img src="https://img.shields.io/github/issues/jevonmao/PermissionsSwiftUI?color=orange"> <img src="https://img.shields.io/github/commit-activity/w/jevonmao/PermissionsSwiftUI?color=yellowgreen&logoColor=yellowgreen"> <img src="https://camo.githubusercontent.com/86f8561418bbd6240d5c39dbf80b83a3dc1e85e69fe58da808f0168194dcc0d3/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5377696674504d2d436f6d70617469626c652d627269676874677265656e2e737667"> <img src="https://img.shields.io/github/v/release/jevonmao/PermissionsSwiftUI?include_prereleases&style=plastic">
 
 `PermissionsSwiftUI` displays and handles permissions in SwiftUI. It is largely inspired by [SPPermissions](https://github.com/varabeis/SPPermissions).
 The UI is highly customizable and resembles an **Apple style**. If you like the project, don't forget to `star ★` and follow me on GitHub. <br />
@@ -54,9 +54,11 @@ You can install PermissionsSwiftUI into your Xcode project via Swift Package Man
 > Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.
 
 ### Modal Style
-To use PermissionsSwiftUI to show a beauitful permission modal, simply add the `JMPermission`to any view. <br />
-`.JMPermissions(showModal: $showModal, for: [.locationAlways, .photo, .microphone])`
-Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions you want to show.
+To use PermissionsSwiftUI, simply add the `JMModal` modifier to any view:
+```Swift
+.JMModal(showModal: $showModal, for: [.locationAlways, .photo, .microphone])`
+```
+Pass in a `Binding<Bool>` to show the modal view, and add whatever permissions you want to show. For example:
 ```Swift
    struct ContentView: View {
        @State var showModal = false
@@ -196,7 +198,7 @@ To unleash the full customization of all button colors under all states, you nee
 For more information regarding the above method, reference the [official documentation](https://jevonmao.github.io/PermissionsSwiftUI/Structs/AllButtonColors.html).
 
 ### Restrict Dismissal
-PermissionsSwiftUI will by default, prevent the user from dismissing the modal and alert. This restrict dismissal behavior and be overriden by the `var restrictModalDismissal: Bool` or `var restrictAlertDismissal: Bool` properties.
+PermissionsSwiftUI will by default, prevent the user from dismissing the modal and alert, before all permissions have been interacted. This means if the user has not explictly denied or allowed EVERY permission shown, they will not be able to dismiss the PermissionsSwiftUI view. This restrict dismissal behavior can be overriden by the `var restrictModalDismissal: Bool` or `var restrictAlertDismissal: Bool` properties.
 To disable the default restrict dismiss behavior:
 ```Swift
 .JMModal(showModal: $show, for permissions: [.camera], restrictDismissal: false)
