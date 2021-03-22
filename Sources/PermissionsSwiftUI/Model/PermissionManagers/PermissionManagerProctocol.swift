@@ -7,11 +7,37 @@
 
 import Foundation
 
-enum AuthorizationStatus{
-    case authorized, denied, limited, notDetermined
+/**
+ The authorization status for any iOS system permission
+ */
+public enum AuthorizationStatus {
+    ///The explicitly allowed or `authorized` permission state
+    case authorized
+    ///The explicitly denied permission state
+    case denied
+    ///The state in which the user has granted limited access permission (ex. photos)
+    case limited
+    ///The `notDetermined` permission state, and the only state where it is possible to ask permission
+    case notDetermined
 }
+#warning("Fix the initializer default implementation bug. Posted on Reddit.")
+
 protocol PermissionManager {
-    static var shared:PermissionManager{get}
-    var authorizationStatus:AuthorizationStatus {get}
-    func requestPermission(_ completion: @escaping (Bool) -> Void)
+    var permissionType: PermissionType? {get set}
+    var authorizationStatus: AuthorizationStatus {get}
+    
+    init(permissionType: PermissionType?)
+    init()
+    
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void)
+   
 }
+
+extension PermissionManager {
+    var permissionType: PermissionType? {
+        get {nil}
+        set{}
+    }
+    init(permissionType: PermissionType?=nil){self.init()}
+}
+

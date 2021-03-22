@@ -14,7 +14,6 @@ struct JMContactsPermissionManager:PermissionManager {
     typealias authorizationStatus = CNAuthorizationStatus
     typealias permissionManagerInstance = JMContactsPermissionManager
     
-    static let shared:PermissionManager = JMContactsPermissionManager()
     var authorizationStatus: AuthorizationStatus{
         switch CNContactStore.authorizationStatus(for: .contacts){
         case .authorized:
@@ -25,15 +24,17 @@ struct JMContactsPermissionManager:PermissionManager {
             return .denied
         }
     }
+    init(){}
+
     func requestPermission(_ completion: @escaping JMPermissionAuthorizationHandlerCompletionBlock) {
             let store = CNContactStore()
             store.requestAccess(for: .contacts, completionHandler: { (authStatus, error) in
                 DispatchQueue.main.async {
-                    completion(authStatus)
+                    completion(authStatus, error)
                 }
             })
     }
 }
 extension JMContactsPermissionManager {
-    typealias JMPermissionAuthorizationHandlerCompletionBlock = (Bool) -> Void
+    typealias JMPermissionAuthorizationHandlerCompletionBlock = (Bool, Error?) -> Void
 }

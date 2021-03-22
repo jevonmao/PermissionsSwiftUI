@@ -8,11 +8,11 @@
 import Foundation
 import CoreMotion
 
-struct JMMotionPermissionManager: PermissionManager {
+struct JMMotionPermissionManager: PermissionManager { 
     
     typealias authorizationStatus = CMAuthorizationStatus
     typealias permissionManagerInstance = JMMotionPermissionManager
-    
+    init(){}
     static let shared: PermissionManager = JMMotionPermissionManager()
     var authorizationStatus: AuthorizationStatus {
         switch CMMotionActivityManager.authorizationStatus() {
@@ -25,16 +25,16 @@ struct JMMotionPermissionManager: PermissionManager {
         }
     }
     
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         let manager = CMMotionActivityManager()
         let today = Date()
         
         manager.queryActivityStarting(from: today, to: today, to: OperationQueue.main, withHandler: { (activities: [CMMotionActivity]?, error: Error?) -> () in
             if error != nil{
-                completion(false)
+                completion(false, error)
             }
             else{
-                completion(true)
+                completion(true, nil)
             }
             manager.stopActivityUpdates()
         })

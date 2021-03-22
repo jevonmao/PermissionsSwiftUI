@@ -21,13 +21,14 @@ struct JMRemindersPermissionManager: PermissionManager{
             return .denied
         }
     }
+    init(){}
 
-    func requestPermission(_ completion: @escaping (Bool)->()) {
+    func requestPermission(_ completion: @escaping (Bool, Error?)->()) {
         let eventStore = EKEventStore()
         eventStore.requestAccess(to: EKEntityType.reminder, completion: {
             (accessGranted: Bool, error: Error?) in
             DispatchQueue.main.async {
-                completion(accessGranted)
+                completion(accessGranted, error)
             }
         })
     }

@@ -23,19 +23,19 @@ struct JMTrackingPermissionManager: PermissionManager {
             return .denied
         }
     }
-    
+
     public static var advertisingIdentifier:UUID{
         ASIdentifierManager.shared().advertisingIdentifier
     }
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         ATTrackingManager.requestTrackingAuthorization { status in
                   switch status {
                   case .authorized:
-                      completion(true)
+                      completion(true, nil)
                   case .notDetermined:
                       break
                   default:
-                      completion(false)
+                      completion(false, nil)
                   }
               }
     }

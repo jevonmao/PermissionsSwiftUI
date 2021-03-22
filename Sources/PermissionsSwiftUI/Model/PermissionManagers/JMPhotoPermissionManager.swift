@@ -10,13 +10,6 @@ import Photos
 
 struct JMPhotoPermissionManager: PermissionManager {
     
-    static var shared: PermissionManager = JMPhotoPermissionManager()
-    var photoLibrary:PHPhotoLibrary.Type
-    
-    init(photoLibrary:PHPhotoLibrary.Type=PHPhotoLibrary.self){
-        self.photoLibrary = photoLibrary
-    }
-    
     var authorizationStatus: AuthorizationStatus {
         switch PHPhotoLibrary.authorizationStatus(){
         case .authorized:
@@ -29,16 +22,20 @@ struct JMPhotoPermissionManager: PermissionManager {
             return .denied
         }
     }
-    
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    var photoLibrary: PHPhotoLibrary.Type = PHPhotoLibrary.self
+    init(){}
+    init(photoLibrary:PHPhotoLibrary.Type=PHPhotoLibrary.self){
+        self.photoLibrary = photoLibrary
+    }
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         photoLibrary.requestAuthorization { authStatus in
             switch authStatus {
             case .authorized:
-                completion(true)
+                completion(true, nil)
             case .limited:
-                completion(true)
+                completion(true, nil)
             default:
-                completion(false)
+                completion(false, nil)
             }
         }
     }

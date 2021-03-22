@@ -8,30 +8,24 @@
 import Foundation
 import HealthKit
 
-class JMHealthPermissionManager: PermissionManager{
+struct JMHealthPermissionManager: PermissionManager {
     
     typealias authorizationStatus = HKAuthorizationStatus
     typealias permissionManagerInstance = JMHealthPermissionManager
     typealias CountComparison = (Int, Int)
 
-    let healthStore: HealthManager
-    static let shared: PermissionManager = JMHealthPermissionManager()
-    
-    init(healthManager: HealthManager = HKHealthStore()) {
+    var healthStore: HealthManager = HKHealthStore()
+    var permissionType: PermissionType?
+    init(){}
+    init(healthManager: HealthManager = HKHealthStore(), permissionType: PermissionType) {
         self.healthStore = healthManager
+        self.permissionType = permissionType
     }
     //Get the health permission from stored permissions array
     var healthPermission: HKAccess? {
         get {
-            //Search and get health permission from all permissions
-            let health = PermissionStore.shared.permissions.first(where: {
-                if case .health = $0{
-                    return true
-                }
-                return false
-            })
             //Get the associated value of health permission
-            if case .health(let permissionCategories) = health {
+            if case .health(let permissionCategories) = permissionType {
                 return permissionCategories
             }
             return nil
@@ -84,22 +78,31 @@ class JMHealthPermissionManager: PermissionManager{
             }
         }
     }
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         guard type(of: healthStore).isHealthDataAvailable() else {
             print("PermissionsSwiftUI - Health data is not available")
-            completion(false)
+            completion(false, createUnavailableError())
             return
         }
         healthStore.requestAuthorization(toShare: Set(healthPermission?.writePermissions ?? []),
                                          read: Set(healthPermission?.readPermissions ?? [])) { authorized, error in
-            guard error == nil else{
-                print("PermissionSwiftUI - \(error!)")
-                completion(false)
-                return
-            }
-            completion(true)
+            completion(authorized, error)
         }
         
+    }
+    func createUnavailableError() -> NSError {
+        let userInfo: [String: Any] = [
+            NSLocalizedDescriptionKey:
+              NSLocalizedString("Health permission request couldn't be completed.",
+                                comment: "localizedErrorDescription"),
+            NSLocalizedFailureReasonErrorKey:
+                NSLocalizedString("Health data is not available on the current device, the permission cannot be requested.", 
+                                  comment: "localizedErrorFailureReason"),
+            NSLocalizedRecoverySuggestionErrorKey:
+              NSLocalizedString("Verify that HealthKit is available on the current device.",
+                                comment: "localizedErrorRecoverSuggestion")
+          ]
+        return NSError(domain: "com.jevonmao.permissionsswiftui", code: 1, userInfo: userInfo)
     }
 }
 

@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import HealthKit
 
 /**
  The types of iOS system permission for show in the JMPermissions view
@@ -18,7 +17,12 @@ import HealthKit
  ```
  */
 
-public enum PermissionType {
+public enum PermissionType: Hashable {
+
+    public static func == (lhs: PermissionType, rhs: PermissionType) -> Bool {
+        lhs.rawValue == rhs.rawValue ? true : false
+    }
+    
     ///The `location` permission allows the device's positoin to be tracked
     case location
     ///The `locationAlways` permission provides location data even if app is in background

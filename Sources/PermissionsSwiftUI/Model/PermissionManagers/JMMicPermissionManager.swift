@@ -8,9 +8,8 @@
 import AVFoundation
 import Foundation
 
-struct JMMicrophonePermissionManager: PermissionManager {
+struct JMMicrophonePermissionManager: PermissionManager {  
     
-    static var shared: PermissionManager = JMMicrophonePermissionManager()
     var authorizationStatus: AuthorizationStatus{
         switch AVCaptureDevice.authorizationStatus(for: .audio){
         case .authorized:
@@ -21,12 +20,12 @@ struct JMMicrophonePermissionManager: PermissionManager {
             return .denied
         }
     }
-    
-    func requestPermission(_ completion: @escaping (Bool) -> Void) {
+    init(){}
+    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         AVAudioSession.sharedInstance().requestRecordPermission {
             granted in
             DispatchQueue.main.async {
-                completion(granted)
+                completion(granted, nil)
             }
         }
     }

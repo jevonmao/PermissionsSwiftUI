@@ -8,7 +8,7 @@
 import SwiftUI
 
 //MARK: Customize Permission Components
-public extension View{
+public extension CustomizableView {
     /**
      Customizes the image view, title (optional), and description (optional) of any permission component
 
@@ -30,15 +30,15 @@ public extension View{
         - description: The description text (optional)
      */
     
-    func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?=nil, description: String?=nil) -> some View{
-        var permission = permission
-        let currentPermission = permission.currentPermission
-        permission.currentPermission = JMPermission(
-            imageIcon: image,
-            title: title ?? currentPermission.title,
-            description: description ?? currentPermission.description, authorized: currentPermission.authorized
-        )
-        return self
+    func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?=nil, description: String?=nil) -> AnyView {
+        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
+        let newPermission = JMPermission(
+        imageIcon: image,
+        title: title ?? currentPermission.title,
+        description: description ?? currentPermission.description, authorized: currentPermission.authorized
+    )
+        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
+        return self.typeErased()
     }
     
     /**
@@ -58,15 +58,15 @@ public extension View{
         - title: The title text
      */
     
-    func setPermissionComponent(for permission: PermissionType, title: String) -> some View{
-        var permission = permission
-        let currentPermission = permission.currentPermission
-        permission.currentPermission = JMPermission(
+    func setPermissionComponent(for permission: PermissionType, title: String) -> AnyView {
+        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
+        let newPermission = JMPermission(
             imageIcon: currentPermission.imageIcon,
             title: title,
             description: currentPermission.description, authorized: currentPermission.authorized
         )
-        return self
+        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
+        return self.typeErased()
     }
     
     /**
@@ -86,20 +86,20 @@ public extension View{
         - description: The description text
      */
     
-    func setPermissionComponent(for permission: PermissionType, description: String) -> some View{
-        var permission = permission
-        let currentPermission = permission.currentPermission
-        permission.currentPermission = JMPermission(
+    func setPermissionComponent(for permission: PermissionType, description: String) -> AnyView {
+        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
+        let newPermission = JMPermission(
             imageIcon: currentPermission.imageIcon,
             title: currentPermission.title,
             description: description, authorized: currentPermission.authorized
         )
-        return self
+        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
+        return self.typeErased()
     }
 }
 
 //MARK: Configure Allow Button Colors
-public extension View {
+public extension CustomizableView {
     /**
      Customizes the color of allow buttons for all status states
 
@@ -115,14 +115,15 @@ public extension View {
         - description: The description text
      */
     
-    func setAllowButtonColor(to colors:AllButtonColors) -> some View {
-        PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: colors)
-        return self
+    func setAllowButtonColor(to colors:AllButtonColors) -> AnyView {
+        store.configStore.allButtonColors = colors
+        return self.typeErased()
     }
 }
 
+
 //MARK: Set Overall Accent Color
-public extension View {
+public extension CustomizableView {
     /**
      Customizes the overall accent color of PermissionsSwiftUI views.
 
@@ -132,10 +133,9 @@ public extension View {
         - to: The new customized accent color
      */
     
-    func setAccentColor(to color: Color) -> some View {
-        let buttonColors = AllButtonColors(primaryColor: color)
-        PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: buttonColors)
-        return self
+    func setAccentColor(to color: Color) -> AnyView {
+        store.configStore.allButtonColors.primaryColor = color
+        return self.typeErased()
     }
     
     /**
@@ -151,10 +151,11 @@ public extension View {
         
      */
     
-    func setAccentColor(toPrimary primaryColor: Color, toTertiary tertiaryColor: Color) -> some View {
+    func setAccentColor(toPrimary primaryColor: Color, toTertiary tertiaryColor: Color) -> AnyView {
         let buttonColors = AllButtonColors(primaryColor: primaryColor,
                                            tertiaryColor: tertiaryColor)
-        PermissionStore.shared.updateStore(property: {$0.allButtonColors=$1}, value: buttonColors)
-        return self
+        store.configStore.allButtonColors = buttonColors
+        return self.typeErased()
     }
 }
+

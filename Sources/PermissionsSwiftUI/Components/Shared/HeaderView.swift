@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @EnvironmentObject var store: PermissionStore
     var exitButtonAction:() -> Void
     //HeaderText component have slightly different UI for alert and modal.
     var isAlert:Bool = false
-    var mainText:PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
+    var mainText: MainTexts {store.configStore.mainTexts}
     var body: some View {
         VStack{
             VStack{

@@ -10,19 +10,19 @@ import SwiftUI
 //The body view of the alert pop up, child view of AlertMainView
 struct AlertView: View {
     @Binding var showAlert: Bool
-    var mainText: PermissionStore.MainTexts{PermissionStore.shared.mainTexts}
+    @EnvironmentObject var store: PermissionStore
 
+    var mainText:  MainTexts{store.configStore.mainTexts}
     var paddingSize: CGFloat {
         screenSize.width < 400 ? 20-(1000-screenSize.width)/120 : 20
     }
     var body: some View {
-        let store = PermissionStore.shared
             VStack{
-                HeaderView(exitButtonAction: {showAlert = store.isAlertDismissalRestricted}, isAlert: true)
+                HeaderView(exitButtonAction: {showAlert = store.shouldStayInPresentation}, isAlert: true)
                     .padding(.bottom, paddingSize/1.5)
                 PermissionSection(showModal: $showAlert, isAlert:true)
                 
-                if PermissionStore.shared.permissions.count < 2{
+                if store.permissions.count < 2{
                     Divider()
                 }
                 Text(mainText.bottomDescription)
