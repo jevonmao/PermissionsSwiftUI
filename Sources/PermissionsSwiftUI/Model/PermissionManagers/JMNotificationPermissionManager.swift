@@ -39,14 +39,12 @@ struct JMNotificationPermissionManager: PermissionManager {
             return .denied
         }
     }
-    var notificationManager:NotificationManager
+    var notificationManager:NotificationManager = UNUserNotificationCenter.shared()
     
     init(notificationManager:NotificationManager=UNUserNotificationCenter.shared()){
         self.notificationManager = notificationManager
     }
-    init(permissionType: PermissionType?=nil){
-        self.init(notificationManager: UNUserNotificationCenter.shared())
-    }
+    init(){}
 
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         notificationManager.requestPermission(options: [.badge,.alert,.sound]){ granted, error in

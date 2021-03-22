@@ -24,7 +24,7 @@ struct JMContactsPermissionManager:PermissionManager {
             return .denied
         }
     }
-    init(permissionType: PermissionType?=nil){}
+    init(){}
 
     func requestPermission(_ completion: @escaping JMPermissionAuthorizationHandlerCompletionBlock) {
             let store = CNContactStore()

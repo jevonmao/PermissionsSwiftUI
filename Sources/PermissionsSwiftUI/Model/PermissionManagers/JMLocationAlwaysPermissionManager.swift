@@ -24,12 +24,10 @@ final class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelega
         }
     }
     
-    var locationManager: LocationManager
+    var locationManager: LocationManager = CLLocationManager()
     //Completion block for is authorized or not authorized
     var completionHandler: ((Bool, Error?) -> Void)?
-    convenience init(permissionType: PermissionType?=nil){
-        self.init(locationManager: CLLocationManager())
-    }
+    override init(){}
 
     init(locationManager:LocationManager = CLLocationManager()){
         self.locationManager = locationManager

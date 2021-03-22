@@ -15,12 +15,7 @@ struct PermissionSection: View {
     var _permissions: [PermissionType]?
     var permissions:[PermissionType] {
         #warning("Fix this awkward computed property.")
-        if store.configStore.autoCheckAuth{
-            return _permissions == nil ? store.undeterminedPermissions : _permissions!
-        }
-        else {
-            return _permissions == nil ? store.permissions : _permissions!
-        }
+        return store.permissions
     }
     var body: some View {
         VStack {
@@ -32,8 +27,8 @@ struct PermissionSection: View {
                 }
             }
         }
-
-
+        
+        
     }
 }
 
@@ -46,6 +41,7 @@ enum AllowButtonStatus:CaseIterable {
 struct PermissionSectionCell: View {
     @State var permission: PermissionType
     @State var allowButtonStatus: AllowButtonStatus = .idle
+    @State var permissionManager: PermissionManager?
     @Binding var showModal: Bool
     @EnvironmentObject var store: PermissionStore
     //Whether used for modal or alert style component
@@ -57,7 +53,7 @@ struct PermissionSectionCell: View {
     var screenSizeConstant: CGFloat {
         //Weirdass formulas that simply work
         screenSize.width < 400 ? 40-(1000-screenSize.width)/80 : 40
-}
+    }
     var fontSizeConstant: CGFloat {
         screenSize.width < 400 ? 20-(1000-screenSize.width)/150 : 20
     }
@@ -99,61 +95,54 @@ struct PermissionSectionCell: View {
                     .lineLimit(3)
                     .foregroundColor(Color(.systemGray2))
                     .minimumScaleFactor(0.5)
-
+                
             }
             .padding(.horizontal, 3)
-
+            
             Spacer()
             if isAlert {
                 //Call requestPermission (enum function) to make request to Apple API
                 //The handleButtonState function will be executed based on result of request
-                AllowButtonSection(action: {
-                    permission.requestPermission(isPermissionGranted: {handleButtonState(for: $0)})
-                }, allowButtonStatus: $allowButtonStatus)
+                AllowButtonSection(action: handlePermissionRequest, allowButtonStatus: $allowButtonStatus)
             }
             else{
-                AllowButtonSection(action: {
-                    permission.requestPermission(isPermissionGranted: {handleButtonState(for: $0)})
-                }, allowButtonStatus: $allowButtonStatus)
+                AllowButtonSection(action: handlePermissionRequest, allowButtonStatus: $allowButtonStatus)
                 .animation(.default)
             }
-      
+            
         }
         .fixedSize(horizontal: false, vertical: true)
         .padding(.vertical, vertPaddingConstant)
         .padding(.horizontal, horiPaddingConstant)
     }
     
-    func handleButtonState(for authorized:Bool){
-        var currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
-        currentPermission.interacted = true
-        if authorized {
-            allowButtonStatus = .allowed
-            currentPermission.authorized = true
-        }
-        else {
-            allowButtonStatus = .denied
-            currentPermission.authorized = false
-        }
-        store.permissionComponentsStore.setPermissionComponent(currentPermission, for: permission)
-        DispatchQueue.main.async {
-            store.objectWillChange.send()
-
-        }
-        if isAlert{
+    func handlePermissionRequest() {
+        permissionManager = permission.getPermissionManager()?.init(permissionType: permission)
+        permissionManager?.requestPermission{authorized, error in
+            var currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
+            currentPermission.interacted = true
+            if authorized {
+                allowButtonStatus = .allowed
+                currentPermission.authorized = true
+            }
+            else {
+                allowButtonStatus = .denied
+                currentPermission.authorized = false
+            }
+            store.permissionComponentsStore.setPermissionComponent(currentPermission, for: permission)
+            DispatchQueue.main.async {
+                store.objectWillChange.send()
+                
+            }
             if shouldAutoDismiss && store.configStore.autoDismiss {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                     showModal = false
                 }
             }
         }
-        else{
-            if shouldAutoDismiss && store.configStore.autoDismiss {
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-                    showModal = false
-                }
-            }
-        }
-       
+        
+        
+        
+        
     }
 }

@@ -22,14 +22,11 @@ struct JMPhotoPermissionManager: PermissionManager {
             return .denied
         }
     }
-    var photoLibrary: PHPhotoLibrary.Type
+    var photoLibrary: PHPhotoLibrary.Type = PHPhotoLibrary.self
+    init(){}
     init(photoLibrary:PHPhotoLibrary.Type=PHPhotoLibrary.self){
         self.photoLibrary = photoLibrary
     }
-    init(permissionType: PermissionType?=nil){
-        self.init(photoLibrary: PHPhotoLibrary.self)
-    }
-
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         photoLibrary.requestAuthorization { authStatus in
             switch authStatus {

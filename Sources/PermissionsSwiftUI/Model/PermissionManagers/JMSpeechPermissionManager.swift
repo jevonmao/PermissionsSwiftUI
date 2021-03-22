@@ -21,7 +21,6 @@ struct JMSpeechPermissionManager: PermissionManager{
             return .denied
         }
     }
-    init(permissionType: PermissionType?=nil){}
 
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         SFSpeechRecognizer.requestAuthorization {authStatus in

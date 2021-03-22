@@ -21,7 +21,7 @@ struct JMRemindersPermissionManager: PermissionManager{
             return .denied
         }
     }
-    init(permissionType: PermissionType?=nil){}
+    init(){}
 
     func requestPermission(_ completion: @escaping (Bool, Error?)->()) {
         let eventStore = EKEventStore()

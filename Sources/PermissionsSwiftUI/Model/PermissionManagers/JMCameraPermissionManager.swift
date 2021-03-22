@@ -20,7 +20,7 @@ struct JMCameraPermissionManager: PermissionManager {
             return .denied
         }
     }
-    init(permissionType: PermissionType?=nil){}
+    init(){}
 
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {

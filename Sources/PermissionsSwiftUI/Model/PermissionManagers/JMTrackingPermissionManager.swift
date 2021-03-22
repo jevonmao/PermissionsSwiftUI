@@ -23,7 +23,6 @@ struct JMTrackingPermissionManager: PermissionManager {
             return .denied
         }
     }
-    init(permissionType: PermissionType?=nil){}
 
     public static var advertisingIdentifier:UUID{
         ASIdentifierManager.shared().advertisingIdentifier

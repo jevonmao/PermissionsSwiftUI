@@ -8,19 +8,15 @@
 import Foundation
 import HealthKit
 
-final class JMHealthPermissionManager: PermissionManager{
+struct JMHealthPermissionManager: PermissionManager {
     
     typealias authorizationStatus = HKAuthorizationStatus
     typealias permissionManagerInstance = JMHealthPermissionManager
     typealias CountComparison = (Int, Int)
 
-    let healthStore: HealthManager
-    var permissionType: PermissionType
-    convenience init(permissionType: PermissionType?=nil){
-        #warning("Refactor to avoid force unwrapping.")
-        self.init(healthManager: HKHealthStore(), permissionType: permissionType!)
-    }
-
+    var healthStore: HealthManager = HKHealthStore()
+    var permissionType: PermissionType?
+    init(){}
     init(healthManager: HealthManager = HKHealthStore(), permissionType: PermissionType) {
         self.healthStore = healthManager
         self.permissionType = permissionType

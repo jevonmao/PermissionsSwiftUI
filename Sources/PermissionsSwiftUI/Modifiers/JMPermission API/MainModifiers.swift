@@ -367,10 +367,10 @@ public extension View {
         store.configStore.onAppear = onAppear
         store.configStore.onDisappear = onDisappear
         store.configStore.autoDismiss = autoDismiss ?? true
-        store.configStore.autoDismiss = autoCheckAuthorization ?? true
+        store.configStore.autoCheckAuth = autoCheckAuthorization ?? true
         store.configStore.restrictDismissal = restrictDismissal ?? true
         store.configStore.onDisappearHandler = onDisappearHandler
-            return store
+        return store
 
 
     }
@@ -613,7 +613,7 @@ public extension View{
         store.configStore.onAppear = onAppear
         store.configStore.onDisappear = onDisappear
         store.configStore.autoDismiss = autoDismiss ?? true
-        store.configStore.autoDismiss = autoCheckAuthorization ?? true
+        store.configStore.autoCheckAuth = autoCheckAuthorization ?? true
         store.configStore.restrictDismissal = restrictDismissal ?? true
         store.configStore.onDisappearHandler = onDisappearHandler
         return AlertMainView(for: self, show: showModal).environmentObject(store)

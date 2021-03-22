@@ -9,20 +9,12 @@ import Foundation
 import SwiftUI
 
 protocol PermissionTypeProtocol {
-    func requestPermission(isPermissionGranted: @escaping (Bool) -> Void)
+    func getPermissionManager() -> PermissionManager.Type?
 }
 //Additional dynamic functionalities for PermissionType
-extension PermissionType: PermissionTypeProtocol{
-    func requestPermission(isPermissionGranted: @escaping (Bool) -> Void) {
-        //Pass the $0 argument that specify isPermissionGranted back to UI layer
-        getPermissionManager()?.init(permissionType: self).requestPermission{authorized, error in
-            isPermissionGranted(authorized)
-            
-        }
-    }
-    
+extension PermissionType: PermissionTypeProtocol { 
     //Gets the correct permission manager for current permission type
-    func getPermissionManager() -> PermissionManager.Type?{
+    func getPermissionManager() -> PermissionManager.Type? {
         switch self {
         case .location:
             return JMLocationPermissionManager.self
@@ -60,8 +52,8 @@ extension PermissionType: PermissionTypeProtocol{
     }
     
 }
-extension PermissionType:CaseIterable{
-    public static var allCases: [PermissionType]{
+extension PermissionType: CaseIterable {
+    public static var allCases: [PermissionType] {
                 if #available(iOS 14.5, *) {
                     return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking, .health(categories: nil)]
                 } else {

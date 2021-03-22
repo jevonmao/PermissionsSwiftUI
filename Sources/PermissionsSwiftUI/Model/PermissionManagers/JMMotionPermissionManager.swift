@@ -12,8 +12,7 @@ struct JMMotionPermissionManager: PermissionManager {
     
     typealias authorizationStatus = CMAuthorizationStatus
     typealias permissionManagerInstance = JMMotionPermissionManager
-    init(permissionType: PermissionType?=nil){}
-
+    init(){}
     static let shared: PermissionManager = JMMotionPermissionManager()
     var authorizationStatus: AuthorizationStatus {
         switch CMMotionActivityManager.authorizationStatus() {

@@ -13,10 +13,7 @@ import MapKit
 final class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate, PermissionManager {
     typealias authorizationStatus = CLAuthorizationStatus
     typealias permissionManagerInstance = JMLocationPermissionManager
-    convenience init(permissionType: PermissionType?=nil){
-        self.init(locationManager: CLLocationManager())
-    }
-
+    
     var authorizationStatus: AuthorizationStatus{
         switch locationManager.authorizationStatus(){
         case .authorizedAlways:
@@ -31,8 +28,8 @@ final class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate, Pe
     }
 
     var completionHandler: ((Bool, Error?) -> Void)?
-    var locationManager: LocationManager
-    
+    var locationManager: LocationManager = CLLocationManager()
+    override init(){}
     init(locationManager:LocationManager = CLLocationManager()){
         self.locationManager = locationManager
         super.init()

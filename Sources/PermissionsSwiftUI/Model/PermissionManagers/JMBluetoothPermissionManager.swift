@@ -22,7 +22,7 @@ final class JMBluetoothPermissionManager: NSObject, PermissionManager {
             return .denied
         }
     }
-    init(permissionType: PermissionType?=nil){}
+    override init(){} 
 
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         self.completion = completion
