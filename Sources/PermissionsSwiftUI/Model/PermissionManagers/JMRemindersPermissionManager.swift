@@ -10,7 +10,6 @@ import EventKit
 
 struct JMRemindersPermissionManager: PermissionManager{
     
-    static let shared: PermissionManager = JMRemindersPermissionManager()
     var authorizationStatus: AuthorizationStatus{
         switch EKEventStore.authorizationStatus(for: .reminder){
         case .authorized:

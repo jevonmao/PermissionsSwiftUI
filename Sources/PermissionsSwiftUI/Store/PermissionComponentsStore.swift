@@ -12,6 +12,7 @@ import SwiftUI
  The data storage class that contains configurable permission components
  */
 public struct PermissionComponentsStore {
+    #warning("Remove authorized property from initializer")
     //MARK: Creating a new permission components store
     public init(){}
     //MARK: Permission Components
@@ -90,14 +91,16 @@ public struct PermissionComponentsStore {
     public var speechPermission = JMPermission(
         imageIcon: AnyView(Image(systemName: "rectangle.3.offgrid.bubble.left.fill")),
         title: "Speech",
-        description: "Allow to access speech recognition", authorized: false
-    )
+        description: "Allow to access speech recognition")
     ///The displayed text and image icon for the health permission
     public var healthPermission = JMPermission(
         imageIcon: AnyView(Image(systemName: "heart.fill")),
         title: "Health",
-        description: "Allow to access your health information",
-        authorized: false)
+        description: "Allow to access your health information")
+    ///The displayed text and image icon for the music permission
+    public var musicPermission = JMPermission(imageIcon: Image(systemName: "music.note.list").typeErased(),
+                                              title: "Music",
+                                              description: "Allow to control audio playback")
     
     func getPermissionComponent(for permission: PermissionType) -> JMPermission {
         switch permission {
@@ -129,7 +132,8 @@ public struct PermissionComponentsStore {
             return self.speechPermission
         case .health:
             return self.healthPermission
-
+        case .music:
+            return self.musicPermission
         }
     }
     
@@ -163,6 +167,8 @@ public struct PermissionComponentsStore {
             self.speechPermission = component
         case .health:
             self.healthPermission = component
+        case .music:
+            self.musicPermission = component
 
         }
 

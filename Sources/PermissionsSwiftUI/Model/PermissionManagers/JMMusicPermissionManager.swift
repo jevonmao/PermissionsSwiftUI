@@ -1,17 +1,16 @@
 //
-//  JMSpeechPermissionManager.swift
+//  File.swift
 //  
 //
-//  Created by Jevon Mao on 2/2/21.
+//  Created by Jevon Mao on 3/22/21.
 //
 
 import Foundation
-import Speech
+import MediaPlayer
 
-struct JMSpeechPermissionManager: PermissionManager{
-    
-    var authorizationStatus: AuthorizationStatus{
-        switch SFSpeechRecognizer.authorizationStatus(){
+struct JMMusicPermissionManager: PermissionManager{
+        var authorizationStatus: AuthorizationStatus{
+        switch MPMediaLibrary.authorizationStatus(){
         case .authorized:
             return .authorized
         case .notDetermined:
@@ -22,7 +21,7 @@ struct JMSpeechPermissionManager: PermissionManager{
     }
 
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
-        SFSpeechRecognizer.requestAuthorization {authStatus in
+        MPMediaLibrary.requestAuthorization {authStatus in
             switch authStatus{
             case .authorized:
                 completion(true, nil)
@@ -34,3 +33,4 @@ struct JMSpeechPermissionManager: PermissionManager{
         }
     }
 }
+
