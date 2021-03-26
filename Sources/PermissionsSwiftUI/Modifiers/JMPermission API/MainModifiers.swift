@@ -571,7 +571,7 @@ public extension View {
         store.configStore.autoCheckAuth = autoCheckAuthorization ?? true
         store.configStore.restrictDismissal = restrictDismissal ?? true
         store.configStore.onDisappearHandler = onDisappearHandler
-        return AlertMainView(for: self, showing: showModal).withEnvironmentObjects(store: store, permissionStyle: .modal)
+        return AlertMainView(for: self, showing: showModal).withEnvironmentObjects(store: store, permissionStyle: .alert)
     }
 }
 

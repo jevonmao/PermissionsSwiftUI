@@ -7,16 +7,19 @@
 
 import Combine
 
+/**
+ The schema storage class that coordinates PermissionsSwiftUI's internal functions
+ */
 public class PermissionSchemaStore: ObservableObject {
 
     //MARK: Filtered permission arrays
     /**
-     A global array of permissions that configures the permissions to request
+     Computed and filtered permissions with `undetermined` status
      
      - Warning: `permissionsToAsk` property is deprecated, renamed to `undeterminedPermissions`
      */
+    
     @available(iOS, deprecated: 13.0, obsoleted: 15.0, renamed: "undeterminedPermissions")
-    ///An array of undetermined permissions filtered out from `permissions`
     var permissionsToAsk: [PermissionType] {
         return undeterminedPermissions
     }
@@ -27,6 +30,7 @@ public class PermissionSchemaStore: ObservableObject {
         //Filter for permissions that are not interacted
         permissions.filter{componentsInternalStore.getPermissionComponent(for: $0).interacted}
     }
+    //MARK: Controls dismiss restriction
     var shouldStayInPresentation: Bool {
         if configStore.restrictDismissal {
             //Empty means all permissions interacted, so should no longer stay in presentation
@@ -34,6 +38,7 @@ public class PermissionSchemaStore: ObservableObject {
         }
         return false
     }
+    //MARK: Initialized configuration properties
     var configStore: ConfigStore
     @Published var permissions: [PermissionType]
     var permissionViewStyle: PermissionViewStyle

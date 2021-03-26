@@ -14,6 +14,19 @@ import SwiftUI
 public struct PermissionComponentsStore {
     #warning("Remove authorized property from initializer")
     //MARK: Creating a new permission components store
+    /**
+     Creates a new permission components store with default settings
+     
+     Use this initializer to declare a new instance of `PermissionComponentsStore`. Configure all the individual permission components, including image, title, and description by assigning to their properties.
+     For example:
+     ```
+     let store = PermissionStore()
+     store.permissionComponentsStore.cameraPermission = JMPermission(
+                                                            imageIcon: AnyView(Image(systemName: "camera.fill")),
+                                                            title: "Camera",
+                                                            description: "Allow to use your camera", authorized: false)
+     ```
+     */
     public init(){}
     //MARK: Permission Components
     ///The displayed text and image icon for the camera permission

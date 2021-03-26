@@ -21,7 +21,7 @@ struct AlertView: View {
             VStack{
                 HeaderView(exitButtonAction: {showAlert = schemaStore.shouldStayInPresentation})
                     .padding(.bottom, paddingSize/1.5)
-                PermissionSection(showModal: $showAlert)
+                PermissionSection(showing: $showAlert)
                 
                 if store.permissions.count < 2{
                     Divider()

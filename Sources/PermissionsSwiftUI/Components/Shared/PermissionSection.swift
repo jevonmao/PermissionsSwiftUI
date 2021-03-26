@@ -9,7 +9,7 @@ import MapKit
 import SwiftUI
 struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
-    @Binding var showModal:Bool
+    @Binding var showing:Bool
     @EnvironmentObject var store: PermissionStore
     var _permissions: [PermissionType]?
     var permissions:[PermissionType] {
@@ -19,7 +19,7 @@ struct PermissionSection: View {
     var body: some View {
         VStack {
             ForEach(permissions.indices, id: \.self) {
-                PermissionSectionCell(permission: permissions[$0], showModal: $showModal)
+                PermissionSectionCell(permission: permissions[$0], showing: $showing)
                 
                 if permissions.count > 1 {
                     Divider()
@@ -41,7 +41,7 @@ struct PermissionSectionCell: View {
     @State var permission: PermissionType
     @State var allowButtonStatus: AllowButtonStatus = .idle
     @State var permissionManager: PermissionManager?
-    @Binding var showModal: Bool
+    @Binding var showing: Bool
     @EnvironmentObject var store: PermissionStore
     @EnvironmentObject var schemaStore: PermissionSchemaStore
 
@@ -133,8 +133,8 @@ struct PermissionSectionCell: View {
                 schemaStore.objectWillChange.send()
             }
             if shouldAutoDismiss && store.configStore.autoDismiss {
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-                    showModal = false
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.8) {
+                    showing = false
                 }
             }
         }
