@@ -11,7 +11,6 @@ struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showModal:Bool
     @EnvironmentObject var store: PermissionStore
-    var isAlert:Bool
     var _permissions: [PermissionType]?
     var permissions:[PermissionType] {
         #warning("Fix this awkward computed property.")
@@ -20,7 +19,7 @@ struct PermissionSection: View {
     var body: some View {
         VStack {
             ForEach(permissions.indices, id: \.self) {
-                PermissionSectionCell(permission: permissions[$0], showModal: $showModal, isAlert: isAlert)
+                PermissionSectionCell(permission: permissions[$0], showModal: $showModal)
                 
                 if permissions.count > 1 {
                     Divider()
@@ -44,10 +43,10 @@ struct PermissionSectionCell: View {
     @State var permissionManager: PermissionManager?
     @Binding var showModal: Bool
     @EnvironmentObject var store: PermissionStore
-    //Whether used for modal or alert style component
-    var isAlert: Bool
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
+
     //Empty unauthorized array means all permissions have been interacted
-    var shouldAutoDismiss: Bool {FilterPermissions.filterForUnauthorized(with: store.permissions, store: store).isEmpty}
+    var shouldAutoDismiss: Bool {FilterPermissions.filterForUnauthorized(with: store.permissions, store: schemaStore).isEmpty}
     
     //Computed constants based on device size for dynamic UI
     var screenSizeConstant: CGFloat {
@@ -61,7 +60,7 @@ struct PermissionSectionCell: View {
         fontSizeConstant - fontSizeConstant/2.8
     }
     var vertPaddingConstant: CGFloat {
-        if isAlert {
+        if schemaStore.permissionViewStyle == .alert {
             return screenSize.width < 400 ? 0 : 10
         }
         else{
@@ -69,7 +68,7 @@ struct PermissionSectionCell: View {
         }
     }
     var horiPaddingConstant: CGFloat {
-        if isAlert {
+        if schemaStore.permissionViewStyle == .alert {
             return 0
         }
         else{
@@ -77,7 +76,7 @@ struct PermissionSectionCell: View {
         }
     }
     var body: some View {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
+        let currentPermission = schemaStore.componentsInternalStore.getPermissionComponent(for: permission)
         HStack {
             currentPermission.imageIcon
                 .foregroundColor(store.configStore.allButtonColors.primaryColor)
@@ -100,7 +99,7 @@ struct PermissionSectionCell: View {
             .padding(.horizontal, 3)
             
             Spacer()
-            if isAlert {
+            if schemaStore.permissionViewStyle == .alert {
                 //Call requestPermission (enum function) to make request to Apple API
                 //The handleButtonState function will be executed based on result of request
                 AllowButtonSection(action: handlePermissionRequest, allowButtonStatus: $allowButtonStatus)
@@ -119,7 +118,7 @@ struct PermissionSectionCell: View {
     func handlePermissionRequest() {
         permissionManager = permission.getPermissionManager()?.init(permissionType: permission)
         permissionManager?.requestPermission{authorized, error in
-            var currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
+            var currentPermission = schemaStore.componentsInternalStore.getPermissionComponent(for: permission)
             currentPermission.interacted = true
             if authorized {
                 allowButtonStatus = .allowed
@@ -129,10 +128,9 @@ struct PermissionSectionCell: View {
                 allowButtonStatus = .denied
                 currentPermission.authorized = false
             }
-            store.permissionComponentsStore.setPermissionComponent(currentPermission, for: permission)
+            schemaStore.componentsInternalStore.setPermissionComponent(currentPermission, for: permission)
             DispatchQueue.main.async {
-                store.objectWillChange.send()
-                
+                schemaStore.objectWillChange.send()
             }
             if shouldAutoDismiss && store.configStore.autoDismiss {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {

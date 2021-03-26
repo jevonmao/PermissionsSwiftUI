@@ -19,7 +19,7 @@ struct ModalView: View {
             VStack { 
                 HeaderView(exitButtonAction: {showModal = schemaStore.shouldStayInPresentation})
                     
-                PermissionSection(showModal:$showModal, isAlert:false)
+                PermissionSection(showModal:$showModal)
                     .background(Color(.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 15))
                     .padding()

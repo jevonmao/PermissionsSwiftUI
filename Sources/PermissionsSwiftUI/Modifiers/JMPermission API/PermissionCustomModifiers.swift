@@ -31,13 +31,13 @@ public extension CustomizableView {
      */
     
     func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?=nil, description: String?=nil) -> AnyView {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
+        let currentPermission = schemaStore.componentsInternalStore.getPermissionComponent(for: permission)
         let newPermission = JMPermission(
         imageIcon: image,
         title: title ?? currentPermission.title,
         description: description ?? currentPermission.description, authorized: currentPermission.authorized
     )
-        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
+        schemaStore.componentsInternalStore.setPermissionComponent(newPermission, for: permission)
         return self.typeErased()
     }
     
@@ -59,13 +59,13 @@ public extension CustomizableView {
      */
     
     func setPermissionComponent(for permission: PermissionType, title: String) -> AnyView {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
+        let currentPermission = schemaStore.componentsInternalStore.getPermissionComponent(for: permission)
         let newPermission = JMPermission(
             imageIcon: currentPermission.imageIcon,
             title: title,
             description: currentPermission.description, authorized: currentPermission.authorized
         )
-        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
+        schemaStore.componentsInternalStore.setPermissionComponent(newPermission, for: permission)
         return self.typeErased()
     }
     
@@ -87,13 +87,13 @@ public extension CustomizableView {
      */
     
     func setPermissionComponent(for permission: PermissionType, description: String) -> AnyView {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
+        let currentPermission = schemaStore.componentsInternalStore.getPermissionComponent(for: permission)
         let newPermission = JMPermission(
             imageIcon: currentPermission.imageIcon,
             title: currentPermission.title,
             description: description, authorized: currentPermission.authorized
         )
-        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
+        schemaStore.componentsInternalStore.setPermissionComponent(newPermission, for: permission)
         return self.typeErased()
     }
 }

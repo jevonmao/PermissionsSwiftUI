@@ -8,10 +8,10 @@
 import SwiftUI
 import Introspect
 
-struct ModalMainView<Body: View>: View, CustomizableView {
+@usableFromInline struct ModalMainView<Body: View>: View, CustomizableView {
     #warning("Refactor all the property here into a view model, along with all the other views.")
-    @EnvironmentObject var store: PermissionStore
-    @EnvironmentObject var schemaStore: PermissionSchemaStore
+    @usableFromInline @EnvironmentObject var store: PermissionStore
+    @usableFromInline @EnvironmentObject var schemaStore: PermissionSchemaStore
     @State var isModalNotShown = true
     var showing: Binding<Bool>
     var bodyView: Body
@@ -31,7 +31,7 @@ struct ModalMainView<Body: View>: View, CustomizableView {
             return true
         }, set: {_ in})
     }
-    init(for bodyView: Body,
+    @usableFromInline init(for bodyView: Body,
          showing: Binding<Bool>,
          permissionsToAsk: [PermissionType]?=nil) {
         self.bodyView = bodyView
@@ -39,7 +39,7 @@ struct ModalMainView<Body: View>: View, CustomizableView {
         self._permissionsToAsk = permissionsToAsk
     }
     
-    var body: some View {
+    @usableFromInline var body: some View {
         bodyView
             .sheet(isPresented: showing.combine(with: shouldShowPermission), content: {
                 ModalView(showModal: showing)

@@ -29,7 +29,7 @@ public class PermissionStore: ObservableObject {
     public init(){}
     
     ///An  array of permissions that configures the permissions to request
-    @Published public var permissions: [PermissionType] = []
+    public var permissions: [PermissionType] = []
     
     //MARK: Configuration store
     public var configStore = ConfigStore()

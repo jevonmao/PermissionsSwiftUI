@@ -7,7 +7,7 @@
 
 import Combine
 
-class PermissionSchemaStore: ObservableObject {
+public class PermissionSchemaStore: ObservableObject {
 
     //MARK: Filtered permission arrays
     /**
@@ -25,29 +25,28 @@ class PermissionSchemaStore: ObservableObject {
     }
     var interactedPermissions: [PermissionType] {
         //Filter for permissions that are not interacted
-        permissions.filter{permissionComponentsStore.getPermissionComponent(for: $0).interacted}
+        permissions.filter{componentsInternalStore.getPermissionComponent(for: $0).interacted}
     }
     var shouldStayInPresentation: Bool {
         if configStore.restrictDismissal {
             //Empty means all permissions interacted, so should no longer stay in presentation
-            return interactedPermissions.isEmpty
+            return !(interactedPermissions.count == permissions.count)
         }
         return false
     }
     var configStore: ConfigStore
-    var permissions: [PermissionType]
-    var permissionComponentsStore: PermissionComponentsStore
+    @Published var permissions: [PermissionType]
     var permissionViewStyle: PermissionViewStyle
-    
+    var componentsInternalStore: ComponentsInternalStore
     init(configStore: ConfigStore, permissions: [PermissionType], permissionComponentsStore: PermissionComponentsStore, permissionViewStyle: PermissionViewStyle) {
         self.configStore = configStore
         self.permissions = permissions
-        self.permissionComponentsStore = permissionComponentsStore
         self.permissionViewStyle = permissionViewStyle
+        self.componentsInternalStore = ComponentsInternalStore(permissionComponentsStore: permissionComponentsStore)
     }
     
 }
 
-enum PermissionViewStyle {
+@usableFromInline enum PermissionViewStyle {
     case alert, modal
 }

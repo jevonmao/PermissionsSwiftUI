@@ -9,6 +9,7 @@ import SwiftUI
 
 public protocol CustomizableView: View {
     var store: PermissionStore {get}
+    var schemaStore: PermissionSchemaStore {get}
     func setAccentColor(to color: Color) -> AnyView
     func setAccentColor(toPrimary primaryColor: Color, toTertiary tertiaryColor: Color) -> AnyView
     func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?, description: String?) -> AnyView

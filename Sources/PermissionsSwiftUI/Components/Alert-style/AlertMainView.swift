@@ -8,8 +8,8 @@
 import SwiftUI
 
 //The root level view for alert-style
-struct AlertMainView<T: View>: View, CustomizableView {
-    typealias ViewType = T
+@usableFromInline struct AlertMainView<Body: View>: View, CustomizableView {
+    typealias ViewType = Body
     var showing: Binding<Bool>
     var bodyView: ViewType
     init(for bodyView: ViewType, showing: Binding<Bool>) {
@@ -17,8 +17,8 @@ struct AlertMainView<T: View>: View, CustomizableView {
         self.bodyView = bodyView
     }
     
-    @EnvironmentObject var store: PermissionStore
-    @EnvironmentObject var schemaStore: PermissionSchemaStore
+    @usableFromInline @EnvironmentObject var store: PermissionStore
+    @usableFromInline @EnvironmentObject var schemaStore: PermissionSchemaStore
     var shouldShowPermission:Bool{
         if store.configStore.autoCheckAuth{
             if showing.wrappedValue &&
@@ -36,7 +36,7 @@ struct AlertMainView<T: View>: View, CustomizableView {
             return false
         }
     }
-    var body: some View {
+    @usableFromInline var body: some View {
         ZStack{
             let insertTransition = AnyTransition.opacity.combined(with: .scale(scale: 1.1)).animation(Animation.default.speed(1.6))
             let removalTransiton = AnyTransition.opacity.combined(with: .scale(scale: 0.9)).animation(Animation.default.speed(1.8))
