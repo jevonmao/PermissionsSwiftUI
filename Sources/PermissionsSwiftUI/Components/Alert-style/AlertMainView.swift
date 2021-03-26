@@ -8,31 +8,33 @@
 import SwiftUI
 
 //The root level view for alert-style
-struct AlertMainView<Body: View>: View, CustomizableView {
+struct AlertMainView<T: View>: View, CustomizableView {
+    typealias ViewType = T
+    var showing: Binding<Bool>
+    var bodyView: ViewType
+    init(for bodyView: ViewType, showing: Binding<Bool>) {
+        self.showing = showing
+        self.bodyView = bodyView
+    }
+    
     @EnvironmentObject var store: PermissionStore
-    private var showAlert: Binding<Bool>
-    private var bodyView: Body
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
     var shouldShowPermission:Bool{
         if store.configStore.autoCheckAuth{
-            if showAlert.wrappedValue && 
-                !store.undeterminedPermissions.isEmpty {
+            if showing.wrappedValue &&
+                !schemaStore.undeterminedPermissions.isEmpty {
                 return true
             }
             else {
                 return false
             }
         }
-        if showAlert.wrappedValue{
+        if showing.wrappedValue{
             return true
         }
         else {
             return false
         }
-    }
-    
-    init(for bodyView: Body, show showAlert: Binding<Bool>) {
-        self.bodyView = bodyView
-        self.showAlert = showAlert
     }
     var body: some View {
         ZStack{
@@ -43,7 +45,7 @@ struct AlertMainView<Body: View>: View, CustomizableView {
                 Group{
                     Blur(style: .systemUltraThinMaterialDark)
                         .transition(AnyTransition.opacity.animation(Animation.default.speed(1.6)))
-                    AlertView(showAlert:showAlert)
+                    AlertView(showAlert: showing)
                         .onAppear(perform: store.configStore.onAppear)
                         .onDisappear(perform: store.configStore.onDisappear)
                 }

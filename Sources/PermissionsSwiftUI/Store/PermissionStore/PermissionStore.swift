@@ -27,43 +27,9 @@ public class PermissionStore: ObservableObject {
      store.mainTexts.headerText = "PermissionsSwiftUI is the best library"
      */
     public init(){}
-    //a private singleton instance that allows read & write, but for this file's methods only
-    fileprivate static var mutableShared = PermissionStore()
-    //Read only singleton exposed to other parts of program
-    static var shared: PermissionStore {
-        get{
-            mutableShared
-        }
-    }
     
     ///An  array of permissions that configures the permissions to request
     @Published public var permissions: [PermissionType] = []
-    
-    //MARK: Filtered permission arrays
-    /**
-     A global array of permissions that configures the permissions to request
-     
-     - Warning: `permissionsToAsk` property is deprecated, renamed to `undeterminedPermissions`
-     */
-    @available(iOS, deprecated: 13.0, obsoleted: 15.0, renamed: "undeterminedPermissions")
-    ///An array of undetermined permissions filtered out from `permissions`
-    var permissionsToAsk: [PermissionType] {
-        return undeterminedPermissions
-    }
-    var undeterminedPermissions: [PermissionType] {
-        FilterPermissions.filterForShouldAskPermission(for: permissions)
-    }
-    var interactedPermissions: [PermissionType] {
-        //Filter for permissions that are not interacted
-        permissions.filter{permissionComponentsStore.getPermissionComponent(for: $0).interacted}
-    }
-    var shouldStayInPresentation: Bool {
-        if configStore.restrictDismissal {
-            //Empty means all permissions interacted, so should no longer stay in presentation
-            return interactedPermissions.isEmpty
-        }
-        return false
-    }
     
     //MARK: Configuration store
     public var configStore = ConfigStore()

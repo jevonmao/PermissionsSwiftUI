@@ -9,7 +9,6 @@
 import Foundation
 import MapKit
 
-#warning("Location and location always permission don't work")
 final class JMLocationPermissionManager: NSObject, CLLocationManagerDelegate, PermissionManager {
     typealias authorizationStatus = CLAuthorizationStatus
     typealias permissionManagerInstance = JMLocationPermissionManager

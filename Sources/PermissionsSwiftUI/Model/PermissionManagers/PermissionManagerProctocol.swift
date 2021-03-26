@@ -20,7 +20,6 @@ public enum AuthorizationStatus {
     ///The `notDetermined` permission state, and the only state where it is possible to ask permission
     case notDetermined
 }
-#warning("Fix the initializer default implementation bug. Posted on Reddit.")
 
 protocol PermissionManager {
     var permissionType: PermissionType? {get set}

@@ -11,6 +11,7 @@ import SwiftUI
 struct AlertView: View {
     @Binding var showAlert: Bool
     @EnvironmentObject var store: PermissionStore
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
 
     var mainText:  MainTexts{store.configStore.mainTexts}
     var paddingSize: CGFloat {
@@ -18,7 +19,7 @@ struct AlertView: View {
     }
     var body: some View {
             VStack{
-                HeaderView(exitButtonAction: {showAlert = store.shouldStayInPresentation}, isAlert: true)
+                HeaderView(exitButtonAction: {showAlert = schemaStore.shouldStayInPresentation}, isAlert: true)
                     .padding(.bottom, paddingSize/1.5)
                 PermissionSection(showModal: $showAlert, isAlert:true)
                 
