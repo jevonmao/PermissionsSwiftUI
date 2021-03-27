@@ -35,8 +35,7 @@ public extension View {
      
      */
     @inlinable func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View {
-        #warning("Reference JMAlert modifiers, fix this here.")
-        return initializeJMModal(showModal: showModal, for: permissions)
+        initializeJMModal(showModal: showModal, for: permissions)
     }
     
     /**
