@@ -18,25 +18,4 @@ public protocol CustomizableView: View {
     var store: PermissionStore {get}
     ///A schema storage object that is implemented by views
     var schemaStore: PermissionSchemaStore {get}
-    
-    //MARK: Customize PermissionsSwiftUI modifiers
-    
-    ///See default implementation for documentation
-    func setAccentColor(to color: Color) -> AnyView
-    ///See default implementation for documentation
-    func setAccentColor(toPrimary primaryColor: Color, toTertiary tertiaryColor: Color) -> AnyView
-    ///See default implementation for documentation
-    func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?, description: String?) -> AnyView
-    ///See default implementation for documentation
-    func setPermissionComponent(for permission: PermissionType, title: String) -> AnyView
-    ///See default implementation for documentation
-    func setPermissionComponent(for permission: PermissionType, description: String) -> AnyView
-    ///See default implementation for documentation
-    func setAllowButtonColor(to colors:AllButtonColors) -> AnyView
-    ///See default implementation for documentation
-    func changeHeaderTo(_ text:String) -> AnyView
-    ///See default implementation for documentation
-    func changeHeaderDescriptionTo(_ text:String) -> AnyView
-    ///See default implementation for documentation
-    func changeBottomDescriptionTo(_ text:String) -> AnyView
 }

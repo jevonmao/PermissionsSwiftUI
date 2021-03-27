@@ -42,7 +42,7 @@ public class PermissionSchemaStore: ObservableObject {
     var configStore: ConfigStore
     @Published var permissions: [PermissionType]
     var permissionViewStyle: PermissionViewStyle
-    var componentsInternalStore: ComponentsInternalStore
+    @usableFromInline var componentsInternalStore: ComponentsInternalStore
     init(configStore: ConfigStore, permissions: [PermissionType], permissionComponentsStore: PermissionComponentsStore, permissionViewStyle: PermissionViewStyle) {
         self.configStore = configStore
         self.permissions = permissions

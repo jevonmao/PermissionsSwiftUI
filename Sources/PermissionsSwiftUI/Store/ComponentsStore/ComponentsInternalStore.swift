@@ -7,25 +7,10 @@
 
 import Foundation
 
-struct ComponentsInternalStore {
+@usableFromInline struct ComponentsInternalStore {
     
-//    var cameraPermission: JMPermission
-//    var locationPermission: JMPermission
-//    var locationAlwaysPermission: JMPermission
-//    var photoPermission: JMPermission
-//    var microphonePermisson: JMPermission
-//    var notificationPermission: JMPermission
-//    var calendarPermisson: JMPermission
-//    var bluetoothPermission: JMPermission
-//    var trackingPermission: JMPermission
-//    var contactsPermission: JMPermission
-//    var motionPermission: JMPermission
-//    var remindersPermission: JMPermission
-//    var speechPermission: JMPermission
-//    var healthPermission: JMPermission
-//    var musicPermission: JMPermission
     var permissionComponentsStore: PermissionComponentsStore
-    func getPermissionComponent(for permission: PermissionType) -> JMPermission {
+    @usableFromInline func getPermissionComponent(for permission: PermissionType) -> JMPermission {
         switch permission {
         case .location:
             return permissionComponentsStore.locationPermission
@@ -60,7 +45,7 @@ struct ComponentsInternalStore {
         }
     }
     
-    mutating func setPermissionComponent(_ component: JMPermission, for permission: PermissionType) {
+    @usableFromInline mutating func setPermissionComponent(_ component: JMPermission, for permission: PermissionType) {
         switch permission {
         case .location:
             permissionComponentsStore.locationPermission = component

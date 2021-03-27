@@ -76,7 +76,7 @@ public struct AllButtonColors: Equatable {
     
     //MARK: Button Color States
     
-    var primaryColor: Color
+    @usableFromInline var primaryColor: Color
     var tertiaryColor: Color
     ///The button color configuration under idle status defined by a `ButtonColor` struct
     public var buttonIdle: ButtonColor

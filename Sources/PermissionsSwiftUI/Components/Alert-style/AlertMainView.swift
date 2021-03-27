@@ -12,13 +12,17 @@ import SwiftUI
     typealias ViewType = Body
     var showing: Binding<Bool>
     var bodyView: ViewType
-    init(for bodyView: ViewType, showing: Binding<Bool>) {
+    @usableFromInline var store: PermissionStore
+    @usableFromInline var schemaStore: PermissionSchemaStore
+    init(for bodyView: ViewType, showing: Binding<Bool>, store: PermissionStore) {
         self.showing = showing
         self.bodyView = bodyView
+        self.store = store
+        self.schemaStore = PermissionSchemaStore(configStore: store.configStore,
+                                                 permissions: store.permissions,
+                                                 permissionComponentsStore: store.permissionComponentsStore,
+                                                 permissionViewStyle: .alert)
     }
-    
-    @usableFromInline @EnvironmentObject var store: PermissionStore
-    @usableFromInline @EnvironmentObject var schemaStore: PermissionSchemaStore
     var shouldShowPermission:Bool{
         if store.configStore.autoCheckAuth{
             if showing.wrappedValue &&
@@ -54,9 +58,8 @@ import SwiftUI
                 .animation(.default)
 
             }
-        }
-
-
+        }.withEnvironmentObjects(store: store, permissionStyle: .alert)
+        
     }
+    
 }
-

@@ -35,7 +35,7 @@ public extension View {
      
      */
     @inlinable func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View {
-        initializeJMModal(showModal: showModal, for: permissions)
+         initializeJMModal(showModal: showModal, for: permissions)
     }
     
     /**
@@ -388,7 +388,7 @@ public extension View {
      
      */
 
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View {
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, autoDismiss: autoDismiss)
     }
     /**
@@ -488,7 +488,7 @@ public extension View {
                  for permissions: [PermissionType],
                  autoDismiss: Bool,
                  onAppear: (() -> Void)?=nil,
-                 onDisappear: (() -> Void)?=nil) -> some View {
+                 onDisappear: (() -> Void)?=nil) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, autoDismiss: autoDismiss, onAppear: onAppear, onDisappear: onDisappear)
     }
     
@@ -550,8 +550,8 @@ public extension View {
         Returns a new view. Will show a alert pop up that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMAlert(showModal: Binding<Bool>, withConfig model: PermissionStore) -> some View {
-        AlertMainView(for: self, showing: showModal).environmentObject(model)
+    func JMAlert(showModal: Binding<Bool>, withConfig model: PermissionStore) -> some CustomizableView {
+        AlertMainView(for: self, showing: showModal, store: model)
     }
     
     private func initializeJMAlert(showModal: Binding<Bool>,
@@ -561,7 +561,7 @@ public extension View {
                                 restrictDismissal: Bool?=nil,
                                 onAppear: (() -> Void)?=nil,
                                 onDisappear: (() -> Void)?=nil,
-                                onDisappearHandler: ((successPermissions, errorPermissions) -> Void)?=nil) -> some View {
+                                onDisappearHandler: ((successPermissions, errorPermissions) -> Void)?=nil) -> some CustomizableView {
         let store = PermissionStore()
         store.permissions = permissions ?? []
         store.configStore.onAppear = onAppear
@@ -570,7 +570,7 @@ public extension View {
         store.configStore.autoCheckAuth = autoCheckAuthorization ?? true
         store.configStore.restrictDismissal = restrictDismissal ?? true
         store.configStore.onDisappearHandler = onDisappearHandler
-        return AlertMainView(for: self, showing: showModal).withEnvironmentObjects(store: store, permissionStyle: .alert)
+        return AlertMainView(for: self, showing: showModal, store: store)
     }
 }
 
