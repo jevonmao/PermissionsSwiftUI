@@ -15,18 +15,23 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", "1.0.0"..<"2.0.0")
+        .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", "1.0.0"..<"2.0.0"),
+        .package(name: "Introspect", url: "https://github.com/siteline/SwiftUI-Introspect", "0.0.0"..<"1.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "PermissionsSwiftUI",
-            dependencies: [],
-            exclude: ["Tests/PermissionsSwiftUITests/__Snapshots__"]
+            dependencies: ["Introspect"],
+            exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
         ),
         .testTarget(
             name: "PermissionsSwiftUITests",
+            dependencies: ["PermissionsSwiftUI","SnapshotTesting"]
+        ),
+        .testTarget(
+            name: "PermissionsSwiftUISmallScreenTests",
             dependencies: ["PermissionsSwiftUI","SnapshotTesting"]
         ),
     ]

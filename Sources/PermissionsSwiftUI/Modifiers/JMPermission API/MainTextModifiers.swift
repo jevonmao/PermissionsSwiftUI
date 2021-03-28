@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK: Header text
-public extension View{
+// MARK: Configure Header and Description Texts
+public extension CustomizableView {
     /**
      Displays a customized main header text
      
@@ -17,15 +17,10 @@ public extension View{
      - Parameter _: The custom text to change to
      */
     
-    func changeHeaderTo(_ text:String) -> some View{
-        PermissionStore.shared.updateStore(property: {$0.mainTexts.headerText=$1}, value: text)
-
-        return self
+    func changeHeaderTo(_ text:String) -> AnyView {
+        store.configStore.mainTexts.headerText = text
+        return self.typeErased()
     }
-}
-
-// MARK: Header description text
-public extension View{
     /**
      Displays a customized header description text
      
@@ -37,15 +32,10 @@ public extension View{
      - Parameter _: The custom text to change to
      */
     
-    func changeHeaderDescriptionTo(_ text:String) -> some View{
-        PermissionStore.shared.updateStore(property: {$0.mainTexts.headerDescription=$1}, value: text)
-
-        return self
+    func changeHeaderDescriptionTo(_ text:String) -> AnyView {
+        store.configStore.mainTexts.headerDescription = text
+        return self.typeErased()
     }
-}
-
-// MARK: Bottom description text
-public extension View{
     /**
      Displays a customized bottom header description text
      
@@ -57,9 +47,9 @@ public extension View{
      - Parameter _: The custom text to change to
      */
     
-    func changeBottomDescriptionTo(_ text:String) -> some View{
-        PermissionStore.shared.updateStore(property: {$0.mainTexts.bottomDescription=$1}, value: text)
-        return self
+    func changeBottomDescriptionTo(_ text:String) -> AnyView {
+        store.configStore.mainTexts.bottomDescription = text
+        return self.typeErased()
     }
 }
 

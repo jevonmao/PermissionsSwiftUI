@@ -7,60 +7,70 @@
 
 import SwiftUI
 
+//Custom view modifier for the button component
 struct ButtonStatusColor: ViewModifier {
     var allowButtonStatus: AllowButtonStatus
+    @EnvironmentObject var store: PermissionStore
+
     func body(content: Content) -> some View {
+        let colorStore = store.configStore.allButtonColors
         switch self.allowButtonStatus {
         case .idle:
-            return content
-                .frame(width: 70)
-                .font(.system(size: 15))
-                .foregroundColor(Color(.systemBlue))
-                .padding(.vertical,6)
-                .padding(.horizontal, 6)
-                .background(
-                    Capsule()
-                        .fill(Color(.white))
-                )
-                .animation(.default)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
+            return content.allowButton(foregroundColor: colorStore.buttonIdle.foregroundColor,
+                                       backgroundColor: colorStore.buttonIdle.backgroundColor)
 
         case .allowed:
-            return content
-                .frame(width: 70)
-                .font(.system(size: 15))
-                .foregroundColor(.white)
-                .padding(.vertical,6)
-                .padding(.horizontal, 6)
-                .background(
-                    Capsule()
-                        .fill(Color(.systemBlue))
-                )
-                .animation(.default)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
+            return content.allowButton(foregroundColor: colorStore.buttonAllowed.foregroundColor,
+                                       backgroundColor: colorStore.buttonAllowed.backgroundColor)
+
 
         case .denied:
-            return content
-                .frame(width: 70)
-                .font(.system(size: 15))
-                .foregroundColor(.white)
-                .padding(.vertical,6)
-                .padding(.horizontal, 6)
-                .background(
-                    Capsule()
-                        .fill(Color(.systemRed))
-                )
-                .animation(.default)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
+            return content.allowButton(foregroundColor: colorStore.buttonDenied.foregroundColor,
+                                       backgroundColor: colorStore.buttonDenied.backgroundColor)
         }
+    }
+}
+//Custom modifier that nests within ButtonStatusColor to further extract code
+struct AllowButton: ViewModifier {
+    var foregroundColor: Color
+    var backgroundColor: Color
+    var buttonSizeConstant :CGFloat {
+        return screenSize.width < 400 ?  70-(1000-screenSize.width)/30 : 70
+    }
+    func body(content: Content) -> some View {
+        content
+        .frame(width: buttonSizeConstant)
+        .font(.system(size: 15))
+        .minimumScaleFactor(0.2)
+        .lineLimit(1)
+        .foregroundColor(foregroundColor)
+        .padding(.vertical,6)
+        .padding(.horizontal, 6)
+        .background(
+            Capsule()
+                .fill(backgroundColor)
+        )
+    }
+}
+
+struct JMAlertViewFrame: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(Color(.systemBackground).opacity(0.8))
+            .frame(width: screenSize.width > 375 ? 375 : screenSize.width-60)
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
 extension View {
     func buttonStatusColor(for allowButtonStatus: AllowButtonStatus) -> some View {
         self.modifier(ButtonStatusColor(allowButtonStatus: allowButtonStatus))
+    }
+    func allowButton(foregroundColor: Color, backgroundColor: Color) -> some View {
+        self.modifier(AllowButton(foregroundColor: foregroundColor, backgroundColor: backgroundColor))
+    }
+    func alertViewFrame() -> some View {
+        self.modifier(JMAlertViewFrame())
     }
 }

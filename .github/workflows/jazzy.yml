@@ -1,0 +1,16 @@
+name: PublishDocumentation
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy_docs:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Publish Jazzy Docs
+      uses: steven0351/publish-jazzy-docs@v1
+      with:
+        personal_access_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+        args: "--module PermissionsSwiftUI --swift-build-tool xcodebuild --build-tool-arguments -scheme,PermissionsSwiftUI,-sdk,iphoneos --author 'Jevon Mao' --author_url https://jingwen-mao.mit-license.org/"
