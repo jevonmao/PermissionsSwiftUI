@@ -10,11 +10,11 @@ import Introspect
 
 @usableFromInline struct ModalMainView<Body: View>: View, CustomizableView {
     #warning("Refactor all the property here into a view model, along with all the other views.")
-    @usableFromInline @EnvironmentObject var store: PermissionStore
-    @usableFromInline @EnvironmentObject var schemaStore: PermissionSchemaStore
+    @usableFromInline var store: PermissionStore
+    @usableFromInline var schemaStore: PermissionSchemaStore
     @State var isModalNotShown = true
-    var showing: Binding<Bool>
-    var bodyView: Body
+    @usableFromInline var showing: Binding<Bool>
+    @usableFromInline var bodyView: Body
     var _permissionsToAsk: [PermissionType]?
     var permissionsToAsk: [PermissionType] {
         #warning("Fix this awkward computed property.")
@@ -33,27 +33,31 @@ import Introspect
     }
     @usableFromInline init(for bodyView: Body,
          showing: Binding<Bool>,
+         store: PermissionStore,
          permissionsToAsk: [PermissionType]?=nil) {
         self.bodyView = bodyView
         self.showing = showing
         self._permissionsToAsk = permissionsToAsk
+        self.store = store
+        self.schemaStore = PermissionSchemaStore(configStore: store.configStore,
+                                                 permissions: store.permissions,
+                                                 permissionComponentsStore: store.permissionComponentsStore,
+                                                 permissionViewStyle: .modal)
     }
     
     @usableFromInline var body: some View {
-        bodyView
-            .sheet(isPresented: showing.combine(with: shouldShowPermission), content: {
-                ModalView(showModal: showing)
-                    .onAppear(perform: store.configStore.onAppear)
-                    .onDisappear(perform: store.configStore.onDisappear)
-                    .onAppear{isModalNotShown=false}
-                    .onDisappear{showing.wrappedValue = false; isModalNotShown=true}
-                    .introspectViewController{
-                        if store.configStore.restrictDismissal {
-                            $0.isModalInPresentation = schemaStore.shouldStayInPresentation
-                        }
-                    }
-                
-            })
+        Group {
+            bodyView
+                .sheet(isPresented: showing.combine(with: shouldShowPermission), content: {
+                    ModalView(showModal: showing)
+                        .onAppear(perform: store.configStore.onAppear)
+                        .onDisappear(perform: store.configStore.onDisappear)
+                        .onAppear{isModalNotShown=false}
+                        .onDisappear{showing.wrappedValue = false; isModalNotShown=true}
+                })
+        }
+        .withEnvironmentObjects(store: store, permissionStyle: .modal)
+
            
         
     }

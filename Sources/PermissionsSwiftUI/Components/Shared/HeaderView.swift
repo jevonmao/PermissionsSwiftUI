@@ -37,6 +37,7 @@ struct HeaderView: View {
                             .allowsTightening(true)
                             .layoutPriority(1)
                             
+                            
                     Spacer()
                     ExitButtonSection(action: { exitButtonAction() })
                         //Layout priority does not do anything
@@ -59,6 +60,7 @@ struct HeaderView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     //Allow scacling down to half the original size on smaller screens
                     .minimumScaleFactor(0.5)
+                    .textHorizontalAlign(.leading)
             }
   
         }

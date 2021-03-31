@@ -29,6 +29,8 @@ struct ModalView: View {
                     .font(.system(.callout, design: .rounded))
                     .foregroundColor(Color(.systemGray))
                     .padding(.horizontal)
+                    .textHorizontalAlign(.leading)
+
                 Spacer()
             }
             .padding(.bottom,30)
@@ -36,5 +38,10 @@ struct ModalView: View {
         }
         .background(Color(.secondarySystemBackground))
         .edgesIgnoringSafeArea(.all)
+        .introspectViewController{
+            if store.configStore.restrictDismissal {
+                $0.isModalInPresentation = true
+            }
+        }
     }
 }

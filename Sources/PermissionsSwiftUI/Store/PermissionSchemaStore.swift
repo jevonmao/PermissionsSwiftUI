@@ -28,7 +28,7 @@ public class PermissionSchemaStore: ObservableObject {
     }
     var interactedPermissions: [PermissionType] {
         //Filter for permissions that are not interacted
-        permissions.filter{componentsInternalStore.getPermissionComponent(for: $0).interacted}
+        permissions.filter{permissionComponentsStore.getPermissionComponent(for: $0).interacted}
     }
     //MARK: Controls dismiss restriction
     var shouldStayInPresentation: Bool {
@@ -42,12 +42,12 @@ public class PermissionSchemaStore: ObservableObject {
     var configStore: ConfigStore
     @Published var permissions: [PermissionType]
     var permissionViewStyle: PermissionViewStyle
-    @usableFromInline var componentsInternalStore: ComponentsInternalStore
+    @usableFromInline var permissionComponentsStore: PermissionComponentsStore
     init(configStore: ConfigStore, permissions: [PermissionType], permissionComponentsStore: PermissionComponentsStore, permissionViewStyle: PermissionViewStyle) {
         self.configStore = configStore
         self.permissions = permissions
+        self.permissionComponentsStore = permissionComponentsStore
         self.permissionViewStyle = permissionViewStyle
-        self.componentsInternalStore = ComponentsInternalStore(permissionComponentsStore: permissionComponentsStore)
     }
     
 }

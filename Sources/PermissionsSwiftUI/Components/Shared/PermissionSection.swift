@@ -76,7 +76,7 @@ struct PermissionSectionCell: View {
         }
     }
     var body: some View {
-        let currentPermission = schemaStore.componentsInternalStore.getPermissionComponent(for: permission)
+        let currentPermission = schemaStore.permissionComponentsStore.getPermissionComponent(for: permission)
         HStack {
             currentPermission.imageIcon
                 .foregroundColor(store.configStore.allButtonColors.primaryColor)
@@ -118,7 +118,7 @@ struct PermissionSectionCell: View {
     func handlePermissionRequest() {
         permissionManager = permission.getPermissionManager()?.init(permissionType: permission)
         permissionManager?.requestPermission{authorized, error in
-            var currentPermission = schemaStore.componentsInternalStore.getPermissionComponent(for: permission)
+            var currentPermission = schemaStore.permissionComponentsStore.getPermissionComponent(for: permission)
             currentPermission.interacted = true
             if authorized {
                 allowButtonStatus = .allowed
@@ -128,7 +128,7 @@ struct PermissionSectionCell: View {
                 allowButtonStatus = .denied
                 currentPermission.authorized = false
             }
-            schemaStore.componentsInternalStore.setPermissionComponent(currentPermission, for: permission)
+            schemaStore.permissionComponentsStore.setPermissionComponent(currentPermission, for: permission)
             DispatchQueue.main.async {
                 schemaStore.objectWillChange.send()
             }

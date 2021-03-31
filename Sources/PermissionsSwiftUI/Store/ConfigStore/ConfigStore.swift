@@ -24,7 +24,7 @@ public struct ConfigStore {
     
     //MARK: Change Auto Dismiss Behaviors
     ///Whether to auto dismiss the view after last permission is allowed
-    public var autoDismiss: Bool = true
+    public var autoDismiss: Bool = false
 
     @available(iOS, deprecated, obsoleted: 15, renamed: "autoDismiss")
     ///Whether to auto dismiss the modal after last permission is allowed

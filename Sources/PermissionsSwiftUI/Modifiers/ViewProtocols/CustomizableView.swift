@@ -18,4 +18,7 @@ public protocol CustomizableView: View {
     var store: PermissionStore {get}
     ///A schema storage object that is implemented by views
     var schemaStore: PermissionSchemaStore {get}
+    associatedtype ViewType
+    var showing: Binding<Bool> {get set}
+    var bodyView: ViewType {get set}
 }

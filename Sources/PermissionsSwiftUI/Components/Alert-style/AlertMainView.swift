@@ -9,9 +9,9 @@ import SwiftUI
 
 //The root level view for alert-style
 @usableFromInline struct AlertMainView<Body: View>: View, CustomizableView {
-    typealias ViewType = Body
-    var showing: Binding<Bool>
-    var bodyView: ViewType
+    @usableFromInline typealias ViewType = Body
+    @usableFromInline var showing: Binding<Bool>
+    @usableFromInline var bodyView: ViewType
     @usableFromInline var store: PermissionStore
     @usableFromInline var schemaStore: PermissionSchemaStore
     init(for bodyView: ViewType, showing: Binding<Bool>, store: PermissionStore) {
