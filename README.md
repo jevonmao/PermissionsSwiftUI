@@ -31,9 +31,11 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
     -  [Restrict Dismissal](#restrict-dismissal)
     -  [Configuring Health Permissions](#configuring-health-permissions)
 </details>
+
 -  [Cheatsheet](#cheatsheat)
 -  [Supported Permissions](#supported-permissions)
 -  [Contribute](#contribute)
+
 <details>
   <summary>Additional Information</summary>
   
