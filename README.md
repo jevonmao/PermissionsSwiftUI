@@ -184,7 +184,7 @@ To easily change the accent color:
 To change the primary (default Apple blue) and tertiary (default Apple red) colors:
 ```Swift
 .setAccentColor(toPrimary: Color(.sRGB, red: 56/255, green: 173/255,
-                                  blue: 169/255, opacity: 1)),
+                                  blue: 169/255, opacity: 1),
                 toTertiary: Color(.systemPink))
 ```
 <p align="center">
