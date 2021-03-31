@@ -16,12 +16,12 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
 <p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑 dark mode. </p>
 
 ## 🧭 Navigation
--  [Installation](#installation)
--  [Quickstart](#quickstart) 
+-  [Installation](#-installation)
+-  [Quickstart](#-quickstart) 
 <details>
   <summary>Usage</summary>
   
--  [Usage](#usage)
+-  [Usage](#-usage)
     -  [Customize Permission Texts](#customize-permission-texts)
     -  [Customize header texts](#customize-header-texts)
     -  [`onAppear` and `onDisappear` Override](#onappear-and-ondisappear-override)
@@ -32,9 +32,9 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
     -  [Configuring Health Permissions](#configuring-health-permissions)
 </details>
 
--  [Cheatsheet](#cheatsheat)
--  [Supported Permissions](#supported-permissions)
--  [Contribute](#contribute)
+-  [Cheatsheet](#-cheatsheat)
+-  [Supported Permissions](#-supported-permissions)
+-  [Contribute](#-contribute)
 
 <details>
   <summary>Additional Information</summary>
