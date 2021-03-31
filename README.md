@@ -243,9 +243,9 @@ let readTypes = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurne
 
 ```
 ## Supported Permissions
-Here is a list of all permissions PermissionsSwiftUI already supports support(health not in image but is supported). Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon.
+Here is a list of all the permissions PermissionsSwiftUI supports. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon.
 <br /> <br /> <br />
-<img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card.png" alt="A card of all the permissions" width="100%">
+<img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card-new.png" alt="A card of all the permissions" width="100%">
 
 ## Additional Information
 
