@@ -10,10 +10,10 @@
 `PermissionsSwiftUI` displays and handles permissions in SwiftUI. It is largely inspired by [SPPermissions](https://github.com/varabeis/SPPermissions).
 The UI is highly customizable and resembles an **Apple style**. If you like the project, please `star ★`. <br />
 <br />
-<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_modal.PNG?raw=true" height="550"/>
-&emsp; &emsp;
-<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_alert.PNG?raw=true" height="550"/> <br />
-<p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑dark mode. </p>
+<p align="center">
+    <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Main-screenshot.png?raw=true" style="display: block; margin: auto;"/>
+</p>
+<p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑 dark mode. </p>
 
 ## Navigation
 -  [Installation](#installation)
@@ -178,14 +178,18 @@ Pass in `true` or `false` to select whether to automatically dismiss the view.
 Using PermissionSwiftUI's capabilities, developers and designers can customize all the UI colors with incredible flexibility. You can fully configure all color at all states with your custom colors. <br />
 To easily change the accent color:
 ```Swift
-.setAccentColor(to: Color(.systemPurple))
+.setAccentColor(to: Color(.sRGB, red: 56/255, green: 173/255,
+                                  blue: 169/255, opacity: 1))
 ```
 To change the primary (default Apple blue) and tertiary (default Apple red) colors:
 ```Swift
-.setAccentColor(toPrimary: Color(.systemPurple),
-                toTertiary: Color(.systemGreen))
+.setAccentColor(toPrimary: Color(.sRGB, red: 56/255, green: 173/255,
+                                  blue: 169/255, opacity: 1)),
+                toTertiary: Color(.systemPink))
 ```
-<img align src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Button_color_customize_showcase.png?raw=true" alt="Alert pop up with customized colors" height="300">
+<p align="center">
+    <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Color-custom-screenshot.png?raw=true" height="250" style="display: block; margin: auto;"/>
+</p>
 
 > ⚠️ `.setAccentColor()` and `.setAllowButtonColor()` should never be used at the same time.
 
