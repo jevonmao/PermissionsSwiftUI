@@ -8,7 +8,7 @@
 <img src="https://img.shields.io/github/workflow/status/jevonmao/PermissionsSwiftUI/Swift?label=CI%20Build"> <img src="https://img.shields.io/github/contributors/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/badge/License-MIT-blue.svg"> <img src="https://img.shields.io/github/issues/jevonmao/PermissionsSwiftUI?color=orange"> <img src="https://img.shields.io/github/commit-activity/w/jevonmao/PermissionsSwiftUI?color=yellowgreen&logoColor=yellowgreen"> <img src="https://camo.githubusercontent.com/86f8561418bbd6240d5c39dbf80b83a3dc1e85e69fe58da808f0168194dcc0d3/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5377696674504d2d436f6d70617469626c652d627269676874677265656e2e737667"> <img src="https://img.shields.io/github/v/release/jevonmao/PermissionsSwiftUI?include_prereleases&style=plastic">
 
 `PermissionsSwiftUI` displays and handles permissions in SwiftUI. It is largely inspired by [SPPermissions](https://github.com/varabeis/SPPermissions).
-The UI is highly customizable and resembles an **Apple style**. If you like the project, don't forget to `star ★` and follow me on GitHub. <br />
+The UI is highly customizable and resembles an **Apple style**. If you like the project, please `star ★`. <br />
 <br />
 <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_modal.PNG?raw=true" height="550"/>
 &emsp; &emsp;
@@ -52,6 +52,9 @@ You can install PermissionsSwiftUI into your Xcode project via Swift Package Man
 
 ## Quickstart
 > Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.
+
+### ⚠️ v1.4.0 Migration Guide
+`v1.4.0` will arrive soon! If you encounter any issues, please checkout the [migration guide](https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0) designed to help developers resolve any deprecations and API updates.
 
 ### Modal Style
 To use PermissionsSwiftUI, simply add the `JMModal` modifier to any view:
@@ -246,6 +249,11 @@ let readTypes = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurne
 Here is a list of all the permissions PermissionsSwiftUI supports. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon.
 <br /> <br /> <br />
 <img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card-new.png" alt="A card of all the permissions" width="100%">
+
+## Contribute
+Contributions are welcome here for coders and non-coders alike. No matter what your skill level is, you can for certain contribute to PermissionSwiftUI's open source community. Please read [contributing.md](https://github.com/jevonmao/PermissionsSwiftUI/blob/main/CONTRIBUTING.md) before starting. 
+
+**If you encounter ANY issue, have ANY concerns, or ANY comments, please do NOT hesitate to let me know. Open a discussion, issue, or email me.** As a developer, I feel you when you don't understand something in the codebase. I try to comment and document as best as I can, but if you happen to encounter any issues, I will be happy to assist in any way I can.
 
 ## Additional Information
 
