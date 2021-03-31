@@ -8,12 +8,28 @@
 import Foundation
 import SwiftUI
 
+/**
+ The closure parameter of successfully requested permissions
+ 
+ This typealias's underlying type, `[PermissionType: JMResult]`, can be accessed like a dictionary for the `JMResult` for each permission type requested. The dictionary will contain only permission types that are passed in to show in PermissionsSwiftUI view. If there is no successful permissions, this dictionary will be empty.
+ 
+ - seeAlso: errorPermissions
+ */
 public typealias successPermissions = [PermissionType: JMResult]
+/**
+ The closure parameter of erroneous requested permissions
+ 
+ This typealias's underlying type, `[PermissionType: JMResult]`, can be accessed like a dictionary for the `JMResult` for each permission type requested. The dictionary will contain only permission types that are passed in to show in PermissionsSwiftUI view. If there is all permission succeed, this dictionary will be empty.
+ 
+ - seeAlso: errorPermissions
+ */
 public typealias errorPermissions = [PermissionType: JMResult]
 
 //MARK: - Storage
 /**
- The data storage class that contains reference to all of PermissionSwiftUI's data
+ The data storage class that contains reference to all the custom configurations
+ 
+ - SeeAlso: PermissionSchemaStore
  */
 public class PermissionStore: ObservableObject {
     
@@ -21,54 +37,26 @@ public class PermissionStore: ObservableObject {
     /**
      Initalizes and returns a new instance of `PermissionStore`
      
+     - Returns: A configuration and customizable data store
+     
      The `PermissionStore` initliazer accepts no parameters, instead, set properties after intialization:
      ```
      let store = PermissionStore()
      store.mainTexts.headerText = "PermissionsSwiftUI is the best library"
      */
     public init(){}
-    //a private singleton instance that allows read & write, but for this file's methods only
-    fileprivate static var mutableShared = PermissionStore()
-    //Read only singleton exposed to other parts of program
-    static var shared: PermissionStore {
-        get{
-            mutableShared
-        }
-    }
     
     ///An  array of permissions that configures the permissions to request
-    @Published public var permissions: [PermissionType] = []
-    
-    //MARK: Filtered permission arrays
-    /**
-     A global array of permissions that configures the permissions to request
-     
-     - Warning: `permissionsToAsk` property is deprecated, renamed to `undeterminedPermissions`
-     */
-    @available(iOS, deprecated: 13.0, obsoleted: 15.0, renamed: "undeterminedPermissions")
-    ///An array of undetermined permissions filtered out from `permissions`
-    var permissionsToAsk: [PermissionType] {
-        return undeterminedPermissions
-    }
-    var undeterminedPermissions: [PermissionType] {
-        FilterPermissions.filterForShouldAskPermission(for: permissions)
-    }
-    var interactedPermissions: [PermissionType] {
-        //Filter for permissions that are not interacted
-        permissions.filter{permissionComponentsStore.getPermissionComponent(for: $0).interacted}
-    }
-    var shouldStayInPresentation: Bool {
-        if configStore.restrictDismissal {
-            //Empty means all permissions interacted, so should no longer stay in presentation
-            return interactedPermissions.isEmpty
-        }
-        return false
-    }
+    public var permissions: [PermissionType] = []
     
     //MARK: Configuration store
+    ///Custom configurations that alters PermissionsSwiftUI view's behaviors
     public var configStore = ConfigStore()
     
     //MARK: Permission components store
+    /**
+     Customizable displayed component for each PermissionType (types of permission)
+     */
     public var permissionComponentsStore = PermissionComponentsStore()
 }
 

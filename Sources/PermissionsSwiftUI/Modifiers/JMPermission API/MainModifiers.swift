@@ -7,39 +7,6 @@
 
 import SwiftUI
 
-#warning("Implement common interface for modal and alert. Finish implementing.")
-struct PermissionsView<Body: View> {
-    @ObservedObject var store: PermissionStore
-    var bodyView: Body
-    var showModal: Binding<Bool>
-    var body: some View {
-        bodyView
-            .environmentObject(store)
-    }
-    
-}
-struct PermissionsModal: ViewModifier {
-    var showModal: Binding<Bool>
-    @ObservedObject var store: PermissionStore
-    init(showModal: Binding<Bool>, store: PermissionStore){
-        self.showModal = showModal
-        self.store = store
-    }
-
-    func body(content: Content) -> some View {
-        ModalMainView(for: AnyView(content), show: showModal)
-            .environmentObject(store)
-    }
-}
-
-struct PermissionsAlert: ViewModifier{
-    var showModal:Binding<Bool>
-    @ObservedObject var store: PermissionStore
-    func body(content: Content) -> some View {
-        AlertMainView(for: AnyView(content), show: showModal)
-    }
-}
-
 //MARK: - Showing Model Style Permissions
 public extension View {
     /**
@@ -67,10 +34,8 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View {
-        #warning("Reference JMAlert modifiers, fix this here.")
-        let store = initializeJMModal(showModal: showModal, for: permissions)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
+    @inlinable func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some CustomizableView {
+         initializeJMModal(showModal: showModal, for: permissions)
     }
     
     /**
@@ -84,9 +49,8 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], restrictDismissal: Bool) -> some View {
-        let store = initializeJMModal(showModal: showModal, for: permissions, restrictDismissal: restrictDismissal)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
+    @inlinable func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], restrictDismissal: Bool) -> some CustomizableView {
+        initializeJMModal(showModal: showModal, for: permissions, restrictDismissal: restrictDismissal)
     }
     
     /**
@@ -116,8 +80,8 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>, withConfig model: PermissionStore) -> some View {
-        return self.modifier(PermissionsModal(showModal: showModal, store: model))
+    @inlinable func JMModal(showModal: Binding<Bool>, withConfig model: PermissionStore) -> some CustomizableView {
+        ModalMainView(for: self, showing: showModal, store: model)
     }
     
     /**
@@ -131,9 +95,8 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View {
-        let store = initializeJMModal(showModal: showModal, for: permissions, autoDismiss: autoDismiss)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
+    @inlinable func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some CustomizableView {
+        initializeJMModal(showModal: showModal, for: permissions, autoDismiss: autoDismiss)
     }
     
     /**
@@ -151,12 +114,11 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>,
+    @inlinable func JMModal(showModal: Binding<Bool>,
                  for permissions: [PermissionType],
                  autoDismiss: Bool?=nil,
-                 autoCheckAuthorization: Bool?=nil) -> some View {
-        let store = initializeJMModal(showModal: showModal, for: permissions, autoDismiss: autoDismiss, autoCheckAuthorization: autoCheckAuthorization)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
+                 autoCheckAuthorization: Bool?=nil) -> some CustomizableView {
+        initializeJMModal(showModal: showModal, for: permissions, autoDismiss: autoDismiss, autoCheckAuthorization: autoCheckAuthorization)
     }
     
     /**
@@ -175,17 +137,16 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>,
+    @inlinable func JMModal(showModal: Binding<Bool>,
                  for permissions: [PermissionType],
                  autoDismiss: Bool?=nil,
                  autoCheckAuthorization: Bool?=nil,
-                 restrictDismissal: Bool?=nil) -> some View {
-        let store = initializeJMModal(showModal: showModal,
+                 restrictDismissal: Bool?=nil) -> some CustomizableView {
+        initializeJMModal(showModal: showModal,
                           for: permissions,
                           autoDismiss: autoDismiss,
                           autoCheckAuthorization: autoCheckAuthorization,
                           restrictDismissal: restrictDismissal)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
     }
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
@@ -214,15 +175,14 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>,
+    @inlinable func JMModal(showModal: Binding<Bool>,
                  for permissions: [PermissionType],
                  onAppear: @escaping () -> Void,
-                 onDisappear: @escaping () -> Void) -> some View {
-        let store = initializeJMModal(showModal: showModal,
+                 onDisappear: @escaping () -> Void) -> some CustomizableView {
+        initializeJMModal(showModal: showModal,
                           for: permissions,
                           onAppear: onAppear,
                           onDisappear: onDisappear)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
     }
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
@@ -252,15 +212,14 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>,
+    @inlinable func JMModal(showModal: Binding<Bool>,
                  for permissions: [PermissionType],
                  onAppear: @escaping () -> Void,
-                 _ onDisappearHandler: @escaping (successPermissions, errorPermissions) -> Void) -> some View {
-        let store = initializeJMModal(showModal: showModal,
+                 _ onDisappearHandler: @escaping (successPermissions, errorPermissions) -> Void) -> some CustomizableView {
+        initializeJMModal(showModal: showModal,
                           for: permissions,
                           onAppear: onAppear,
                           onDisappearHandler: onDisappearHandler) 
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
     }
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
@@ -276,17 +235,16 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>,
+    @inlinable func JMModal(showModal: Binding<Bool>,
                  for permissions: [PermissionType],
                  autoDismiss: Bool,
                  onAppear: @escaping () -> Void,
-                 onDisappear: @escaping () -> Void) -> some View {
-        let store = initializeJMModal(showModal: showModal,
+                 onDisappear: @escaping () -> Void) -> some CustomizableView {
+        initializeJMModal(showModal: showModal,
                           for: permissions,
                           autoDismiss: autoDismiss,
                           onAppear: onAppear,
                           onDisappear: onDisappear)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
     }
     
     /**
@@ -307,19 +265,18 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>,
+    @inlinable func JMModal(showModal: Binding<Bool>,
                  for permissions: [PermissionType],
                  autoDismiss: Bool?=nil,
                  autoCheckAuthorization: Bool?=nil,
                  onAppear: @escaping () -> Void,
-                 onDisappear: @escaping () -> Void) -> some View {
-        let store = initializeJMModal(showModal: showModal,
+                 onDisappear: @escaping () -> Void) -> some CustomizableView {
+        initializeJMModal(showModal: showModal,
                        for: permissions,
                        autoDismiss: autoDismiss,
                        autoCheckAuthorization: autoCheckAuthorization,
                        onAppear: onAppear,
                        onDisappear: onDisappear)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
     }
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
@@ -338,30 +295,29 @@ public extension View {
         Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMModal(showModal: Binding<Bool>,
+    @inlinable func JMModal(showModal: Binding<Bool>,
                  for permissions: [PermissionType],
                  autoDismiss: Bool?=nil,
                  autoCheckAuthorization: Bool?=nil,
                  restrictDismissal: Bool?=nil,
                  onAppear: @escaping () -> Void,
-                 onDisappear: @escaping () -> Void) -> some View {
-        let store = initializeJMModal(showModal: showModal,
+                 onDisappear: @escaping () -> Void) -> some CustomizableView {
+        initializeJMModal(showModal: showModal,
                 for: permissions,
                 autoDismiss: autoDismiss,
                 autoCheckAuthorization: autoCheckAuthorization,
                 restrictDismissal: restrictDismissal,
                 onAppear: onAppear,
                 onDisappear: onDisappear)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
     }
-    private func initializeJMModal(showModal: Binding<Bool>,
+    @usableFromInline internal func initializeJMModal(showModal: Binding<Bool>,
                          for permissions: [PermissionType]?=nil,
                          autoDismiss: Bool?=nil,
                          autoCheckAuthorization: Bool?=nil,
                          restrictDismissal: Bool?=nil,
                          onAppear: (() -> Void)?=nil,
                          onDisappear: (() -> Void)?=nil,
-                         onDisappearHandler: ((successPermissions, errorPermissions) -> Void)?=nil) -> PermissionStore {
+                         onDisappearHandler: ((successPermissions, errorPermissions) -> Void)?=nil) -> some CustomizableView {
         let store = PermissionStore()
         store.permissions = permissions ?? []
         store.configStore.onAppear = onAppear
@@ -370,7 +326,7 @@ public extension View {
         store.configStore.autoCheckAuth = autoCheckAuthorization ?? true
         store.configStore.restrictDismissal = restrictDismissal ?? true
         store.configStore.onDisappearHandler = onDisappearHandler
-        return store
+        return ModalMainView(for: self, showing: showModal, store: store)
 
 
     }
@@ -378,7 +334,7 @@ public extension View {
 }
 
 //MARK: - Showing Alert Style Permissions
-public extension View{
+public extension View {
     /**
      Displays a PermissionsSwiftUI alert view that displays and handles permissions.
      
@@ -409,10 +365,8 @@ public extension View{
      
      */
     
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View {
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions)
-        
-
     }
     
     /**
@@ -434,7 +388,7 @@ public extension View{
      
      */
 
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View {
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, autoDismiss: autoDismiss)
     }
     /**
@@ -457,7 +411,7 @@ public extension View{
      
      */
 
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoCheckAuthorization: Bool) -> some View {
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoCheckAuthorization: Bool) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, autoCheckAuthorization: autoCheckAuthorization)
     }
     
@@ -483,7 +437,7 @@ public extension View{
      
      */
 
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool?=nil, autoCheckAuthorization: Bool?=nil) -> some View {
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool?=nil, autoCheckAuthorization: Bool?=nil) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, autoDismiss: autoDismiss, autoCheckAuthorization: autoCheckAuthorization)
     }
     
@@ -508,7 +462,7 @@ public extension View{
     func JMAlert(showModal: Binding<Bool>,
                  for permissions: [PermissionType],
                  onAppear: (() -> Void)?=nil,
-                 onDisappear: (() -> Void)?=nil) -> some View {
+                 onDisappear: (() -> Void)?=nil) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, onAppear: onAppear, onDisappear: onDisappear)
     }
     
@@ -534,7 +488,7 @@ public extension View{
                  for permissions: [PermissionType],
                  autoDismiss: Bool,
                  onAppear: (() -> Void)?=nil,
-                 onDisappear: (() -> Void)?=nil) -> some View {
+                 onDisappear: (() -> Void)?=nil) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, autoDismiss: autoDismiss, onAppear: onAppear, onDisappear: onDisappear)
     }
     
@@ -565,7 +519,7 @@ public extension View{
                  autoDismiss: Bool?=nil,
                  autoCheckAuthorization: Bool?=nil,
                  onAppear: (() -> Void)?=nil,
-                 onDisappear: (() -> Void)?=nil) -> some View {
+                 onDisappear: (() -> Void)?=nil) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, autoDismiss: autoDismiss, autoCheckAuthorization: autoCheckAuthorization, onAppear: onAppear, onDisappear: onDisappear)
     }
     
@@ -596,8 +550,8 @@ public extension View{
         Returns a new view. Will show a alert pop up that will overlay your existing view to show PermissionsSwiftUI permission handling components.
      
      */
-    func JMAlert(showModal: Binding<Bool>, withConfig model: PermissionStore) -> some View {
-        AlertMainView(for: self, show: showModal).environmentObject(model)
+    func JMAlert(showModal: Binding<Bool>, withConfig model: PermissionStore) -> some CustomizableView {
+        AlertMainView(for: self, showing: showModal, store: model)
     }
     
     private func initializeJMAlert(showModal: Binding<Bool>,
@@ -607,7 +561,7 @@ public extension View{
                                 restrictDismissal: Bool?=nil,
                                 onAppear: (() -> Void)?=nil,
                                 onDisappear: (() -> Void)?=nil,
-                                onDisappearHandler: ((successPermissions, errorPermissions) -> Void)?=nil) -> some View {
+                                onDisappearHandler: ((successPermissions, errorPermissions) -> Void)?=nil) -> some CustomizableView {
         let store = PermissionStore()
         store.permissions = permissions ?? []
         store.configStore.onAppear = onAppear
@@ -616,7 +570,7 @@ public extension View{
         store.configStore.autoCheckAuth = autoCheckAuthorization ?? true
         store.configStore.restrictDismissal = restrictDismissal ?? true
         store.configStore.onDisappearHandler = onDisappearHandler
-        return AlertMainView(for: self, show: showModal).environmentObject(store)
+        return AlertMainView(for: self, showing: showModal, store: store)
     }
 }
 
@@ -650,8 +604,7 @@ public extension View {
      */
     @available(iOS, deprecated, obsoleted:15, renamed: "JMModal")
     func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType]) -> some View {
-        let store = initializeJMModal(showModal: showModal, for: permissions)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
+        initializeJMModal(showModal: showModal, for: permissions)
     }
     
     /**
@@ -683,8 +636,7 @@ public extension View {
      */
     @available(iOS, deprecated, obsoleted:15, renamed: "JMModal")
     func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View {
-        let store = initializeJMModal(showModal: showModal, for: permissions, autoDismiss: autoDismiss)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
+        initializeJMModal(showModal: showModal, for: permissions, autoDismiss: autoDismiss)
     }
     
     /**
@@ -717,8 +669,7 @@ public extension View {
      */
     @available(iOS, deprecated, obsoleted:15, renamed: "JMModal")
     func JMPermissions(showModal: Binding<Bool>, for permissions: [PermissionType], onAppear: @escaping () -> Void, onDisappear: @escaping () -> Void) -> some View {
-        let store = initializeJMModal(showModal: showModal, for: permissions, onAppear: onAppear, onDisappear: onDisappear)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
+        initializeJMModal(showModal: showModal, for: permissions, onAppear: onAppear, onDisappear: onDisappear)
     }
 
     /**
@@ -756,7 +707,17 @@ public extension View {
                        autoDismiss: Bool,
                        onAppear: @escaping () -> Void,
                        onDisappear: @escaping () -> Void) -> some View {
-        let store = initializeJMModal(showModal: showModal, for: permissions, onAppear: onAppear, onDisappear: onDisappear)
-        return self.modifier(PermissionsModal(showModal: showModal, store: store))
+        initializeJMModal(showModal: showModal, for: permissions, onAppear: onAppear, onDisappear: onDisappear)
+    }
+}
+
+extension View {
+    @usableFromInline func withEnvironmentObjects(store: PermissionStore, permissionStyle: PermissionViewStyle) -> some View {
+        self
+            .environmentObject(store)
+            .environmentObject(PermissionSchemaStore(configStore: store.configStore,
+                                                     permissions: store.permissions,
+                                                     permissionComponentsStore: store.permissionComponentsStore,
+                                                     permissionViewStyle: permissionStyle))
     }
 }

@@ -8,20 +8,20 @@
 import SwiftUI
 import Introspect
 
-struct ModalMainView<Body: View>: View, CustomizableView {
+@usableFromInline struct ModalMainView<Body: View>: View, CustomizableView {
     #warning("Refactor all the property here into a view model, along with all the other views.")
-    @EnvironmentObject var store: PermissionStore
+    @usableFromInline var store: PermissionStore
+    @usableFromInline var schemaStore: PermissionSchemaStore
     @State var isModalNotShown = true
-    var showModal: Binding<Bool>
-    //var thisView: AnyView
-    var bodyView: Body
+    @usableFromInline var showing: Binding<Bool>
+    @usableFromInline var bodyView: Body
     var _permissionsToAsk: [PermissionType]?
     var permissionsToAsk: [PermissionType] {
         #warning("Fix this awkward computed property.")
         guard _permissionsToAsk == nil else {
             return _permissionsToAsk!
         }
-        return store.undeterminedPermissions
+        return schemaStore.undeterminedPermissions
     }
     var shouldShowPermission: Binding<Bool>{
         Binding(get: {
@@ -31,31 +31,33 @@ struct ModalMainView<Body: View>: View, CustomizableView {
             return true
         }, set: {_ in})
     }
-    
-    init(for bodyView: Body,
-         show showModal: Binding<Bool>,
+    @usableFromInline init(for bodyView: Body,
+         showing: Binding<Bool>,
+         store: PermissionStore,
          permissionsToAsk: [PermissionType]?=nil) {
         self.bodyView = bodyView
-        self.showModal = showModal
+        self.showing = showing
         self._permissionsToAsk = permissionsToAsk
-        //self.thisView = self.typeErased()
+        self.store = store
+        self.schemaStore = PermissionSchemaStore(configStore: store.configStore,
+                                                 permissions: store.permissions,
+                                                 permissionComponentsStore: store.permissionComponentsStore,
+                                                 permissionViewStyle: .modal)
     }
     
-    var body: some View {
-        bodyView
-            .sheet(isPresented: showModal.combine(with: shouldShowPermission), content: {
-                ModalView(showModal: showModal)
-                    .onAppear(perform: store.configStore.onAppear)
-                    .onDisappear(perform: store.configStore.onDisappear)
-                    .onAppear{isModalNotShown=false}
-                    .onDisappear{showModal.wrappedValue = false; isModalNotShown=true}
-                    .introspectViewController{
-                        if store.configStore.restrictDismissal {
-                            $0.isModalInPresentation = store.shouldStayInPresentation
-                        }
-                    }
-                
-            })
+    @usableFromInline var body: some View {
+        Group {
+            bodyView
+                .sheet(isPresented: showing.combine(with: shouldShowPermission), content: {
+                    ModalView(showModal: showing)
+                        .onAppear(perform: store.configStore.onAppear)
+                        .onDisappear(perform: store.configStore.onDisappear)
+                        .onAppear{isModalNotShown=false}
+                        .onDisappear{showing.wrappedValue = false; isModalNotShown=true}
+                })
+        }
+        .withEnvironmentObjects(store: store, permissionStyle: .modal)
+
            
         
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    func typeErased() -> AnyView {
+    @usableFromInline func typeErased() -> AnyView {
         AnyView(self)
     }
 }

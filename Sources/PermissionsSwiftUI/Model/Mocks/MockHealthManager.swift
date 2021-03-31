@@ -16,7 +16,7 @@ protocol HealthManager {
 }
 extension HKHealthStore: HealthManager {}
 
-class MockHealthManager: HealthManager {
+final class MockHealthManager: HealthManager {
     enum AuthorizationStatus: CaseIterable {
         case notDetermined, authorized, denied, mixedAuthorized, mixedDenied
     }

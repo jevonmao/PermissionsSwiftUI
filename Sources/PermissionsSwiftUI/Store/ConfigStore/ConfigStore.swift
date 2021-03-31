@@ -24,7 +24,7 @@ public struct ConfigStore {
     
     //MARK: Change Auto Dismiss Behaviors
     ///Whether to auto dismiss the view after last permission is allowed
-    public var autoDismiss: Bool = true
+    public var autoDismiss: Bool = false
 
     @available(iOS, deprecated, obsoleted: 15, renamed: "autoDismiss")
     ///Whether to auto dismiss the modal after last permission is allowed
@@ -37,22 +37,22 @@ public struct ConfigStore {
     //MARK: Configure Auto Authorization Checking
     ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
     public var autoCheckAuth: Bool = true
-
-    @available(iOS, deprecated, obsoleted: 15, renamed: "autoDismiss")
+    
     ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
+    @available(iOS, deprecated, obsoleted: 15, renamed: "autoDismiss")
     public var autoCheckModalAuth: Bool = true
-    @available(iOS, deprecated, obsoleted: 15, renamed: "autoDismiss")
     ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
+    @available(iOS, deprecated, obsoleted: 15, renamed: "autoDismiss")
     public var autoCheckAlertAuth: Bool = true
     
     //MARK: Prevent Dismissal Before All Permissions Interacted
     ///Whether to prevent dismissal of  view before all permissions have been interacted (explict deny or allow)
     public var restrictDismissal: Bool = true
-    @available(iOS, deprecated, obsoleted: 15, renamed: "restrictDismissal")
     ///Whether to prevent dismissal of modal view before all permissions have been interacted (explict deny or allow)
-    public var restrictModalDismissal: Bool = true
     @available(iOS, deprecated, obsoleted: 15, renamed: "restrictDismissal")
+    public var restrictModalDismissal: Bool = true
     ///Whether to prevent dismissal of alert view before all permissions have been interacted (explict deny or allow)
+    @available(iOS, deprecated, obsoleted: 15, renamed: "restrictDismissal")
     public var restrictAlertDismissal: Bool = true
     
     //MARK: `onAppear` and `onDisappear` Executions

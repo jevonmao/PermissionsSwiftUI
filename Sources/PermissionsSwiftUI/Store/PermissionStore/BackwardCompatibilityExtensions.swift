@@ -86,7 +86,7 @@ public extension PermissionStore {
     }
 }
 
-@available(iOS, obsoleted: 15.0, deprecated, message: "Access the properties through PermissionStore 's permissionComponentsStore property instead")
+@available(iOS, obsoleted: 15.0, deprecated, message: "Access the properties through PermissionStore's permissionComponentsStore property instead")
 /**
  Additional permission component properties for backward compatibility
  

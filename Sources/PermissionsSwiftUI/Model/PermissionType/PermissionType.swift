@@ -58,6 +58,8 @@ public enum PermissionType: Hashable {
     case health(categories: HKAccess?=nil)
     ///Permission that allows app to use speech recognition
     case speech
+    ///Permission that allows app to control audio playback of the device
+    case music
     ///In order for app to track user's data across apps and websites, the tracking permission is needed
     @available(iOS 14.5, *) case tracking
 }

@@ -7,15 +7,18 @@
 
 import SwiftUI
 
+/**
+ Creates any style of PermissionsSwiftUI view with custom configurations
+ 
+ The `JMModal` and `JMAlert` modifier are higher-level containers for `AlertMainView` and `ModalMainView`. Both of those conform to the `CustomizableView` protocol, which allows it to be configured with PermissionSwiftUI's customization modifiers.
+ */
 public protocol CustomizableView: View {
+    //MARK: Environment data storage
+    ///A global data storage object that is implemented by views
     var store: PermissionStore {get}
-    func setAccentColor(to color: Color) -> AnyView
-    func setAccentColor(toPrimary primaryColor: Color, toTertiary tertiaryColor: Color) -> AnyView
-    func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?, description: String?) -> AnyView
-    func setPermissionComponent(for permission: PermissionType, title: String) -> AnyView
-    func setPermissionComponent(for permission: PermissionType, description: String) -> AnyView
-    func setAllowButtonColor(to colors:AllButtonColors) -> AnyView
-    func changeHeaderTo(_ text:String) -> AnyView
-    func changeHeaderDescriptionTo(_ text:String) -> AnyView
-    func changeBottomDescriptionTo(_ text:String) -> AnyView
+    ///A schema storage object that is implemented by views
+    var schemaStore: PermissionSchemaStore {get}
+    associatedtype ViewType
+    var showing: Binding<Bool> {get set}
+    var bodyView: ViewType {get set}
 }

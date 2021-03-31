@@ -73,4 +73,22 @@ extension View {
     func alertViewFrame() -> some View {
         self.modifier(JMAlertViewFrame())
     }
+    func textHorizontalAlign(_ alignment: Alignment) -> some View {
+        TextHorizontalAlign(alignment: alignment, bodyView: self)
+    }
+}
+struct TextHorizontalAlign<BodyView: View>: View {
+    var alignment: Alignment
+    var bodyView: BodyView
+    @ViewBuilder
+    var body: some View {
+        switch alignment {
+        case .leading:
+            HStack{bodyView; Spacer()}
+        case .trailing:
+            HStack{Spacer(); bodyView}
+        default:
+            bodyView
+        }
+    }
 }
