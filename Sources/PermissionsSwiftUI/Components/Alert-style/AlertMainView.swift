@@ -22,8 +22,10 @@ import SwiftUI
                                                  permissionViewStyle: .alert)
     }
     var shouldShowPermission:Bool{
+        //Handles case where configuration for autoCheckAuth is true
         if store.configStore.autoCheckAuth || store.autoCheckAlertAuth {
             if showing.wrappedValue &&
+                //schemaStore underterminedPermissions (askable permissions) must not be empty
                 !schemaStore.undeterminedPermissions.isEmpty {
                 return true
             }

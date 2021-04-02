@@ -10,11 +10,16 @@ import Introspect
 
 @usableFromInline struct ModalMainView<Body: View>: View, CustomizableView {
     #warning("Refactor all the property here into a view model, along with all the other views.")
+    //store contains static configurations and customizations
     @usableFromInline var store: PermissionStore
+    //schemaStore contains dynamically computed properties, and internal methods/properties
     @usableFromInline var schemaStore: PermissionSchemaStore
+    //Keep track of whether modal as already been shown for 1st time
     @State var isModalNotShown = true
     @usableFromInline var showing: Binding<Bool>
     @usableFromInline var bodyView: Body
+    //Placeholder to make sure permissionsToAsk only get computed value once
+    //Otherwise, the list of permissions will change while the modal is still open, which is not good
     var _permissionsToAsk: [PermissionType]?
     var permissionsToAsk: [PermissionType] {
         #warning("Fix this awkward computed property.")
@@ -25,10 +30,14 @@ import Introspect
     }
     var shouldShowPermission: Binding<Bool>{
         Binding(get: {
+            //configStore.autoCheckAuth is added in newer version. autoCheckModalAuth is backward compatibility
             if (store.configStore.autoCheckAuth || store.autoCheckModalAuth) &&
+                //Prevent modal from unwanted dismiss while still presented
                 isModalNotShown {
+                //underterminedPermissions.isEmpty => No askable permissions => should not show modal
                 return !permissionsToAsk.isEmpty
             }
+            //Always show the modal regardless of permission status
             return true
         }, set: {_ in})
     }
@@ -49,8 +58,10 @@ import Introspect
             bodyView
                 .sheet(isPresented: showing.combine(with: shouldShowPermission), content: {
                     ModalView(showModal: showing)
+                        //Possible nil, to account for backward compatibility
                         .onAppear(perform: store.onAppear ?? store.configStore.onAppear)
                         .onDisappear(perform: store.onDisappear ?? store.configStore.onDisappear)
+                        //Writing duplicate onAppear and OnDisappear is actually less lines of code
                         .onAppear{isModalNotShown=false}
                         .onDisappear{showing.wrappedValue = false; isModalNotShown=true}
                 })

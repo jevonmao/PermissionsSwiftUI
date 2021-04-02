@@ -8,9 +8,14 @@
 import Foundation
 import UIKit
 
-func notificationImpact(_ type: UINotificationFeedbackGenerator.FeedbackType){
-    var notificationFeedbackGenerator: UINotificationFeedbackGenerator? = UINotificationFeedbackGenerator()
-    notificationFeedbackGenerator?.prepare()
-    notificationFeedbackGenerator?.notificationOccurred(type) 
-    notificationFeedbackGenerator = nil
+class HapticsManager {
+    var notificationFeedbackGenerator: UINotificationFeedbackGenerator?
+    init() {
+        notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+        notificationFeedbackGenerator?.prepare()
+    }
+    func notificationImpact(_ type: UINotificationFeedbackGenerator.FeedbackType){
+        notificationFeedbackGenerator?.notificationOccurred(type)
+        notificationFeedbackGenerator = nil
+    }
 }
