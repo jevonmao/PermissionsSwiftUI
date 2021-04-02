@@ -52,6 +52,7 @@ import SwiftUI
                     AlertView(showAlert: showing)
                         .onAppear(perform: store.configStore.onAppear)
                         .onDisappear(perform: store.configStore.onDisappear)
+                     
                 }
                 .transition(.asymmetric(insertion: insertTransition, removal: removalTransiton))
                 .edgesIgnoringSafeArea(.all)

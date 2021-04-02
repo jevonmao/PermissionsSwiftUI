@@ -13,23 +13,16 @@ import Combine
 public class PermissionSchemaStore: ObservableObject {
 
     //MARK: Filtered permission arrays
-    /**
-     Computed and filtered permissions with `undetermined` status
-     
-     - Warning: `permissionsToAsk` property is deprecated, renamed to `undeterminedPermissions`
-     */
-    
-    @available(iOS, deprecated: 13.0, obsoleted: 15.0, renamed: "undeterminedPermissions")
-    var permissionsToAsk: [PermissionType] {
-        return undeterminedPermissions
-    }
     var undeterminedPermissions: [PermissionType] {
         FilterPermissions.filterForShouldAskPermission(for: permissions)
     }
     var interactedPermissions: [PermissionType] {
         //Filter for permissions that are not interacted
-        permissions.filter{permissionComponentsStore.getPermissionComponent(for: $0).interacted}
+        permissions.filter{permissionComponentsStore.getPermissionComponent(for: $0, modify: {_ in}).interacted}
     }
+    var successfulPermissions: [JMResult]?
+    var erroneousPermissions: [JMResult]?
+    
     //MARK: Controls dismiss restriction
     var shouldStayInPresentation: Bool {
         if configStore.restrictDismissal {

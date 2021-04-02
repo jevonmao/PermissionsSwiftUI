@@ -79,11 +79,6 @@ public extension PermissionStore {
         get {configStore.onDisappear}
         set {configStore.onDisappear = newValue}
     }
-    ///Called when PermissionsSwiftUI view disappears with additional parameters that encapsulates the results
-    var onDisappearHandler: ((successPermissions, errorPermissions)->Void)? {
-        get {configStore.onDisappearHandler}
-        set {configStore.onDisappearHandler = newValue}
-    }
 }
 
 @available(iOS, obsoleted: 15.0, deprecated, message: "Access the properties through PermissionStore's permissionComponentsStore property instead")

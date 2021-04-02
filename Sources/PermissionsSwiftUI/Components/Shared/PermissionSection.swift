@@ -76,7 +76,7 @@ struct PermissionSectionCell: View {
         }
     }
     var body: some View {
-        let currentPermission = schemaStore.permissionComponentsStore.getPermissionComponent(for: permission)
+        let currentPermission = schemaStore.permissionComponentsStore.getPermissionComponent(for: permission, modify: {_ in})
         HStack {
             currentPermission.imageIcon
                 .foregroundColor(store.configStore.allButtonColors.primaryColor)
@@ -97,7 +97,6 @@ struct PermissionSectionCell: View {
                 
             }
             .padding(.horizontal, 3)
-            
             Spacer()
             if schemaStore.permissionViewStyle == .alert {
                 //Call requestPermission (enum function) to make request to Apple API
@@ -117,30 +116,35 @@ struct PermissionSectionCell: View {
     
     func handlePermissionRequest() {
         permissionManager = permission.getPermissionManager()?.init(permissionType: permission)
-        permissionManager?.requestPermission{authorized, error in
-            var currentPermission = schemaStore.permissionComponentsStore.getPermissionComponent(for: permission)
-            currentPermission.interacted = true
-            if authorized {
-                allowButtonStatus = .allowed
-                currentPermission.authorized = true
+        permissionManager!.requestPermission{authorized, error in
+            let result = JMResult(permissionType: permission,
+                                  authorizationStatus: permissionManager!.authorizationStatus,
+                                  error: error)
+            schemaStore.permissionComponentsStore.getPermissionComponent(for: permission){permissionComponent in
+                permissionComponent.interacted = true
+                if authorized {
+                    allowButtonStatus = .allowed
+                    permissionComponent.authorized = true
+                    (schemaStore.successfulPermissions?.append(result)) ?? (schemaStore.successfulPermissions = [result])
+                }
+                else {
+                    allowButtonStatus = .denied
+                    permissionComponent.authorized = false
+                    (schemaStore.erroneousPermissions?.append(result)) ?? (schemaStore.erroneousPermissions = [result])
+                }
             }
-            else {
-                allowButtonStatus = .denied
-                currentPermission.authorized = false
-            }
-            schemaStore.permissionComponentsStore.setPermissionComponent(currentPermission, for: permission)
             DispatchQueue.main.async {
                 schemaStore.objectWillChange.send()
             }
             if shouldAutoDismiss && store.configStore.autoDismiss {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.8) {
                     showing = false
+                    guard let handler = store.configStore.onDisappearHandler else {return}
+                    handler(schemaStore.successfulPermissions ?? nil, schemaStore.erroneousPermissions ?? nil)
                 }
             }
+            permissionManager = nil
+
         }
-        
-        
-        
-        
     }
 }

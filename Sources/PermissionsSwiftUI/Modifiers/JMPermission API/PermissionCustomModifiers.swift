@@ -31,13 +31,11 @@ public extension CustomizableView {
      */
     
     @inlinable func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?=nil, description: String?=nil) -> some CustomizableView {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
-        let newPermission = JMPermission(
-        imageIcon: image,
-        title: title ?? currentPermission.title,
-        description: description ?? currentPermission.description, authorized: currentPermission.authorized
-    )
-        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
+        store.permissionComponentsStore.getPermissionComponent(for: permission){permissionComponent in
+            permissionComponent.title = title ?? permissionComponent.title
+            permissionComponent.imageIcon = image
+            permissionComponent.description = description ?? permissionComponent.description
+        }
         return self
     }
     
@@ -59,13 +57,9 @@ public extension CustomizableView {
      */
     
     @inlinable func setPermissionComponent(for permission: PermissionType, title: String) -> some CustomizableView {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
-        let newPermission = JMPermission(
-            imageIcon: currentPermission.imageIcon,
-            title: title,
-            description: currentPermission.description, authorized: currentPermission.authorized
-        )
-        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
+        store.permissionComponentsStore.getPermissionComponent(for: permission){permissionComponent in
+            permissionComponent.title = title
+        }
         return self
     }
     
@@ -87,13 +81,7 @@ public extension CustomizableView {
      */
     
     @inlinable func setPermissionComponent(for permission: PermissionType, description: String) -> some CustomizableView {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
-        let newPermission = JMPermission(
-            imageIcon: currentPermission.imageIcon,
-            title: currentPermission.title,
-            description: description, authorized: currentPermission.authorized
-        )
-        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
+        store.permissionComponentsStore.getPermissionComponent(for: permission){$0.description = description}
         return self
     }
 }

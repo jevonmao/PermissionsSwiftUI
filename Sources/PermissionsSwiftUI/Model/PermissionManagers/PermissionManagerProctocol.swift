@@ -17,6 +17,8 @@ public enum AuthorizationStatus {
     case denied
     ///The state in which the user has granted limited access permission (ex. photos)
     case limited
+    ///The temporary allowed state that limits the app's access (ex. allow once)
+    case temporary
     ///The `notDetermined` permission state, and the only state where it is possible to ask permission
     case notDetermined
 }

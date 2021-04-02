@@ -39,7 +39,11 @@ struct HeaderView: View {
                             
                             
                     Spacer()
-                    ExitButtonSection(action: { exitButtonAction() })
+                    ExitButtonSection(action: {
+                        exitButtonAction()
+                        guard let handler = store.configStore.onDisappearHandler else {return}
+                        handler(schemaStore.successfulPermissions, schemaStore.erroneousPermissions)
+                    })
                         //Layout priority does not do anything
                         .layoutPriority(-1)
                 }
