@@ -13,13 +13,13 @@ struct AlertView: View {
     @EnvironmentObject var store: PermissionStore
     @EnvironmentObject var schemaStore: PermissionSchemaStore
 
-    var mainText:  MainTexts{store.configStore.mainTexts}
+    var mainText: MainTexts{store.mainTexts.contentChanged ? store.mainTexts : store.configStore.mainTexts}
     var paddingSize: CGFloat {
         screenSize.width < 400 ? 20-(1000-screenSize.width)/120 : 20
     }
     var body: some View {
             VStack{
-                HeaderView(exitButtonAction: {showAlert = schemaStore.shouldStayInPresentation})
+                HeaderView(exitButtonAction: {showAlert = schemaStore.shouldStayInPresentation}, mainText: mainText)
                     .padding(.bottom, paddingSize/1.5)
                 PermissionSection(showing: $showAlert)
                 

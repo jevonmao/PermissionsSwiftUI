@@ -697,9 +697,7 @@ extension View {
     @usableFromInline func withEnvironmentObjects(store: PermissionStore, permissionStyle: PermissionViewStyle) -> some View {
         self
             .environmentObject(store)
-            .environmentObject(PermissionSchemaStore(configStore: store.configStore,
-                                                     permissions: store.permissions,
-                                                     permissionComponentsStore: store.permissionComponentsStore,
+            .environmentObject(PermissionSchemaStore(store: store,
                                                      permissionViewStyle: permissionStyle))
     }
 }

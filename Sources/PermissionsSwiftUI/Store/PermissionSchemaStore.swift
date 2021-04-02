@@ -25,7 +25,9 @@ public class PermissionSchemaStore: ObservableObject {
     
     //MARK: Controls dismiss restriction
     var shouldStayInPresentation: Bool {
-        if configStore.restrictDismissal {
+        if configStore.restrictDismissal ||
+            ((permissionViewStyle == .modal && store.restrictModalDismissal) ||
+                (permissionViewStyle == .alert && store.restrictAlertDismissal)) {
             //Empty means all permissions interacted, so should no longer stay in presentation
             return !(interactedPermissions.count == permissions.count)
         }
@@ -33,13 +35,15 @@ public class PermissionSchemaStore: ObservableObject {
     }
     //MARK: Initialized configuration properties
     var configStore: ConfigStore
+    var store: PermissionStore
     @Published var permissions: [PermissionType]
     var permissionViewStyle: PermissionViewStyle
     @usableFromInline var permissionComponentsStore: PermissionComponentsStore
-    init(configStore: ConfigStore, permissions: [PermissionType], permissionComponentsStore: PermissionComponentsStore, permissionViewStyle: PermissionViewStyle) {
-        self.configStore = configStore
-        self.permissions = permissions
-        self.permissionComponentsStore = permissionComponentsStore
+    init(store: PermissionStore, permissionViewStyle: PermissionViewStyle) {
+        self.configStore = store.configStore
+        self.permissions = store.permissions
+        self.permissionComponentsStore = store.permissionComponentsStore
+        self.store = store
         self.permissionViewStyle = permissionViewStyle
     }
     

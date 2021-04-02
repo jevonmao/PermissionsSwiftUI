@@ -25,7 +25,8 @@ import Introspect
     }
     var shouldShowPermission: Binding<Bool>{
         Binding(get: {
-            if store.configStore.autoCheckAuth && isModalNotShown {
+            if (store.configStore.autoCheckAuth || store.autoCheckModalAuth) &&
+                isModalNotShown {
                 return !permissionsToAsk.isEmpty
             }
             return true
@@ -39,9 +40,7 @@ import Introspect
         self.showing = showing
         self._permissionsToAsk = permissionsToAsk
         self.store = store
-        self.schemaStore = PermissionSchemaStore(configStore: store.configStore,
-                                                 permissions: store.permissions,
-                                                 permissionComponentsStore: store.permissionComponentsStore,
+        self.schemaStore = PermissionSchemaStore(store: store,
                                                  permissionViewStyle: .modal)
     }
     
@@ -50,8 +49,8 @@ import Introspect
             bodyView
                 .sheet(isPresented: showing.combine(with: shouldShowPermission), content: {
                     ModalView(showModal: showing)
-                        .onAppear(perform: store.configStore.onAppear)
-                        .onDisappear(perform: store.configStore.onDisappear)
+                        .onAppear(perform: store.onAppear ?? store.configStore.onAppear)
+                        .onDisappear(perform: store.onDisappear ?? store.configStore.onDisappear)
                         .onAppear{isModalNotShown=false}
                         .onDisappear{showing.wrappedValue = false; isModalNotShown=true}
                 })

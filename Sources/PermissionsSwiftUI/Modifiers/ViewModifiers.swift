@@ -13,7 +13,9 @@ struct ButtonStatusColor: ViewModifier {
     @EnvironmentObject var store: PermissionStore
 
     func body(content: Content) -> some View {
-        let colorStore = store.configStore.allButtonColors
+        let colorStore = {
+            store.allButtonColors.contentChanged ? store.allButtonColors : store.configStore.allButtonColors
+        }()
         switch self.allowButtonStatus {
         case .idle:
             return content.allowButton(foregroundColor: colorStore.buttonIdle.foregroundColor,

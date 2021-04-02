@@ -17,6 +17,11 @@ import SwiftUI
  3. Pass in the `AllButtonColors` struct previously into the proper parameter
  */
 public struct AllButtonColors: Equatable {
+    var contentChanged: Bool {
+        let allButtonColors = AllButtonColors()
+        if self == allButtonColors {return false}
+        return true
+    }
     //MARK: Creating New Button Configs
     /**
      - parameters:

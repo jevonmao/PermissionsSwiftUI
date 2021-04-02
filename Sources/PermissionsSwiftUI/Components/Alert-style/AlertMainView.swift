@@ -18,13 +18,11 @@ import SwiftUI
         self.showing = showing
         self.bodyView = bodyView
         self.store = store
-        self.schemaStore = PermissionSchemaStore(configStore: store.configStore,
-                                                 permissions: store.permissions,
-                                                 permissionComponentsStore: store.permissionComponentsStore,
+        self.schemaStore = PermissionSchemaStore(store: store,
                                                  permissionViewStyle: .alert)
     }
     var shouldShowPermission:Bool{
-        if store.configStore.autoCheckAuth{
+        if store.configStore.autoCheckAuth || store.autoCheckAlertAuth {
             if showing.wrappedValue &&
                 !schemaStore.undeterminedPermissions.isEmpty {
                 return true
@@ -50,8 +48,8 @@ import SwiftUI
                     Blur(style: .systemUltraThinMaterialDark)
                         .transition(AnyTransition.opacity.animation(Animation.default.speed(1.6)))
                     AlertView(showAlert: showing)
-                        .onAppear(perform: store.configStore.onAppear)
-                        .onDisappear(perform: store.configStore.onDisappear)
+                        .onAppear(perform: store.onAppear ?? store.configStore.onAppear)
+                        .onDisappear(perform: store.onDisappear ?? store.configStore.onDisappear)
                      
                 }
                 .transition(.asymmetric(insertion: insertTransition, removal: removalTransiton))

@@ -51,6 +51,13 @@ public struct ConfigStore {
  Encapsulates the surrounding texts and title
  */
 public struct MainTexts: Equatable {
+    //Whether the text properties have been changed and customized
+    var contentChanged: Bool {
+        //Represents the default, unchanged struct with default property values
+        let mainTexts = MainTexts()
+        if self == mainTexts{return false}
+        return true
+    }
     ///Text to display for header text
     public var headerText: String = "Need Permissions"
     ///Text to display for header description text
