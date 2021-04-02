@@ -13,8 +13,17 @@ struct ExitButtonSection: View {
     var buttonSizeConstant: CGFloat {
         screenSize.width < 400 ? 40-(1000-screenSize.width)/80 : 40
     }
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
     var body: some View {
-        Button(action: action, label: {
+        Button(action: {
+            let haptics = HapticsManager()
+            if schemaStore.shouldStayInPresentation {
+                haptics.notificationImpact(.error)
+                
+            }
+            action()
+            
+        }, label: {
             Circle()
                 .fill(Color(.systemGray4))
                 .frame(width: buttonSizeConstant, height: buttonSizeConstant)

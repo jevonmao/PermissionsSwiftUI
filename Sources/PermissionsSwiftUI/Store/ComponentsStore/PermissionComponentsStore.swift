@@ -118,76 +118,56 @@ public struct PermissionComponentsStore {
 }
 
 extension PermissionComponentsStore {
-    @usableFromInline func getPermissionComponent(for permission: PermissionType) -> JMPermission {
+    @usableFromInline
+    @discardableResult
+    mutating func getPermissionComponent(for permission: PermissionType, modify: (inout JMPermission) -> Void) -> JMPermission {
         switch permission {
         case .location:
+            modify(&self.locationPermission)
             return self.locationPermission
         case .locationAlways:
+            modify(&self.locationAlwaysPermission)
             return self.locationAlwaysPermission
         case .photo:
+            modify(&self.photoPermission)
             return self.photoPermission
         case .microphone:
+            modify(&self.microphonePermisson)
             return self.microphonePermisson
         case .camera:
+            modify(&self.cameraPermission)
             return self.cameraPermission
         case .notification:
+            modify(&self.notificationPermission)
             return self.notificationPermission
         case .calendar:
+            modify(&self.calendarPermisson)
             return self.calendarPermisson
         case .bluetooth:
+            modify(&self.bluetoothPermission)
             return self.bluetoothPermission
         case .tracking:
+            modify(&self.trackingPermission)
             return self.trackingPermission
         case .contacts:
+            modify(&self.contactsPermission)
             return self.contactsPermission
         case .motion:
+            modify(&self.motionPermission)
             return self.motionPermission
         case .reminders:
+            modify(&self.remindersPermission)
             return self.remindersPermission
         case .speech:
+            modify(&self.speechPermission)
             return self.speechPermission
         case .health:
+            modify(&self.healthPermission)
             return self.healthPermission
         case .music:
+            modify(&self.musicPermission)
             return self.musicPermission
         }
-    }
-    
-    @usableFromInline mutating func setPermissionComponent(_ component: JMPermission, for permission: PermissionType) {
-        switch permission {
-        case .location:
-            self.locationPermission = component
-        case .locationAlways:
-            self.locationAlwaysPermission = component
-        case .photo:
-            self.photoPermission = component
-        case .microphone:
-            self.microphonePermisson = component
-        case .camera:
-            self.cameraPermission = component
-        case .notification:
-            self.notificationPermission = component
-        case .calendar:
-            self.calendarPermisson = component
-        case .bluetooth:
-            self.bluetoothPermission = component
-        case .tracking:
-            self.trackingPermission = component
-        case .contacts:
-            self.contactsPermission = component
-        case .motion:
-            self.motionPermission = component
-        case .reminders:
-            self.remindersPermission = component
-        case .speech:
-            self.speechPermission = component
-        case .health:
-            self.healthPermission = component
-        case .music:
-            self.musicPermission = component
-
-        }
-
     }
 }
 

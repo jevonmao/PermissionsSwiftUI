@@ -8,23 +8,6 @@
 import Foundation
 import SwiftUI
 
-/**
- The closure parameter of successfully requested permissions
- 
- This typealias's underlying type, `[PermissionType: JMResult]`, can be accessed like a dictionary for the `JMResult` for each permission type requested. The dictionary will contain only permission types that are passed in to show in PermissionsSwiftUI view. If there is no successful permissions, this dictionary will be empty.
- 
- - seeAlso: errorPermissions
- */
-public typealias successPermissions = [PermissionType: JMResult]
-/**
- The closure parameter of erroneous requested permissions
- 
- This typealias's underlying type, `[PermissionType: JMResult]`, can be accessed like a dictionary for the `JMResult` for each permission type requested. The dictionary will contain only permission types that are passed in to show in PermissionsSwiftUI view. If there is all permission succeed, this dictionary will be empty.
- 
- - seeAlso: errorPermissions
- */
-public typealias errorPermissions = [PermissionType: JMResult]
-
 //MARK: - Storage
 /**
  The data storage class that contains reference to all the custom configurations

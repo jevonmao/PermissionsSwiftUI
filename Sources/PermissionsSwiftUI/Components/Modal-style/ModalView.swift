@@ -12,12 +12,12 @@ struct ModalView: View {
     @EnvironmentObject var schemaStore: PermissionSchemaStore
 
     @Binding var showModal: Bool
-    var mainText: MainTexts{store.configStore.mainTexts}
+    var mainText: MainTexts{store.mainTexts.contentChanged ? store.mainTexts : store.configStore.mainTexts}
 
     var body: some View {
         ScrollView {
             VStack { 
-                HeaderView(exitButtonAction: {showModal = schemaStore.shouldStayInPresentation})
+                HeaderView(exitButtonAction: {showModal = schemaStore.shouldStayInPresentation}, mainText: mainText)
                     
                 PermissionSection(showing: $showModal)
                     .background(Color(.systemBackground))
@@ -39,7 +39,7 @@ struct ModalView: View {
         .background(Color(.secondarySystemBackground))
         .edgesIgnoringSafeArea(.all)
         .introspectViewController{
-            if store.configStore.restrictDismissal {
+            if store.configStore.restrictDismissal || store.restrictModalDismissal {
                 $0.isModalInPresentation = true
             }
         }

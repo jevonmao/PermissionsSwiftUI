@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-@available(iOS, obsoleted: 15.0, deprecated, message: "Access the properties through PermissionStore's configStore property instead")
+@available(iOS, obsoleted: 15.0, deprecated, message: "Access the properties through PermissionStore's configStore property instead. Learn more: https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0")
 /**
  Additional configuration properties for backward compatibility
  
@@ -79,14 +79,9 @@ public extension PermissionStore {
         get {configStore.onDisappear}
         set {configStore.onDisappear = newValue}
     }
-    ///Called when PermissionsSwiftUI view disappears with additional parameters that encapsulates the results
-    var onDisappearHandler: ((successPermissions, errorPermissions)->Void)? {
-        get {configStore.onDisappearHandler}
-        set {configStore.onDisappearHandler = newValue}
-    }
 }
 
-@available(iOS, obsoleted: 15.0, deprecated, message: "Access the properties through PermissionStore's permissionComponentsStore property instead")
+@available(iOS, obsoleted: 15.0, deprecated, message: "These will no longer work. Access through permissionComponentsStore property instead. Learn more: https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0")
 /**
  Additional permission component properties for backward compatibility
  

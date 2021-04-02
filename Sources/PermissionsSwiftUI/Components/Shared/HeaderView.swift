@@ -12,7 +12,7 @@ struct HeaderView: View {
     @EnvironmentObject var schemaStore: PermissionSchemaStore
     var exitButtonAction:() -> Void
     //HeaderText component have slightly different UI for alert and modal.
-    var mainText: MainTexts {store.configStore.mainTexts}
+    var mainText: MainTexts
     var body: some View {
         let style = schemaStore.permissionViewStyle
         VStack{
@@ -39,7 +39,11 @@ struct HeaderView: View {
                             
                             
                     Spacer()
-                    ExitButtonSection(action: { exitButtonAction() })
+                    ExitButtonSection(action: {
+                        exitButtonAction()
+                        guard let handler = store.configStore.onDisappearHandler else {return}
+                        handler(schemaStore.successfulPermissions, schemaStore.erroneousPermissions)
+                    })
                         //Layout priority does not do anything
                         .layoutPriority(-1)
                 }

@@ -26,48 +26,38 @@ public struct ConfigStore {
     ///Whether to auto dismiss the view after last permission is allowed
     public var autoDismiss: Bool = false
 
-    @available(iOS, deprecated, obsoleted: 15, renamed: "autoDismiss")
-    ///Whether to auto dismiss the modal after last permission is allowed
-    public var autoDismissModal: Bool = true
-    
-    @available(iOS, deprecated, obsoleted: 15, renamed: "autoDismiss")
-    ///Whether to auto dismiss the alert after last permission is allowed
-    public var autoDismissAlert: Bool = true
-    
     //MARK: Configure Auto Authorization Checking
     ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
     public var autoCheckAuth: Bool = true
     
-    ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
-    @available(iOS, deprecated, obsoleted: 15, renamed: "autoDismiss")
-    public var autoCheckModalAuth: Bool = true
-    ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
-    @available(iOS, deprecated, obsoleted: 15, renamed: "autoDismiss")
-    public var autoCheckAlertAuth: Bool = true
-    
     //MARK: Prevent Dismissal Before All Permissions Interacted
     ///Whether to prevent dismissal of  view before all permissions have been interacted (explict deny or allow)
     public var restrictDismissal: Bool = true
-    ///Whether to prevent dismissal of modal view before all permissions have been interacted (explict deny or allow)
-    @available(iOS, deprecated, obsoleted: 15, renamed: "restrictDismissal")
-    public var restrictModalDismissal: Bool = true
-    ///Whether to prevent dismissal of alert view before all permissions have been interacted (explict deny or allow)
-    @available(iOS, deprecated, obsoleted: 15, renamed: "restrictDismissal")
-    public var restrictAlertDismissal: Bool = true
-    
+
     //MARK: `onAppear` and `onDisappear` Executions
     ///Override point for executing action when PermissionsSwiftUI view appears
     public var onAppear: (()->Void)?
     ///Override point for executing action when PermissionsSwiftUI view disappears
     public var onDisappear: (()->Void)?
-    ///Called when PermissionsSwiftUI view disappears with additional parameters that encapsulates the results
-    public var onDisappearHandler: ((successPermissions, errorPermissions)->Void)?
+    /**
+     Called when PermissionsSwiftUI view disappears with additional parameters that encapsulates the results
+     
+     This completion handler will return additional details about the permission request's results, and execute action when PermissionsSwiftUI view disappears.
+     */
+    public var onDisappearHandler: ((_ successful: [JMResult]?, _ erroneous: [JMResult]?)->Void)?
 }
 
 /**
  Encapsulates the surrounding texts and title
  */
 public struct MainTexts: Equatable {
+    //Whether the text properties have been changed and customized
+    var contentChanged: Bool {
+        //Represents the default, unchanged struct with default property values
+        let mainTexts = MainTexts()
+        if self == mainTexts{return false}
+        return true
+    }
     ///Text to display for header text
     public var headerText: String = "Need Permissions"
     ///Text to display for header description text
