@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//MARK: - Showing Model Style Permissions
+//MARK: - Showing Modal Style Permissions
 public extension View {
     /**
      Displays a PermissionsSwiftUI modal view that displays and handles permissions.
@@ -154,9 +154,9 @@ public extension View {
      - Parameters:
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
-        - onAppear: Override point for when JMPermission modal appears
-        - onDisappear: Override point for when JMPermission modal disappears
-        - onDisappearHandler: Override point for when JMPermission modal disappears
+        - onAppear: Override point for when the modal appears
+        - onDisappear: Override point for when the modal modal disappears
+        - onDisappearHandler: Returns back results of permission request when the modal dismissess
         - successful:  Permissions that are successfully requested and granted. Will return nil if no permissions are successful.
         - erroneous: Permissions that failed with error while requesting, or explicitly denied. Will return nil if all permissions are successful.
      - Returns:
@@ -167,7 +167,7 @@ public extension View {
                  for permissions: [PermissionType],
                  onAppear: @escaping () -> Void,
                  onDisappear: (() -> Void)?=nil,
-                 onDisappearHandler: ((_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void)?=nil) -> some CustomizableView {
+                 onDisappearHandler: Optional<(_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void>=nil) -> some CustomizableView {
         initializeJMModal(showModal: showModal,
                           for: permissions,
                           onAppear: onAppear,
@@ -179,12 +179,12 @@ public extension View {
      
      ````
      - Parameters:
-        - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
+       - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
         - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
-        - onAppear: Override point for when JMPermission modal appears
-        - onDisappear: Override point for when JMPermission modal disappears
-        - onDisappearHandler: Override point for when JMPermission modal disappears
+        - onAppear: Override point for when the modal appears
+        - onDisappear: Override point for when the modal modal disappears
+        - onDisappearHandler: Returns back results of permission request when the modal dismissess
         - successful:  Permissions that are successfully requested and granted. Will return nil if no permissions are successful.
         - erroneous: Permissions that failed with error while requesting, or explicitly denied. Will return nil if all permissions are successful.
      - Returns:
@@ -196,7 +196,7 @@ public extension View {
                  autoDismiss: Bool,
                  onAppear: @escaping () -> Void,
                  onDisappear: (() -> Void)?=nil,
-                 onDisappearHandler: ((_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void)?=nil) -> some CustomizableView {
+                 onDisappearHandler: Optional<(_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void>=nil) -> some CustomizableView {
         initializeJMModal(showModal: showModal,
                           for: permissions,
                           autoDismiss: autoDismiss,
@@ -214,9 +214,9 @@ public extension View {
         - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
         - restrictDismissal: Specify whether to prevent dismissal of modal view before all permissions have been interacted. Default is `true`.
         - autoCheckAuthorization: Specify whether to auto check for authorization status before showing. The modal will seamlessly only display permission UI for permission that are in `notDetermined` status. If no permission meet the criteria, the alert will not show at all. Default is `true`
-        - onAppear: Override point for when JMPermission modal appears
-        - onDisappear: Override point for when JMPermission modal disappears
-        - onDisappearHandler: Override point for when JMPermission modal disappears
+        - onAppear: Override point for when the modal appears
+        - onDisappear: Override point for when the modal modal disappears
+        - onDisappearHandler: Returns back results of permission request when the modal dismissess
         - successful:  Permissions that are successfully requested and granted. Will return nil if no permissions are successful.
         - erroneous: Permissions that failed with error while requesting, or explicitly denied. Will return nil if all permissions are successful.
      - Note:
@@ -232,7 +232,7 @@ public extension View {
                  autoCheckAuthorization: Bool?=nil,
                  onAppear: @escaping () -> Void,
                  onDisappear: (() -> Void)?=nil,
-                 onDisappearHandler: ((_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void)?=nil) -> some CustomizableView {
+                 onDisappearHandler: Optional<(_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void>=nil) -> some CustomizableView {
         initializeJMModal(showModal: showModal,
                        for: permissions,
                        autoDismiss: autoDismiss,
@@ -249,9 +249,9 @@ public extension View {
         - for: An array of type `PermissionModel` to specify permissions to show
         - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
         - autoCheckAuthorization: Specify whether to auto check for authorization status before showing. The modal will seamlessly only display permission UI for permission that are in `notDetermined` status. If no permission meet the criteria, the alert will not show at all. Default is `true`
-        - onAppear: Override point for when JMPermission modal appears
-        - onDisappear: Override point for when JMPermission modal disappears
-        - onDisappearHandler: Override point for when JMPermission modal disappears
+        - onAppear: Override point for when the modal appears
+        - onDisappear: Override point for when the modal modal disappears
+        - onDisappearHandler: Returns back results of permission request when the modal dismissess
         - successful:  Permissions that are successfully requested and granted. Will return nil if no permissions are successful.
         - erroneous: Permissions that failed with error while requesting, or explicitly denied. Will return nil if all permissions are successful.
      - Note:
@@ -268,7 +268,7 @@ public extension View {
                  restrictDismissal: Bool?=nil,
                  onAppear: @escaping () -> Void,
                  onDisappear: (() -> Void)?=nil,
-                 onDisappearHandler: ((_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void)?=nil) -> some CustomizableView {
+                 onDisappearHandler: Optional<(_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void>=nil) -> some CustomizableView {
         initializeJMModal(showModal: showModal,
                 for: permissions,
                 autoDismiss: autoDismiss,
@@ -419,9 +419,9 @@ public extension View {
      - Parameters:
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
-        - onAppear: Override point for when JMPermission modal appears
-        - onDisappear: Override point for when JMPermission modal disappears
-        - onDisappearHandler: Override point for when JMPermission modal disappears
+        - onAppear: Override point for when the dialog appears
+        - onDisappear: Override point for when the dialog disappears
+        - onDisappearHandler: Returns back results of permission request when the dialog dismissess
         - successful:  Permissions that are successfully requested and granted. Will return nil if no permissions are successful.
         - erroneous: Permissions that failed with error while requesting, or explicitly denied. Will return nil if all permissions are successful.
      - Returns:
@@ -433,7 +433,7 @@ public extension View {
                  for permissions: [PermissionType],
                  onAppear: (() -> Void)?=nil,
                  onDisappear: (() -> Void)?=nil,
-                 onDisappearHandler: ((_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void)?=nil) -> some CustomizableView {
+                 onDisappearHandler: Optional<(_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void>=nil) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, onAppear: onAppear, onDisappear: onDisappear, onDisappearHandler: onDisappearHandler)
     }
     /**
@@ -447,9 +447,9 @@ public extension View {
         - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
         - for: An array of type `PermissionModel` to specify permissions to show
         - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
-        - onAppear: Override point for when JMPermission modal appears
-        - onDisappear: Override point for when JMPermission modal disappears
-        - onDisappearHandler: Override point for when JMPermission modal disappears
+        - onAppear: Override point for when the dialog appears
+        - onDisappear: Override point for when the dialog disappears
+        - onDisappearHandler: Returns back results of permission request when the dialog dismissess
         - successful:  Permissions that are successfully requested and granted. Will return nil if no permissions are successful.
         - erroneous: Permissions that failed with error while requesting, or explicitly denied. Will return nil if all permissions are successful.
      - Returns:
@@ -461,7 +461,7 @@ public extension View {
                  autoDismiss: Bool,
                  onAppear: (() -> Void)?=nil,
                  onDisappear: (() -> Void)?=nil,
-                 onDisappearHandler: ((_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void)?=nil) -> some CustomizableView {
+                 onDisappearHandler: Optional<(_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void>=nil) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, autoDismiss: autoDismiss, onAppear: onAppear, onDisappear: onDisappear, onDisappearHandler: onDisappearHandler)
     }
     
@@ -478,9 +478,9 @@ public extension View {
         - for: An array of type `PermissionModel` to specify permissions to show
         - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
         - autoCheckAuthorization: Specify whether to auto check for authorization status before showing. The alert will seamlessly only display permission UI for permission that are in `notDetermined` status. If no permission meet the criteria, the alert will not show at all. Default is `true`
-        - onAppear: Override point for when JMPermission modal appears
-        - onDisappear: Override point for when JMPermission modal disappears
-        - onDisappearHandler: Override point for when JMPermission modal disappears
+        - onAppear: Override point for when the dialog appears
+        - onDisappear: Override point for when the dialog disappears
+        - onDisappearHandler: Returns back results of permission request when the dialog dismissess
         - successful:  Permissions that are successfully requested and granted. Will return nil if no permissions are successful.
         - erroneous: Permissions that failed with error while requesting, or explicitly denied. Will return nil if all permissions are successful.
      - Note:
@@ -496,7 +496,7 @@ public extension View {
                  autoCheckAuthorization: Bool?=nil,
                  onAppear: (() -> Void)?=nil,
                  onDisappear: (() -> Void)?=nil,
-                 onDisappearHandler: ((_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void)?=nil) -> some CustomizableView {
+                 onDisappearHandler: Optional<(_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void>=nil) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions,
                           autoDismiss: autoDismiss,
                           autoCheckAuthorization: autoCheckAuthorization,
