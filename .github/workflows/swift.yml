@@ -47,6 +47,8 @@ jobs:
     name: Documentation coverage
     runs-on: macos-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - name: Ready shell script
         run: chmod +x .github/documentation_coverage.sh
       - name: Execute shell script
