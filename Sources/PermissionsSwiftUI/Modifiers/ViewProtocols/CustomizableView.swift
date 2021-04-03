@@ -18,7 +18,10 @@ public protocol CustomizableView: View {
     var store: PermissionStore {get}
     ///A schema storage object that is implemented by views
     var schemaStore: PermissionSchemaStore {get}
+    ///Concrete type should be constraint to of type View
     associatedtype ViewType
+    ///Binding variable to control the presentable of view
     var showing: Binding<Bool> {get set}
+    ///The layer of passed in view below PermisisonsSwiftUI's view
     var bodyView: ViewType {get set}
 }
