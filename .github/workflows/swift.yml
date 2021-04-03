@@ -48,6 +48,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Ready shell script
-        run: chmod+x .github/documentation_coverage.sh
+        run: chmod +x .github/documentation_coverage.sh
       - name: Execute shell script
         run: .github/documentation_coverage.sh
