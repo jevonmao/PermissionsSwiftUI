@@ -43,3 +43,11 @@ jobs:
 
       - name: Format Swift code
         run: swiftformat --verbose . --swiftversion 5.2
+  Documentation_coverage:
+    name: Documentation coverage
+    runs-on: macos-latest
+    steps:
+      - name: Ready shell script:
+        run: chmod+x .github/documentation_coverage.sh
+      - name: Execute shell script:
+        run: .github/documentation_coverage.sh
