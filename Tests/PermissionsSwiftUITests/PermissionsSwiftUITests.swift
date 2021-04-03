@@ -6,34 +6,33 @@ import HealthKit
 
 fileprivate let referenceSize = UIScreen.main.bounds.size
 #warning("Write unit tests")
-#warning("Documentation and migration guide")
 final class PermissionsSwiftUITests: XCTestCase {
     let placeholderText = """
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
 """
     func testPermissionStoreCurrentPermissionGet(){
-        let store = PermissionComponentsStore()
+        var store = PermissionComponentsStore()
         if #available(iOS 14.5, *) {
-            let trackingPermission = store.getPermissionComponent(for: .tracking)
+            let trackingPermission = store.getPermissionComponent(for: .tracking, modify: {_ in })
             XCTAssertEqual(trackingPermission, JMPermission(
                 imageIcon: AnyView(Image(systemName: "person.circle.fill")),
                 title: "Tracking",
                 description: "Allow to track your data", authorized: false
             ))
         }
-        let photoPermission = store.getPermissionComponent(for: .photo)
-        let cameraPermission = store.getPermissionComponent(for: .camera)
-        let locationPermission = store.getPermissionComponent(for: .location)
-        let reminderPermission = store.getPermissionComponent(for: .reminders)
-        let speechPermission = store.getPermissionComponent(for: .speech)
-        let bluetoothPermission = store.getPermissionComponent(for: .bluetooth)
-        let calendarPermission = store.getPermissionComponent(for: .calendar)
-        let contactsPermission = store.getPermissionComponent(for: .contacts)
-        let locationAlwaysPermission = store.getPermissionComponent(for: .locationAlways)
-        let microphonePermission = store.getPermissionComponent(for: .microphone)
-        let notificationPermission = store.getPermissionComponent(for: .notification)
-        let healthPermission = store.getPermissionComponent(for: .health(categories: nil))
-        let musicPermission = store.getPermissionComponent(for: .music)
+        let photoPermission = store.getPermissionComponent(for: .photo, modify: {_ in })
+        let cameraPermission = store.getPermissionComponent(for: .camera, modify: {_ in })
+        let locationPermission = store.getPermissionComponent(for: .location, modify: {_ in })
+        let reminderPermission = store.getPermissionComponent(for: .reminders, modify: {_ in })
+        let speechPermission = store.getPermissionComponent(for: .speech, modify: {_ in })
+        let bluetoothPermission = store.getPermissionComponent(for: .bluetooth, modify: {_ in })
+        let calendarPermission = store.getPermissionComponent(for: .calendar, modify: {_ in })
+        let contactsPermission = store.getPermissionComponent(for: .contacts, modify: {_ in })
+        let locationAlwaysPermission = store.getPermissionComponent(for: .locationAlways, modify: {_ in })
+        let microphonePermission = store.getPermissionComponent(for: .microphone, modify: {_ in })
+        let notificationPermission = store.getPermissionComponent(for: .notification, modify: {_ in })
+        let healthPermission = store.getPermissionComponent(for: .health(categories: nil), modify: {_ in })
+        let musicPermission = store.getPermissionComponent(for: .music, modify: {_ in })
         XCTAssertEqual(photoPermission, JMPermission(
             imageIcon: AnyView(Image(systemName: "photo")),
             title: "Photo Library",
@@ -315,61 +314,65 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
 //            XCTAssert(authorized)
 //        }
 //    }
-//    func testModalViewSnapshot14_0(){
-//        if #available(iOS 14.5, *) {}
-//        else{
-//            store.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
-//            store.updateStore(property: {$0.autoCheckModalAuth=$1}, value: false)
-//            let view = ModalView(showModal: .constant(true))
-//            assertSnapshot(matching: view.referenceFrame(), as: .image)
-//        }
-//    }
-//    func testModalViewSnapshot14_5(){
-//        if #available(iOS 14.5, *) {
-//            let view = ModalView(showModal: .constant(true))
-//            store.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
-//            assertSnapshot(matching: view.referenceFrame(), as: .image)
-//        }
-//    }
-//
-//    func testCustomizeHeaderSnapshot(){
-//        let newHeader = "Permissions Request"
-//        let view = ModalView(showModal: .constant(true))
-//            .referenceFrame()
-//            .changeHeaderTo(newHeader)
-//            .changeHeaderDescriptionTo(placeholderText)
-//            .changeBottomDescriptionTo(placeholderText)
-//        XCTAssertEqual(newHeader, store.mainTexts.headerText)
-//        XCTAssertEqual(placeholderText, store.mainTexts.headerDescription)
-//        XCTAssertEqual(placeholderText, store.mainTexts.bottomDescription)
-//        assertSnapshot(matching: view, as: .image)
-//
-//    }
-//    func testPermissionCell(){
-//        for permission in PermissionType.allCases{
-//            let title = permission.currentPermission.title
-//            let views = getPermissionView(for: permission)
-//            let testingPermission = JMPermission(imageIcon: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText, authorized: false)
-//            XCTAssertEqual(testingPermission, permission.currentPermission)
-//            for i in views{
-//                assertSnapshot(matching: i, as: .image)
-//            }
-//        }
-//    }
-//    func getPermissionView(for permission: PermissionType) -> [AnyView]{
-//        let title = permission.currentPermission.title
-//        switch permission {
-//        default:
-//            let views:[AnyView] = AllowButtonStatus.allCases.map{
-//                let view = PermissionSectionCell(permission: permission, allowButtonStatus: $0, showModal: .constant(true), isAlert: false)
-//                    .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
-//                    .referenceFrameCell()
-//                return AnyView(view)
-//            }
-//            return views
-//
-//        }
-//    }
+    func testModalViewSnapshot14_0(){
+        if #available(iOS 14.5, *) {}
+        else{
+            let store = PermissionStore()
+            store.permissions = PermissionType.allCases
+            store.configStore.autoCheckAuth = false
+            let view = ModalView(showModal: .constant(true)).withEnvironmentObjects(store: store, permissionStyle: .modal)
+            assertSnapshot(matching: view.referenceFrame(count: store.permissions.count), as: .image)
+        }
+    }
+    func testModalViewSnapshot14_5(){
+        if #available(iOS 14.5, *) {
+            let store = PermissionStore()
+            store.permissions = PermissionType.allCases
+            store.configStore.autoCheckAuth = false
+            let view = ModalView(showModal: .constant(true)).withEnvironmentObjects(store: store, permissionStyle: .modal)
+            assertSnapshot(matching: view.referenceFrame(count: store.permissions.count), as: .image)
+        }
+    }
+
+    func testCustomizeHeaderSnapshot(){
+        let newHeader = "Permissions Request"
+        let store = PermissionStore()
+        _ = ModalMainView(for: Color.red, showing: .constant(true), store: store)
+            .changeHeaderTo(newHeader)
+            .changeHeaderDescriptionTo(placeholderText)
+            .changeBottomDescriptionTo(placeholderText)
+            .referenceFrame(count: 0)
+
+        XCTAssertEqual(newHeader, store.configStore.mainTexts.headerText)
+        XCTAssertEqual(placeholderText, store.configStore.mainTexts.headerDescription)
+        XCTAssertEqual(placeholderText, store.configStore.mainTexts.bottomDescription)
+        let view = ModalView(showModal: .constant(true)).withEnvironmentObjects(store: store, permissionStyle: .modal)
+        assertSnapshot(matching: view, as: .image)
+
+    }
+    func testPermissionCell(){
+        for permission in PermissionType.allCases{
+            let currentPermission = PermissionStore().permissionComponentsStore.getPermissionComponent(for: permission, modify: {_ in})
+            let title = currentPermission.title
+            let views = getPermissionView(for: permission)
+            for i in views{
+                assertSnapshot(matching: i, as: .image)
+            }
+        }
+    }
+    func getPermissionView(for permission: PermissionType) -> [AnyView]{
+        switch permission {
+        default:
+            let views:[AnyView] = AllowButtonStatus.allCases.map{
+                let view = PermissionSectionCell(permission: permission, allowButtonStatus: $0, showing: .constant(true))
+                    .withEnvironmentObjects(store: PermissionStore(), permissionStyle: .modal)
+                    .referenceFrameCell()
+                return AnyView(view)
+            }
+            return views
+
+        }
+    }
 //    func testStateChangeClosures(){
 //        XCTAssertNil(store.onAppear)
 //        XCTAssertNil(store.onDisappear)
@@ -555,15 +558,14 @@ struct testViewGreenBG:View{
         }
     }
 }
-//private extension SwiftUI.View {
-//    func referenceFrame() -> some View {
-//        let count = store.permissions.count
-//        return self.frame(width: referenceSize.width, height: referenceSize.height+CGFloat(count*60))
-//    }
-//    func referenceFrameCell() -> some View{
-//        return self.frame(width: referenceSize.width, height: 70)
-//    }
-//}
+private extension SwiftUI.View {
+    func referenceFrame(count: Int) -> some View {
+        return self.frame(width: referenceSize.width, height: referenceSize.height+CGFloat(count*60))
+    }
+    func referenceFrameCell() -> some View{
+        return self.frame(width: referenceSize.width, height: 70)
+    }
+}
 
 public extension UIDevice {
     enum DeviceType{
