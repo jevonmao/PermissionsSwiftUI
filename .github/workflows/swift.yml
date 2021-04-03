@@ -49,6 +49,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+      - name: Install Jazzy
+        run: sudo gem install jazzy
       - name: Ready shell script
         run: chmod +x .github/documentation_coverage.sh
       - name: Execute shell script
