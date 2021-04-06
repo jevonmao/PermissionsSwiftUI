@@ -24,7 +24,10 @@ let package = Package(
         .target(
             name: "PermissionsSwiftUI",
             dependencies: ["Introspect"],
-            exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+            exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+            swiftSettings: [
+                            .unsafeFlags(["-suppress-warnings"]),
+                        ]
         ),
         .testTarget(
             name: "PermissionsSwiftUITests",
