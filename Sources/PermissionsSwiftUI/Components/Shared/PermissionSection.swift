@@ -13,7 +13,6 @@ struct PermissionSection: View {
     @EnvironmentObject var store: PermissionStore
     var _permissions: [PermissionType]?
     var permissions:[PermissionType] {
-        #warning("Fix this awkward computed property.")
         return store.permissions
     }
     var body: some View {

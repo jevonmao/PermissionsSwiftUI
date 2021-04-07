@@ -9,7 +9,6 @@ import SwiftUI
 import Introspect
 
 @usableFromInline struct ModalMainView<Body: View>: View, CustomizableView {
-    #warning("Refactor all the property here into a view model, along with all the other views.")
     //store contains static configurations and customizations
     @usableFromInline var store: PermissionStore
     //schemaStore contains dynamically computed properties, and internal methods/properties
@@ -22,7 +21,6 @@ import Introspect
     //Otherwise, the list of permissions will change while the modal is still open, which is not good
     var _permissionsToAsk: [PermissionType]?
     var permissionsToAsk: [PermissionType] {
-        #warning("Fix this awkward computed property.")
         guard _permissionsToAsk == nil else {
             return _permissionsToAsk!
         }
@@ -31,7 +29,8 @@ import Introspect
     var shouldShowPermission: Binding<Bool>{
         Binding(get: {
             //configStore.autoCheckAuth is added in newer version. autoCheckModalAuth is backward compatibility
-            if (store.configStore.autoCheckAuth || store.autoCheckModalAuth) &&
+            if (store.configStore.autoCheckAuth ||
+                    (store.autoCheckModalAuth || store.autoCheckAlertAuth)) &&
                 //Prevent modal from unwanted dismiss while still presented
                 isModalNotShown {
                 //underterminedPermissions.isEmpty => No askable permissions => should not show modal
