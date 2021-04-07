@@ -8,7 +8,7 @@
 import SwiftUI
 
 //The root level view for alert-style
-@usableFromInline struct AlertMainView<Body: View>: View, CustomizableView {
+@usableFromInline struct DialogViewWrapper<Body: View>: View, CustomizableView {
     @usableFromInline typealias ViewType = Body
     @usableFromInline var showing: Binding<Bool>
     @usableFromInline var bodyView: ViewType
@@ -49,7 +49,7 @@ import SwiftUI
                 Group{
                     Blur(style: .systemUltraThinMaterialDark)
                         .transition(AnyTransition.opacity.animation(Animation.default.speed(1.6)))
-                    AlertView(showAlert: showing)
+                    DialogView(showAlert: showing)
                         .onAppear(perform: store.onAppear ?? store.configStore.onAppear)
                         .onDisappear(perform: store.onDisappear ?? store.configStore.onDisappear)
                      

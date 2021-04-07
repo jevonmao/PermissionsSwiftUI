@@ -8,7 +8,7 @@
 import SwiftUI
 
 //The body view of the alert pop up, child view of AlertMainView
-struct AlertView: View {
+struct DialogView: View {
     @Binding var showAlert: Bool
     @EnvironmentObject var store: PermissionStore
     @EnvironmentObject var schemaStore: PermissionSchemaStore

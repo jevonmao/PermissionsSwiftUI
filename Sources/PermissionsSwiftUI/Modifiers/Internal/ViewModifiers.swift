@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+extension View {
+    func buttonStatusColor(for allowButtonStatus: AllowButtonStatus) -> some View {
+        self.modifier(ButtonStatusColor(allowButtonStatus: allowButtonStatus))
+    }
+    func allowButton(foregroundColor: Color, backgroundColor: Color) -> some View {
+        self.modifier(AllowButton(foregroundColor: foregroundColor, backgroundColor: backgroundColor))
+    }
+    func alertViewFrame() -> some View {
+        self.modifier(JMAlertViewFrame())
+    }
+    func textHorizontalAlign(_ alignment: Alignment) -> some View {
+        TextHorizontalAlign(alignment: alignment, bodyView: self)
+    }
+}
+
 //Custom view modifier for the button component
 struct ButtonStatusColor: ViewModifier {
     var allowButtonStatus: AllowButtonStatus
@@ -65,20 +80,6 @@ struct JMAlertViewFrame: ViewModifier {
     }
 }
 
-extension View {
-    func buttonStatusColor(for allowButtonStatus: AllowButtonStatus) -> some View {
-        self.modifier(ButtonStatusColor(allowButtonStatus: allowButtonStatus))
-    }
-    func allowButton(foregroundColor: Color, backgroundColor: Color) -> some View {
-        self.modifier(AllowButton(foregroundColor: foregroundColor, backgroundColor: backgroundColor))
-    }
-    func alertViewFrame() -> some View {
-        self.modifier(JMAlertViewFrame())
-    }
-    func textHorizontalAlign(_ alignment: Alignment) -> some View {
-        TextHorizontalAlign(alignment: alignment, bodyView: self)
-    }
-}
 struct TextHorizontalAlign<BodyView: View>: View {
     var alignment: Alignment
     var bodyView: BodyView

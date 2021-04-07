@@ -8,7 +8,7 @@
 import SwiftUI
 import Introspect
 
-@usableFromInline struct ModalMainView<Body: View>: View, CustomizableView {
+@usableFromInline struct ModalViewWrapper<Body: View>: View, CustomizableView {
     //store contains static configurations and customizations
     @usableFromInline var store: PermissionStore
     //schemaStore contains dynamically computed properties, and internal methods/properties
