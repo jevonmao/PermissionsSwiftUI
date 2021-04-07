@@ -39,7 +39,9 @@ struct ModalView: View {
         .background(Color(.secondarySystemBackground))
         .edgesIgnoringSafeArea(.all)
         .introspectViewController{
-            if store.configStore.restrictDismissal || store.restrictModalDismissal {
+            if store.configStore.restrictDismissal ||
+                store.restrictAlertDismissal ||
+                store.restrictModalDismissal {
                 $0.isModalInPresentation = true
             }
         }
