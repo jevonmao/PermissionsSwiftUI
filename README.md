@@ -51,18 +51,30 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
 * Xcode 12 and Swift 5.3
 * No tvOS, MacOS, and WatchOS support for now
 ### Install
-You can install PermissionsSwiftUI into your Xcode project via Swift Package Manager. To learn more about Swift Package Manager, click [here](https://swift.org/package-manager/)
+#### Swift Package Manager (Recommended)
+You can install PermissionsSwiftUI into your Xcode project via SPM. 
+To learn more about SPM, click [here](https://swift.org/package-manager/)
 1. In Xcode, open your project and navigate to **File** → **Swift Packages** → **Add Package Dependency...**
 2. Paste the repository URL (`https://github.com/jevonmao/PermissionsSwiftUI`) and click **Next**.
 3. For **Version**, select **Up to next major**.
 4. Click **Next** and click **Finish**.
-5. You are all set, have fun using PermissionsSwiftUI!
+5. You are all set, thank you for using PermissionsSwiftUI!
+#### Cocoapods
+You can also install PermissionsSwiftUI with Cocoapods. Add `pod 'PermissionsSwiftUI'` in your podfile:
+```Ruby
+platform :ios, '14.0'
 
+target 'test abstract' do
+  use_frameworks!
+  pod 'PermissionsSwiftUI'
+
+end
+```
 ## 🚀 Quickstart
 > Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.
 
 ### ⚠️ v1.4.0 Migration Guide
-`v1.4.0` will arrive soon! If you encounter any issues, please checkout the [migration guide](https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0) designed to help developers resolve any deprecations and API updates.
+`v1.4` is here! If you encounter any issues, please checkout the [migration guide](https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0) designed to help developers resolve any deprecations and API updates.
 
 ### Modal Style
 To use PermissionsSwiftUI, simply add the `JMModal` modifier to any view:
