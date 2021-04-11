@@ -2,7 +2,7 @@
 name: Action Item
 about: Keep track of implementation progress
 title: ''
-labels: good first issue, help wanted
+labels: help wanted, good first issue, work in progres
 assignees: ''
 
 ---
