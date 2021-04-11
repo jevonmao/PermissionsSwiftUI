@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if !os(tvOS)
 import HealthKit
 
 protocol HealthManager {
@@ -83,3 +84,4 @@ final class MockHealthManager: HealthManager {
     
     
 }
+#endif

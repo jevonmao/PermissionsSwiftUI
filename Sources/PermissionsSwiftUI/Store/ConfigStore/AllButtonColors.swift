@@ -16,6 +16,7 @@ import SwiftUI
  2. Add the `setAllowButtonColor(to colors:AllButtonColors)` modifier to your view
  3. Pass in the `AllButtonColors` struct previously into the proper parameter
  */
+@available(iOS 13.0, tvOS 13.0, *)
 public struct AllButtonColors: Equatable {
     var contentChanged: Bool {
         let allButtonColors = AllButtonColors()

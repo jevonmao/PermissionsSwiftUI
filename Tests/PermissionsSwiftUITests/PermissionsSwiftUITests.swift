@@ -6,6 +6,7 @@ import HealthKit
 
 fileprivate let referenceSize = UIScreen.main.bounds.size
 #warning("Write unit tests")
+@available(iOS 13.0, tvOS 13.0, *)
 final class PermissionsSwiftUITests: XCTestCase {
     let placeholderText = """
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
@@ -314,18 +315,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
 //            XCTAssert(authorized)
 //        }
 //    }
-    func testModalViewSnapshot14_0(){
-        if #available(iOS 14.5, *) {}
-        else{
-            let store = PermissionStore()
-            store.permissions = PermissionType.allCases
-            store.configStore.autoCheckAuth = false
-            let view = ModalView(showModal: .constant(true)).withEnvironmentObjects(store: store, permissionStyle: .modal)
-            assertSnapshot(matching: view.referenceFrame(count: store.permissions.count), as: .image)
-        }
-    }
-    func testModalViewSnapshot14_5(){
-        if #available(iOS 14.5, *) {
+    func testModalViewSnapshot(){
+        if #available(iOS 14, *) {
             let store = PermissionStore()
             store.permissions = PermissionType.allCases
             store.configStore.autoCheckAuth = false
@@ -337,7 +328,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
     func testCustomizeHeaderSnapshot(){
         let newHeader = "Permissions Request"
         let store = PermissionStore()
-        _ = ModalMainView(for: Color.red, showing: .constant(true), store: store)
+        _ = ModalViewWrapper(for: Color.red, showing: .constant(true), store: store)
             .changeHeaderTo(newHeader)
             .changeHeaderDescriptionTo(placeholderText)
             .changeBottomDescriptionTo(placeholderText)
@@ -353,7 +344,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
     func testPermissionCell(){
         for permission in PermissionType.allCases{
             let currentPermission = PermissionStore().permissionComponentsStore.getPermissionComponent(for: permission, modify: {_ in})
-            let title = currentPermission.title
             let views = getPermissionView(for: permission)
             for i in views{
                 assertSnapshot(matching: i, as: .image)
@@ -411,31 +401,39 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
 //    }
 //
 //    func testMainViewShouldShowPermissionTrue(){
-//        let permissions: [PermissionType] = [.calendar, .camera, .microphone]
-//        let mainView = ModalMainView(for: AnyView(EmptyView()), show: .constant(false), permissionsToAsk: permissions)
+//        let store = PermissionStore()
+//        store.permissions = [.calendar]
+//        let mainView = ModalViewWrapper(for: EmptyView(), showing: .constant(true), store: store)
 //        XCTAssert(mainView.shouldShowPermission.wrappedValue)
 //    }
+//    func testModalShouldShowPermissionLegacyTrue(){
+//        let store = PermissionStore()
+//        store.autoCheckAlertAuth = true
+//        let mainView = ModalViewWrapper(for: EmptyView(), showing: .constant(true), store: store)
+//        XCTAssert(mainView.shouldShowPermission.wrappedValue)
+//        store.autoCheckAlertAuth = false
+//        store.autoCheckModalAuth = true
 //    func testMainViewShouldShowPermissionEmpty(){
 //        let permissions: [PermissionType] = []
-//        let mainView = ModalMainView(for: AnyView(EmptyView()), show: .constant(false), permissionsToAsk: permissions)
+//        let mainView = ModalViewWrapper(for: AnyView(EmptyView()), permissionsToAsk: permissions)
 //        XCTAssertFalse(mainView.shouldShowPermission.wrappedValue)
 //    }
 //    func testMainViewShouldShowPermissionDisabled(){
 //        var permissions: [PermissionType] = [.calendar, .camera, .microphone]
 //        store.updateStore(property: {$0.autoCheckModalAuth=$1}, value: false)
-//        let mainView = ModalMainView(for: AnyView(EmptyView()), show: .constant(false), permissionsToAsk: permissions)
+//        let mainView = ModalViewWrapper(for: AnyView(EmptyView()), permissionsToAsk: permissions)
 //        XCTAssert(mainView.shouldShowPermission.wrappedValue)
 //        permissions = []
-//        let mainView2 = ModalMainView(for: AnyView(EmptyView()), show: .constant(false), permissionsToAsk: permissions)
+//        let mainView2 = ModalViewWrapper(for: AnyView(EmptyView()), permissionsToAsk: permissions)
 //        XCTAssert(mainView2.shouldShowPermission.wrappedValue)
 //    }
-//    func testBindingCombineExtension(){
-//        let trueBinding = Binding.constant(true)
-//        let falseBinding = Binding.constant(false)
-//        XCTAssert(trueBinding.combine(with: .constant(true)).wrappedValue)
-//        XCTAssertFalse(trueBinding.combine(with: falseBinding).wrappedValue)
-//        XCTAssertFalse(falseBinding.combine(with: .constant(false)).wrappedValue)
-//    }
+    func testBindingCombineExtension(){
+        let trueBinding = Binding.constant(true)
+        let falseBinding = Binding.constant(false)
+        XCTAssert(trueBinding.combine(with: .constant(true)).wrappedValue)
+        XCTAssertFalse(trueBinding.combine(with: falseBinding).wrappedValue)
+        XCTAssertFalse(falseBinding.combine(with: .constant(false)).wrappedValue)
+    }
 //    func testAlertViewSinglePermission(){
 //        store.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
 //        let view = EmptyView()
@@ -541,6 +539,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
 //        ("testLocationPermissionManager",testLocationPermissionManager)
 //    ]
 }
+@available(iOS 13.0, tvOS 13.0, *)
 
 struct testViewRedBG:View{
     var body: some View{
@@ -550,6 +549,8 @@ struct testViewRedBG:View{
         }
     }
 }
+@available(iOS 13.0, tvOS 13.0, *)
+
 struct testViewGreenBG:View{
     var body: some View{
         ZStack {
@@ -558,6 +559,8 @@ struct testViewGreenBG:View{
         }
     }
 }
+@available(iOS 13.0, tvOS 13.0, *)
+
 private extension SwiftUI.View {
     func referenceFrame(count: Int) -> some View {
         return self.frame(width: referenceSize.width, height: referenceSize.height+CGFloat(count*60))

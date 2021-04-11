@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if !os(tvOS)
 import CoreMotion
 
 struct JMMotionPermissionManager: PermissionManager { 
@@ -41,3 +42,4 @@ struct JMMotionPermissionManager: PermissionManager {
         
     }
 }
+#endif

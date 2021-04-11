@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 13.0, tvOS 13.0, *)
 struct ModalView: View {
     @EnvironmentObject var store: PermissionStore
     @EnvironmentObject var schemaStore: PermissionSchemaStore

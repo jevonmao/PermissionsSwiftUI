@@ -8,6 +8,7 @@
 import SwiftUI
 
 //The body view of the alert pop up, child view of AlertMainView
+@available(iOS 13.0, tvOS 13.0, *)
 struct DialogView: View {
     @Binding var showAlert: Bool
     @EnvironmentObject var store: PermissionStore

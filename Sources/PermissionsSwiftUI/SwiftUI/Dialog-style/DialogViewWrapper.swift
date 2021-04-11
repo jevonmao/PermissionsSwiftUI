@@ -8,6 +8,7 @@
 import SwiftUI
 
 //The root level view for alert-style
+@available(iOS 13.0, tvOS 13.0, *)
 @usableFromInline struct DialogViewWrapper<Body: View>: View, CustomizableView {
     @usableFromInline typealias ViewType = Body
     @usableFromInline var showing: Binding<Bool>
@@ -47,8 +48,13 @@ import SwiftUI
             bodyView
             if shouldShowPermission {
                 Group{
+                    #if !os(tvOS)
                     Blur(style: .systemUltraThinMaterialDark)
                         .transition(AnyTransition.opacity.animation(Animation.default.speed(1.6)))
+                    #else
+                    Blur(style: .extraDark)
+                        .transition(AnyTransition.opacity.animation(Animation.default.speed(1.6)))
+                    #endif
                     DialogView(showAlert: showing)
                         .onAppear(perform: store.onAppear ?? store.configStore.onAppear)
                         .onDisappear(perform: store.onDisappear ?? store.configStore.onDisappear)

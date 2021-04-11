@@ -7,6 +7,8 @@
 
 import MapKit
 import SwiftUI
+
+@available(iOS 13.0, tvOS 13.0, *)
 struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showing:Bool
@@ -36,6 +38,7 @@ enum AllowButtonStatus:CaseIterable {
     case denied
 }
 
+@available(iOS 13.0, tvOS 13.0, *)
 struct PermissionSectionCell: View {
     @State var permission: PermissionType
     @State var allowButtonStatus: AllowButtonStatus = .idle

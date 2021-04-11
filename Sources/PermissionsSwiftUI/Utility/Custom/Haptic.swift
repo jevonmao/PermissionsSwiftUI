@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+@available(tvOS, unavailable)
 class HapticsManager {
     var notificationFeedbackGenerator: UINotificationFeedbackGenerator?
     init() {

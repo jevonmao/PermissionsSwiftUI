@@ -11,6 +11,7 @@ import SwiftUI
 /**
  The data storage class that contains configurable permission components
  */
+@available(iOS 13.0, tvOS 13.0, *)
 public struct PermissionComponentsStore {
     //MARK: Creating a new permission components store
     /**
@@ -117,6 +118,7 @@ public struct PermissionComponentsStore {
 
 }
 
+@available(iOS 13.0, tvOS 13.0, *)
 extension PermissionComponentsStore {
     @usableFromInline
     @discardableResult
@@ -161,12 +163,14 @@ extension PermissionComponentsStore {
         case .speech:
             modify(&self.speechPermission)
             return self.speechPermission
-        case .health:
-            modify(&self.healthPermission)
-            return self.healthPermission
         case .music:
             modify(&self.musicPermission)
             return self.musicPermission
+        #if !os(tvOS)
+        case .health:
+            modify(&self.healthPermission)
+            return self.healthPermission
+        #endif
         }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 import AppTrackingTransparency
 import AdSupport
 
-@available(iOS 14.5, *)
+@available(iOS 14, tvOS 14, *)
 struct JMTrackingPermissionManager: PermissionManager {
     var authorizationStatus: AuthorizationStatus{
         switch ATTrackingManager.trackingAuthorizationStatus{

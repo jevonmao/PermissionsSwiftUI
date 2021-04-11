@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if !os(tvOS)
 import HealthKit
 
 struct JMHealthPermissionManager: PermissionManager {
@@ -107,5 +108,4 @@ struct JMHealthPermissionManager: PermissionManager {
         return NSError(domain: "com.jevonmao.permissionsswiftui", code: 1, userInfo: userInfo)
     }
 }
-
-
+#endif

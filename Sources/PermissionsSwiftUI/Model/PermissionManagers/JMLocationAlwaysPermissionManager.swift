@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 
+#if !os(tvOS)
 final class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelegate, PermissionManager {
     
     typealias authorizationStatus = CLAuthorizationStatus
@@ -63,3 +64,4 @@ final class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelega
     }
 
 }
+#endif

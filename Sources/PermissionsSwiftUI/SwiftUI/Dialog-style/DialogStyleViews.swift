@@ -8,6 +8,7 @@
 import SwiftUI
 
 //MARK: - Showing Alert Style Permissions
+@available(iOS 13.0, tvOS 13.0, *)
 public extension View {
     /**
      Displays a PermissionsSwiftUI alert view that displays and handles permissions.

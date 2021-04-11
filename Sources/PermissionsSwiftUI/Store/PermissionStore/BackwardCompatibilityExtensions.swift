@@ -8,12 +8,13 @@
 import Foundation
 import SwiftUI
 
-@available(iOS, obsoleted: 15.0, deprecated, message: "Access the properties through PermissionStore's configStore property instead. Learn more: https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0")
 /**
  Additional configuration properties for backward compatibility
  
  - Warning: These properties are deprecated, access the sub-properties through `PermissionStore` 's `configStore` property instead
  */
+@available(iOS, introduced: 13.0, obsoleted: 15.0, deprecated, message: "Access the properties through PermissionStore's configStore property instead. Learn more: https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0")
+@available(tvOS, introduced: 13.0, obsoleted: 15.0, deprecated, message: "Access the properties through PermissionStore's configStore property instead. Learn more: https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0")
 public extension PermissionStore {
     
     //MARK: Configuring View Texts
@@ -81,7 +82,8 @@ public extension PermissionStore {
     }
 }
 
-@available(iOS, obsoleted: 15.0, deprecated, message: "These will no longer work. Access through permissionComponentsStore property instead. Learn more: https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0")
+@available(iOS, introduced: 13.0, obsoleted: 15.0, deprecated, message: "These will no longer work. Access through permissionComponentsStore property instead. Learn more: https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0")
+@available(tvOS, introduced: 13.0, obsoleted: 15.0, deprecated, message: "These will no longer work. Access through permissionComponentsStore property instead. Learn more: https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0")
 /**
  Additional permission component properties for backward compatibility
  

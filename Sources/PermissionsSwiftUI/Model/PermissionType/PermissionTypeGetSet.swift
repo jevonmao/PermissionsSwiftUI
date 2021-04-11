@@ -18,24 +18,27 @@ extension PermissionType: PermissionTypeProtocol {
         switch self {
         case .location:
             return JMLocationPermissionManager.self
-        case .locationAlways:
-            return JMLocationAlwaysPermissionManager.self
+            
         case .photo:
             return JMPhotoPermissionManager.self
+            
+        case .notification:
+            return JMNotificationPermissionManager.self
+        case .bluetooth:
+            return JMBluetoothPermissionManager.self
+        case .tracking:
+            if #available(iOS 14, tvOS 14, *) {
+                return JMTrackingPermissionManager.self
+            }
+        #if !os(tvOS)
+        case .locationAlways:
+            return JMLocationAlwaysPermissionManager.self
         case .microphone:
             return JMMicrophonePermissionManager.self
         case .camera:
             return JMCameraPermissionManager.self
-        case .notification:
-            return JMNotificationPermissionManager.self
         case .calendar:
             return JMCalendarPermissionManager.self
-        case .bluetooth:
-            return JMBluetoothPermissionManager.self  
-        case .tracking:
-            if #available(iOS 14.5, *) {
-                return JMTrackingPermissionManager.self
-            }
         case .contacts:
             return JMContactsPermissionManager.self
         case .motion:
@@ -48,24 +51,34 @@ extension PermissionType: PermissionTypeProtocol {
             return JMHealthPermissionManager.self
         case .music:
             return JMMusicPermissionManager.self
+        #endif
         }
         return nil
-
+        
     }
     
 }
 extension PermissionType: CaseIterable {
     public static var allCases: [PermissionType] {
-                if #available(iOS 14.5, *) {
-                    return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking, .health(categories: nil)]
-                } else {
-                    return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech, .health(categories: nil)]
-                }
+        #if !os(tvOS)
+        if #available(iOS 14, *) {
+            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech,.tracking, .health(categories: nil)]
+        } else {
+            return [.location,.locationAlways,.photo,microphone,.camera,.notification,.calendar,.bluetooth,.contacts,.motion,.reminders,.speech, .health(categories: nil)]
+        }
+        #else
+        if #available(tvOS 14, *) {
+            return [.location, .photo, .notification, .bluetooth, .tracking]
+        }
+        else {
+            return [.location, .photo, .notification, .bluetooth]
+        }
+        #endif
     }
     var rawValue: String {
-            guard let label = Mirror(reflecting: self).children.first?.label else {
-                return .init(describing: self)
-            }
-            return label
+        guard let label = Mirror(reflecting: self).children.first?.label else {
+            return .init(describing: self)
         }
+        return label
+    }
 }

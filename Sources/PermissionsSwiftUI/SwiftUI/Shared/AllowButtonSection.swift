@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 13.0, tvOS 13.0, *)
 struct AllowButtonSection: View {
     var action: () -> Void
     @Binding var allowButtonStatus: AllowButtonStatus

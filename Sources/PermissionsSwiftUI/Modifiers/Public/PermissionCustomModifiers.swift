@@ -8,6 +8,7 @@
 import SwiftUI
 
 //MARK: Customize Permission Components
+@available(iOS 13.0, tvOS 13.0, *)
 public extension CustomizableView {
     /**
      Customizes the image view, title (optional), and description (optional) of any permission component
@@ -87,6 +88,7 @@ public extension CustomizableView {
 }
 
 //MARK: Configure Allow Button Colors
+@available(iOS 13.0, tvOS 13.0, *)
 public extension CustomizableView {
     /**
      Customizes the color of allow buttons for all status states
@@ -111,6 +113,7 @@ public extension CustomizableView {
 
 
 //MARK: Set Overall Accent Color
+@available(iOS 13.0, tvOS 13.0, *)
 public extension CustomizableView {
     /**
      Customizes the overall accent color of PermissionsSwiftUI views.

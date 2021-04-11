@@ -5,8 +5,9 @@
 //  Created by Jevon Mao on 1/31/21.
 //
 
-import EventKit
 import UIKit
+#if !os(tvOS)
+import EventKit
 
 struct JMCalendarPermissionManager: PermissionManager {  
     
@@ -32,3 +33,4 @@ struct JMCalendarPermissionManager: PermissionManager {
         })
     }
 }
+#endif

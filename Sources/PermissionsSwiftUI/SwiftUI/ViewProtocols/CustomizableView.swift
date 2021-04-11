@@ -12,6 +12,7 @@ import SwiftUI
  
  The `JMModal` and `JMAlert` modifier are higher-level containers for `AlertMainView` and `ModalMainView`. Both of those conform to the `CustomizableView` protocol, which allows it to be configured with PermissionSwiftUI's customization modifiers.
  */
+@available(iOS 13.0, tvOS 13.0, *)
 public protocol CustomizableView: View {
     //MARK: Environment data storage
     ///A global data storage object that is implemented by views

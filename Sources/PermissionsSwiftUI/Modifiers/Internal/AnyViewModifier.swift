@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 13.0, tvOS 13.0, *)
 extension View {
     @usableFromInline func typeErased() -> AnyView {
         AnyView(self)

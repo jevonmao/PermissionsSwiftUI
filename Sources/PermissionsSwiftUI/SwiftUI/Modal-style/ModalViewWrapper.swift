@@ -8,6 +8,7 @@
 import SwiftUI
 import Introspect
 
+@available(iOS 13.0, tvOS 13.0, *)
 @usableFromInline struct ModalViewWrapper<Body: View>: View, CustomizableView {
     //store contains static configurations and customizations
     @usableFromInline var store: PermissionStore
@@ -84,6 +85,7 @@ import Introspect
     
 }
 //Extension Binding wrapper for Binding booleans
+@available(iOS 13.0, tvOS 13.0, *)
 extension Binding where Value == Bool{
     func combine(with value2: Binding<Bool>) -> Binding<Bool>{
         //Combine two Binding Bool conditions with AND operator

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if !os(tvOS)
 import HealthKit
 /**
  Encapsulates different subtypes of permission for health permission
@@ -63,3 +64,4 @@ extension HKAccess {
         self.init(read: sharedPermissions, write: sharedPermissions)
     }
 }
+#endif

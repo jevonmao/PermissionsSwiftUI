@@ -4,7 +4,7 @@
 //
 //  Created by Jevon Mao on 1/31/21.
 //
-
+#if os(iOS)
 import AVFoundation
 import Foundation
 
@@ -31,3 +31,4 @@ struct JMCameraPermissionManager: PermissionManager {
         })
     }
 }
+#endif

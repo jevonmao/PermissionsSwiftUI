@@ -9,6 +9,7 @@ import Foundation
 
 struct FilterPermissions {
     // Based on struct boolean property, dependent on memory
+    @available(iOS 13.0, tvOS 13.0, *)
     static func filterForUnauthorized(with permissions: [PermissionType], store: PermissionSchemaStore) -> [PermissionType] {
         let filteredPermissions = permissions.filter {
             store.permissionComponentsStore.getPermissionComponent(for: $0, modify: {_ in}).authorized == false

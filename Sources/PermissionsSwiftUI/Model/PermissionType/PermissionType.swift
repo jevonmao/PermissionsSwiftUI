@@ -25,26 +25,19 @@ public enum PermissionType: Hashable {
     
     ///The `location` permission allows the device's positoin to be tracked
     case location
-    ///The `locationAlways` permission provides location data even if app is in background
-    case locationAlways
+    
     ///Used to access the user's photo library
     case photo
-    ///Permission allows developers to interact with the device microphone
-    case microphone
-    ///Permission that allows developers to interact with on-device camera
-    case camera
+   
     ///The `notification` permission allows the iOS system to receive notification from app
     case notification
-    ///Permission that allows app to read & write to device calendar
-    case calendar
+    
     ///Permission that allows app to access device's bluetooth technologies
     case bluetooth
-    ///A permission that allows developers to read & write to device contacts
-    case contacts
-    ///Permission that give app access to motion and fitness related sensor data
-    case motion
-    ///The `reminders` permission is needed to interact with device reminders
-    case reminders
+    
+    ///In order for app to track user's data across apps and websites, the tracking permission is needed
+    @available(iOS 14, tvOS 14, *) case tracking
+    #if !os(tvOS)
     /**
      Permission that allows app to access healthkit information
      
@@ -56,12 +49,35 @@ public enum PermissionType: Hashable {
      ```
      */
     case health(categories: HKAccess?=nil)
+    #endif
+
+    ///The `locationAlways` permission provides location data even if app is in background
+    @available(tvOS, unavailable) case locationAlways
+    
+    ///Permission allows developers to interact with the device microphone
+    @available(tvOS, unavailable) case microphone
+    
+    ///Permission that allows developers to interact with on-device camera
+    @available(tvOS, unavailable) case camera
+    
+    ///A permission that allows developers to read & write to device contacts
+    @available(tvOS, unavailable) case contacts
+    
+    ///Permission that give app access to motion and fitness related sensor data
+    @available(tvOS, unavailable) case motion
+    
+    ///The `reminders` permission is needed to interact with device reminders
+    @available(tvOS, unavailable) case reminders
+    
+    ///Permission that allows app to read & write to device calendar
+    @available(tvOS, unavailable) case calendar
+    
     ///Permission that allows app to use speech recognition
-    case speech
+    @available(tvOS, unavailable) case speech
+    
     ///Permission that allows app to control audio playback of the device
-    case music
-    ///In order for app to track user's data across apps and websites, the tracking permission is needed
-    @available(iOS 14, *) case tracking
+    @available(tvOS, unavailable) case music
+    
 }
 
 
