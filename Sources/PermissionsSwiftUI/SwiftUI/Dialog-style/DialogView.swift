@@ -8,7 +8,8 @@
 import SwiftUI
 
 //The body view of the alert pop up, child view of AlertMainView
-@available(iOS 13.0, tvOS 13.0, *)
+@available(iOS 13.0, *)
+@available(tvOS, unavailable, message: "Dialog style permission view is unavailable for tvOS, use modal style instead.")
 struct DialogView: View {
     @Binding var showAlert: Bool
     @EnvironmentObject var store: PermissionStore

@@ -101,11 +101,11 @@ struct PermissionSectionCell: View {
             .padding(.horizontal, 3)
             Spacer()
             if schemaStore.permissionViewStyle == .alert {
-                //Call requestPermission (enum function) to make request to Apple API
-                //The handleButtonState function will be executed based on result of request
+                //No animation for alert to avoid unwanted jiggle
                 AllowButtonSection(action: handlePermissionRequest, allowButtonStatus: $allowButtonStatus)
             }
             else{
+                //Separate case for modal style because an animation is needed for best user experience
                 AllowButtonSection(action: handlePermissionRequest, allowButtonStatus: $allowButtonStatus)
                 .animation(.default)
             }
