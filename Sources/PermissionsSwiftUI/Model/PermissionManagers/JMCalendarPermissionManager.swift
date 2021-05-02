@@ -10,7 +10,6 @@ import UIKit
 
 struct JMCalendarPermissionManager: PermissionManager {  
     
-    static let shared: PermissionManager = JMCalendarPermissionManager()
     var authorizationStatus: AuthorizationStatus{
         switch EKEventStore.authorizationStatus(for: .event){
         case .authorized:

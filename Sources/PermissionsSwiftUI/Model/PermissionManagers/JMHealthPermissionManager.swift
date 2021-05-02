@@ -80,7 +80,9 @@ struct JMHealthPermissionManager: PermissionManager {
     }
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         guard type(of: healthStore).isHealthDataAvailable() else {
+            #if DEBUG
             print("PermissionsSwiftUI - Health data is not available")
+            #endif
             completion(false, createUnavailableError())
             return
         }

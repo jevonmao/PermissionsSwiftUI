@@ -10,7 +10,6 @@ import Speech
 
 struct JMSpeechPermissionManager: PermissionManager{
     
-    static let shared: PermissionManager = JMSpeechPermissionManager()
     var authorizationStatus: AuthorizationStatus{
         switch SFSpeechRecognizer.authorizationStatus(){
         case .authorized:

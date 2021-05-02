@@ -46,6 +46,8 @@ extension PermissionType: PermissionTypeProtocol {
             return JMSpeechPermissionManager.self
         case .health:
             return JMHealthPermissionManager.self
+        case .music:
+            return JMMusicPermissionManager.self
         }
         return nil
 

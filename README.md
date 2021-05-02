@@ -8,20 +8,20 @@
 <img src="https://img.shields.io/github/workflow/status/jevonmao/PermissionsSwiftUI/Swift?label=CI%20Build"> <img src="https://img.shields.io/github/contributors/jevonmao/PermissionsSwiftUI"> <img src="https://img.shields.io/badge/License-MIT-blue.svg"> <img src="https://img.shields.io/github/issues/jevonmao/PermissionsSwiftUI?color=orange"> <img src="https://img.shields.io/github/commit-activity/w/jevonmao/PermissionsSwiftUI?color=yellowgreen&logoColor=yellowgreen"> <img src="https://camo.githubusercontent.com/86f8561418bbd6240d5c39dbf80b83a3dc1e85e69fe58da808f0168194dcc0d3/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5377696674504d2d436f6d70617469626c652d627269676874677265656e2e737667"> <img src="https://img.shields.io/github/v/release/jevonmao/PermissionsSwiftUI?include_prereleases&style=plastic">
 
 `PermissionsSwiftUI` displays and handles permissions in SwiftUI. It is largely inspired by [SPPermissions](https://github.com/varabeis/SPPermissions).
-The UI is highly customizable and resembles an **Apple style**. If you like the project, don't forget to `star ★` and follow me on GitHub. <br />
+The UI is highly customizable and resembles an **Apple style**. If you like the project, please `star ★`. <br />
 <br />
-<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_modal.PNG?raw=true" height="550"/>
-&emsp; &emsp;
-<img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/screenshot_main_alert.PNG?raw=true" height="550"/> <br />
-<p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑dark mode. </p>
+<p align="center">
+    <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Main-screenshot.png?raw=true" style="display: block; margin: auto;"/>
+</p>
+<p align="center"> PermissionsSwiftUI looks equally gorgeous on both ☀️light and 🌑 dark mode. </p>
 
-## Navigation
--  [Installation](#installation)
--  [Quickstart](#quickstart) 
+## 🧭 Navigation
+-  [Installation](#-installation)
+-  [Quickstart](#-quickstart) 
 <details>
   <summary>Usage</summary>
   
--  [Usage](#usage)
+-  [Usage](#-usage)
     -  [Customize Permission Texts](#customize-permission-texts)
     -  [Customize header texts](#customize-header-texts)
     -  [`onAppear` and `onDisappear` Override](#onappear-and-ondisappear-override)
@@ -32,26 +32,49 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
     -  [Configuring Health Permissions](#configuring-health-permissions)
 </details>
 
--  [Supported Permissions](#supported-permissions)
+-  [Cheatsheet](#-cheatsheat)
+-  [Supported Permissions](#-supported-permissions)
+-  [Contribute](#-contribute)
+
+<details>
+  <summary>Additional Information</summary>
+  
 -  [Additional Information](#additional-information)
     -  [Acknowledgement](#acknowledgement)
     -  [License](#license)
+    
+</details>
 
-## Installation
+## 🖥️ Installation
 ### Requirements
 * iOS 13 or iPadOS 13
 * Xcode 12 and Swift 5.3
 * No tvOS, MacOS, and WatchOS support for now
 ### Install
-You can install PermissionsSwiftUI into your Xcode project via Swift Package Manager. To learn more about Swift Package Manager, click [here](https://swift.org/package-manager/)
+#### Swift Package Manager (Recommended)
+You can install PermissionsSwiftUI into your Xcode project via SPM. 
+To learn more about SPM, click [here](https://swift.org/package-manager/)
 1. In Xcode, open your project and navigate to **File** → **Swift Packages** → **Add Package Dependency...**
 2. Paste the repository URL (`https://github.com/jevonmao/PermissionsSwiftUI`) and click **Next**.
 3. For **Version**, select **Up to next major**.
 4. Click **Next** and click **Finish**.
-5. You are all set, have fun using PermissionsSwiftUI!
+5. You are all set, thank you for using PermissionsSwiftUI!
+#### Cocoapods
+You can also install PermissionsSwiftUI with Cocoapods. Add `pod 'PermissionsSwiftUI'` in your podfile:
+```Ruby
+platform :ios, '14.0'
 
-## Quickstart
+target 'test abstract' do
+  use_frameworks!
+  pod 'PermissionsSwiftUI'
+
+end
+```
+## 🚀 Quickstart
 > Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.
+
+### ⚠️ v1.4.0 Migration Guide
+`v1.4` is here! If you encounter any issues, please checkout the [migration guide](https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0) designed to help developers resolve any deprecations and API updates.
 
 ### Modal Style
 To use PermissionsSwiftUI, simply add the `JMModal` modifier to any view:
@@ -81,8 +104,10 @@ To show a permission pop up alert, use:
 .JMAlert(showModal: $showModal, for: [.locationAlways, .photo])
 ```
 Similar to the previous `JMPermissions`, you need to pass in a `Binding<Bool>` to show the view, and add whatever permissions you want to show.
+To quickly glance all of PermissionsSwiftUI's customization and configurations, checkout the [cheatsheet](#cheatsheat)!
+<br /> <br /> <br /> <br /> <br /> <br />
 
-## Usage
+## 🛠️ Usage
 ### Customize Permission Texts
 😱 Be aware. Features ahead will wow you - the customization is so advanced, yet so simple. Have fun!
 
@@ -175,14 +200,18 @@ Pass in `true` or `false` to select whether to automatically dismiss the view.
 Using PermissionSwiftUI's capabilities, developers and designers can customize all the UI colors with incredible flexibility. You can fully configure all color at all states with your custom colors. <br />
 To easily change the accent color:
 ```Swift
-.setAccentColor(to: Color(.systemPurple))
+.setAccentColor(to: Color(.sRGB, red: 56/255, green: 173/255,
+                                  blue: 169/255, opacity: 1))
 ```
 To change the primary (default Apple blue) and tertiary (default Apple red) colors:
 ```Swift
-.setAccentColor(toPrimary: Color(.systemPurple),
-                toTertiary: Color(.systemGreen))
+.setAccentColor(toPrimary: Color(.sRGB, red: 56/255, green: 173/255,
+                                  blue: 169/255, opacity: 1),
+                toTertiary: Color(.systemPink))
 ```
-<img align src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Button_color_customize_showcase.png?raw=true" alt="Alert pop up with customized colors" height="300">
+<p align="center">
+    <img src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Color-custom-screenshot.png?raw=true" height="250" style="display: block; margin: auto;"/>
+</p>
 
 > ⚠️ `.setAccentColor()` and `.setAllowButtonColor()` should never be used at the same time.
 
@@ -242,10 +271,68 @@ let readTypes = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurne
 .JMModal(showModal: $showModal, for: [.health(categories: .init(read: readTypes))])
 
 ```
-## Supported Permissions
-Here is a list of all permissions PermissionsSwiftUI already supports support(health not in image but is supported). Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon.
+## 📖 Cheatsheat 
+
+### Modifiers
+**Customize overall accent color:**
+```Swift
+setAccentColor(to:)
+setAccentColor(toPrimary:toTertiary:)
+```
+**Customize title:**
+```Swift
+changeHeaderTo(_:)
+```
+**Customize top description:**
+```Swift
+changeHeaderDescriptionTo(_:)
+```
+**Customize bottom description:**
+```Swift
+changeBottomDescriptionTo(_:)
+```
+**Customize each permission's displayed text & image:**
+```Swift
+setPermissionComponent(for:image:title:description:)
+
+setPermissionComponent(for:title:)
+
+setPermissionComponent(for:description:)
+```
+**Customize `allow` button's colors:**
+```Swift
+setAllowButtonColor(to:)
+```
+**Automatically dismiss after last**
+```Swift
+autoDismiss: Bool
+```
+### Parameters of `JMModal` and `JMAlert`
+**Check authorization before showing modal or alert**
+```Swift
+autoCheckAuthorization: Bool
+```
+**Prevent dismissing before all permissions interacted**
+```Swift
+restrictDismissal: Bool
+```
+**Do something right before view appear**
+```Swift
+onAppear: () -> Void
+```
+**Do something right before view disappear**
+```Swift
+onDisappear: (() -> Void
+```
+## 🧰 Supported Permissions
+Here is a list of all the permissions PermissionsSwiftUI supports. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon.
 <br /> <br /> <br />
-<img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card.png" alt="A card of all the permissions" width="100%">
+<img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card-new.png" alt="A card of all the permissions" width="100%">
+
+## 💪 Contribute
+Contributions are welcome here for coders and non-coders alike. No matter what your skill level is, you can for certain contribute to PermissionSwiftUI's open source community. Please read [contributing.md](https://github.com/jevonmao/PermissionsSwiftUI/blob/main/CONTRIBUTING.md) before starting. 
+
+**If you encounter ANY issue, have ANY concerns, or ANY comments, please do NOT hesitate to let me know. Open a discussion, issue, or email me.** As a developer, I feel you when you don't understand something in the codebase. I try to comment and document as best as I can, but if you happen to encounter any issues, I will be happy to assist in any way I can.
 
 ## Additional Information
 
@@ -253,3 +340,4 @@ Here is a list of all permissions PermissionsSwiftUI already supports support(he
 SPPermissions is in large a SwiftUI remake of famous Swift library **[SPPermissions](https://github.com/varabeis/SPPermissions)** by @verabeis. SPPermissions was initially created in 2017, and today on GitHub has over 4000 stars. PermissionsSwiftUI aims to deliver a just as beautiful and powerful library in SwiftUI. If you `star ★` my project PermissionsSwiftUI, be sure to checkout the original project SPPermissions where I borrowed the UI Design, some parts of README.md page, and important source code references along the way.
 ### License
 PermissionsSwiftUI is created by Jingwen (Jevon) Mao and licensed under the [MIT License](https://jingwen-mao.mit-license.org)
+

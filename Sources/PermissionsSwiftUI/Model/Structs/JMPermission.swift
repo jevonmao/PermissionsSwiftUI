@@ -31,7 +31,7 @@ public struct JMPermission: Equatable{
         self.title = title
         self.description = description
     }
-    internal init(imageIcon: AnyView, title: String, description: String, authorized: Bool) {
+    @usableFromInline internal init(imageIcon: AnyView, title: String, description: String, authorized: Bool) {
         self.imageIcon = imageIcon
         self.title = title
         self.description = description
@@ -62,7 +62,7 @@ public struct JMPermission: Equatable{
     public var title: String
     ///The permission description displayed
     public var description: String
-    internal var authorized:Bool = false
+    @usableFromInline internal var authorized:Bool = false
     internal var interacted:Bool = false
 }
 

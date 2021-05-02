@@ -17,6 +17,11 @@ import SwiftUI
  3. Pass in the `AllButtonColors` struct previously into the proper parameter
  */
 public struct AllButtonColors: Equatable {
+    var contentChanged: Bool {
+        let allButtonColors = AllButtonColors()
+        if self == allButtonColors {return false}
+        return true
+    }
     //MARK: Creating New Button Configs
     /**
      - parameters:
@@ -76,7 +81,7 @@ public struct AllButtonColors: Equatable {
     
     //MARK: Button Color States
     
-    var primaryColor: Color
+    @usableFromInline var primaryColor: Color
     var tertiaryColor: Color
     ///The button color configuration under idle status defined by a `ButtonColor` struct
     public var buttonIdle: ButtonColor

@@ -25,7 +25,7 @@ extension UNUserNotificationCenter:NotificationManager{
     }
     
 }
-class MockNotificationManager:NotificationManager{
+final class MockNotificationManager:NotificationManager{
     var authStatus:UNAuthorizationStatus = .notDetermined
     func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Void) {
         completionHandler(UNNotificationSettings(coder: MockNSCoder(authorizationStatus: authStatus.rawValue))!)
@@ -51,7 +51,7 @@ class MockNotificationManager:NotificationManager{
     
     
 }
-class MockNSCoder: NSCoder {
+final class MockNSCoder: NSCoder {
     var authorizationStatus:Int
     init(authorizationStatus:Int){
         self.authorizationStatus = authorizationStatus

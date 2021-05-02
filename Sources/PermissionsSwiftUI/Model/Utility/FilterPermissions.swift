@@ -9,9 +9,9 @@ import Foundation
 
 struct FilterPermissions {
     // Based on struct boolean property, dependent on memory
-    static func filterForUnauthorized(with permissions: [PermissionType], store: PermissionStore) -> [PermissionType] {
+    static func filterForUnauthorized(with permissions: [PermissionType], store: PermissionSchemaStore) -> [PermissionType] {
         let filteredPermissions = permissions.filter {
-            store.permissionComponentsStore.getPermissionComponent(for: $0).authorized == false
+            store.permissionComponentsStore.getPermissionComponent(for: $0, modify: {_ in}).authorized == false
         }
         return filteredPermissions
     }

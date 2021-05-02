@@ -26,13 +26,15 @@ let package = Package(
             dependencies: ["Introspect"],
             exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
         ),
-        .testTarget(
-            name: "PermissionsSwiftUITests",
-            dependencies: ["PermissionsSwiftUI","SnapshotTesting"]
-        ),
+        .testTarget(name: "PermissionsSwiftUITests",
+                    dependencies: ["PermissionsSwiftUI","SnapshotTesting"],
+                    exclude: [],
+                    resources: [.process("__Snapshots__")]),
         .testTarget(
             name: "PermissionsSwiftUISmallScreenTests",
-            dependencies: ["PermissionsSwiftUI","SnapshotTesting"]
+            dependencies: ["PermissionsSwiftUI","SnapshotTesting"],
+            exclude: [],
+            resources: [.process("__Snapshots__")]
         ),
     ]
 )

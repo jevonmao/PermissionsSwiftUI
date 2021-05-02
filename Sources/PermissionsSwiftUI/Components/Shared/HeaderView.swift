@@ -9,14 +9,15 @@ import SwiftUI
 
 struct HeaderView: View {
     @EnvironmentObject var store: PermissionStore
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
     var exitButtonAction:() -> Void
     //HeaderText component have slightly different UI for alert and modal.
-    var isAlert:Bool = false
-    var mainText: MainTexts {store.configStore.mainTexts}
+    var mainText: MainTexts
     var body: some View {
+        let style = schemaStore.permissionViewStyle
         VStack{
             VStack{
-                    if isAlert{
+                if style == .alert{
                         Text("PERMISSIONS REQUEST")
                             .font(.footnote)
                             .fontWeight(.semibold)
@@ -29,24 +30,29 @@ struct HeaderView: View {
                 
                 HStack {
                         Text(mainText.headerText)
-                            .font(.system(isAlert ? .title : .largeTitle, design: .rounded))
+                            .font(.system(style == .alert ? .title : .largeTitle, design: .rounded))
                             .fontWeight(.bold)
                             .lineLimit(1)
                             .minimumScaleFactor(0.85)
                             .allowsTightening(true)
                             .layoutPriority(1)
                             
+                            
                     Spacer()
-                    ExitButtonSection(action: { exitButtonAction() })
+                    ExitButtonSection(action: {
+                        exitButtonAction()
+                        guard let handler = store.configStore.onDisappearHandler else {return}
+                        handler(schemaStore.successfulPermissions, schemaStore.erroneousPermissions)
+                    })
                         //Layout priority does not do anything
                         .layoutPriority(-1)
                 }
             }
             //Extra padding for modal view only. Alert pop up space not enough for the extra paddings
-            .padding(.top, isAlert ? 0 : 30)
-            .padding(.horizontal, isAlert ? 0 : 16)
+            .padding(.top, style == .alert ? 0 : 30)
+            .padding(.horizontal, style == .alert ? 0 : 16)
             
-            if !isAlert{
+            if style == .modal {
                 Text(mainText.headerDescription)
                     .font(.system(.body, design: .rounded))
                     .fontWeight(.medium)
@@ -58,6 +64,7 @@ struct HeaderView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     //Allow scacling down to half the original size on smaller screens
                     .minimumScaleFactor(0.5)
+                    .textHorizontalAlign(.leading)
             }
   
         }
