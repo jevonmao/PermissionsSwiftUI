@@ -8,7 +8,7 @@
 import Foundation
 import Photos
 
-class MockPhotoManager:PHPhotoLibrary{
+final class MockPhotoManager:PHPhotoLibrary{
     static override func requestAuthorization(_ handler: @escaping (PHAuthorizationStatus) -> Void) {
         handler(PHAuthorizationStatus.authorized)
     }

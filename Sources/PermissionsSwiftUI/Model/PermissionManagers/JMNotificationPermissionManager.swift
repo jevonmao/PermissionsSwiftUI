@@ -23,7 +23,9 @@ struct JMNotificationPermissionManager: PermissionManager {
 
         semaphore.wait()
         guard let settings = notificationSettings else{
+            #if DEBUG
             print("Notification settings is nil while getting authorization status for JMNotificationPermissionManager")
+            #endif
             return .notDetermined
         }
         switch settings.authorizationStatus{

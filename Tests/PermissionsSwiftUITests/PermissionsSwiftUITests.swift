@@ -6,278 +6,257 @@ import HealthKit
 
 fileprivate let referenceSize = UIScreen.main.bounds.size
 #warning("Write unit tests")
-#warning("Documentation and migration guide")
 final class PermissionsSwiftUITests: XCTestCase {
-//    let placeholderText = """
-//Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
-//"""
-//    override func setUpWithError() throws {
-//        PermissionStore.resetPermissionsModelStore()
-//    }
-//    func testPermissionStoreCurrentPermissionGet(){
-//        if #available(iOS 14.5, *) {
-//            let trackingPermission = PermissionType.tracking.currentPermission
-//            XCTAssertEqual(trackingPermission, JMPermission(
-//                imageIcon: AnyView(Image(systemName: "person.circle.fill")),
-//                title: "Tracking",
-//                description: "Allow to track your data", authorized: false
-//            ))
-//        }
-//        let photoPermission = PermissionType.photo.currentPermission
-//        let cameraPermission = PermissionType.camera.currentPermission
-//        let locationPermission = PermissionType.location.currentPermission
-//        let reminderPermission = PermissionType.reminders.currentPermission
-//        let speechPermission = PermissionType.speech.currentPermission
-//        let bluetoothPermission = PermissionType.bluetooth.currentPermission
-//        let calendarPermission = PermissionType.calendar.currentPermission
-//        let contactsPermission = PermissionType.contacts.currentPermission
-//        let locationAlwaysPermission = PermissionType.locationAlways.currentPermission
-//        let microphonePermission = PermissionType.microphone.currentPermission
-//        let notificationPermission = PermissionType.notification.currentPermission
-//        let healthPermission = PermissionType.health().currentPermission
-//        XCTAssertEqual(photoPermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "photo")),
-//            title: "Photo Library",
-//            description: "Allow to access your photos", authorized: false
-//        ))
-//        XCTAssertEqual(cameraPermission, JMPermission(
-//                        imageIcon: AnyView(Image(systemName: "camera.fill")),
-//                        title: "Camera",
-//                        description: "Allow to use your camera", authorized: false))
-//        XCTAssertEqual(locationPermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "location.fill.viewfinder")),
-//            title: "Location",
-//            description: "Allow to access your location", authorized: false
-//        ))
-//        XCTAssertEqual(reminderPermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "list.bullet.rectangle")),
-//            title: "Reminders",
-//            description: "Allow to access your reminders", authorized: false
-//        ))
-//        XCTAssertEqual(speechPermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "rectangle.3.offgrid.bubble.left.fill")),
-//            title: "Speech",
-//            description: "Allow to access speech recognition", authorized: false
-//        ))
-//        XCTAssertEqual(bluetoothPermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "wave.3.left.circle.fill")),
-//            title: "Bluetooth",
-//            description: "Allow to use bluetooth", authorized: false
-//        ))
-//        XCTAssertEqual(calendarPermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "calendar")),
-//            title: "Calendar",
-//            description: "Allow to access calendar", authorized: false
-//        ))
-//        XCTAssertEqual(contactsPermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "book.fill")),
-//            title: "Contacts",
-//            description: "Allow to access your contacts", authorized: false
-//        ))
-//        XCTAssertEqual(locationAlwaysPermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "location.fill.viewfinder")),
-//            title: "Location Always",
-//            description: "Allow to access your location", authorized: false
-//        ))
-//        XCTAssertEqual(microphonePermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "mic.fill")),
-//            title: "Microphone",
-//            description: "Allow to record with microphone", authorized: false
-//        ))
-//        XCTAssertEqual(notificationPermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "bell.fill")),
-//            title: "Notification",
-//            description: "Allow to send notifications", authorized: false
-//        ))
-//        XCTAssertEqual(healthPermission, JMPermission(
-//                        imageIcon: AnyView(Image(systemName: "heart.fill")),
-//                        title: "Health",
-//                        description: "Allow to access your health information",
-//                        authorized: false))
-//        //Additional test for failing case
-//        XCTAssertNotEqual(notificationPermission, JMPermission(
-//            imageIcon: AnyView(Image(systemName: "bell.fill")),
-//            title: "Test_Notification",
-//            description: "Allow to send notifications", authorized: false
-//        ))
-//        
-//    }
-//    func testPermissionStoreAllPermissions(){
-//        let permissionType = PermissionType.camera
-//        var testingPermissions: [PermissionType] = [.camera, .bluetooth]
-//        store.updateStore(property: {$0.permissions=$1}, value: testingPermissions)
-//        XCTAssertEqual(permissionType.permissions.description, testingPermissions.description)
-//        testingPermissions = PermissionType.allCases
-//        store.updateStore(property: {$0.permissions=$1}, value: testingPermissions)
-//        XCTAssertEqual(permissionType.permissions.description, testingPermissions.description)
-//    }
-//    func testPermissionStorePermissionManager(){
-//        let permissionTypes = PermissionType.allCases
-//        UNUserNotificationCenter.isTestingMode = true
-//        for permission in permissionTypes{
-//            let permissionManagerString = String(describing: permission.getPermissionManager()).lowercased()
-//            let permissionRawValueString = permission.rawValue.lowercased()
-//            XCTAssert(permissionManagerString.contains("permissionmanager"))
-//            XCTAssert(permissionManagerString.contains(permissionRawValueString))
-//        }
-//    }
-//    
-//    func testLocationPermissionManager(){
-//        let manager = MockCLLocationManager()
-//        let JMManager = JMLocationPermissionManager(locationManager: manager)
-//        let JMAlwaysManager = JMLocationAlwaysPermissionManager(locationManager: manager)
-//        //FIXME: Dummy test will always pass
-//        //TODO: Mock location manager delegate
-//        //TODO: Reimplement XCTAssert to check for Bool callback (whether permission is authorized)
-//        JMManager.requestPermission{authorized, _ in
-//            XCTAssert(true)
-//        }
-//        JMAlwaysManager.requestPermission{authorized, _ in
-//            XCTAssert(true)
-//        }
-//        
-//        
-//    }
-//    func setupHealthPermissionStore() -> (MockHealthManager, JMHealthPermissionManager){
-//        let mockManager = MockHealthManager()
-//        MockHealthManager.healthDataAvailableOverride = true
-//        let manager = JMHealthPermissionManager(healthManager: mockManager)
-//        let quantityType = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!,
-//                                HKSampleType.quantityType(forIdentifier: .bodyFatPercentage)!,
-//                                HKSampleType.quantityType(forIdentifier: .bloodGlucose)!])
-//        let healthPermission = PermissionType.health(categories: .init(readAndWrite: quantityType))
-//        store.updateStore(property: {$0.permissions.append($1)}, value: healthPermission)
-//        return (mockManager, manager)
-//    }
-//    func testHealthManagerAuthNotDetermined(){
-//        let (mockManager, manager) = setupHealthPermissionStore()
-//        mockManager.authStatusOverride = .notDetermined
-//        XCTAssertEqual(manager.authorizationStatus, .notDetermined)
-//    }
-//    func testHealthManagerAuthAuthorized(){
-//        let (mockManager, manager) = setupHealthPermissionStore()
-//        mockManager.authStatusOverride = .authorized
-//        XCTAssertEqual(manager.authorizationStatus, .authorized)
-//    }
-//    func testHealthManagerAuthDenied(){
-//        let (mockManager, manager) = setupHealthPermissionStore()
-//        mockManager.authStatusOverride = .denied
-//        XCTAssertEqual(manager.authorizationStatus, .denied)
-//    }
-//    func testHealthManagerAuthMixedAuthorized(){
-//        let (mockManager, manager) = setupHealthPermissionStore()
-//        mockManager.authStatusOverride = .mixedAuthorized
-//        XCTAssertEqual(manager.authorizationStatus, .authorized)
-//    }
-//    func testHealthManagerAuthMixedDenied(){
-//        let (mockManager, manager) = setupHealthPermissionStore()
-//        mockManager.authStatusOverride = .mixedDenied
-//        XCTAssertEqual(manager.authorizationStatus, .denied)
-//    }
+    let placeholderText = """
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
+"""
+    func testPermissionStoreCurrentPermissionGet(){
+        var store = PermissionComponentsStore()
+        if #available(iOS 14.5, *) {
+            let trackingPermission = store.getPermissionComponent(for: .tracking, modify: {_ in })
+            XCTAssertEqual(trackingPermission, JMPermission(
+                imageIcon: AnyView(Image(systemName: "person.circle.fill")),
+                title: "Tracking",
+                description: "Allow to track your data", authorized: false
+            ))
+        }
+        let photoPermission = store.getPermissionComponent(for: .photo, modify: {_ in })
+        let cameraPermission = store.getPermissionComponent(for: .camera, modify: {_ in })
+        let locationPermission = store.getPermissionComponent(for: .location, modify: {_ in })
+        let reminderPermission = store.getPermissionComponent(for: .reminders, modify: {_ in })
+        let speechPermission = store.getPermissionComponent(for: .speech, modify: {_ in })
+        let bluetoothPermission = store.getPermissionComponent(for: .bluetooth, modify: {_ in })
+        let calendarPermission = store.getPermissionComponent(for: .calendar, modify: {_ in })
+        let contactsPermission = store.getPermissionComponent(for: .contacts, modify: {_ in })
+        let locationAlwaysPermission = store.getPermissionComponent(for: .locationAlways, modify: {_ in })
+        let microphonePermission = store.getPermissionComponent(for: .microphone, modify: {_ in })
+        let notificationPermission = store.getPermissionComponent(for: .notification, modify: {_ in })
+        let healthPermission = store.getPermissionComponent(for: .health(categories: nil), modify: {_ in })
+        let musicPermission = store.getPermissionComponent(for: .music, modify: {_ in })
+        XCTAssertEqual(photoPermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "photo")),
+            title: "Photo Library",
+            description: "Allow to access your photos", authorized: false
+        ))
+        XCTAssertEqual(cameraPermission, JMPermission(
+                        imageIcon: AnyView(Image(systemName: "camera.fill")),
+                        title: "Camera",
+                        description: "Allow to use your camera", authorized: false))
+        XCTAssertEqual(locationPermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "location.fill.viewfinder")),
+            title: "Location",
+            description: "Allow to access your location", authorized: false
+        ))
+        XCTAssertEqual(reminderPermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "list.bullet.rectangle")),
+            title: "Reminders",
+            description: "Allow to access your reminders", authorized: false
+        ))
+        XCTAssertEqual(speechPermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "rectangle.3.offgrid.bubble.left.fill")),
+            title: "Speech",
+            description: "Allow to access speech recognition", authorized: false
+        ))
+        XCTAssertEqual(bluetoothPermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "wave.3.left.circle.fill")),
+            title: "Bluetooth",
+            description: "Allow to use bluetooth", authorized: false
+        ))
+        XCTAssertEqual(calendarPermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "calendar")),
+            title: "Calendar",
+            description: "Allow to access calendar", authorized: false
+        ))
+        XCTAssertEqual(contactsPermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "book.fill")),
+            title: "Contacts",
+            description: "Allow to access your contacts", authorized: false
+        ))
+        XCTAssertEqual(locationAlwaysPermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "location.fill.viewfinder")),
+            title: "Location Always",
+            description: "Allow to access your location", authorized: false
+        ))
+        XCTAssertEqual(microphonePermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "mic.fill")),
+            title: "Microphone",
+            description: "Allow to record with microphone", authorized: false
+        ))
+        XCTAssertEqual(notificationPermission, JMPermission(
+            imageIcon: AnyView(Image(systemName: "bell.fill")),
+            title: "Notification",
+            description: "Allow to send notifications", authorized: false
+        ))
+        XCTAssertEqual(healthPermission, JMPermission(
+                        imageIcon: AnyView(Image(systemName: "heart.fill")),
+                        title: "Health",
+                        description: "Allow to access your health information",
+                        authorized: false))
+        XCTAssertEqual(musicPermission, JMPermission(imageIcon: Image(systemName: "music.note.list").typeErased(),
+                                                     title: "Music",
+                                                     description: "Allow to control audio playback"))
+    }
+
+    func testPermissionStorePermissionManager(){
+        let permissionTypes = PermissionType.allCases
+        UNUserNotificationCenter.isTestingMode = true
+        for permission in permissionTypes{
+            let permissionManagerString = String(describing: permission.getPermissionManager()).lowercased()
+            let permissionRawValueString = permission.rawValue.lowercased()
+            XCTAssert(permissionManagerString.contains("permissionmanager"))
+            XCTAssert(permissionManagerString.contains(permissionRawValueString))
+        }
+    }
+
+    func testLocationPermissionManager(){
+        let manager = MockCLLocationManager()
+        let JMManager = JMLocationPermissionManager(locationManager: manager)
+        let JMAlwaysManager = JMLocationAlwaysPermissionManager(locationManager: manager)
+        //FIXME: Dummy test will always pass
+        //TODO: Mock location manager delegate
+        //TODO: Reimplement XCTAssert to check for Bool callback (whether permission is authorized)
+        JMManager.requestPermission{authorized, _ in
+            XCTAssert(true)
+        }
+        JMAlwaysManager.requestPermission{authorized, _ in
+            XCTAssert(true)
+        }
+
+
+    }
+    func setupHealthPermissionStore(quantityType: Set<HKSampleType> = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!,
+                                                        HKSampleType.quantityType(forIdentifier: .bodyFatPercentage)!,
+                                                        HKSampleType.quantityType(forIdentifier: .bloodGlucose)!])) -> (MockHealthManager, JMHealthPermissionManager){
+        let mockManager = MockHealthManager()
+        MockHealthManager.healthDataAvailableOverride = true
+        let healthPermission = PermissionType.health(categories: .init(readAndWrite: quantityType))
+        let manager = JMHealthPermissionManager(healthManager: mockManager, permissionType: healthPermission)
+        return (mockManager, manager)
+    }
+    func testHealthManagerAuthNotDetermined(){
+        let (mockManager, manager) = setupHealthPermissionStore()
+        mockManager.authStatusOverride = .notDetermined
+        XCTAssertEqual(manager.authorizationStatus, .notDetermined)
+    }
+    func testHealthManagerAuthAuthorized(){
+        let (mockManager, manager) = setupHealthPermissionStore()
+        mockManager.authStatusOverride = .authorized
+        XCTAssertEqual(manager.authorizationStatus, .authorized)
+    }
+    func testHealthManagerAuthDenied(){
+        let (mockManager, manager) = setupHealthPermissionStore()
+        mockManager.authStatusOverride = .denied
+        XCTAssertEqual(manager.authorizationStatus, .denied)
+    }
+    func testHealthManagerAuthMixedAuthorized(){
+        let (mockManager, manager) = setupHealthPermissionStore()
+        mockManager.authStatusOverride = .mixedAuthorized
+        XCTAssertEqual(manager.authorizationStatus, .authorized)
+    }
+    func testHealthManagerAuthMixedDenied(){
+        let (mockManager, manager) = setupHealthPermissionStore()
+        mockManager.authStatusOverride = .mixedDenied
+        XCTAssertEqual(manager.authorizationStatus, .denied)
+    }
 //    func testHealthManagerReqestReadWrite() {
 //        let (manager, sharedType, mockManager) = setupHealthPermissionReadWrite()
 //        let readType = Array(Array(sharedType)[0..<1])
 //        let writeType = Array(Array(sharedType)[1...])
 //        let healthPermission = PermissionType.health(categories: .init(read: Set(readType),
 //                                                                    write: Set(writeType)))
-//        store.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
 //        manager.requestPermission{_,_ in}
 //        XCTAssertEqual(mockManager.requestedPermissions?.readPermissions, Set(readType))
 //        XCTAssertEqual(mockManager.requestedPermissions?.writePermissions, Set(writeType))
 //
 //    }
-//    func setupHealthPermissionReadWrite() -> (JMHealthPermissionManager, Set<HKSampleType>, MockHealthManager) {
-//        let sharedType = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!,
-//                              HKSampleType.quantityType(forIdentifier: .bodyFatPercentage)!,
-//                              HKSampleType.quantityType(forIdentifier: .bloodGlucose)!])
-//        let healthPermission = PermissionType.health(categories: .init(readAndWrite: sharedType))
-//        let mockManager = MockHealthManager()
-//        let manager = JMHealthPermissionManager(healthManager: mockManager)
-//        store.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
-//        return (manager, sharedType, mockManager)
-//    }
-//    func testHealthManagerReadWriteSame(){
-//        let (manager, sharedType, _) = setupHealthPermissionReadWrite()
-//        XCTAssertEqual(manager.healthPermission?.readPermissions, sharedType)
-//        XCTAssertEqual(manager.healthPermission?.writePermissions, sharedType)
-//    }
+    func setupHealthPermissionReadWrite() -> (JMHealthPermissionManager, Set<HKSampleType>, MockHealthManager) {
+        let sharedType = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!,
+                              HKSampleType.quantityType(forIdentifier: .bodyFatPercentage)!,
+                              HKSampleType.quantityType(forIdentifier: .bloodGlucose)!])
+        let healthPermission = PermissionType.health(categories: .init(readAndWrite: sharedType))
+        let mockManager = MockHealthManager()
+        let manager = JMHealthPermissionManager(healthManager: mockManager, permissionType: healthPermission)
+        return (manager, sharedType, mockManager)
+    }
+    func testHealthManagerReadWriteSame(){
+        let (manager, sharedType, _) = setupHealthPermissionReadWrite()
+        XCTAssertEqual(manager.healthPermission?.readPermissions, sharedType)
+        XCTAssertEqual(manager.healthPermission?.writePermissions, sharedType)
+    }
 //    func testHealthManagerReadWriteDifferent(){
 //        let (manager, sharedType, _) = setupHealthPermissionReadWrite()
 //        let readType = Array(Array(sharedType)[0..<1])
 //        let writeType = Array(Array(sharedType)[1...])
 //        let healthPermission = PermissionType.health(categories: .init(read: Set(readType),
 //                                                                       write: Set(writeType)))
-//        store.updateStore(property: {$0.permissions=[$1]}, value: healthPermission)
 //        XCTAssertEqual(manager.healthPermission?.readPermissions, Set(readType))
 //        XCTAssertEqual(manager.healthPermission?.writePermissions, Set(writeType))
 //    }
-//    func testHealthManagerUnavailableResults(){
-//        let (_, manager) = setupHealthPermissionStore()
-//        MockHealthManager.healthDataAvailableOverride = false
-//        let expectation = self.expectation(description: "Wait for unavailable result")
-//        var authorizationRequestResult: Bool?
-//        manager.requestPermission{authorized, _ in
-//            authorizationRequestResult = authorized
-//            expectation.fulfill()
-//        }
-//        waitForExpectations(timeout: 10)
-//        XCTAssertFalse(authorizationRequestResult ?? true)
-//    }
-//    func testHealthManagerAuthedResults(){
-//        let (mockManager, manager) = setupHealthPermissionStore()
-//        mockManager.requestSuccessOverride = true
-//        let expectation = self.expectation(description: "Wait for true result")
-//        var authorizationRequestResult: Bool?
-//        manager.requestPermission{authorized, _ in
-//            authorizationRequestResult = authorized
-//            expectation.fulfill()
-//        }
-//        waitForExpectations(timeout: 10)
-//        XCTAssert(authorizationRequestResult ?? false)
-//    }
-//    func testHealthManagerDeniedResults(){
-//        let (mockManager, manager) = setupHealthPermissionStore()
-//        MockHealthManager.healthDataAvailableOverride = true
-//        mockManager.requestSuccessOverride = false
-//        let expectation = self.expectation(description: "Wait for false result")
-//        var authorizationRequestResult: Bool?
-//        manager.requestPermission{authorized, _ in
-//            authorizationRequestResult = authorized
-//            expectation.fulfill()
-//        }
-//        waitForExpectations(timeout: 10)
-//        XCTAssertFalse(authorizationRequestResult ?? true)
-//    }
-//    func testHealthManagerNoHealthPermission(){
-//        let mockManager = MockHealthManager()
-//        let manager = JMHealthPermissionManager(healthManager: mockManager)
-//        store.updateStore(property: {$0.permissions=$1}, value: [PermissionType]())
-//        XCTAssertNil(manager.healthPermission)
-//        XCTAssertEqual(manager.authorizationStatus, .notDetermined)
-//        let expectation = self.expectation(description: "Wait for true result")
-//        var authorizationRequestResult: Bool?
-//        manager.requestPermission{authorized, _ in
-//            authorizationRequestResult = authorized
-//            expectation.fulfill()
-//        }
-//        waitForExpectations(timeout: 10)
-//        XCTAssert(authorizationRequestResult ?? false)
-//    }
-//    func testHealthManagerEmptyPermissions(){
-//        let mockManager = MockHealthManager()
-//        let manager = JMHealthPermissionManager(healthManager: mockManager)
-//        store.updateStore(property: {$0.permissions=$1}, value: [.camera,.calendar])
-//        XCTAssertNil(manager.healthPermission)
-//        XCTAssertEqual(manager.authorizationStatus, .notDetermined)
-//        let expectation = self.expectation(description: "Wait for true result")
-//        var authorizationRequestResult: Bool?
-//        manager.requestPermission{authorized, _ in
-//            authorizationRequestResult = authorized
-//            expectation.fulfill()
-//        }
-//        waitForExpectations(timeout: 10)
-//        XCTAssert(authorizationRequestResult ?? false)
-//    }
+    func testHealthManagerUnavailableResults(){
+        let (_, manager) = setupHealthPermissionStore()
+        MockHealthManager.healthDataAvailableOverride = false
+        let expectation = self.expectation(description: "Wait for unavailable result")
+        var authorizationRequestResult: Bool?
+        manager.requestPermission{authorized, _ in
+            authorizationRequestResult = authorized
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 10)
+        XCTAssertFalse(authorizationRequestResult ?? true)
+    }
+    func testHealthManagerAuthedResults(){
+        let (mockManager, manager) = setupHealthPermissionStore()
+        mockManager.requestSuccessOverride = true
+        let expectation = self.expectation(description: "Wait for true result")
+        var authorizationRequestResult: Bool?
+        manager.requestPermission{authorized, _ in
+            authorizationRequestResult = authorized
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 10)
+        XCTAssert(authorizationRequestResult ?? false)
+    }
+    func testHealthManagerDeniedResults(){
+        let (mockManager, manager) = setupHealthPermissionStore()
+        MockHealthManager.healthDataAvailableOverride = true
+        mockManager.requestSuccessOverride = false
+        let expectation = self.expectation(description: "Wait for false result")
+        var authorizationRequestResult: Bool?
+        manager.requestPermission{authorized, _ in
+            authorizationRequestResult = authorized
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 10)
+        XCTAssertFalse(authorizationRequestResult ?? true)
+    }
+    func testHealthManagerNoHealthPermission(){
+        let mockManager = MockHealthManager()
+        let manager = JMHealthPermissionManager(healthManager: mockManager, permissionType: .health(categories: nil))
+        XCTAssertNil(manager.healthPermission)
+        XCTAssertEqual(manager.authorizationStatus, .notDetermined)
+        let expectation = self.expectation(description: "Wait for true result")
+        var authorizationRequestResult: Bool?
+        manager.requestPermission{authorized, _ in
+            authorizationRequestResult = authorized
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 10)
+        XCTAssert(authorizationRequestResult ?? false)
+    }
+    func testHealthManagerEmptyPermissions(){
+        let mockManager = MockHealthManager()
+        let manager = JMHealthPermissionManager(healthManager: mockManager, permissionType: .health(categories: nil))
+        XCTAssertNil(manager.healthPermission)
+        XCTAssertEqual(manager.authorizationStatus, .notDetermined)
+        let expectation = self.expectation(description: "Wait for true result")
+        var authorizationRequestResult: Bool?
+        manager.requestPermission{authorized, _ in
+            authorizationRequestResult = authorized
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 10)
+        XCTAssert(authorizationRequestResult ?? false)
+    }
 //    func testPermissionManagers() {
 //        DispatchQueue.main.async {
 //            JMContactsPermissionManager.shared.requestPermission{authorized, _ in
@@ -298,7 +277,7 @@ final class PermissionsSwiftUITests: XCTestCase {
 //            JMMotionPermissionManager.shared.requestPermission{authorized, _ in
 //                XCTAssertTrue(authorized)
 //            }
-//            
+//
 //            JMRemindersPermissionManager.shared.requestPermission{authorized, _ in
 //                XCTAssertTrue(authorized)
 //            }
@@ -311,7 +290,7 @@ final class PermissionsSwiftUITests: XCTestCase {
 //                }
 //            }
 //        }
-//        
+//
 //    }
 //    func permissionManagerMethod(for permission:PermissionType){
 //        switch permission {
@@ -327,7 +306,7 @@ final class PermissionsSwiftUITests: XCTestCase {
 //            waitForExpectations(timeout: 5, handler: nil)
 //            XCTAssertTrue(permissionGranted ?? false)
 //        }
-//        
+//
 //    }
 //    func testPhotoPermission(){
 //        let photoPermissionManager = JMPhotoPermissionManager(photoLibrary: MockPhotoManager.self)
@@ -335,61 +314,65 @@ final class PermissionsSwiftUITests: XCTestCase {
 //            XCTAssert(authorized)
 //        }
 //    }
-//    func testModalViewSnapshot14_0(){
-//        if #available(iOS 14.5, *) {}
-//        else{
-//            store.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
-//            store.updateStore(property: {$0.autoCheckModalAuth=$1}, value: false)
-//            let view = ModalView(showModal: .constant(true))
-//            assertSnapshot(matching: view.referenceFrame(), as: .image)
-//        }
-//    }
-//    func testModalViewSnapshot14_5(){
-//        if #available(iOS 14.5, *) {
-//            let view = ModalView(showModal: .constant(true))
-//            store.updateStore(property: {$0.permissions=$1}, value: PermissionType.allCases)
-//            assertSnapshot(matching: view.referenceFrame(), as: .image)
-//        }
-//    }
-//    
-//    func testCustomizeHeaderSnapshot(){
-//        let newHeader = "Permissions Request"
-//        let view = ModalView(showModal: .constant(true))
-//            .referenceFrame()
-//            .changeHeaderTo(newHeader)
-//            .changeHeaderDescriptionTo(placeholderText)
-//            .changeBottomDescriptionTo(placeholderText)
-//        XCTAssertEqual(newHeader, store.mainTexts.headerText)
-//        XCTAssertEqual(placeholderText, store.mainTexts.headerDescription)
-//        XCTAssertEqual(placeholderText, store.mainTexts.bottomDescription)
-//        assertSnapshot(matching: view, as: .image)
-//        
-//    }
-//    func testPermissionCell(){
-//        for permission in PermissionType.allCases{
-//            let title = permission.currentPermission.title
-//            let views = getPermissionView(for: permission)
-//            let testingPermission = JMPermission(imageIcon: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText, authorized: false)
-//            XCTAssertEqual(testingPermission, permission.currentPermission)
-//            for i in views{
-//                assertSnapshot(matching: i, as: .image)
-//            }
-//        }
-//    }
-//    func getPermissionView(for permission: PermissionType) -> [AnyView]{
-//        let title = permission.currentPermission.title
-//        switch permission {
-//        default:
-//            let views:[AnyView] = AllowButtonStatus.allCases.map{
-//                let view = PermissionSectionCell(permission: permission, allowButtonStatus: $0, showModal: .constant(true), isAlert: false)
-//                    .setPermissionComponent(for: permission, image: AnyView(Image(systemName: "gear")), title: "Testing \(title)", description: placeholderText)
-//                    .referenceFrameCell()
-//                return AnyView(view)
-//            }
-//            return views
-//            
-//        }
-//    }
+    func testModalViewSnapshot14_0(){
+        if #available(iOS 14.5, *) {}
+        else{
+            let store = PermissionStore()
+            store.permissions = PermissionType.allCases
+            store.configStore.autoCheckAuth = false
+            let view = ModalView(showModal: .constant(true)).withEnvironmentObjects(store: store, permissionStyle: .modal)
+            assertSnapshot(matching: view.referenceFrame(count: store.permissions.count), as: .image)
+        }
+    }
+    func testModalViewSnapshot14_5(){
+        if #available(iOS 14.5, *) {
+            let store = PermissionStore()
+            store.permissions = PermissionType.allCases
+            store.configStore.autoCheckAuth = false
+            let view = ModalView(showModal: .constant(true)).withEnvironmentObjects(store: store, permissionStyle: .modal)
+            assertSnapshot(matching: view.referenceFrame(count: store.permissions.count), as: .image)
+        }
+    }
+
+    func testCustomizeHeaderSnapshot(){
+        let newHeader = "Permissions Request"
+        let store = PermissionStore()
+        _ = ModalMainView(for: Color.red, showing: .constant(true), store: store)
+            .changeHeaderTo(newHeader)
+            .changeHeaderDescriptionTo(placeholderText)
+            .changeBottomDescriptionTo(placeholderText)
+            .referenceFrame(count: 0)
+
+        XCTAssertEqual(newHeader, store.configStore.mainTexts.headerText)
+        XCTAssertEqual(placeholderText, store.configStore.mainTexts.headerDescription)
+        XCTAssertEqual(placeholderText, store.configStore.mainTexts.bottomDescription)
+        let view = ModalView(showModal: .constant(true)).withEnvironmentObjects(store: store, permissionStyle: .modal)
+        assertSnapshot(matching: view, as: .image)
+
+    }
+    func testPermissionCell(){
+        for permission in PermissionType.allCases{
+            let currentPermission = PermissionStore().permissionComponentsStore.getPermissionComponent(for: permission, modify: {_ in})
+            let title = currentPermission.title
+            let views = getPermissionView(for: permission)
+            for i in views{
+                assertSnapshot(matching: i, as: .image)
+            }
+        }
+    }
+    func getPermissionView(for permission: PermissionType) -> [AnyView]{
+        switch permission {
+        default:
+            let views:[AnyView] = AllowButtonStatus.allCases.map{
+                let view = PermissionSectionCell(permission: permission, allowButtonStatus: $0, showing: .constant(true))
+                    .withEnvironmentObjects(store: PermissionStore(), permissionStyle: .modal)
+                    .referenceFrameCell()
+                return AnyView(view)
+            }
+            return views
+
+        }
+    }
 //    func testStateChangeClosures(){
 //        XCTAssertNil(store.onAppear)
 //        XCTAssertNil(store.onDisappear)
@@ -413,11 +396,11 @@ final class PermissionsSwiftUITests: XCTestCase {
 //        var notificationManager = JMNotificationPermissionManager(notificationManager: mockManager)
 //        notificationManager.requestPermission{authorized, _ in
 //            XCTAssertTrue(authorized)
-//            
+//
 //        }
 //        var status = notificationManager.authorizationStatus
 //        XCTAssertEqual(status, .authorized)
-//        
+//
 //        mockManager.authStatus = .denied
 //        notificationManager = JMNotificationPermissionManager(notificationManager: mockManager)
 //        notificationManager.requestPermission{authorized, _ in
@@ -426,7 +409,7 @@ final class PermissionsSwiftUITests: XCTestCase {
 //        status = notificationManager.authorizationStatus
 //        XCTAssertEqual(status, .denied)
 //    }
-//    
+//
 //    func testMainViewShouldShowPermissionTrue(){
 //        let permissions: [PermissionType] = [.calendar, .camera, .microphone]
 //        let mainView = ModalMainView(for: AnyView(EmptyView()), show: .constant(false), permissionsToAsk: permissions)
@@ -511,7 +494,7 @@ final class PermissionsSwiftUITests: XCTestCase {
 //        assertSnapshot(matching: view7, as: .image)
 //    }
 //    func testAlertViewAutpDismissInit(){
-//        
+//
 //    }
 //    func testPermissionSectionButtonAuthorized(){
 //        let permission = PermissionType.camera
@@ -525,7 +508,7 @@ final class PermissionsSwiftUITests: XCTestCase {
 //    }
 //    func testPermissionSectionButtonDenied(){
 //        let permission = PermissionType.camera
-//        
+//
 //        let sectionCell = PermissionSectionCell(permission: permission,
 //                                                showModal: .constant(false), isAlert: false)
 //        let queue = DispatchQueue(label: "testPermissionSectionHandling")
@@ -535,7 +518,7 @@ final class PermissionsSwiftUITests: XCTestCase {
 //    }
 //    func testAlertPermissionSectionButtonAuthorized(){
 //        let permission = PermissionType.camera
-//        
+//
 //        let sectionCell = PermissionSectionCell(permission: permission,
 //                                                showModal: .constant(false), isAlert: true)
 //        let queue = DispatchQueue(label: "testPermissionSectionHandling")
@@ -545,7 +528,7 @@ final class PermissionsSwiftUITests: XCTestCase {
 //    }
 //    func testAlertPermissionSectionButtonDenied(){
 //        let permission = PermissionType.camera
-//        
+//
 //        let sectionCell = PermissionSectionCell(permission: permission,
 //                                                showModal: .constant(false), isAlert: true)
 //        let queue = DispatchQueue(label: "testPermissionSectionHandling")
@@ -575,37 +558,36 @@ struct testViewGreenBG:View{
         }
     }
 }
-//private extension SwiftUI.View {
-//    func referenceFrame() -> some View {
-//        let count = store.permissions.count
-//        return self.frame(width: referenceSize.width, height: referenceSize.height+CGFloat(count*60))
-//    }
-//    func referenceFrameCell() -> some View{
-//        return self.frame(width: referenceSize.width, height: 70)
-//    }
-//}
-//
-//public extension UIDevice {
-//    enum DeviceType{
-//        case iPod7, iPhone12ProMax, iPhone11, unknown
-//    }
-//    static var modelName: DeviceType{
-//        var systemInfo = utsname()
-//        uname(&systemInfo)
-//        let machineMirror = Mirror(reflecting: systemInfo.machine)
-//        let identifier = machineMirror.children.reduce("") { identifier, element in
-//            guard let value = element.value as? Int8, value != 0 else { return identifier }
-//            return identifier + String(UnicodeScalar(UInt8(value)))
-//        }
-//        func mapToDevice(identifier: String) -> DeviceType {
-//            switch identifier {
-//            case "iPod9,1": return .iPod7
-//            case "iPhone13,4": return .iPhone12ProMax
-//            case "iPhone12,1": return .iPhone11
-//            default: return .unknown
-//            }
-//        }
-//        
-//        return mapToDevice(identifier: identifier)
-//    }
-//}
+private extension SwiftUI.View {
+    func referenceFrame(count: Int) -> some View {
+        return self.frame(width: referenceSize.width, height: referenceSize.height+CGFloat(count*60))
+    }
+    func referenceFrameCell() -> some View{
+        return self.frame(width: referenceSize.width, height: 70)
+    }
+}
+
+public extension UIDevice {
+    enum DeviceType{
+        case iPod7, iPhone12ProMax, iPhone11, unknown
+    }
+    static var modelName: DeviceType{
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        func mapToDevice(identifier: String) -> DeviceType {
+            switch identifier {
+            case "iPod9,1": return .iPod7
+            case "iPhone13,4": return .iPhone12ProMax
+            case "iPhone12,1": return .iPhone11
+            default: return .unknown
+            }
+        }
+        
+        return mapToDevice(identifier: identifier)
+    }
+}

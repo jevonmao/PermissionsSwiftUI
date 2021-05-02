@@ -11,16 +11,17 @@ import SwiftUI
 struct AlertView: View {
     @Binding var showAlert: Bool
     @EnvironmentObject var store: PermissionStore
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
 
-    var mainText:  MainTexts{store.configStore.mainTexts}
+    var mainText: MainTexts{store.mainTexts.contentChanged ? store.mainTexts : store.configStore.mainTexts}
     var paddingSize: CGFloat {
         screenSize.width < 400 ? 20-(1000-screenSize.width)/120 : 20
     }
     var body: some View {
             VStack{
-                HeaderView(exitButtonAction: {showAlert = store.shouldStayInPresentation}, isAlert: true)
+                HeaderView(exitButtonAction: {showAlert = schemaStore.shouldStayInPresentation}, mainText: mainText)
                     .padding(.bottom, paddingSize/1.5)
-                PermissionSection(showModal: $showAlert, isAlert:true)
+                PermissionSection(showing: $showAlert)
                 
                 if store.permissions.count < 2{
                     Divider()

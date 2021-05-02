@@ -30,15 +30,13 @@ public extension CustomizableView {
         - description: The description text (optional)
      */
     
-    func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?=nil, description: String?=nil) -> AnyView {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
-        let newPermission = JMPermission(
-        imageIcon: image,
-        title: title ?? currentPermission.title,
-        description: description ?? currentPermission.description, authorized: currentPermission.authorized
-    )
-        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
-        return self.typeErased()
+    @inlinable func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?=nil, description: String?=nil) -> some CustomizableView {
+        store.permissionComponentsStore.getPermissionComponent(for: permission){permissionComponent in
+            permissionComponent.title = title ?? permissionComponent.title
+            permissionComponent.imageIcon = image
+            permissionComponent.description = description ?? permissionComponent.description
+        }
+        return self
     }
     
     /**
@@ -58,15 +56,11 @@ public extension CustomizableView {
         - title: The title text
      */
     
-    func setPermissionComponent(for permission: PermissionType, title: String) -> AnyView {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
-        let newPermission = JMPermission(
-            imageIcon: currentPermission.imageIcon,
-            title: title,
-            description: currentPermission.description, authorized: currentPermission.authorized
-        )
-        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
-        return self.typeErased()
+    @inlinable func setPermissionComponent(for permission: PermissionType, title: String) -> some CustomizableView {
+        store.permissionComponentsStore.getPermissionComponent(for: permission){permissionComponent in
+            permissionComponent.title = title
+        }
+        return self
     }
     
     /**
@@ -86,15 +80,9 @@ public extension CustomizableView {
         - description: The description text
      */
     
-    func setPermissionComponent(for permission: PermissionType, description: String) -> AnyView {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
-        let newPermission = JMPermission(
-            imageIcon: currentPermission.imageIcon,
-            title: currentPermission.title,
-            description: description, authorized: currentPermission.authorized
-        )
-        store.permissionComponentsStore.setPermissionComponent(newPermission, for: permission)
-        return self.typeErased()
+    @inlinable func setPermissionComponent(for permission: PermissionType, description: String) -> some CustomizableView {
+        store.permissionComponentsStore.getPermissionComponent(for: permission){$0.description = description}
+        return self
     }
 }
 
@@ -115,9 +103,9 @@ public extension CustomizableView {
         - description: The description text
      */
     
-    func setAllowButtonColor(to colors:AllButtonColors) -> AnyView {
+    @inlinable func setAllowButtonColor(to colors:AllButtonColors) -> some CustomizableView {
         store.configStore.allButtonColors = colors
-        return self.typeErased()
+        return self
     }
 }
 
@@ -133,9 +121,9 @@ public extension CustomizableView {
         - to: The new customized accent color
      */
     
-    func setAccentColor(to color: Color) -> AnyView {
+    @inlinable func setAccentColor(to color: Color) -> some CustomizableView {
         store.configStore.allButtonColors.primaryColor = color
-        return self.typeErased()
+        return self
     }
     
     /**
@@ -151,11 +139,11 @@ public extension CustomizableView {
         
      */
     
-    func setAccentColor(toPrimary primaryColor: Color, toTertiary tertiaryColor: Color) -> AnyView {
+    @inlinable func setAccentColor(toPrimary primaryColor: Color, toTertiary tertiaryColor: Color) -> some CustomizableView {
         let buttonColors = AllButtonColors(primaryColor: primaryColor,
                                            tertiaryColor: tertiaryColor)
         store.configStore.allButtonColors = buttonColors
-        return self.typeErased()
+        return self
     }
 }
 

@@ -9,15 +9,17 @@ import SwiftUI
 
 struct ModalView: View {
     @EnvironmentObject var store: PermissionStore
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
+
     @Binding var showModal: Bool
-    var mainText: MainTexts{store.configStore.mainTexts}
+    var mainText: MainTexts{store.mainTexts.contentChanged ? store.mainTexts : store.configStore.mainTexts}
 
     var body: some View {
         ScrollView {
             VStack { 
-                HeaderView(exitButtonAction: {showModal = store.shouldStayInPresentation})
+                HeaderView(exitButtonAction: {showModal = schemaStore.shouldStayInPresentation}, mainText: mainText)
                     
-                PermissionSection(showModal:$showModal, isAlert:false)
+                PermissionSection(showing: $showModal)
                     .background(Color(.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 15))
                     .padding()
@@ -27,6 +29,8 @@ struct ModalView: View {
                     .font(.system(.callout, design: .rounded))
                     .foregroundColor(Color(.systemGray))
                     .padding(.horizontal)
+                    .textHorizontalAlign(.leading)
+
                 Spacer()
             }
             .padding(.bottom,30)
@@ -34,5 +38,12 @@ struct ModalView: View {
         }
         .background(Color(.secondarySystemBackground))
         .edgesIgnoringSafeArea(.all)
+        .introspectViewController{
+            if store.configStore.restrictDismissal ||
+                store.restrictAlertDismissal ||
+                store.restrictModalDismissal {
+                $0.isModalInPresentation = true
+            }
+        }
     }
 }

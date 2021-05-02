@@ -9,18 +9,16 @@ import MapKit
 import SwiftUI
 struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
-    @Binding var showModal:Bool
+    @Binding var showing:Bool
     @EnvironmentObject var store: PermissionStore
-    var isAlert:Bool
     var _permissions: [PermissionType]?
     var permissions:[PermissionType] {
-        #warning("Fix this awkward computed property.")
         return store.permissions
     }
     var body: some View {
         VStack {
             ForEach(permissions.indices, id: \.self) {
-                PermissionSectionCell(permission: permissions[$0], showModal: $showModal, isAlert: isAlert)
+                PermissionSectionCell(permission: permissions[$0], showing: $showing)
                 
                 if permissions.count > 1 {
                     Divider()
@@ -42,12 +40,12 @@ struct PermissionSectionCell: View {
     @State var permission: PermissionType
     @State var allowButtonStatus: AllowButtonStatus = .idle
     @State var permissionManager: PermissionManager?
-    @Binding var showModal: Bool
+    @Binding var showing: Bool
     @EnvironmentObject var store: PermissionStore
-    //Whether used for modal or alert style component
-    var isAlert: Bool
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
+
     //Empty unauthorized array means all permissions have been interacted
-    var shouldAutoDismiss: Bool {FilterPermissions.filterForUnauthorized(with: store.permissions, store: store).isEmpty}
+    var shouldAutoDismiss: Bool {FilterPermissions.filterForUnauthorized(with: store.permissions, store: schemaStore).isEmpty}
     
     //Computed constants based on device size for dynamic UI
     var screenSizeConstant: CGFloat {
@@ -61,7 +59,7 @@ struct PermissionSectionCell: View {
         fontSizeConstant - fontSizeConstant/2.8
     }
     var vertPaddingConstant: CGFloat {
-        if isAlert {
+        if schemaStore.permissionViewStyle == .alert {
             return screenSize.width < 400 ? 0 : 10
         }
         else{
@@ -69,7 +67,7 @@ struct PermissionSectionCell: View {
         }
     }
     var horiPaddingConstant: CGFloat {
-        if isAlert {
+        if schemaStore.permissionViewStyle == .alert {
             return 0
         }
         else{
@@ -77,7 +75,7 @@ struct PermissionSectionCell: View {
         }
     }
     var body: some View {
-        let currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
+        let currentPermission = schemaStore.permissionComponentsStore.getPermissionComponent(for: permission, modify: {_ in})
         HStack {
             currentPermission.imageIcon
                 .foregroundColor(store.configStore.allButtonColors.primaryColor)
@@ -98,9 +96,8 @@ struct PermissionSectionCell: View {
                 
             }
             .padding(.horizontal, 3)
-            
             Spacer()
-            if isAlert {
+            if schemaStore.permissionViewStyle == .alert {
                 //Call requestPermission (enum function) to make request to Apple API
                 //The handleButtonState function will be executed based on result of request
                 AllowButtonSection(action: handlePermissionRequest, allowButtonStatus: $allowButtonStatus)
@@ -118,31 +115,44 @@ struct PermissionSectionCell: View {
     
     func handlePermissionRequest() {
         permissionManager = permission.getPermissionManager()?.init(permissionType: permission)
-        permissionManager?.requestPermission{authorized, error in
-            var currentPermission = store.permissionComponentsStore.getPermissionComponent(for: permission)
-            currentPermission.interacted = true
-            if authorized {
-                allowButtonStatus = .allowed
-                currentPermission.authorized = true
-            }
-            else {
-                allowButtonStatus = .denied
-                currentPermission.authorized = false
-            }
-            store.permissionComponentsStore.setPermissionComponent(currentPermission, for: permission)
-            DispatchQueue.main.async {
-                store.objectWillChange.send()
-                
-            }
-            if shouldAutoDismiss && store.configStore.autoDismiss {
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-                    showModal = false
+        permissionManager!.requestPermission{authorized, error in
+            let result = JMResult(permissionType: permission,
+                                  authorizationStatus: permissionManager!.authorizationStatus,
+                                  error: error)
+            schemaStore.permissionComponentsStore.getPermissionComponent(for: permission){permissionComponent in
+                permissionComponent.interacted = true
+                if authorized {
+                    allowButtonStatus = .allowed
+                    permissionComponent.authorized = true
+                    (schemaStore.successfulPermissions?.append(result)) ?? (schemaStore.successfulPermissions = [result])
+                }
+                else {
+                    allowButtonStatus = .denied
+                    permissionComponent.authorized = false
+                    (schemaStore.erroneousPermissions?.append(result)) ?? (schemaStore.erroneousPermissions = [result])
                 }
             }
+            DispatchQueue.main.async {
+                schemaStore.objectWillChange.send()
+            }
+            //Backward compatibility - autoDismissAlert, autoDismissModal, and autoDismiss are all acceptable ways to trigger condition
+                if shouldAutoDismiss &&
+                    
+                    //Current view style is alert and autoDismissAlert is true
+                    ((schemaStore.permissionViewStyle == .alert &&
+                        store.autoDismissAlert) ||
+                    //Current view style is modal and autoDismissModal is true
+                        (schemaStore.permissionViewStyle == .modal &&
+                            store.autoDismissModal)) ||
+                        store.configStore.autoDismiss {
+                    DispatchQueue.main.asyncAfter(deadline: .now()+0.8) {
+                        showing = false
+                        guard let handler = store.configStore.onDisappearHandler else {return}
+                        handler(schemaStore.successfulPermissions ?? nil, schemaStore.erroneousPermissions ?? nil)
+                    }
+                }
+            permissionManager = nil
+
         }
-        
-        
-        
-        
     }
 }
