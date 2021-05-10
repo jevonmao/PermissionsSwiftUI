@@ -11,7 +11,7 @@ import Contacts
 import AddressBook
 
 struct JMContactsPermissionManager:PermissionManager {
-    
+    init(permissionType: PermissionType?) {}
     typealias authorizationStatus = CNAuthorizationStatus
     typealias permissionManagerInstance = JMContactsPermissionManager
     
@@ -25,7 +25,6 @@ struct JMContactsPermissionManager:PermissionManager {
             return .denied
         }
     }
-    init(){}
 
     func requestPermission(_ completion: @escaping JMPermissionAuthorizationHandlerCompletionBlock) {
             let store = CNContactStore()

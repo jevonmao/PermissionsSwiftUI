@@ -17,7 +17,9 @@ struct JMHealthPermissionManager: PermissionManager {
 
     var healthStore: HealthManager = HKHealthStore()
     var permissionType: PermissionType?
-    init(){}
+    init(permissionType: PermissionType?) {
+        self.permissionType = permissionType
+    }
     init(healthManager: HealthManager = HKHealthStore(), permissionType: PermissionType) {
         self.healthStore = healthManager
         self.permissionType = permissionType

@@ -10,6 +10,7 @@ import UIKit
 import UserNotifications
 
 struct JMNotificationPermissionManager: PermissionManager {
+    init(permissionType: PermissionType?) {}
     var authorizationStatus: AuthorizationStatus{
         var notificationSettings: UNNotificationSettings?
         let semaphore = DispatchSemaphore(value: 0)

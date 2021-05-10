@@ -20,7 +20,7 @@ struct JMMicrophonePermissionManager: PermissionManager {
             return .denied
         }
     }
-    init(){}
+    init(permissionType: PermissionType?) {}
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         AVAudioSession.sharedInstance().requestRecordPermission {
             granted in

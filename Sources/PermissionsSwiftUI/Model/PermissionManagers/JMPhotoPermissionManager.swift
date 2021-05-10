@@ -9,7 +9,7 @@ import Foundation
 import Photos
 
 struct JMPhotoPermissionManager: PermissionManager {
-    
+    init(permissionType: PermissionType?) {}
     var authorizationStatus: AuthorizationStatus {
         switch PHPhotoLibrary.authorizationStatus(){
         case .authorized:
@@ -23,7 +23,6 @@ struct JMPhotoPermissionManager: PermissionManager {
         }
     }
     var photoLibrary: PHPhotoLibrary.Type = PHPhotoLibrary.self
-    init(){}
     init(photoLibrary:PHPhotoLibrary.Type=PHPhotoLibrary.self){
         self.photoLibrary = photoLibrary
     }

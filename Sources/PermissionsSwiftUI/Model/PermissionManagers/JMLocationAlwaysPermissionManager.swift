@@ -10,6 +10,8 @@ import MapKit
 
 #if !os(tvOS)
 final class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelegate, PermissionManager {
+    init(permissionType: PermissionType?) {}
+    
     
     typealias authorizationStatus = CLAuthorizationStatus
     typealias permissionManagerInstance = JMLocationAlwaysPermissionManager
