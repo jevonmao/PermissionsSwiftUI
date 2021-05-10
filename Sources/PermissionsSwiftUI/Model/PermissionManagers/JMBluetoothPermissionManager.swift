@@ -9,7 +9,7 @@ import CoreBluetooth
 import UIKit
 
 final class JMBluetoothPermissionManager: NSObject, PermissionManager {
-    
+    init(permissionType: PermissionType?) {}
     private var completion: ((Bool, Error?) -> Void)?
     private var manager: CBCentralManager?
     var authorizationStatus: AuthorizationStatus{

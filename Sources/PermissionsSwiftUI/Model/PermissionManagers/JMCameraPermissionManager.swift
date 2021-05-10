@@ -9,7 +9,7 @@ import AVFoundation
 import Foundation
 
 struct JMCameraPermissionManager: PermissionManager {
-
+    init(permissionType: PermissionType?) {}
     var authorizationStatus: AuthorizationStatus{
         switch AVCaptureDevice.authorizationStatus(for: .video){
         case .authorized:
@@ -20,7 +20,6 @@ struct JMCameraPermissionManager: PermissionManager {
             return .denied
         }
     }
-    init(){}
 
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
         AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {

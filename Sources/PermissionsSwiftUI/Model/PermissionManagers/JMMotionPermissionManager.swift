@@ -12,7 +12,7 @@ struct JMMotionPermissionManager: PermissionManager {
     
     typealias authorizationStatus = CMAuthorizationStatus
     typealias permissionManagerInstance = JMMotionPermissionManager
-    init(){}
+    init(permissionType: PermissionType?) {}
     var authorizationStatus: AuthorizationStatus {
         switch CMMotionActivityManager.authorizationStatus() {
         case .authorized:

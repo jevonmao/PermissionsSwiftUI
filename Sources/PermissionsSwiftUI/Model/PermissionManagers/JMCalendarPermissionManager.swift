@@ -9,7 +9,7 @@ import EventKit
 import UIKit
 
 struct JMCalendarPermissionManager: PermissionManager {  
-    
+    init(permissionType: PermissionType?) {}
     var authorizationStatus: AuthorizationStatus{
         switch EKEventStore.authorizationStatus(for: .event){
         case .authorized:

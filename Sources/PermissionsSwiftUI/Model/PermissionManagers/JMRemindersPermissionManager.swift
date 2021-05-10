@@ -9,6 +9,7 @@ import Foundation
 import EventKit
 
 struct JMRemindersPermissionManager: PermissionManager{
+    init(permissionType: PermissionType?) {}
     
     var authorizationStatus: AuthorizationStatus{
         switch EKEventStore.authorizationStatus(for: .reminder){
@@ -20,7 +21,6 @@ struct JMRemindersPermissionManager: PermissionManager{
             return .denied
         }
     }
-    init(){}
 
     func requestPermission(_ completion: @escaping (Bool, Error?)->()) {
         let eventStore = EKEventStore()

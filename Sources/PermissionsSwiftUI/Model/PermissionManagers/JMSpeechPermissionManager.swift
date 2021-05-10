@@ -9,6 +9,7 @@ import Foundation
 import Speech
 
 struct JMSpeechPermissionManager: PermissionManager{
+    init(permissionType: PermissionType?) {}
     
     var authorizationStatus: AuthorizationStatus{
         switch SFSpeechRecognizer.authorizationStatus(){

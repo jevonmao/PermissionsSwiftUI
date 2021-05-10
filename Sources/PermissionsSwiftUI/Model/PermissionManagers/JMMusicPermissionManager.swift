@@ -9,7 +9,8 @@ import Foundation
 import MediaPlayer
 
 struct JMMusicPermissionManager: PermissionManager{
-        var authorizationStatus: AuthorizationStatus{
+    init(permissionType: PermissionType?) {}
+    var authorizationStatus: AuthorizationStatus{
         switch MPMediaLibrary.authorizationStatus(){
         case .authorized:
             return .authorized

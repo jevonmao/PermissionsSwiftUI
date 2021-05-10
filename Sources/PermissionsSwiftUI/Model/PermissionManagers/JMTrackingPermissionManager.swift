@@ -11,6 +11,8 @@ import AdSupport
 
 @available(iOS 14.5, *)
 struct JMTrackingPermissionManager: PermissionManager {
+    init(permissionType: PermissionType?) {}
+    
     var authorizationStatus: AuthorizationStatus{
         switch ATTrackingManager.trackingAuthorizationStatus{
         case .authorized:

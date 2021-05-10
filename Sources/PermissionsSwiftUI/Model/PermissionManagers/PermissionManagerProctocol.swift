@@ -28,7 +28,7 @@ protocol PermissionManager {
     var authorizationStatus: AuthorizationStatus {get}
     
     init(permissionType: PermissionType?)
-    init()
+
     
     func requestPermission(_ completion: @escaping (Bool, Error?) -> Void)
    
@@ -38,7 +38,5 @@ extension PermissionManager {
     var permissionType: PermissionType? {
         get {nil}
         set{}
-    }
-    init(permissionType: PermissionType?=nil){self.init()}
-}
+    }}
 
