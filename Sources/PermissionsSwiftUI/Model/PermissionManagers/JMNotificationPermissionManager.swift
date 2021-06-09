@@ -42,9 +42,9 @@ struct JMNotificationPermissionManager: PermissionManager {
             return .denied
         }
     }
-    var notificationManager:NotificationManager = UNUserNotificationCenter.shared()
+    var notificationManager:NotificationManager = UNUserNotificationCenter.shared() 
     
-    init(notificationManager:NotificationManager=UNUserNotificationCenter.shared()){
+    init(notificationManager:NotificationManager = UNUserNotificationCenter.shared()){
         self.notificationManager = notificationManager
     }
     init(){}

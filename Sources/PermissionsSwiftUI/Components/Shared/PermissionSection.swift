@@ -7,6 +7,8 @@
 
 import MapKit
 import SwiftUI
+import UserNotifications
+
 struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showing:Bool
@@ -43,7 +45,7 @@ struct PermissionSectionCell: View {
     @Binding var showing: Bool
     @EnvironmentObject var store: PermissionStore
     @EnvironmentObject var schemaStore: PermissionSchemaStore
-
+    
     //Empty unauthorized array means all permissions have been interacted
     var shouldAutoDismiss: Bool {FilterPermissions.filterForUnauthorized(with: store.permissions, store: schemaStore).isEmpty}
     
@@ -104,7 +106,7 @@ struct PermissionSectionCell: View {
             }
             else{
                 AllowButtonSection(action: handlePermissionRequest, allowButtonStatus: $allowButtonStatus)
-                .animation(.default)
+                    .animation(.default)
             }
             
         }
@@ -115,44 +117,77 @@ struct PermissionSectionCell: View {
     
     func handlePermissionRequest() {
         permissionManager = permission.getPermissionManager()?.init(permissionType: permission)
-        permissionManager!.requestPermission{authorized, error in
-            let result = JMResult(permissionType: permission,
-                                  authorizationStatus: permissionManager!.authorizationStatus,
-                                  error: error)
-            schemaStore.permissionComponentsStore.getPermissionComponent(for: permission){permissionComponent in
-                permissionComponent.interacted = true
-                if authorized {
-                    allowButtonStatus = .allowed
-                    permissionComponent.authorized = true
-                    (schemaStore.successfulPermissions?.append(result)) ?? (schemaStore.successfulPermissions = [result])
-                }
-                else {
-                    allowButtonStatus = .denied
-                    permissionComponent.authorized = false
-                    (schemaStore.erroneousPermissions?.append(result)) ?? (schemaStore.erroneousPermissions = [result])
+        guard let permissionManager = permissionManager else {
+            return
+        }
+        permissionManager.requestPermission{authorized, error in
+            var result: JMResult!
+            if permission == .notification {
+                getNotificationAuthorizationStatus{
+                    result = JMResult(permissionType: permission,
+                                          authorizationStatus: $0,
+                                          error: error)
+                    setStatus(authorized: authorized, result: result)
                 }
             }
-            DispatchQueue.main.async {
-                schemaStore.objectWillChange.send()
+            else {
+                result = JMResult(permissionType: permission,
+                                  authorizationStatus: permissionManager.authorizationStatus,
+                                      error: error)
+                setStatus(authorized: authorized, result: result)
             }
-            //Backward compatibility - autoDismissAlert, autoDismissModal, and autoDismiss are all acceptable ways to trigger condition
-                if shouldAutoDismiss &&
-                    
-                    //Current view style is alert and autoDismissAlert is true
-                    ((schemaStore.permissionViewStyle == .alert &&
-                        store.autoDismissAlert) ||
-                    //Current view style is modal and autoDismissModal is true
-                        (schemaStore.permissionViewStyle == .modal &&
-                            store.autoDismissModal)) ||
-                        store.configStore.autoDismiss {
-                    DispatchQueue.main.asyncAfter(deadline: .now()+0.8) {
-                        showing = false
-                        guard let handler = store.configStore.onDisappearHandler else {return}
-                        handler(schemaStore.successfulPermissions ?? nil, schemaStore.erroneousPermissions ?? nil)
-                    }
-                }
-            permissionManager = nil
-
+            
+        }
+    }
+    
+    func setStatus(authorized: Bool, result: JMResult) {
+        schemaStore.permissionComponentsStore.getPermissionComponent(for: permission){permissionComponent in
+            permissionComponent.interacted = true
+            if authorized {
+                allowButtonStatus = .allowed
+                permissionComponent.authorized = true
+                (schemaStore.successfulPermissions?.append(result)) ?? (schemaStore.successfulPermissions = [result])
+            }
+            else {
+                allowButtonStatus = .denied
+                permissionComponent.authorized = false
+                (schemaStore.erroneousPermissions?.append(result)) ?? (schemaStore.erroneousPermissions = [result])
+            }
+        }
+        DispatchQueue.main.async {
+            schemaStore.objectWillChange.send()
+        }
+        //Backward compatibility - autoDismissAlert, autoDismissModal, and autoDismiss are all acceptable ways to trigger condition
+        if shouldAutoDismiss &&
+            
+            //Current view style is alert and autoDismissAlert is true
+            ((schemaStore.permissionViewStyle == .alert &&
+                store.autoDismissAlert) ||
+                //Current view style is modal and autoDismissModal is true
+                (schemaStore.permissionViewStyle == .modal &&
+                    store.autoDismissModal)) ||
+            store.configStore.autoDismiss {
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.8) {
+                showing = false
+                guard let handler = store.configStore.onDisappearHandler else {return}
+                handler(schemaStore.successfulPermissions ?? nil, schemaStore.erroneousPermissions ?? nil)
+            }
+        }
+    }
+    func getNotificationAuthorizationStatus(completion: @escaping (AuthorizationStatus) -> ()) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus{
+            case .authorized:
+                completion(.authorized)
+            case .denied:
+                completion(.denied)
+            case .notDetermined:
+                completion(.notDetermined)
+            case .provisional:
+                completion(.limited)
+            default:
+                completion(.denied)
+            }
         }
     }
 }

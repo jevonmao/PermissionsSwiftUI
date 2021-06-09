@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PermissionsSwiftUI'
-  s.version          = '1.4.2'
+  s.version          = '1.4.3'
   s.summary          = 'A SwiftUI package to beautifully display and handle permissions.'
  
   s.description      = <<-DESC

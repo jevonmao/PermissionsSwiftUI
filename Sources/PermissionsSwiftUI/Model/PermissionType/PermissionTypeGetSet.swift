@@ -33,7 +33,7 @@ extension PermissionType: PermissionTypeProtocol {
         case .bluetooth:
             return JMBluetoothPermissionManager.self  
         case .tracking:
-            if #available(iOS 14.5, *) {
+            if #available(iOS 14, *) {
                 return JMTrackingPermissionManager.self
             }
         case .contacts:
