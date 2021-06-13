@@ -11,7 +11,7 @@ let permissionsTargets: [Target] = [
     ),
     .target(
         name: "PermissionsSwiftUI",  //Maintain backward compatibility - access to all permissions
-        dependencies: ["Introspect", "CorePermissionsSwiftUI", "PermissionsSwiftUITracking", "PermissionsSwiftUIBluetooth", "PermissionsSwiftUICalendar", "PermissionsSwiftUICamera", "PermissionsSwiftUIContacts", "PermissionsSwiftUILocation", "PermissionsSwiftUILocationAlways", "PermissionsSwiftUIMicrophone", "PermissionsSwiftUIMotion", "PermissionsSwiftUIMusic", "PermissionsSwiftUINotification", "PermissionsSwiftUIPhoto", "PermissionsSwiftUIReminder", "PermissionsSwiftUISpeech"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI", "PermissionsSwiftUITracking", "PermissionsSwiftUIBluetooth", "PermissionsSwiftUICalendar", "PermissionsSwiftUICamera", "PermissionsSwiftUIContacts", "PermissionsSwiftUILocation", "PermissionsSwiftUILocationAlways", "PermissionsSwiftUIMicrophone", "PermissionsSwiftUIMotion", "PermissionsSwiftUIMusic", "PermissionsSwiftUINotification", "PermissionsSwiftUIPhoto", "PermissionsSwiftUIReminder", "PermissionsSwiftUISpeech", "PermissionsSwiftUIHealth"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
@@ -145,7 +145,9 @@ let package = Package(
                 targets: ["PermissionsSwiftUITracking"]
         ),
         .library(name: "PermissionSwiftUI",
-                 targets: ["PermissionsSwiftUI"])
+                 targets: ["PermissionsSwiftUI"]),
+        .library(name: "CorePermissionsSwiftUI",
+                 targets: ["CorePermissionsSwiftUI"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -156,8 +158,7 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .testTarget(name: "PermissionsSwiftUITests",
-                    dependencies: ["SnapshotTesting"] + permissionsTargets
-                                                            .map{Target.Dependency(stringLiteral: $0.name)},
+                    dependencies: ["SnapshotTesting", "PermissionsSwiftUI", "CorePermissionsSwiftUI"],
                     exclude: [],
                     resources: [.process("__Snapshots__")]),
         .testTarget(

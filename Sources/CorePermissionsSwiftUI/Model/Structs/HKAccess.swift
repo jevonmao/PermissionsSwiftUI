@@ -50,7 +50,11 @@ public struct HKAccess: Hashable {
     public init(write: Set<HKSampleType>){
         self.writePermissions = write
     }
-    
+    /**
+     Initializes a new `HKAccess` with empty read and write permissions
+     
+     - warning: This initializer should never be used in production. It will definitely crash the application when health permission is requested.
+     */
     public init(){}
 }
 
