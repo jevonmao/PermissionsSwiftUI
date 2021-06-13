@@ -12,7 +12,9 @@ protocol LocationManager {
     var delegate: CLLocationManagerDelegate? {get set}
     func authorizationStatus() -> CLAuthorizationStatus
     func requestWhenInUseAuthorization()
+    #if !os(tvOS)
     func requestAlwaysAuthorization()
+    #endif
 }
 
 

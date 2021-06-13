@@ -14,6 +14,7 @@ import SwiftUI
  
  - SeeAlso: PermissionSchemaStore
  */
+@available(iOS 13.0, tvOS 13.0, *)
 public class PermissionStore: ObservableObject {
     
     //MARK: Creating a new store

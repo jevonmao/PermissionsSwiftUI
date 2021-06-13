@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if !os(tvOS)
 import Speech
 
 struct JMSpeechPermissionManager: PermissionManager{
@@ -35,3 +36,4 @@ struct JMSpeechPermissionManager: PermissionManager{
         }
     }
 }
+#endif

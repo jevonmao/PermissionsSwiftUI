@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(iOS 13.0, tvOS 13.0, *)
 protocol ComponentsStore {
     var cameraPermission: JMPermission {get set}
     var locationPermission: JMPermission {get set}

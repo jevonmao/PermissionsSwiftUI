@@ -4,11 +4,11 @@
 //
 //  Created by Jevon Mao on 1/31/21.
 //
-
+#if os(iOS)
 import AVFoundation
 import Foundation
 
-struct JMMicrophonePermissionManager: PermissionManager {  
+struct JMMicrophonePermissionManager: PermissionManager {
     
     var authorizationStatus: AuthorizationStatus{
         switch AVCaptureDevice.authorizationStatus(for: .audio){
@@ -30,3 +30,4 @@ struct JMMicrophonePermissionManager: PermissionManager {
         }
     }
 }
+#endif

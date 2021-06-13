@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if !os(tvOS)
 import Contacts
 import AddressBook
 
@@ -37,3 +38,4 @@ struct JMContactsPermissionManager:PermissionManager {
 extension JMContactsPermissionManager {
     typealias JMPermissionAuthorizationHandlerCompletionBlock = (Bool, Error?) -> Void
 }
+#endif

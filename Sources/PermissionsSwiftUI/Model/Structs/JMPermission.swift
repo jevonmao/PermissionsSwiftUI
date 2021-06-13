@@ -7,13 +7,12 @@
 
 import Foundation
 import SwiftUI
-import HealthKit
 /**
  A data model that defines a JPPermission component and its data
  
  `JMPermission` conforms to `Equatable` and `Hashable`. The PermissionsSwiftUI view interface will be rendered based on information from `JMPermission` structure
  */
-
+@available(iOS 13.0, tvOS 13.0, *)
 public struct JMPermission: Equatable{
 
     

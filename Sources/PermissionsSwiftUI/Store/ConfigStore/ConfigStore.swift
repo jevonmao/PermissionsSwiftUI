@@ -10,6 +10,7 @@ import Foundation
 /**
  The data storage class that contains configurable settings
  */
+@available(iOS 13.0, tvOS 13.0, *)
 public struct ConfigStore {
     //MARK: Creating a new configuration store
     ///Creates a new configuration store with default settings

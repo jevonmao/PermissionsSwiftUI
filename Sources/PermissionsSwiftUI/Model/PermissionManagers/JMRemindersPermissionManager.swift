@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if !os(tvOS)
 import EventKit
 
 struct JMRemindersPermissionManager: PermissionManager{
@@ -32,3 +33,4 @@ struct JMRemindersPermissionManager: PermissionManager{
         })
     }
 }
+#endif

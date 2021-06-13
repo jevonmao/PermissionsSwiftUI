@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 
+#if !os(tvOS)
 final class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelegate, PermissionManager {
     init(permissionType: PermissionType?) {}
     
@@ -65,3 +66,4 @@ final class JMLocationAlwaysPermissionManager: NSObject, CLLocationManagerDelega
     }
 
 }
+#endif

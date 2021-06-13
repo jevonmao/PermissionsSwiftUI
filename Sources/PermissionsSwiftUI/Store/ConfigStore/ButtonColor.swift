@@ -13,6 +13,7 @@ import SwiftUI
   Declared within parent struct  `AllButtonColors` and should only be used within a `AllButtonColors` struct instance.
   To customize
  */
+@available(iOS 13.0, tvOS 13.0, *)
 public struct ButtonColor: Equatable {
     // MARK: Creating New Button Color
     /**

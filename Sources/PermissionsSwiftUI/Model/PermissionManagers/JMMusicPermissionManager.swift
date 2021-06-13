@@ -8,6 +8,7 @@
 import Foundation
 import MediaPlayer
 
+#if !os(tvOS)
 struct JMMusicPermissionManager: PermissionManager{
     init(permissionType: PermissionType?) {}
     var authorizationStatus: AuthorizationStatus{
@@ -34,4 +35,4 @@ struct JMMusicPermissionManager: PermissionManager{
         }
     }
 }
-
+#endif
