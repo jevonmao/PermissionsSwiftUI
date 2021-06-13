@@ -3,15 +3,150 @@
 
 import PackageDescription
 
+let permissionsTargets: [Target] = [
+    .target(
+        name: "PermissionsSwiftUIInternal",  //Internal module for shared code
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUI",  //Maintain backward compatibility - access to all permissions
+        dependencies: ["Introspect", "PermissionsSwiftUIInternal", "PermissionsSwiftUITracking"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUIBluetooth",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUICalendar",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUICamera",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUIContacts",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUIHealth",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUILocationAlways",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUILocation",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUIMicrophone",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUIMotion",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUIMusic",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUINotification",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUIPhoto",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUIReminder",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUISpeech",
+        dependencies: ["Introspect"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUITracking",
+        dependencies: ["Introspect", .target(name: "PermissionsSwiftUIInternal")],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),]
+
+
 let package = Package(
     name: "PermissionsSwiftUI",
     platforms: [.iOS(.v11)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "PermissionsSwiftUI",
-            targets: ["PermissionsSwiftUI"]
+            name: "PermissionsSwiftUIBluetooth",
+            targets: ["PermissionsSwiftUIBluetooth"]
         ),
+        .library(
+            name: "PermissionsSwiftUICalendar",
+            targets: ["PermissionsSwiftUICalendar"]
+        ),
+        .library(
+            name: "PermissionsSwiftUICamera",
+            targets: ["PermissionsSwiftUICamera"]
+        ),
+        .library(
+                name: "PermissionsSwiftUIContacts",
+                targets: ["PermissionsSwiftUIContacts"]
+        ),
+        .library(name: "PermissionsSwiftUIHealth",
+                targets: ["PermissionsSwiftUIHealth"]
+        ),
+        .library(name: "PermissionsSwiftUILocationAlways",
+                targets: ["PermissionsSwiftUILocationAlways"]
+        ),
+        .library(name: "PermissionsSwiftUILocation",
+                targets: ["PermissionsSwiftUILocation"]
+        ),
+        .library(name: "PermissionsSwiftUIMicrophone",
+                targets: ["PermissionsSwiftUIMicrophone"]
+        ),
+        .library(name: "PermissionsSwiftUIMotion",
+                targets: ["PermissionsSwiftUIMotion"]
+        ),
+        .library(name: "PermissionsSwiftUIMusic",
+                targets: ["PermissionsSwiftUIMusic"]
+        ),
+        .library(name: "PermissionsSwiftUINotification",
+                targets: ["PermissionsSwiftUINotification"]
+        ),
+        .library(name: "PermissionsSwiftUIPhoto",
+                targets: ["PermissionsSwiftUIPhoto"]
+        ),
+        .library(name: "PermissionsSwiftUIReminder",
+                targets: ["PermissionsSwiftUIReminder"]
+        ),
+        .library(name: "PermissionsSwiftUISpeech",
+                targets: ["PermissionsSwiftUISpeech"]
+        ),
+        .library(name: "PermissionsSwiftUITracking",
+                targets: ["PermissionsSwiftUITracking"]
+        ),
+        .library(name: "PermissionSwiftUI",
+                 targets: ["PermissionsSwiftUI"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -21,20 +156,17 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "PermissionsSwiftUI",
-            dependencies: ["Introspect"],
-            exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
-        ),
         .testTarget(name: "PermissionsSwiftUITests",
-                    dependencies: ["PermissionsSwiftUI","SnapshotTesting"],
+                    dependencies: ["SnapshotTesting"] + permissionsTargets
+                                                            .map{Target.Dependency(stringLiteral: $0.name)},
                     exclude: [],
                     resources: [.process("__Snapshots__")]),
         .testTarget(
             name: "PermissionsSwiftUISmallScreenTests",
-            dependencies: ["PermissionsSwiftUI","SnapshotTesting"],
+            dependencies: ["SnapshotTesting"] + permissionsTargets
+                                                    .map{Target.Dependency(stringLiteral: $0.name)},
             exclude: [],
             resources: [.process("__Snapshots__")]
         ),
-    ]
+    ] + permissionsTargets
 )
