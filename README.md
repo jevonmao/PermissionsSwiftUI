@@ -47,18 +47,24 @@ The UI is highly customizable and resembles an **Apple style**. If you like the 
 
 ## 🖥️ Installation
 ### Requirements
-* iOS 13 or iPadOS 13
+* iOS 11 (SwiftUI require iOS 13.0) or iPadOS 13
 * Xcode 12 and Swift 5.3
-* No tvOS, MacOS, and WatchOS support for now
+* tvOS support coming soon
+* No MacOS, and WatchOS support for now
+
 ### Install
 #### Swift Package Manager (Recommended)
 You can install PermissionsSwiftUI into your Xcode project via SPM. 
 To learn more about SPM, click [here](https://swift.org/package-manager/)
-1. In Xcode, open your project and navigate to **File** → **Swift Packages** → **Add Package Dependency...**
+1. In Xcode 12, open your project and navigate to **File** → **Swift Packages** → **Add Package Dependency...**
+
+For Xcode 13, navigate to **Files** → **Add Package**
+
 2. Paste the repository URL (`https://github.com/jevonmao/PermissionsSwiftUI`) and click **Next**.
 3. For **Version**, select **Up to next major**.
 4. Click **Next** and click **Finish**.
 5. You are all set, thank you for using PermissionsSwiftUI!
+6. 
 #### Cocoapods
 You can also install PermissionsSwiftUI with Cocoapods. Add `pod 'PermissionsSwiftUI'` in your podfile:
 ```Ruby
