@@ -9,9 +9,9 @@ import UIKit
 #if !os(tvOS)
 import EventKit
 
-struct JMCalendarPermissionManager: PermissionManager {  
-    init(permissionType: PermissionType?) {}
-    var authorizationStatus: AuthorizationStatus{
+struct JMCalendarPermissionManager: PermissionType.PermissionManager {  
+    internal init() { super.init() }
+    public override var authorizationStatus: AuthorizationStatus {
         switch EKEventStore.authorizationStatus(for: .event){
         case .authorized:
             return .authorized
@@ -23,7 +23,7 @@ struct JMCalendarPermissionManager: PermissionManager {
     }
     init(){}
 
-    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
+    override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         let eventStore = EKEventStore()
         eventStore.requestAccess(to: EKEntityType.event, completion: {
             (accessGranted: Bool, error: Error?) in

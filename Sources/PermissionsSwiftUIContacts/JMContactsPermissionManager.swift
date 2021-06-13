@@ -11,11 +11,11 @@ import Contacts
 import AddressBook
 
 struct JMContactsPermissionManager:PermissionManager {
-    init(permissionType: PermissionType?) {}
+    internal init() { super.init() }
     typealias authorizationStatus = CNAuthorizationStatus
     typealias permissionManagerInstance = JMContactsPermissionManager
     
-    var authorizationStatus: AuthorizationStatus{
+    public override var authorizationStatus: AuthorizationStatus {
         switch CNContactStore.authorizationStatus(for: .contacts){
         case .authorized:
             return .authorized

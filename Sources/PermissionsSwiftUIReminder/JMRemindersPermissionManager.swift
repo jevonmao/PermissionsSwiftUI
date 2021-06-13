@@ -8,11 +8,13 @@
 import Foundation
 #if !os(tvOS)
 import EventKit
+import PermissionsSwiftUIInternal
 
-struct JMRemindersPermissionManager: PermissionManager{
-    init(permissionType: PermissionType?) {}
+@available(iOS 13.0, tvOS 13.0, *)
+class JMRemindersPermissionManager: PermissionType.PermissionManager {
+    internal init() { super.init() }
     
-    var authorizationStatus: AuthorizationStatus{
+    public override var authorizationStatus: AuthorizationStatus {
         switch EKEventStore.authorizationStatus(for: .reminder){
         case .authorized:
             return .authorized

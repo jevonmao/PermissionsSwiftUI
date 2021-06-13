@@ -9,9 +9,9 @@ import Foundation
 import MediaPlayer
 
 #if !os(tvOS)
-struct JMMusicPermissionManager: PermissionManager{
-    init(permissionType: PermissionType?) {}
-    var authorizationStatus: AuthorizationStatus{
+struct JMMusicPermissionManager: PermissionType.PermissionManager {{
+    internal init() { super.init() }
+    public override var authorizationStatus: AuthorizationStatus {
         switch MPMediaLibrary.authorizationStatus(){
         case .authorized:
             return .authorized
@@ -22,7 +22,7 @@ struct JMMusicPermissionManager: PermissionManager{
         }
     }
 
-    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
+    override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         MPMediaLibrary.requestAuthorization {authStatus in
             switch authStatus{
             case .authorized:

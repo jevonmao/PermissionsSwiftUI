@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 import UserNotifications
 
-struct JMNotificationPermissionManager: PermissionManager {
-    init(permissionType: PermissionType?) {}
-    var authorizationStatus: AuthorizationStatus{
+struct JMNotificationPermissionManager: PermissionType.PermissionManager {
+    internal init() { super.init() }
+    public override var authorizationStatus: AuthorizationStatus {
         var notificationSettings: UNNotificationSettings?
         let semaphore = DispatchSemaphore(value: 0)
         
@@ -49,7 +49,7 @@ struct JMNotificationPermissionManager: PermissionManager {
     }
     init(){}
 
-    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
+    override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         notificationManager.requestPermission(options: [.badge,.alert,.sound]){ granted, error in
             completion(granted, error)
             

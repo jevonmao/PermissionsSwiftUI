@@ -9,12 +9,12 @@ import Foundation
 #if !os(tvOS)
 import CoreMotion
 
-struct JMMotionPermissionManager: PermissionManager { 
+struct JMMotionPermissionManager: PermissionType.PermissionManager { 
     
     typealias authorizationStatus = CMAuthorizationStatus
     typealias permissionManagerInstance = JMMotionPermissionManager
-    init(permissionType: PermissionType?) {}
-    var authorizationStatus: AuthorizationStatus {
+    internal init() { super.init() }
+    public override var authorizationStatus: AuthorizationStatus  {
         switch CMMotionActivityManager.authorizationStatus() {
         case .authorized:
             return .authorized
@@ -25,7 +25,7 @@ struct JMMotionPermissionManager: PermissionManager {
         }
     }
     
-    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
+    override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         let manager = CMMotionActivityManager()
         let today = Date()
         

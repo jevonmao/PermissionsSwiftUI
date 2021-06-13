@@ -9,10 +9,10 @@ import CoreBluetooth
 import UIKit
 
 final class JMBluetoothPermissionManager: NSObject, PermissionManager {
-    init(permissionType: PermissionType?) {}
+    internal init() { super.init() }
     private var completion: ((Bool, Error?) -> Void)?
     private var manager: CBCentralManager?
-    var authorizationStatus: AuthorizationStatus{
+    public override var authorizationStatus: AuthorizationStatus {
         if #available(iOS 13.0, tvOS 13.0, *) {
             switch CBCentralManager().authorization{
             case .allowedAlways:
@@ -35,7 +35,7 @@ final class JMBluetoothPermissionManager: NSObject, PermissionManager {
     }
     override init(){} 
 
-    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
+    override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         self.completion = completion
         self.manager = CBCentralManager(delegate: self, queue: nil)
     }

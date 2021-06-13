@@ -32,7 +32,7 @@ public class JMHealthPermissionManager: PermissionType.PermissionManager {
     init(categories: HKAccess) {
         self.categories = categories
     }
-    override public var authorizationStatus: AuthorizationStatus{
+    override public public override var authorizationStatus: AuthorizationStatus {
         get {
             //Count to track total # of permissions allowed and denied each
             var allowDenyCount: CountComparison = (authorized: 0, denied: 0)

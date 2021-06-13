@@ -8,11 +8,18 @@
 import Foundation
 #if !os(tvOS)
 import Speech
+import PermissionsSwiftUIInternal
 
-struct JMSpeechPermissionManager: PermissionManager{
-    init(permissionType: PermissionType?) {}
+@available(iOS 13.0, tvOS 13.0, *)
+public extension PermissionType.PermissionManager {
+    static let speech = JMSpeechPermissionManager()
+}
+
+@available(iOS 13.0, tvOS 13.0, *)
+public class JMSpeechPermissionManager: PermissionType.PermissionManager {
+    internal init() { super.init() }
     
-    var authorizationStatus: AuthorizationStatus{
+    public override var authorizationStatus: AuthorizationStatus {
         switch SFSpeechRecognizer.authorizationStatus(){
         case .authorized:
             return .authorized
@@ -23,7 +30,7 @@ struct JMSpeechPermissionManager: PermissionManager{
         }
     }
 
-    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
+    override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         SFSpeechRecognizer.requestAuthorization {authStatus in
             switch authStatus{
             case .authorized:

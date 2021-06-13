@@ -22,7 +22,7 @@ public class JMTrackingPermissionManager: PermissionType.PermissionManager {
         }
     }
     
-    public override var authorizationStatus: AuthorizationStatus{
+    public override public override var authorizationStatus: AuthorizationStatus {
         switch ATTrackingManager.trackingAuthorizationStatus{
         case .authorized:
             return .authorized
@@ -37,9 +37,7 @@ public class JMTrackingPermissionManager: PermissionType.PermissionManager {
         ASIdentifierManager.shared().advertisingIdentifier
     }
     
-    internal init() {
-        super.init()
-    }
+    internal init() { super.init() }
     public override func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         ATTrackingManager.requestTrackingAuthorization { status in
                   switch status {

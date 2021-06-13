@@ -7,10 +7,12 @@
 
 import Foundation
 import Photos
+import PermissionsSwiftUIInternal
 
-struct JMPhotoPermissionManager: PermissionManager {
-    init(permissionType: PermissionType?) {}
-    var authorizationStatus: AuthorizationStatus {
+@available(iOS 13.0, tvOS 13.0, *)
+struct JMPhotoPermissionManager: PermissionType.PermissionManager {
+    internal init() { super.init() }
+    public override var authorizationStatus: AuthorizationStatus  {
         switch PHPhotoLibrary.authorizationStatus(){
         case .authorized:
             return .authorized
@@ -26,7 +28,7 @@ struct JMPhotoPermissionManager: PermissionManager {
     init(photoLibrary:PHPhotoLibrary.Type=PHPhotoLibrary.self){
         self.photoLibrary = photoLibrary
     }
-    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
+    override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         photoLibrary.requestAuthorization { authStatus in
             switch authStatus {
             case .authorized:

@@ -34,7 +34,7 @@ public enum PermissionType: Hashable, Equatable {
             preconditionFailure("This property must be overridden.")
         }
         
-        open var authorizationStatus: AuthorizationStatus {
+        open public override var authorizationStatus: AuthorizationStatus  {
             get {
                 preconditionFailure("This property must be overridden.")
             }

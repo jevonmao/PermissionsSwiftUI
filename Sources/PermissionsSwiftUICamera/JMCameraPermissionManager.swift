@@ -8,9 +8,9 @@
 import AVFoundation
 import Foundation
 
-struct JMCameraPermissionManager: PermissionManager {
-    init(permissionType: PermissionType?) {}
-    var authorizationStatus: AuthorizationStatus{
+struct JMCameraPermissionManager: PermissionType.PermissionManager {
+    internal init() { super.init() }
+    public override var authorizationStatus: AuthorizationStatus {
         switch AVCaptureDevice.authorizationStatus(for: .video){
         case .authorized:
             return .authorized
@@ -21,7 +21,7 @@ struct JMCameraPermissionManager: PermissionManager {
         }
     }
 
-    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
+    override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {
             authorized in
             DispatchQueue.main.async {
