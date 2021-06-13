@@ -8,12 +8,22 @@
 import Foundation
 #if !os(tvOS)
 import CoreMotion
+import PermissionsSwiftUIInternal
 
-struct JMMotionPermissionManager: PermissionType.PermissionManager { 
+@available(iOS 13.0, tvOS 13.0, *)
+public extension PermissionType.PermissionManager {
+    static let motion = JMMotionPermissionManager()
+}
+
+@available(iOS 13.0, tvOS 13.0, *)
+public class JMMotionPermissionManager: PermissionType.PermissionManager {
     
     typealias authorizationStatus = CMAuthorizationStatus
     typealias permissionManagerInstance = JMMotionPermissionManager
-    internal init() { super.init() }
+    public override var permissionType: PermissionType {
+        .motion
+    }
+    
     public override var authorizationStatus: AuthorizationStatus  {
         switch CMMotionActivityManager.authorizationStatus() {
         case .authorized:
@@ -25,6 +35,8 @@ struct JMMotionPermissionManager: PermissionType.PermissionManager {
         }
     }
     
+    internal init() { super.init() }
+
     override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         let manager = CMMotionActivityManager()
         let today = Date()

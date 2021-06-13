@@ -22,7 +22,7 @@ public class JMTrackingPermissionManager: PermissionType.PermissionManager {
         }
     }
     
-    public override public override var authorizationStatus: AuthorizationStatus {
+    override public var authorizationStatus: AuthorizationStatus {
         switch ATTrackingManager.trackingAuthorizationStatus{
         case .authorized:
             return .authorized

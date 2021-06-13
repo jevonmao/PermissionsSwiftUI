@@ -11,8 +11,16 @@ import EventKit
 import PermissionsSwiftUIInternal
 
 @available(iOS 13.0, tvOS 13.0, *)
-class JMRemindersPermissionManager: PermissionType.PermissionManager {
+public extension PermissionType.PermissionManager {
+    static let reminders = JMRemindersPermissionManager()
+}
+@available(iOS 13.0, tvOS 13.0, *)
+public class JMRemindersPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
+    
+    public override var permissionType: PermissionType {
+        .reminders
+    }
     
     public override var authorizationStatus: AuthorizationStatus {
         switch EKEventStore.authorizationStatus(for: .reminder){

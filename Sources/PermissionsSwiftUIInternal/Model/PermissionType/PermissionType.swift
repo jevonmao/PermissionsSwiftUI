@@ -22,7 +22,7 @@ public enum PermissionType: Hashable, Equatable {
     public static func == (lhs: PermissionType, rhs: PermissionType) -> Bool {
         lhs.rawValue == rhs.rawValue ? true : false
     }
-    open class PermissionManager: Identifiable {
+    open class PermissionManager: NSObject, Identifiable {
         open var permissionComponent: JMPermission {
             get {
                 preconditionFailure("This property must be overridden.")
@@ -34,7 +34,7 @@ public enum PermissionType: Hashable, Equatable {
             preconditionFailure("This property must be overridden.")
         }
         
-        open public override var authorizationStatus: AuthorizationStatus  {
+        open var authorizationStatus: AuthorizationStatus  {
             get {
                 preconditionFailure("This property must be overridden.")
             }

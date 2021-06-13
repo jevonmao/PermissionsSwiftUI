@@ -8,15 +8,27 @@
 import Foundation
 import UIKit
 import UserNotifications
+import PermissionsSwiftUIInternal
 
-struct JMNotificationPermissionManager: PermissionType.PermissionManager {
+@available(iOS 13.0, tvOS 13.0, *)
+public extension PermissionType.PermissionManager {
+    static let notification = JMNotificationPermissionManager()
+}
+
+@available(iOS 13.0, tvOS 13.0, *)
+public class JMNotificationPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
+    
+    public override var permissionType: PermissionType {
+        .notification
+    }
+    
     public override var authorizationStatus: AuthorizationStatus {
         var notificationSettings: UNNotificationSettings?
         let semaphore = DispatchSemaphore(value: 0)
         
         DispatchQueue.global().async {
-            notificationManager.getNotificationSettings { settings in
+            self.notificationManager.getNotificationSettings { settings in
                 notificationSettings = settings
                 semaphore.signal()
             }
@@ -42,15 +54,10 @@ struct JMNotificationPermissionManager: PermissionType.PermissionManager {
             return .denied
         }
     }
-    var notificationManager:NotificationManager = UNUserNotificationCenter.shared() 
-    
-    init(notificationManager:NotificationManager = UNUserNotificationCenter.shared()){
-        self.notificationManager = notificationManager
-    }
-    init(){}
+    var notificationManager = UNUserNotificationCenter.current()
 
     override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
-        notificationManager.requestPermission(options: [.badge,.alert,.sound]){ granted, error in
+        notificationManager.requestAuthorization(options: [.badge,.alert,.sound]){ granted, error in
             completion(granted, error)
             
         }

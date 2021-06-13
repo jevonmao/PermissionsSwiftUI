@@ -7,9 +7,16 @@
 
 import Foundation
 import MediaPlayer
+import PermissionsSwiftUIInternal
 
 #if !os(tvOS)
-struct JMMusicPermissionManager: PermissionType.PermissionManager {{
+@available(iOS 13.0, tvOS 13.0, *)
+public extension PermissionType.PermissionManager {
+    static let music = JMMusicPermissionManager()
+}
+
+@available(iOS 13.0, tvOS 13.0, *)
+public class JMMusicPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
     public override var authorizationStatus: AuthorizationStatus {
         switch MPMediaLibrary.authorizationStatus(){
@@ -21,7 +28,9 @@ struct JMMusicPermissionManager: PermissionType.PermissionManager {{
             return .denied
         }
     }
-
+    public override var permissionType: PermissionType {
+        .music
+    }
     override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         MPMediaLibrary.requestAuthorization {authStatus in
             switch authStatus{

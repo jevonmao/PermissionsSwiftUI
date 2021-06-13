@@ -19,6 +19,10 @@ public extension PermissionType.PermissionManager {
 public class JMSpeechPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
     
+    public override var permissionType: PermissionType {
+        .speech
+    }
+    
     public override var authorizationStatus: AuthorizationStatus {
         switch SFSpeechRecognizer.authorizationStatus(){
         case .authorized:

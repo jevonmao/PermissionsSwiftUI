@@ -10,8 +10,18 @@ import Photos
 import PermissionsSwiftUIInternal
 
 @available(iOS 13.0, tvOS 13.0, *)
-struct JMPhotoPermissionManager: PermissionType.PermissionManager {
+public extension PermissionType.PermissionManager {
+    static let photo = JMPhotoPermissionManager()
+}
+
+@available(iOS 13.0, tvOS 13.0, *)
+public class JMPhotoPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
+    
+    public override var permissionType: PermissionType {
+        .photo
+    }
+    
     public override var authorizationStatus: AuthorizationStatus  {
         switch PHPhotoLibrary.authorizationStatus(){
         case .authorized:
@@ -24,6 +34,7 @@ struct JMPhotoPermissionManager: PermissionType.PermissionManager {
             return .denied
         }
     }
+    
     var photoLibrary: PHPhotoLibrary.Type = PHPhotoLibrary.self
     init(photoLibrary:PHPhotoLibrary.Type=PHPhotoLibrary.self){
         self.photoLibrary = photoLibrary
