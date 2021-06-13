@@ -19,6 +19,11 @@ final public class JMBluetoothPermissionManager: PermissionType.PermissionManage
     internal init() { super.init() }
     private var completion: ((Bool, Error?) -> Void)?
     private var manager: CBCentralManager?
+    
+    public override var permissionType: PermissionType {
+        .bluetooth
+    }
+    
     public override var authorizationStatus: AuthorizationStatus {
         switch CBCentralManager().authorization{
         case .allowedAlways:

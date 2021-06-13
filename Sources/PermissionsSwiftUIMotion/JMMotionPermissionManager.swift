@@ -42,7 +42,7 @@ public final class JMMotionPermissionManager: PermissionType.PermissionManager {
         let today = Date()
         
         manager.queryActivityStarting(from: today, to: today, to: OperationQueue.main, withHandler: { (activities: [CMMotionActivity]?, error: Error?) -> () in
-            if error != nil{
+            if error != nil {
                 completion(false, error)
             }
             else{

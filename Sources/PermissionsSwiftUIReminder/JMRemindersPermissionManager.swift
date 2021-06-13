@@ -33,7 +33,7 @@ public final class JMRemindersPermissionManager: PermissionType.PermissionManage
         }
     }
 
-    func requestPermission(_ completion: @escaping (Bool, Error?)->()) {
+    public override func requestPermission(completion: @escaping (Bool, Error?)->()) {
         let eventStore = EKEventStore()
         eventStore.requestAccess(to: EKEntityType.reminder, completion: {
             (accessGranted: Bool, error: Error?) in
