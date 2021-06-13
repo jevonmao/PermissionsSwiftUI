@@ -5,88 +5,88 @@ import PackageDescription
 
 let permissionsTargets: [Target] = [
     .target(
-        name: "PermissionsSwiftUIInternal",  //Internal module for shared code
+        name: "CorePermissionsSwiftUI",  //Internal module for shared code
         dependencies: ["Introspect"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUI",  //Maintain backward compatibility - access to all permissions
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal", "PermissionsSwiftUITracking"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI", "PermissionsSwiftUITracking"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUIBluetooth",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUICalendar",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUICamera",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUIContacts",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUIHealth",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUILocationAlways",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUILocation",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUIMicrophone",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUIMotion",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUIMusic",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUINotification",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUIPhoto",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUIReminder",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUISpeech",
-        dependencies: ["Introspect", "PermissionsSwiftUIInternal"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
         name: "PermissionsSwiftUITracking",
-        dependencies: ["Introspect", .target(name: "PermissionsSwiftUIInternal")],
+        dependencies: ["Introspect", .target(name: "CorePermissionsSwiftUI")],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),]
 

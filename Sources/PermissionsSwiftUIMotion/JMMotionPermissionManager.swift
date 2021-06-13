@@ -8,7 +8,7 @@
 import Foundation
 #if !os(tvOS)
 import CoreMotion
-import PermissionsSwiftUIInternal
+import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionType.PermissionManager {
@@ -16,7 +16,7 @@ public extension PermissionType.PermissionManager {
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public class JMMotionPermissionManager: PermissionType.PermissionManager {
+public final class JMMotionPermissionManager: PermissionType.PermissionManager {
     
     typealias authorizationStatus = CMAuthorizationStatus
     typealias permissionManagerInstance = JMMotionPermissionManager

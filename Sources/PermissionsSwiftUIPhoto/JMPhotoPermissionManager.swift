@@ -7,7 +7,7 @@
 
 import Foundation
 import Photos
-import PermissionsSwiftUIInternal
+import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionType.PermissionManager {
@@ -15,7 +15,7 @@ public extension PermissionType.PermissionManager {
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public class JMPhotoPermissionManager: PermissionType.PermissionManager {
+public final class JMPhotoPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
     
     public override var permissionType: PermissionType {

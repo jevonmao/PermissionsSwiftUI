@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import UserNotifications
-import PermissionsSwiftUIInternal
+import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionType.PermissionManager {
@@ -16,7 +16,7 @@ public extension PermissionType.PermissionManager {
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public class JMNotificationPermissionManager: PermissionType.PermissionManager {
+public final class JMNotificationPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
     
     public override var permissionType: PermissionType {

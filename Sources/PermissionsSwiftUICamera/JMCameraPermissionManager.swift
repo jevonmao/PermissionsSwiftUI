@@ -7,9 +7,21 @@
 #if os(iOS)
 import AVFoundation
 import Foundation
+import CorePermissionsSwiftUI
 
-struct JMCameraPermissionManager: PermissionType.PermissionManager {
+@available(iOS 13.0, tvOS 13.0, *)
+public extension PermissionType.PermissionManager {
+    static let camera = JMCameraPermissionManager()
+}
+
+@available(iOS 13.0, tvOS 13.0, *)
+public final class JMCameraPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
+    
+    public override var permissionType: PermissionType {
+        .camera
+    }
+    
     public override var authorizationStatus: AuthorizationStatus {
         switch AVCaptureDevice.authorizationStatus(for: .video){
         case .authorized:

@@ -7,7 +7,7 @@
 #if os(iOS)
 import AVFoundation
 import Foundation
-import PermissionsSwiftUIInternal
+import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionType.PermissionManager {
@@ -15,7 +15,7 @@ public extension PermissionType.PermissionManager {
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public class JMMicrophonePermissionManager: PermissionType.PermissionManager {
+public final class JMMicrophonePermissionManager: PermissionType.PermissionManager {
     public override var permissionType: PermissionType {
         .microphone
     }

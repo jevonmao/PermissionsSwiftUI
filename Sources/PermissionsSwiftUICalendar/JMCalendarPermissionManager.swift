@@ -8,9 +8,21 @@
 import UIKit
 #if !os(tvOS)
 import EventKit
+import CorePermissionsSwiftUI
 
-struct JMCalendarPermissionManager: PermissionType.PermissionManager {  
+@available(iOS 13.0, tvOS 13.0, *)
+public extension PermissionType.PermissionManager {
+    static let calendar = JMCalendarPermissionManager()
+}
+
+@available(iOS 13.0, tvOS 13.0, *)
+public final class JMCalendarPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
+    
+    public override var permissionType: PermissionType {
+        .calendar
+    }
+    
     public override var authorizationStatus: AuthorizationStatus {
         switch EKEventStore.authorizationStatus(for: .event){
         case .authorized:
@@ -21,7 +33,6 @@ struct JMCalendarPermissionManager: PermissionType.PermissionManager {
             return .denied
         }
     }
-    init(){}
 
     override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         let eventStore = EKEventStore()

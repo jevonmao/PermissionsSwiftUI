@@ -8,7 +8,7 @@
 import Foundation
 #if !os(tvOS)
 import Speech
-import PermissionsSwiftUIInternal
+import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionType.PermissionManager {
@@ -16,7 +16,7 @@ public extension PermissionType.PermissionManager {
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public class JMSpeechPermissionManager: PermissionType.PermissionManager {
+public final class JMSpeechPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
     
     public override var permissionType: PermissionType {

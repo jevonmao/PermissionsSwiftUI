@@ -7,7 +7,7 @@
 
 import Foundation
 import MapKit
-import PermissionsSwiftUIInternal
+import CorePermissionsSwiftUI
 
 #if !os(tvOS)
 @available(iOS 13.0, tvOS 13.0, *)

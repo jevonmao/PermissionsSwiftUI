@@ -8,7 +8,7 @@
 import Foundation
 import AppTrackingTransparency
 import AdSupport
-import PermissionsSwiftUIInternal
+import CorePermissionsSwiftUI
 
 @available(iOS 14, tvOS 14, *)
 public extension PermissionType.PermissionManager {

@@ -7,16 +7,17 @@
 
 import Foundation
 #if !os(tvOS)
-import PermissionsSwiftUIInternal
+import CorePermissionsSwiftUI
 import HealthKit
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionType.PermissionManager {
     static func health(categories: HKAccess) -> JMHealthPermissionManager {
         JMHealthPermissionManager(categories: categories)
     }
 }
-@available(iOS 13.0, *)
+
+@available(iOS 13.0, tvOS 13.0, *)
 public class JMHealthPermissionManager: PermissionType.PermissionManager {
     
     typealias authorizationStatus = HKAuthorizationStatus

@@ -8,14 +8,14 @@
 import Foundation
 #if !os(tvOS)
 import EventKit
-import PermissionsSwiftUIInternal
+import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionType.PermissionManager {
     static let reminders = JMRemindersPermissionManager()
 }
 @available(iOS 13.0, tvOS 13.0, *)
-public class JMRemindersPermissionManager: PermissionType.PermissionManager {
+public final class JMRemindersPermissionManager: PermissionType.PermissionManager {
     internal init() { super.init() }
     
     public override var permissionType: PermissionType {
