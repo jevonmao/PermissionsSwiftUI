@@ -88,7 +88,7 @@ public class JMHealthPermissionManager: PermissionType.PermissionManager {
         }
         healthStore.requestAuthorization(toShare: Set(categories.writePermissions),
                                          read: Set(categories.readPermissions)) { authorized, error in
-            completion(authorized, error)
+            completion(self.authorizationStatus == .authorized, error)
         }
         
     }
