@@ -50,6 +50,8 @@ public struct HKAccess: Hashable {
     public init(write: Set<HKSampleType>){
         self.writePermissions = write
     }
+    
+    public init(){}
 }
 
 extension HKAccess {

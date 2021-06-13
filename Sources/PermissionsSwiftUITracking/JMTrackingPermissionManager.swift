@@ -37,7 +37,7 @@ public class JMTrackingPermissionManager: PermissionType.PermissionManager {
         ASIdentifierManager.shared().advertisingIdentifier
     }
     
-    init() {
+    internal init() {
         super.init()
     }
     public override func requestPermission(completion: @escaping (Bool, Error?) -> Void) {

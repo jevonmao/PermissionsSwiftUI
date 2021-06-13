@@ -7,35 +7,32 @@
 
 import Foundation
 #if !os(tvOS)
+import PermissionsSwiftUIInternal
 import HealthKit
 
-struct JMHealthPermissionManager: PermissionManager {
+@available(iOS 13.0, *)
+public extension PermissionType.PermissionManager {
+    static func health(categories: HKAccess) -> JMHealthPermissionManager {
+        JMHealthPermissionManager(categories: categories)
+    }
+}
+@available(iOS 13.0, *)
+public class JMHealthPermissionManager: PermissionType.PermissionManager {
     
     typealias authorizationStatus = HKAuthorizationStatus
-    typealias permissionManagerInstance = JMHealthPermissionManager
     typealias CountComparison = (Int, Int)
-
-    var healthStore: HealthManager = HKHealthStore()
-    var permissionType: PermissionType?
-    init(permissionType: PermissionType?) {
-        self.permissionType = permissionType
-    }
-    init(healthManager: HealthManager = HKHealthStore(), permissionType: PermissionType) {
-        self.healthStore = healthManager
-        self.permissionType = permissionType
-    }
-    //Get the health permission from stored permissions array
-    var healthPermission: HKAccess? {
+    var categories: HKAccess
+    let healthStore = HKHealthStore()
+    override public var permissionType: PermissionType {
         get {
-            //Get the associated value of health permission
-            if case .health(let permissionCategories) = permissionType {
-                return permissionCategories
-            }
-            return nil
+            .health
         }
-
     }
-    var authorizationStatus: AuthorizationStatus{
+
+    init(categories: HKAccess) {
+        self.categories = categories
+    }
+    override public var authorizationStatus: AuthorizationStatus{
         get {
             //Count to track total # of permissions allowed and denied each
             var allowDenyCount: CountComparison = (authorized: 0, denied: 0)
@@ -56,8 +53,8 @@ struct JMHealthPermissionManager: PermissionManager {
              - Note: From Apple Developer Documentation: "to help prevent possible leaks of sensitive health information, your app cannot determine whether or not a user has granted permission to read data. If you are not given permission, it simply appears as if there is no data of the requested type in the HealthKit store."
              */
             
-            var readPermissions = healthPermission?.readPermissions ?? []
-            var writePermissions = healthPermission?.writePermissions ?? []
+            var readPermissions = categories.readPermissions
+            var writePermissions = categories.writePermissions
             //Map the authorization status, remove allowed and denied permissions from array.
             //Increase allowDenyCount as needed.
             mapPermissionAuthorizationStatus(for: &readPermissions, forCount: &allowDenyCount)
@@ -81,16 +78,16 @@ struct JMHealthPermissionManager: PermissionManager {
             }
         }
     }
-    func requestPermission(_ completion: @escaping (Bool, Error?) -> Void) {
-        guard type(of: healthStore).isHealthDataAvailable() else {
+    override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
+        guard HKHealthStore.isHealthDataAvailable() else {
             #if DEBUG
             print("PermissionsSwiftUI - Health data is not available")
             #endif
             completion(false, createUnavailableError())
             return
         }
-        healthStore.requestAuthorization(toShare: Set(healthPermission?.writePermissions ?? []),
-                                         read: Set(healthPermission?.readPermissions ?? [])) { authorized, error in
+        healthStore.requestAuthorization(toShare: Set(categories.writePermissions),
+                                         read: Set(categories.readPermissions)) { authorized, error in
             completion(authorized, error)
         }
         
