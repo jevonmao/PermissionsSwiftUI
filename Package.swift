@@ -11,7 +11,7 @@ let permissionsTargets: [Target] = [
     ),
     .target(
         name: "PermissionsSwiftUI",  //Maintain backward compatibility - access to all permissions
-        dependencies: ["Introspect", "CorePermissionsSwiftUI", "PermissionsSwiftUITracking"],
+        dependencies: ["Introspect", "CorePermissionsSwiftUI", "PermissionsSwiftUITracking", "PermissionsSwiftUIBluetooth", "PermissionsSwiftUICalendar", "PermissionsSwiftUICamera", "PermissionsSwiftUIContacts", "PermissionsSwiftUILocation", "PermissionsSwiftUILocationAlways", "PermissionsSwiftUIMicrophone", "PermissionsSwiftUIMotion", "PermissionsSwiftUIMusic", "PermissionsSwiftUINotification", "PermissionsSwiftUIPhoto", "PermissionsSwiftUIReminder", "PermissionsSwiftUISpeech"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
@@ -89,7 +89,6 @@ let permissionsTargets: [Target] = [
         dependencies: ["Introspect", .target(name: "CorePermissionsSwiftUI")],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),]
-
 
 let package = Package(
     name: "PermissionsSwiftUI",
