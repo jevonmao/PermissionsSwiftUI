@@ -109,7 +109,6 @@ To quickly glance all of PermissionsSwiftUI's customization and configurations, 
 
 ## 🛠️ Usage
 ### Customize Permission Texts
-😱 Be aware. Features ahead will wow you - the customization is so advanced, yet so simple. Have fun!
 
 To customize permission texts, use the modifier `setPermissionComponent()`
 For example, you can change title, description, and image icon:
