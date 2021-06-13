@@ -21,7 +21,7 @@ struct PermissionSectionCell: View {
     @Binding var showing: Bool
     @EnvironmentObject var store: PermissionStore
     @EnvironmentObject var schemaStore: PermissionSchemaStore
-
+    
     //Empty unauthorized array means all permissions have been interacted
     var shouldAutoDismiss: Bool {FilterPermissions.filterForUnauthorized(with: store.permissions, store: schemaStore).isEmpty}
     
@@ -49,7 +49,7 @@ struct PermissionSectionCell: View {
             return 0
         }
         else{
-            return 15
+            return 10
         }
     }
     var body: some View {
@@ -65,6 +65,7 @@ struct PermissionSectionCell: View {
                     .font(.system(size: fontSizeConstant))
                     .bold()
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
                     .layoutPriority(1)
                 Text(currentPermission.description)
                     .font(.system(size: smallFontSizeConstant))
@@ -82,7 +83,7 @@ struct PermissionSectionCell: View {
             else{
                 //Separate case for modal style because an animation is needed for best user experience
                 AllowButtonSection(action: handlePermissionRequest, allowButtonStatus: $allowButtonStatus)
-                .animation(.default)
+                    .animation(.default)
             }
             
         }
@@ -107,7 +108,6 @@ struct PermissionSectionCell: View {
                 handleCompletionDismissal()
            
             }
-   
         }
     }
     

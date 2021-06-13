@@ -1,4 +1,4 @@
-name: Swift
+name: Build and Test
 
 on:
   push:
@@ -31,7 +31,7 @@ jobs:
        run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'  -only-testing:PermissionsSwiftUITests test
      - name: Test small screen device
        run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPod touch (7th generation)' -only-testing:PermissionsSwiftUISmallScreenTests test
-  Swiftformat:
+  Swift_format_lint:
     name: Check swiftformat
     runs-on: macos-latest
     steps:
@@ -43,7 +43,7 @@ jobs:
 
       - name: Format Swift code
         run: swiftformat --verbose . --swiftversion 5.2
-  Documentation_coverage:
+  documentation_coverage:
     name: Documentation coverage
     runs-on: macos-latest
     steps:
@@ -55,3 +55,11 @@ jobs:
         run: chmod +x .github/documentation_coverage.sh
       - name: Execute shell script
         run: .github/documentation_coverage.sh
+  lint_podspec:
+    name: Lint podspec
+    runs-on: macos-latest
+    steps:
+     - name: Checkout Repo
+       uses: actions/checkout@v2
+     - name: lint podspec
+       run: pod lib lint --allow-warnings

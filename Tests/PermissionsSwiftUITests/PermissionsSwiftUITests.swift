@@ -321,7 +321,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             store.permissions = PermissionType.allCases
             store.configStore.autoCheckAuth = false
             let view = ModalView(showModal: .constant(true)).withEnvironmentObjects(store: store, permissionStyle: .modal)
-            assertSnapshot(matching: view.referenceFrame(count: store.permissions.count), as: .image)
+            assertSnapshot(matching: view.referenceFrame(count: store.permissions.count), as: .image(precision: 0.99))
         }
     }
 
@@ -346,7 +346,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec congue metus.
             let currentPermission = PermissionStore().permissionComponentsStore.getPermissionComponent(for: permission, modify: {_ in})
             let views = getPermissionView(for: permission)
             for i in views{
-                assertSnapshot(matching: i, as: .image)
+                assertSnapshot(matching: i, as: .image(precision: 0.99))
             }
         }
     }
