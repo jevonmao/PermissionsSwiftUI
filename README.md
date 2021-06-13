@@ -61,11 +61,18 @@ To learn more about SPM, click [here](https://swift.org/package-manager/)
 For Xcode 13, navigate to **Files** → **Add Package**
 
 2. Paste the repository URL (`https://github.com/jevonmao/PermissionsSwiftUI`) and click **Next**.
-3. For **Version**, select **Up to next major**.
-4. Click **Next** and click **Finish**.
-5. You are all set, thank you for using PermissionsSwiftUI!
-6. 
-#### Cocoapods
+3. For **Version**, verify it's **Up to next major**.
+4. Click **Next** and ONLY SELECT PERMISSIONS NEEDED else Apple will reject your app 
+
+(You don't need to add CorePermissionsSwiftUI or PermissionsSwiftUI)
+
+<img width="716" alt="image" src="https://user-images.githubusercontent.com/64660730/121824314-313dea00-cc60-11eb-8553-40012b27f88e.png">
+
+5. Click **Finish**
+6. You are all set, thank you for using PermissionsSwiftUI!
+
+
+#### Cocoapods (Deprecated)
 You can also install PermissionsSwiftUI with Cocoapods. Add `pod 'PermissionsSwiftUI'` in your podfile:
 ```Ruby
 platform :ios, '14.0'
@@ -331,6 +338,8 @@ onDisappear: (() -> Void
 ```
 ## 🧰 Supported Permissions
 Here is a list of all the permissions PermissionsSwiftUI supports. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon.
+
+Support for Siri permission and FaceID permission is work in progress and coming soon!
 <br /> <br /> <br />
 <img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card-new.png" alt="A card of all the permissions" width="100%">
 
