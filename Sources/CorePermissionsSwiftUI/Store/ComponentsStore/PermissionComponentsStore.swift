@@ -114,6 +114,10 @@ public struct PermissionComponentsStore {
     public var musicPermission = JMPermission(imageIcon: Image(systemName: "music.note.list").typeErased(),
                                               title: "Music",
                                               description: "Allow to control audio playback")
+    ///The displayed text and image icon for the siri permission
+    public var siriPermission = JMPermission(imageIcon: Image(systemName: "waveform").typeErased(),
+                                             title: "Siri",
+                                             description: "Allow Siri to interact with app")
     
 
 }
@@ -172,6 +176,9 @@ extension PermissionComponentsStore {
             modify(&self.healthPermission)
             return self.healthPermission
         #endif
+        case .siri:
+            modify(&self.siriPermission)
+            return self.siriPermission
         }
     }
 }
