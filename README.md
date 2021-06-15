@@ -339,12 +339,12 @@ onDisappear: (() -> Void
 ## 🧰 Supported Permissions
 Here is a list of all the permissions PermissionsSwiftUI supports. Yup, even the newest `tracking` permission for iOS 14 so you can stay on top of your game. All permissions in PermissionsSwiftUI come with a default name, description, and a stunning Apple native SF Symbols icon.
 
-Support for Siri permission and FaceID permission is work in progress and coming soon!
+Support for FaceID permission is work in progress and coming soon! If you don't find a permission you need, open an issue. Even better, build it yourself and open a pull request, you can follow [this](docs/New_Permission_Guide.md) step-by-step guide on adding new permissions.
 <br /> <br /> <br />
 <img align="center" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/All-permissions-card-new.png" alt="A card of all the permissions" width="100%">
 
 ## 💪 Contribute
-Contributions are welcome here for coders and non-coders alike. No matter what your skill level is, you can for certain contribute to PermissionSwiftUI's open source community. Please read [contributing.md](https://github.com/jevonmao/PermissionsSwiftUI/blob/main/CONTRIBUTING.md) before starting. 
+Contributions are welcome here for coders and non-coders alike. No matter what your skill level is, you can for certain contribute to PermissionSwiftUI's open source community. Please read [contributing.md](CONTRIBUTING.md) before starting, and if you are looking to contributing a new type of iOS permission, be sure to read this step-by-step [guide](docs/New_Permission_Guide.md).
 
 **If you encounter ANY issue, have ANY concerns, or ANY comments, please do NOT hesitate to let me know. Open a discussion, issue, or email me.** As a developer, I feel you when you don't understand something in the codebase. I try to comment and document as best as I can, but if you happen to encounter any issues, I will be happy to assist in any way I can.
 
