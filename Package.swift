@@ -88,67 +88,15 @@ let permissionsTargets: [Target] = [
         name: "PermissionsSwiftUITracking",
         dependencies: ["Introspect", .target(name: "CorePermissionsSwiftUI")],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
-    ),]
+    ),
+    .target(name: "PermissionsSwiftUISiri",
+            dependencies: ["Introspect", "CorePermissionsSwiftUI"],
+            exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"])]
 
 let package = Package(
     name: "PermissionsSwiftUI",
     platforms: [.iOS(.v11)],
-    products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "PermissionsSwiftUIBluetooth",
-            targets: ["PermissionsSwiftUIBluetooth"]
-        ),
-        .library(
-            name: "PermissionsSwiftUICalendar",
-            targets: ["PermissionsSwiftUICalendar"]
-        ),
-        .library(
-            name: "PermissionsSwiftUICamera",
-            targets: ["PermissionsSwiftUICamera"]
-        ),
-        .library(
-                name: "PermissionsSwiftUIContacts",
-                targets: ["PermissionsSwiftUIContacts"]
-        ),
-        .library(name: "PermissionsSwiftUIHealth",
-                targets: ["PermissionsSwiftUIHealth"]
-        ),
-        .library(name: "PermissionsSwiftUILocationAlways",
-                targets: ["PermissionsSwiftUILocationAlways"]
-        ),
-        .library(name: "PermissionsSwiftUILocation",
-                targets: ["PermissionsSwiftUILocation"]
-        ),
-        .library(name: "PermissionsSwiftUIMicrophone",
-                targets: ["PermissionsSwiftUIMicrophone"]
-        ),
-        .library(name: "PermissionsSwiftUIMotion",
-                targets: ["PermissionsSwiftUIMotion"]
-        ),
-        .library(name: "PermissionsSwiftUIMusic",
-                targets: ["PermissionsSwiftUIMusic"]
-        ),
-        .library(name: "PermissionsSwiftUINotification",
-                targets: ["PermissionsSwiftUINotification"]
-        ),
-        .library(name: "PermissionsSwiftUIPhoto",
-                targets: ["PermissionsSwiftUIPhoto"]
-        ),
-        .library(name: "PermissionsSwiftUIReminder",
-                targets: ["PermissionsSwiftUIReminder"]
-        ),
-        .library(name: "PermissionsSwiftUISpeech",
-                targets: ["PermissionsSwiftUISpeech"]
-        ),
-        .library(name: "PermissionsSwiftUITracking",
-                targets: ["PermissionsSwiftUITracking"]
-        ),
-        .library(name: "PermissionSwiftUI",
-                 targets: ["PermissionsSwiftUI"]),
-        .library(name: "CorePermissionsSwiftUI",
-                 targets: ["CorePermissionsSwiftUI"]),
-    ],
+    products: permissionsTargets.map{Product.library(name: $0.name, targets: [$0.name])},
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", "1.0.0"..<"2.0.0"),
