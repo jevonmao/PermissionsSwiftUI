@@ -37,7 +37,10 @@ let permissionsTargets: [Target] = [
     .target(
         name: "PermissionsSwiftUIHealth",
         dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        swiftSettings: [
+                        .define("PERMISSIONSWIFTUI_HEALTH")
+                    ]
     ),
     .target(
         name: "PermissionsSwiftUILocationAlways",

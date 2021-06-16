@@ -7,7 +7,9 @@
 
 import Foundation
 import SwiftUI
+#if PERMISSIONSWIFTUI_HEALTH
 import HealthKit
+#endif
 
 /**
  The types of iOS system permission for show in the JMPermissions view
@@ -35,9 +37,6 @@ public enum PermissionType: Hashable, Equatable {
                 preconditionFailure("This property must be overridden.")
             }
         }
-        ///Holds the health permission subcategories, in case of health permission type subclass
-        open var healthPermissionCategories: Set<HKSampleType>?
-        
         ///The type of permission
         open var permissionType: PermissionType {
             preconditionFailure("This property must be overridden.")
@@ -50,6 +49,11 @@ public enum PermissionType: Hashable, Equatable {
             }
         }
         
+        #if PERMISSIONSWIFTUI_HEALTH
+        
+        ///Holds the health permission subcategories, in case of health permission type subclass
+        open var healthPermissionCategories: Set<HKSampleType>?
+        
         /**
          Creates a new `PermissionManager` for health permission.
          
@@ -59,6 +63,10 @@ public enum PermissionType: Hashable, Equatable {
         public init(_ healthPermissionCategories: Set<HKSampleType>? = nil) {
             self.healthPermissionCategories = healthPermissionCategories
         }
+        #else
+        ///Creates a new `PermissionManager` for any type of child implemented permission
+        public override init() {}
+        #endif
         
         /**
          Requests authorization for the current implemented type of permission.

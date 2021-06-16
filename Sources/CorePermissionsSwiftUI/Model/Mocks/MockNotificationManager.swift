@@ -13,7 +13,7 @@ protocol NotificationManager {
     func requestPermission(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Void)
     func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Void)
 }
-extension UNUserNotificationCenter:NotificationManager{
+extension UNUserNotificationCenter: NotificationManager{
     static var isTestingMode = false
     static func shared() -> NotificationManager {
         return isTestingMode ? MockNotificationManager.shared() : UNUserNotificationCenter.current()

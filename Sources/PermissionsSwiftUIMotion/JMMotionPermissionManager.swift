@@ -35,7 +35,7 @@ public final class JMMotionPermissionManager: PermissionType.PermissionManager {
         }
     }
     
-    internal init() { super.init() }
+    
 
     override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         let manager = CMMotionActivityManager()

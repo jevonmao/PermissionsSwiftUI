@@ -16,7 +16,7 @@ public extension PermissionType.PermissionManager {
 
 @available(iOS 13.0, tvOS 13.0, *)
 public final class JMSiriPermissionManager: PermissionType.PermissionManager {
-    internal init() { super.init() }
+    
     
     public override var permissionType: PermissionType {
             .siri
