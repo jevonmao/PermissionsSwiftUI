@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if PERMISSIONSWIFTUI_NOTIFICATION
 import UserNotifications
 
 protocol NotificationManager {
@@ -64,3 +65,4 @@ final class MockNSCoder: NSCoder {
         return true
     }
 }
+#endif

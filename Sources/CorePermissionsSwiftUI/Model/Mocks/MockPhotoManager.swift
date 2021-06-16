@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if PERMISSIONSWIFTUI_PHOTO
 import Photos
 
 final class MockPhotoManager: PHPhotoLibrary{
@@ -13,3 +14,4 @@ final class MockPhotoManager: PHPhotoLibrary{
         handler(PHAuthorizationStatus.authorized)
     }
 }
+#endif
