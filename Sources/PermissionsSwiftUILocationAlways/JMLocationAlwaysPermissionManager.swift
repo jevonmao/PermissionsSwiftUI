@@ -17,7 +17,7 @@ public extension PermissionType.PermissionManager {
 
 @available(iOS 13.0, tvOS 13.0, *)
 public final class JMLocationAlwaysPermissionManager: PermissionType.PermissionManager, CLLocationManagerDelegate {
-    internal init() { super.init() }
+    
 
     typealias authorizationStatus = CLAuthorizationStatus
     typealias permissionManagerInstance = JMLocationAlwaysPermissionManager

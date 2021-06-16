@@ -19,7 +19,7 @@ public extension PermissionType.PermissionManager {
 public final class JMLocationPermissionManager: PermissionType.PermissionManager, CLLocationManagerDelegate {
     typealias authorizationStatus = CLAuthorizationStatus
     typealias permissionManagerInstance = JMLocationPermissionManager
-    internal init() { super.init() }
+    
 
     public override var permissionType: PermissionType {
         .location

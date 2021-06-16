@@ -5,7 +5,6 @@
 //  Created by Jevon Mao on 1/30/21.
 //
 
-import MapKit
 import SwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)

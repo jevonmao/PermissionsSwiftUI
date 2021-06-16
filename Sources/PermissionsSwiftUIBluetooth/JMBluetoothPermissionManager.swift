@@ -16,7 +16,6 @@ public extension PermissionType.PermissionManager {
 
 @available(iOS 13.0, tvOS 13.0, *)
 final public class JMBluetoothPermissionManager: PermissionType.PermissionManager {
-    internal init() { super.init() }
     private var completion: ((Bool, Error?) -> Void)?
     private var manager: CBCentralManager?
     

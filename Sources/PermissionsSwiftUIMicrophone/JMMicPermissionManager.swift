@@ -29,7 +29,7 @@ public final class JMMicrophonePermissionManager: PermissionType.PermissionManag
             return .denied
         }
     }
-    internal init() { super.init() }
+    
     override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
         AVAudioSession.sharedInstance().requestRecordPermission {
             granted in

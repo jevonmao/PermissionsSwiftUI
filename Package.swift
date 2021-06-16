@@ -37,17 +37,26 @@ let permissionsTargets: [Target] = [
     .target(
         name: "PermissionsSwiftUIHealth",
         dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        swiftSettings: [
+                        .define("PERMISSIONSWIFTUI_HEALTH")
+                    ]
     ),
     .target(
         name: "PermissionsSwiftUILocationAlways",
         dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        swiftSettings: [
+            .define("PERMISSIONSWIFTUI_LOCATION")
+        ]
     ),
     .target(
         name: "PermissionsSwiftUILocation",
         dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        swiftSettings: [
+            .define("PERMISSIONSWIFTUI_LOCATION")
+        ]
     ),
     .target(
         name: "PermissionsSwiftUIMicrophone",
@@ -67,12 +76,18 @@ let permissionsTargets: [Target] = [
     .target(
         name: "PermissionsSwiftUINotification",
         dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        swiftSettings: [
+            .define("PERMISSIONSWIFTUI_NOTIFICATION")
+        ]
     ),
     .target(
         name: "PermissionsSwiftUIPhoto",
         dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        swiftSettings: [
+            .define("PERMISSIONSWIFTUI_PHOTO")
+        ]
     ),
     .target(
         name: "PermissionsSwiftUIReminder",

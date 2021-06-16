@@ -6,7 +6,7 @@
 //
 
 import Foundation
-#if !os(tvOS)
+#if !os(tvOS) && PERMISSIONSWIFTUI_HEALTH
 import HealthKit
 /**
  Encapsulates different subtypes of permission for health permission
