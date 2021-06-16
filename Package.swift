@@ -45,12 +45,18 @@ let permissionsTargets: [Target] = [
     .target(
         name: "PermissionsSwiftUILocationAlways",
         dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        swiftSettings: [
+            .define("PERMISSIONSWIFTUI_LOCATION")
+        ]
     ),
     .target(
         name: "PermissionsSwiftUILocation",
         dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        swiftSettings: [
+            .define("PERMISSIONSWIFTUI_LOCATION")
+        ]
     ),
     .target(
         name: "PermissionsSwiftUIMicrophone",

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if PERMISSIONSWIFTUI_LOCATION
 import MapKit
 
 protocol LocationManager {
@@ -48,4 +49,4 @@ struct MockCLLocationManager:LocationManager{
     
 }
 
-
+#endif
