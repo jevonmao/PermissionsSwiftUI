@@ -8,7 +8,6 @@
 import Foundation
 #if !os(tvOS) && PERMISSIONSWIFTUI_HEALTH
 import HealthKit
-
 protocol HealthManager {
     func authorizationStatus(for type: HKObjectType) -> HKAuthorizationStatus
     func requestAuthorization(toShare typesToShare: Set<HKSampleType>?, read typesToRead: Set<HKObjectType>?, completion: @escaping (Bool, Error?) -> Void)

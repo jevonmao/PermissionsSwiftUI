@@ -59,6 +59,8 @@ struct PermissionSectionCell: View {
                 .font(.system(size: screenSizeConstant))
                 .frame(width: screenSizeConstant)
                 .padding(.horizontal, 5)
+                .accessibility(identifier: "Permission icon")
+            
             VStack(alignment: .leading) {
                 Text(currentPermission.title)
                     .font(.system(size: fontSizeConstant))
@@ -66,11 +68,14 @@ struct PermissionSectionCell: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                     .layoutPriority(1)
+                    .accessibility(identifier: "Permission title")
+                
                 Text(currentPermission.description)
                     .font(.system(size: smallFontSizeConstant))
                     .lineLimit(3)
                     .foregroundColor(Color(.systemGray2))
                     .minimumScaleFactor(0.5)
+                    .accessibility(identifier: "Permission description")
                 
             }
             .padding(.horizontal, 3)
