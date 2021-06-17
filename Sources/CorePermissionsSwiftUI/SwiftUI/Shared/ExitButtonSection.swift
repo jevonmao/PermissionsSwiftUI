@@ -38,6 +38,7 @@ struct ExitButtonSection: View {
                         .padding(4)
                 )
         })
+        .accessibility(identifier: "Exit button")
     }
 }
 

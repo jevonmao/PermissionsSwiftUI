@@ -18,5 +18,6 @@ struct AllowButtonSection: View {
                 .buttonStatusColor(for: allowButtonStatus)
         })
         .layoutPriority(-1)
+        .accessibility(identifier: "Allow button")
     }
 }

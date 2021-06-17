@@ -27,6 +27,7 @@ struct HeaderView: View {
                             .frame(maxWidth:.infinity, alignment: .leading)
                             //Negative padding make the bottom title "shift up" a little
                             .padding(.vertical, -5)
+                            .accessibility(identifier: "Alert header")
                     }
                 
                 HStack {
@@ -37,6 +38,7 @@ struct HeaderView: View {
                             .minimumScaleFactor(0.85)
                             .allowsTightening(true)
                             .layoutPriority(1)
+                            .accessibility(identifier: "Main title")
                             
                             
                     Spacer()
@@ -66,6 +68,7 @@ struct HeaderView: View {
                     //Allow scacling down to half the original size on smaller screens
                     .minimumScaleFactor(0.5)
                     .textHorizontalAlign(.leading)
+                    .accessibility(identifier: "Modal header description")
             }
   
         }

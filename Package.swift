@@ -131,5 +131,6 @@ let package = Package(
             exclude: [],
             resources: [.process("__Snapshots__")]
         ),
+        
     ] + permissionsTargets
 )
