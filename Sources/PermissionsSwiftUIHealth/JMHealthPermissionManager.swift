@@ -12,6 +12,18 @@ import HealthKit
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionType.PermissionManager {
+    /**
+     Permission that allows app to access healthkit information
+     
+     - Note: Extensive Info.plist  values and configurations are required for HealthKit authorization. Please see Apple Developer [website](https://developer.apple.com/documentation/healthkit/authorizing_access_to_health_data) for details. \n
+     
+     For example, passing in a `Set` of `HKSampleType`:
+     ```
+     [.health(categories: .init(readAndWrite: Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!])))]
+     ```
+     
+     - Attention: From Apple Developer Documentation: "to help prevent possible leaks of sensitive health information, your app cannot determine whether or not a user has granted permission to read data. If you are not given permission, it simply appears as if there is no data of the requested type in the HealthKit store."
+     */
     static func health(categories: HKAccess) -> JMHealthPermissionManager {
         JMHealthPermissionManager(categories: categories)
     }
@@ -33,46 +45,50 @@ public class JMHealthPermissionManager: PermissionType.PermissionManager {
     init(categories: HKAccess) {
         self.categories = categories
     }
+    
+    /**
+     - Note: From Apple Developer Documentation: "to help prevent possible leaks of sensitive health information, your app cannot determine whether or not a user has granted permission to read data. If you are not given permission, it simply appears as if there is no data of the requested type in the HealthKit store."
+     */
     public override var authorizationStatus: AuthorizationStatus {
         get {
-            //Count to track total # of permissions allowed and denied each
-            var allowDenyCount: CountComparison = (authorized: 0, denied: 0)
+            var allowDenyCount: CountComparison = (authorized: 0, denied: 0)  //Tracks # of authorized and denied health categories
             var status: AuthorizationStatus {
+                
                 //Set to notDetermined if all permissions are not determined
                 if allowDenyCount.0 == 0 && allowDenyCount.1 == 0 {
                     return .notDetermined
                 }
-                //Set to authorized if majority are authorized
-                if allowDenyCount.0 > allowDenyCount.1 {
+                
+                //Set to authorized if at least 1 type is authorized
+                if allowDenyCount.0 > 0 {
                     return .authorized
                 }
-                //Set to denied if majority are denied, or equal # of allowed and denied
-                return .denied
+                
+                //If all types are denied, set status to denied
+                else {
+                    return .denied
+                }
             }
             
-            /**
-             - Note: From Apple Developer Documentation: "to help prevent possible leaks of sensitive health information, your app cannot determine whether or not a user has granted permission to read data. If you are not given permission, it simply appears as if there is no data of the requested type in the HealthKit store."
-             */
-            
-            var readPermissions = categories.readPermissions
-            var writePermissions = categories.writePermissions
             //Map the authorization status, remove allowed and denied permissions from array.
             //Increase allowDenyCount as needed.
-            mapPermissionAuthorizationStatus(for: &readPermissions, forCount: &allowDenyCount)
-            mapPermissionAuthorizationStatus(for: &writePermissions, forCount: &allowDenyCount)
+            mapPermissionAuthorizationStatus(for: categories.writePermissions, forCount: &allowDenyCount)
+            
+            //Assume all read permissions are authorized, because Apple restrict app from determining read data
+            if categories.writePermissions.isEmpty {
+                allowDenyCount.0 += categories.readPermissions.count
+            }
             return status
         }
 
     }
-    func mapPermissionAuthorizationStatus(for permissions: inout Set<HKSampleType>,
+    func mapPermissionAuthorizationStatus(for permissions: Set<HKSampleType>,
                                         forCount allowDenyCount: inout CountComparison) {
         for sampleType in permissions {
             switch healthStore.authorizationStatus(for: sampleType){
             case .sharingAuthorized:
-                permissions.remove(sampleType)
                 allowDenyCount.0 += 1
             case .sharingDenied:
-                permissions.remove(sampleType)
                 allowDenyCount.1 += 1
             default:
                 ()
