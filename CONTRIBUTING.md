@@ -10,7 +10,7 @@ PermissionsSwiftUI is created by **Jingwen (Jevon) Mao**
 
 The current owner is **Jingwen (Jevon) Mao**
 
-Email: woodburyjevonmao@gmail.com
+Email: jingwenmao@g.ucla.edu
 
 Discord: Jevon#2448
 
