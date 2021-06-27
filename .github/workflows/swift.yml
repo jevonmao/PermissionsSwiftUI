@@ -18,19 +18,19 @@ jobs:
         xcode-version: latest-stable
     - name: Build
       run: xcodebuild -scheme PermissionsSwiftUI -destination 'generic/platform=iOS' build
-  test_iOS:
-     runs-on: macos-latest
-     steps:
-     - name: Checkout Repo
-       uses: actions/checkout@v2
-     - name: Setup Xcode
-       uses: maxim-lobanov/setup-xcode@v1
-       with:
-         xcode-version: latest-stable
-     - name: Test large screen device
-       run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'  -only-testing:PermissionsSwiftUITests test
-     - name: Test small screen device
-       run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPod touch (7th generation)' -only-testing:PermissionsSwiftUISmallScreenTests test
+#   test_iOS:
+#      runs-on: macos-latest
+#      steps:
+#      - name: Checkout Repo
+#        uses: actions/checkout@v2
+#      - name: Setup Xcode
+#        uses: maxim-lobanov/setup-xcode@v1
+#        with:
+#          xcode-version: latest-stable
+#      - name: Test large screen device
+#        run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'  -only-testing:PermissionsSwiftUITests test
+#      - name: Test small screen device
+#        run: xcodebuild -scheme PermissionsSwiftUI -destination 'platform=iOS Simulator,name=iPod touch (7th generation)' -only-testing:PermissionsSwiftUISmallScreenTests test
   Swift_format_lint:
     name: Check swiftformat
     runs-on: macos-latest
@@ -55,11 +55,11 @@ jobs:
         run: chmod +x .github/documentation_coverage.sh
       - name: Execute shell script
         run: .github/documentation_coverage.sh
-  lint_podspec:
-    name: Lint podspec
-    runs-on: macos-latest
-    steps:
-     - name: Checkout Repo
-       uses: actions/checkout@v2
-     - name: lint podspec
-       run: pod lib lint --allow-warnings
+#   lint_podspec:
+#     name: Lint podspec
+#     runs-on: macos-latest
+#     steps:
+#      - name: Checkout Repo
+#        uses: actions/checkout@v2
+#      - name: lint podspec
+#        run: pod lib lint --allow-warnings
