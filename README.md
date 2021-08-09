@@ -202,9 +202,9 @@ same applies for JMAlert
 .JMAlert(showModal: $showModal, for: [.camera], autoCheckAuthorization: false)
 ```
 ### Auto Dismiss
-PermissionsSwiftUI by default will automatically dismiss the modal or alert after user allows the last permission item. However, you can override this behavior.
+PermissionsSwiftUI by default will not have any auto dimiss behavior. You can override this behaviour to make it automatically dismiss the modal or alert after user allows the last permission item. (All permissions must be ALLOWED, if any is DENIED, it will not auto dismiss).
 ```Swift
-func JMModal(showModal: Binding<Bool>, for permissions: [PermissionType], autoDismiss: Bool) -> some View
+.JMModal(... autoDismiss: Bool) -> some View
 ```
 Pass in `true` or `false` to select whether to automatically dismiss the view.
 
