@@ -136,7 +136,7 @@ struct PermissionSectionCell: View {
                     store.autoDismissAlert) ||
                 //Current view style is modal and autoDismissModal is true
                     (schemaStore.permissionViewStyle == .modal &&
-                        store.autoDismissModal)) ||
+                        store.autoDismissModal)) &&
                     store.configStore.autoDismiss {
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.8) {
                     showing = false
