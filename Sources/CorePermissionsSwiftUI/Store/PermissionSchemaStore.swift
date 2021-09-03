@@ -32,7 +32,10 @@ public class PermissionSchemaStore: ObservableObject {
         if configStore.restrictDismissal ||
             ((permissionViewStyle == .modal && store.restrictModalDismissal) ||
                 (permissionViewStyle == .alert && store.restrictAlertDismissal)) {
-            //Empty means all permissions interacted, so should no longer stay in presentation
+            // number of interacted permissions equal to number
+            // of all permissions means means everything has been
+            // interacted with, thus if so, shouldStayInPresentation
+            // will be false and dismissal is allowed
             return !(interactedPermissions.count == permissions.count)
         }
         return false
