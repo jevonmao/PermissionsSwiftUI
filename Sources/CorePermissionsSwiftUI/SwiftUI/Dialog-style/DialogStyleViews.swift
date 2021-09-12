@@ -113,8 +113,15 @@ public extension View {
      
      */
 
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType.PermissionManager], autoDismiss: Bool?=nil, autoCheckAuthorization: Bool?=nil) -> some CustomizableView {
-        initializeJMAlert(showModal: showModal, for: permissions, autoDismiss: autoDismiss, autoCheckAuthorization: autoCheckAuthorization)
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType.PermissionManager],
+                 restrictDismissal: Bool?=nil,
+                 autoDismiss: Bool?=nil,
+                 autoCheckAuthorization: Bool?=nil) -> some CustomizableView {
+        initializeJMAlert(showModal: showModal,
+                          for: permissions,
+                          autoDismiss: autoDismiss,
+                          autoCheckAuthorization: autoCheckAuthorization,
+                          restrictDismissal: restrictDismissal)
     }
     
     /**
