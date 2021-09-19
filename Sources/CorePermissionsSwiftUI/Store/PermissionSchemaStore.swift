@@ -14,8 +14,6 @@ import Combine
 @available(iOS 13.0, tvOS 13.0, *)
 public class PermissionSchemaStore: ObservableObject {
 
-    static var shared = PermissionSchemaStore(store: PermissionStore.shared, permissionViewStyle: .modal)
-    
     //MARK: Filtered permission arrays
     var undeterminedPermissions: [PermissionType.PermissionManager] {
         FilterPermissions.filterForShouldAskPermission(for: permissions)

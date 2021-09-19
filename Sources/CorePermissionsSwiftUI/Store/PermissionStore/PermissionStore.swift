@@ -16,7 +16,6 @@ import SwiftUI
  */
 @available(iOS 13.0, tvOS 13.0, *)
 public class PermissionStore: ObservableObject {
-    static var shared: PermissionStore()
     
     //MARK: Creating a new store
     /**
