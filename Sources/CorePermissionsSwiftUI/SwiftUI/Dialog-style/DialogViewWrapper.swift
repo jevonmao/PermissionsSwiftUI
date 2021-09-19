@@ -66,7 +66,7 @@ import SwiftUI
                 .animation(.default)
 
             }
-        }.withEnvironmentObjects(store: store, permissionStyle: .alert)
+        }.withEnvironmentObjects(store: store, schemaStore: schemaStore, permissionStyle: .alert)
         
     }
     
