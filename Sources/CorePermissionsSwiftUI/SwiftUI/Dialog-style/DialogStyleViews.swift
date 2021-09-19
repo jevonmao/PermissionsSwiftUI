@@ -259,7 +259,7 @@ public extension View {
                                 onAppear: (() -> Void)?=nil,
                                 onDisappear: (() -> Void)?=nil,
                                 onDisappearHandler: (([JMResult]?, [JMResult]?) -> Void)?=nil) -> some CustomizableView {
-        let store = PermissionStore()
+        let store = PermissionStore.shared
         store.permissions = permissions ?? []
         store.configStore.onAppear = onAppear
         store.configStore.onDisappear = onDisappear
