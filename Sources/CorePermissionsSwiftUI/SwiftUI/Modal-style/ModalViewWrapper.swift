@@ -11,9 +11,9 @@ import Introspect
 @available(iOS 13.0, tvOS 13.0, *)
 @usableFromInline struct ModalViewWrapper<Body: View>: View, CustomizableView {
     //store contains static configurations and customizations
-    @usableFromInline var store: PermissionStore = PermissionStore.shared
+    @ObservedObject var store: PermissionStore = PermissionStore.shared
     //schemaStore contains dynamically computed properties, and internal methods/properties
-    @usableFromInline var schemaStore: PermissionSchemaStore = PermissionSchemaStore.shared
+    @ObservedOnject var schemaStore: PermissionSchemaStore = PermissionSchemaStore.shared
     //Keep track of whether modal as already been shown for 1st time
     @State var isModalNotShown = true
     @usableFromInline var showing: Binding<Bool>
