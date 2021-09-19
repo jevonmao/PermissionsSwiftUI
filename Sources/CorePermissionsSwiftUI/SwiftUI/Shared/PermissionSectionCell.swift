@@ -18,8 +18,8 @@ struct PermissionSectionCell: View {
     @State var permissionManager: PermissionType.PermissionManager
     @State var allowButtonStatus: AllowButtonStatus = .idle
     @Binding var showing: Bool
-    @EnvironmentObject var store: PermissionStore
-    @EnvironmentObject var schemaStore: PermissionSchemaStore
+    @ObservedObject var store: PermissionStore = PermissionStore.shared
+    @ObservedObject var schemaStore: PermissionSchemaStore = PermissionSchemaStore.shared
     
     //Empty unauthorized array means all permissions have been interacted
     var shouldAutoDismiss: Bool {FilterPermissions.filterForUnauthorized(with: store.permissions, store: schemaStore).isEmpty}

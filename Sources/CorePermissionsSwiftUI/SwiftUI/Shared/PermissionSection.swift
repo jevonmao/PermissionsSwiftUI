@@ -11,7 +11,7 @@ import SwiftUI
 struct PermissionSection: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showing:Bool
-    @EnvironmentObject var store: PermissionStore
+    @ObservedObject var store: PermissionStore = PermissionStore.shared
     
     var body: some View {
         VStack {

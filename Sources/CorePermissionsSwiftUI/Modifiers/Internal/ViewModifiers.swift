@@ -27,7 +27,7 @@ extension View {
 @available(iOS 13.0, tvOS 13.0, *)
 struct ButtonStatusColor: ViewModifier {
     var allowButtonStatus: AllowButtonStatus
-    @EnvironmentObject var store: PermissionStore
+    @ObservedObject var store: PermissionStore = PermissionStore.shared
 
     func body(content: Content) -> some View {
         let colorStore = {
