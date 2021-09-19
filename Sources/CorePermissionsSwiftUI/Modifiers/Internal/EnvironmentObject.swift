@@ -11,7 +11,8 @@ import SwiftUI
 extension View {
     @usableFromInline func withEnvironmentObjects(store: PermissionStore, permissionStyle: PermissionViewStyle) -> some View {
         self
-            .environmentObject(PermissionStore.shared)
-            .environmentObject(PermissionSchemaStore.shared)
+            .environmentObject(store)
+            .environmentObject(PermissionSchemaStore(store: store,
+                                                     permissionViewStyle: permissionStyle))
     }
 }
