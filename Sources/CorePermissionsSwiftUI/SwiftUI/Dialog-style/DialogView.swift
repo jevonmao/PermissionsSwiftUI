@@ -12,8 +12,8 @@ import SwiftUI
 @available(tvOS, unavailable, message: "Dialog style permission view is unavailable for tvOS, use modal style instead.")
 struct DialogView: View {
     @Binding var showAlert: Bool
-    @ObservedObject var store: PermissionStore = PermissionStore.shared
-    @ObservedObject var schemaStore: PermissionSchemaStore = PermissionSchemaStore.shared
+    @EnvironmentObject var store: PermissionStore
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
 
     var mainText: MainTexts{store.mainTexts.contentChanged ? store.mainTexts : store.configStore.mainTexts}
     var paddingSize: CGFloat {

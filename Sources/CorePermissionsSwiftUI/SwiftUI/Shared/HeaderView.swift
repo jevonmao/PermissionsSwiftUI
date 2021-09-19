@@ -9,8 +9,8 @@ import SwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 struct HeaderView: View {
-    @ObservedObject var store: PermissionStore = PermissionStore.shared
-    @ObservedObject var schemaStore: PermissionSchemaStore = PermissionSchemaStore.shared
+    @EnvironmentObject var store: PermissionStore
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
     var exitButtonAction:() -> Void
     //HeaderText component have slightly different UI for alert and modal.
     var mainText: MainTexts

@@ -14,8 +14,7 @@ struct ExitButtonSection: View {
     var buttonSizeConstant: CGFloat {
         screenSize.width < 400 ? 40-(1000-screenSize.width)/80 : 40
     }
-    @ObservedObject var schemaStore: PermissionSchemaStore = PermissionSchemaStore.shared
-    
+    @EnvironmentObject var schemaStore: PermissionSchemaStore
     var body: some View {
         Button(action: {
             #if !os(tvOS)
