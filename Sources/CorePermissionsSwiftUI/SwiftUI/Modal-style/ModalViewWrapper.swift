@@ -66,7 +66,7 @@ import Introspect
                         .onDisappear{showing.wrappedValue = false; isModalNotShown=true}
                 })
         }
-        .withEnvironmentObjects(store: store, schemaStore: schemaStore, permissionStyle: .modal)
+        .withEnvironmentObjects(store: store, permissionStyle: .modal)
 
            
         
