@@ -60,13 +60,18 @@ public struct MainTexts: Equatable {
         return true
     }
     ///Text to display for header text
-    public var headerText: String = "Need Permissions"
+    public var headerText: String = NSLocalizedString("permission_header",
+                                                      bundle: .module,
+                                                      value: "Need Permissions",
+                                                      comment: "")
     ///Text to display for header description text
-    public var headerDescription: String = """
-                                   In order for you use certain features of this app, you need to give permissions. See description for each permission
-                                   """
+    public var headerDescription: String = NSLocalizedString("permission_primary_label",
+                                                             bundle: .module,
+                                                             value: "permission_primary_label",
+                                                             comment: "")
     ///Text to display for bottom part description text
-    public var bottomDescription: String = """
-                                        Permission are necessary for all the features and functions to work properly. If not allowed, you have to enable permissions in settings
-                                        """
+    public var bottomDescription: String = NSLocalizedString("permission_secondary_label",
+                                                             bundle: .module,
+                                                             value: "",
+                                                             comment: "")
 }

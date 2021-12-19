@@ -1,2 +1,7 @@
-"ALLOW" = "允许";
+"button_allow" = "允许";
+"button_allowed" = "已允许";
+"button_denied" = "未允许";
+"permission_header" = "需要权限";
 
+"permission_primary_label" = "请求允许权限来使用本app的相关功能。请见每个权限的描述。";
+"permission_secondary_label" = "常使用所有的功能需要允许权限。如果未允许，需要在设置中启用权限。";
