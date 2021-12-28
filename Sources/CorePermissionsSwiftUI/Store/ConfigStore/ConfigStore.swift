@@ -60,18 +60,9 @@ public struct MainTexts: Equatable {
         return true
     }
     ///Text to display for header text
-    public var headerText: String = NSLocalizedString("permission_header",
-                                                      bundle: .module,
-                                                      value: "Need Permissions",
-                                                      comment: "")
+    public var headerText: String = "permission_header".localized
     ///Text to display for header description text
-    public var headerDescription: String = NSLocalizedString("permission_primary_label",
-                                                             bundle: .module,
-                                                             value: "permission_primary_label",
-                                                             comment: "")
+    public var headerDescription: String = "permission_primary_label".localized
     ///Text to display for bottom part description text
-    public var bottomDescription: String = NSLocalizedString("permission_secondary_label",
-                                                             bundle: .module,
-                                                             value: "",
-                                                             comment: "")
+    public var bottomDescription: String = "permission_secondary_label".localized
 }

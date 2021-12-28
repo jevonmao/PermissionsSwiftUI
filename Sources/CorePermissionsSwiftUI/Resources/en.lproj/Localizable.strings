@@ -1,7 +1,20 @@
+/* MARK: Allow Button */
 "button_allow" = "ALLOW";
 "button_allowed" = "ALLOWED";
 "button_denied" = "DENIED";
+
+/* MARK: UI labels */
 "permission_header" = "Need Permissions";
 
 "permission_primary_label" = "In order for you use certain features of this app, you need to give permissions. See description for each permission";
+
 "permission_secondary_label" = "Permission are necessary for all the features and functions to work properly. If not allowed, you have to enable permissions in settings";
+
+/* MARK: Permissions (name & description) */
+"camera_title" = "Camera";
+"camera_description" = "Allow to use your camera"
+
+"health_title" = "Health";
+"health_description" = "Allow to access your health information";
+
+
