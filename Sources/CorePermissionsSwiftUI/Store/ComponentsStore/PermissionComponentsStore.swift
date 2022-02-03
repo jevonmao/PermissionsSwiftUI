@@ -108,8 +108,8 @@ public struct PermissionComponentsStore {
     ///The displayed text and image icon for the health permission
     public var healthPermission = JMPermission(
         imageIcon: AnyView(Image(systemName: "heart.fill")),
-        title: "Health",
-        description: "Allow to access your health information")
+        title: "health_title".localized,
+        description: "health_description".localized)
     ///The displayed text and image icon for the music permission
     public var musicPermission = JMPermission(imageIcon: Image(systemName: "music.note.list").typeErased(),
                                               title: "Music",

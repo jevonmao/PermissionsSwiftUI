@@ -7,7 +7,8 @@ let permissionsTargets: [Target] = [
     .target(
         name: "CorePermissionsSwiftUI",  //Internal module for shared code
         dependencies: ["Introspect"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        resources: [.process("Resources")]
     ),
     .target(
         name: "PermissionsSwiftUI",  //Maintain backward compatibility - access to all permissions
@@ -110,6 +111,7 @@ let permissionsTargets: [Target] = [
 
 let package = Package(
     name: "PermissionsSwiftUI",
+    defaultLocalization: "en",
     platforms: [.iOS(.v11)],
     products: permissionsTargets.map{Product.library(name: $0.name, targets: [$0.name])},
     dependencies: [
