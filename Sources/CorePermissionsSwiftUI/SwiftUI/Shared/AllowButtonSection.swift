@@ -13,7 +13,9 @@ struct AllowButtonSection: View {
     @Binding var allowButtonStatus: AllowButtonStatus
     var body: some View {
         Button(action: action, label: {
-            Text(allowButtonStatus == .allowed ? "ALLOWED" : allowButtonStatus == .idle ? "ALLOW" : "DENIED")
+            Text(allowButtonStatus == .allowed ?
+                 "button_allowed" : allowButtonStatus == .idle ?
+                 "button_allow" : "button_denied", bundle: .module)
                 .fontWeight(.bold)
                 .buttonStatusColor(for: allowButtonStatus)
         })

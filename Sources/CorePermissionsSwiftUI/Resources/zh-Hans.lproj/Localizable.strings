@@ -1,0 +1,18 @@
+/* MARK: Allow Button */
+"button_allow" = "允许";
+"button_allowed" = "已允许";
+"button_denied" = "未允许";
+
+/* MARK: UI labels */
+"permission_header" = "需要权限";
+"permission_primary_label" = "请求允许权限来使用本app的相关功能。请见每个权限的描述。";
+"permission_secondary_label" = "所有功能的正常使用需要允许权限。如果未允许，需要在设置中启用权限。";
+
+/* MARK: Permissions (name & description) */
+"camera_title" = "相机";
+"camera_description" = "允许使用相机";
+
+"health_title" = "健康";
+"health_description" = "允许访问您的健康信息";
+
+
