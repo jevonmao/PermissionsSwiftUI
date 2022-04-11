@@ -1,0 +1,4 @@
+/* MARK: Allow Button */
+"button_allow" = "TILLADE";
+"button_allowed" = "TILLADT";
+"button_denied" = "NÆGTET";
