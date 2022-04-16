@@ -1,0 +1,5 @@
+/* MARK: Allow Button */
+"button_allow" = "CONSENTIRE";
+"button_allowed" = "CONSENTITO";
+"button_denied" = "NEGATO";
+
