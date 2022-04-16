@@ -561,6 +561,7 @@ final class PermissionsSwiftUISmallScreenTests: XCTestCase {
 }
 
 struct testViewRedBG:View{
+    @available(iOS 13.0, *)
     var body: some View{
         ZStack {
             Color.red
@@ -569,6 +570,7 @@ struct testViewRedBG:View{
     }
 }
 struct testViewGreenBG:View{
+    @available(iOS 13.0, *)
     var body: some View{
         ZStack {
             Color.green
