@@ -13,7 +13,7 @@ import SwiftUI
  */
 @available(iOS 13.0, tvOS 13.0, *)
 public struct PermissionComponentsStore {
-    //MARK: Creating a new permission components store
+    // MARK: Creating a new permission components store
     /**
      Creates a new permission components store with default settings
      
@@ -28,7 +28,7 @@ public struct PermissionComponentsStore {
      ```
      */
     public init(){}
-    //MARK: Permission Components
+    // MARK: Permission Components
     ///The displayed text and image icon for the camera permission
     public var cameraPermission = JMPermission(
         imageIcon: AnyView(Image(systemName: "camera.fill")),

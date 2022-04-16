@@ -5,14 +5,19 @@ import PackageDescription
 
 let permissionsTargets: [Target] = [
     .target(
-        name: "CorePermissionsSwiftUI",  //Internal module for shared code
+        name: "CorePermissionsSwiftUI",  // Internal module for shared code
         dependencies: ["Introspect"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
         resources: [.process("Resources")]
     ),
     .target(
-        name: "PermissionsSwiftUI",  //Maintain backward compatibility - access to all permissions
-        dependencies: ["Introspect", "CorePermissionsSwiftUI", "PermissionsSwiftUITracking", "PermissionsSwiftUIBluetooth", "PermissionsSwiftUICalendar", "PermissionsSwiftUICamera", "PermissionsSwiftUIContacts", "PermissionsSwiftUILocation", "PermissionsSwiftUILocationAlways", "PermissionsSwiftUIMicrophone", "PermissionsSwiftUIMotion", "PermissionsSwiftUIMusic", "PermissionsSwiftUINotification", "PermissionsSwiftUIPhoto", "PermissionsSwiftUIReminder", "PermissionsSwiftUISpeech", "PermissionsSwiftUIHealth"],
+        name: "PermissionsSwiftUI",  // Maintain backward compatibility - access to all permissions
+        dependencies: ["Introspect", "CorePermissionsSwiftUI", "PermissionsSwiftUITracking",
+                       "PermissionsSwiftUIBluetooth", "PermissionsSwiftUICalendar", "PermissionsSwiftUICamera",
+                       "PermissionsSwiftUIContacts", "PermissionsSwiftUILocation", "PermissionsSwiftUILocationAlways",
+                       "PermissionsSwiftUIMicrophone", "PermissionsSwiftUIMotion", "PermissionsSwiftUIMusic",
+                       "PermissionsSwiftUINotification", "PermissionsSwiftUIPhoto", "PermissionsSwiftUIReminder",
+                       "PermissionsSwiftUISpeech", "PermissionsSwiftUIHealth"],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
     .target(
@@ -113,7 +118,9 @@ let package = Package(
     name: "PermissionsSwiftUI",
     defaultLocalization: "en",
     platforms: [.iOS(.v13)],
-    products: permissionsTargets.map{Product.library(name: $0.name, targets: [$0.name])},
+    products: permissionsTargets.map {
+        Product.library(name: $0.name, targets: [$0.name])
+    },
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", "1.0.0"..<"2.0.0"),
@@ -129,10 +136,11 @@ let package = Package(
         .testTarget(
             name: "PermissionsSwiftUISmallScreenTests",
             dependencies: ["SnapshotTesting"] + permissionsTargets
-                                                    .map{Target.Dependency(stringLiteral: $0.name)},
+                                                    .map{
+                                                        Target.Dependency(stringLiteral: $0.name)
+                                                    },
             exclude: [],
             resources: [.process("__Snapshots__")]
-        ),
-        
+        )
     ] + permissionsTargets
 )

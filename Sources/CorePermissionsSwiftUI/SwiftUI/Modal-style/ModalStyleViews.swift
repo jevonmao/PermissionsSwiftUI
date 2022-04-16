@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//MARK: - Showing Modal Style Permissions
+// MARK: - Showing Modal Style Permissions
 @available(iOS 13.0, tvOS 13.0, *)
 public extension View {
     /**
@@ -302,7 +302,7 @@ public extension View {
     
 }
 
-//MARK: - Deprecated
+// MARK: - Deprecated
 @available(iOS 13.0, tvOS 13.0, *)
 public extension View {
     /**

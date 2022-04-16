@@ -50,8 +50,7 @@ final class MockHealthManager: HealthManager {
         if lastStatus == .notDetermined {
             self.lastStatus = keyStatus
             return keyStatus
-        }
-        else {
+        } else {
             self.lastStatus = .notDetermined
             return .notDetermined
         }
@@ -63,14 +62,11 @@ final class MockHealthManager: HealthManager {
             guard typesToShare != nil || typesToRead != nil else {return}
             if let typesToShare = typesToShare, let typesToRead = typesToRead {
                 requestedPermissions = .init(read: typesToRead as! Set<HKSampleType>, write: typesToShare)
-            }
-            else if let typesToShare = typesToShare {
+            } else if let typesToShare = typesToShare {
                 requestedPermissions = .init(write: typesToShare)
-            }
-            else if let typesToRead = typesToRead {
+            } else if let typesToRead = typesToRead {
                 requestedPermissions = .init(read: typesToRead as! Set<HKSampleType>)
             }
-            
         }
         else {
             completion(false, NSError(domain: "", code: 0, userInfo: nil))

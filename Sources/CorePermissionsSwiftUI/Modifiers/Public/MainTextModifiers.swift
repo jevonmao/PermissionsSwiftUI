@@ -18,7 +18,7 @@ public extension CustomizableView {
      - Parameter _: The custom text to change to
      */
     
-    @inlinable func changeHeaderTo(_ text:String) -> some CustomizableView {
+    @inlinable func changeHeaderTo(_ text: String) -> some CustomizableView {
         store.configStore.mainTexts.headerText = text
         return self
     }
@@ -33,7 +33,7 @@ public extension CustomizableView {
      - Parameter _: The custom text to change to
      */
     
-    @inlinable func changeHeaderDescriptionTo(_ text:String) -> some CustomizableView {
+    @inlinable func changeHeaderDescriptionTo(_ text: String) -> some CustomizableView {
         store.configStore.mainTexts.headerDescription = text
         return self
     }
@@ -48,9 +48,8 @@ public extension CustomizableView {
      - Parameter _: The custom text to change to
      */
     
-    @inlinable func changeBottomDescriptionTo(_ text:String) -> some CustomizableView {
+    @inlinable func changeBottomDescriptionTo(_ text: String) -> some CustomizableView {
         store.configStore.mainTexts.bottomDescription = text
         return self
     }
 }
-
