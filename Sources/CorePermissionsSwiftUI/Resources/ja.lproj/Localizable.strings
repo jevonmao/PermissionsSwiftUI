@@ -1,0 +1,18 @@
+/ *マーク：ボタンを許可* /
+"button_allow" = "ALLOW";
+"button_allowed" = "ALLOWED";
+"button_denied" = "DENIED";
+
+/ *マーク：UIラベル* /
+"permission_header" = "アクセス許可が必要";
+
+"permission_primary_label" = "このアプリの特定の機能を使用するには、権限を付与する必要があります。各権限の説明を参照してください";
+
+"permission_secondary_label" = "すべての機能が正しく機能するには、アクセス許可が必要です。許可されていない場合は、設定でアクセス許可を有効にする必要があります";
+
+/ *マーク：権限（名前と説明）* /
+"camera_title"="カメラ";
+"camera_description"="カメラの使用を許可する";
+
+"health_title" = "健康";
+"health_description" = "あなたの健康情報へのアクセスを許可する";
