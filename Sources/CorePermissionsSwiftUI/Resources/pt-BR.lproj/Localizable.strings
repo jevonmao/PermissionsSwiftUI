@@ -1,0 +1,18 @@
+/* MARK: Botão Permitir */
+"button_allow" = "PERMITIR";
+"button_allowed" = "PERMITIDO";
+"button_denied" = "NEGADO";
+
+/* MARK: rótulos da interface do usuário */
+"permission_header" = "Precisa de permissões";
+
+"permission_primary_label" = "Para usar determinados recursos deste aplicativo, você precisa conceder permissões. Consulte a descrição de cada permissão";
+
+"permission_secondary_label" = "A permissão é necessária para que todos os recursos e funções funcionem corretamente. Se não for permitido, você deve habilitar as permissões nas configurações";
+
+/* MARK: Permissões (nome e descrição) */
+"camera_title" = "Câmera";
+"camera_description" = "Permitir usar sua câmera";
+
+"health_title" = "Saúde";
+"health_description" = "Permitir acessar suas informações de saúde";

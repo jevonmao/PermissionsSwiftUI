@@ -1,0 +1,18 @@
+/* MARCA: Botón Permitir */
+"button_allow" = "PERMITIR";
+"button_allowed" = "PERMITIDO";
+"button_denied" = "DENEGADO";
+
+/* MARCA: etiquetas de interfaz de usuario */
+"permission_header" = "Necesita permisos";
+
+"permission_primary_label" = "Para utilizar ciertas funciones de esta aplicación, debe otorgar permisos. Consulte la descripción de cada permiso";
+
+"permission_secondary_label" = "Los permisos son necesarios para que todas las características y funciones funcionen correctamente. Si no está permitido, debe habilitar los permisos en la configuración";
+
+/* MARCA: Permisos (nombre y descripción) */
+"camera_title" = "Cámara";
+"camera_description" = "Permitir usar su cámara";
+
+"health_title" = "Salud";
+"health_description" = "Permitir acceder a su información de salud";

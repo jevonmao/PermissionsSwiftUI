@@ -20,7 +20,9 @@ import SwiftUI
 import SnapshotTesting 
 import HealthKit
 
-private let referenceSize = UIScreen.main.bounds.size
+fileprivate let referenceSize = UIScreen.main.bounds.size
+#warning("Write unit tests")
+
 @available(iOS 13.0, tvOS 13.0, *)
 final class PermissionsSwiftUITests: XCTestCase {
     func testBindingCombineExtension() {

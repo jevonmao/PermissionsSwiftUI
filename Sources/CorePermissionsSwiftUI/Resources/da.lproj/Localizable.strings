@@ -1,4 +1,18 @@
-/* MARK: Allow Button */
-"button_allow" = "TILLADE";
-"button_allowed" = "TILLADT";
-"button_denied" = "NÆGTET";
+/* MARK: Tillad knap */
+"button_allow" = "TILLAD";
+"button_allowed" = "TILLADET";
+"button_denied" = "AFVISET";
+
+/* MARK: UI-etiketter */
+"permission_header" = "Behøver tilladelser";
+
+"permission_primary_label" = "For at du kan bruge visse funktioner i denne app, skal du give tilladelser. Se beskrivelsen for hver tilladelse";
+
+"permission_secondary_label" = "Tilladelser er nødvendige for at alle funktioner og funktioner kan fungere korrekt. Hvis det ikke er tilladt, skal du aktivere tilladelser i indstillingerne";
+
+/* MARK: Tilladelser (navn og beskrivelse) */
+"camera_title" = "Kamera";
+"camera_description" = "Tillad at bruge dit kamera";
+
+"health_title" = "Sundhed";
+"health_description" = "Giv adgang til dine helbredsoplysninger";

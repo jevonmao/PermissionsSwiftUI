@@ -1,5 +1,18 @@
-/* MARK: Allow Button */
-"button_allow" = "CONSENTIRE";
+/* MARK: pulsante Consenti */
+"button_allow" = "CONSENTI";
 "button_allowed" = "CONSENTITO";
-"button_denied" = "NEGATO";
+"button_denied" = "DENIED";
 
+/* MARK: etichette dell'interfaccia utente */
+"permission_header" = "Richiede autorizzazioni";
+
+"permission_primary_label" = "Per poter utilizzare determinate funzioni di questa app, devi concedere le autorizzazioni. Vedi la descrizione per ciascuna autorizzazione";
+
+"permission_secondary_label" = "Le autorizzazioni sono necessarie per il corretto funzionamento di tutte le caratteristiche e funzioni. Se non sono consentite, è necessario abilitare le autorizzazioni nelle impostazioni";
+
+/* MARK: Permessi (nome e descrizione) */
+"camera_title" = "Fotocamera";
+"camera_description" = "Consenti di utilizzare la tua fotocamera";
+
+"health_title" = "Salute";
+"health_description" = "Consenti l'accesso alle tue informazioni sulla salute";

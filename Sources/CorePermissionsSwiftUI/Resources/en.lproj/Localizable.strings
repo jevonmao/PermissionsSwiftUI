@@ -12,7 +12,7 @@
 
 /* MARK: Permissions (name & description) */
 "camera_title" = "Camera";
-"camera_description" = "Allow to use your camera"
+"camera_description" = "Allow to use your camera";
 
 "health_title" = "Health";
 "health_description" = "Allow to access your health information";

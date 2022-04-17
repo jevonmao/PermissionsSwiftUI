@@ -1,0 +1,18 @@
+
+/* MARK: Allow Button */
+"button_allow" = "अनुमति दें";
+"button_allowed" = "अनुमति";
+"button_denied" = "अस्वीकृत";
+
+/* MARK: UI labels */
+"permission_header" = "अनुमति की आवश्यकता है";
+"permission_primary_label" = "आपके लिए इस ऐप की कुछ विशेषताओं का उपयोग करने के लिए, आपको अनुमति देने की आवश्यकता है। प्रत्येक अनुमति के लिए विवरण देखें";
+"permission_secondary_label" = "सभी सुविधाओं और कार्यों के ठीक से काम करने के लिए अनुमति आवश्यक है। यदि अनुमति नहीं है, तो आपको सेटिंग्स में अनुमतियों को सक्षम करना होगा";
+
+
+/* MARK: Permissions (name & description) */
+"camera_title" = "कैमरा";
+"camera_description" = "अपने कैमरे का उपयोग करने की अनुमति दें";
+
+"health_title" = "स्वास्थ्य";
+"health_description" = "अपनी स्वास्थ्य जानकारी तक पहुंचने की अनुमति दें";

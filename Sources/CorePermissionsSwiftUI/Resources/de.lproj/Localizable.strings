@@ -1,20 +1,18 @@
-/* MARK: Allow Button */
+/* MARK: Schaltfläche zulassen */
 "button_allow" = "ERLAUBEN";
 "button_allowed" = "ERLAUBT";
-"button_denied" = "ABGELEHNT";
+"button_denied" = "VERWEIGERT";
 
-/* MARK: UI labels */
-"permission_header" = "Berechtigungen benötigt";
+/* MARK: UI-Labels */
+"permission_header" = "Berechtigungen erforderlich";
 
-"permission_primary_label" = "Damit Sie bestimmte Funktionen dieser App benutzen können, müssen Sie Berechtigungen zulassen. Siehe Beschreiben der Berechtigung";
+"permission_primary_label" = "Um bestimmte Funktionen dieser App nutzen zu können, müssen Sie Berechtigungen erteilen. Siehe Beschreibung für jede Berechtigung";
 
-"permission_secondary_label" = "Um alle Funktionen ordnungsgemäß benutzen zu können, müssen bestimmte Berechtigungen erteilt werden. Wenn Sie die Berechtigungen nicht erlauben, müssen Sie diese in den Einstellungen erlauben.";
+"permission_secondary_label" = "Berechtigungen sind erforderlich, damit alle Features und Funktionen ordnungsgemäß funktionieren. Wenn nicht, müssen Sie die Berechtigungen in den Einstellungen aktivieren";
 
-/* MARK: Permissions (name & description) */
+/* MARK: Berechtigungen (Name & Beschreibung) */
 "camera_title" = "Kamera";
-"camera_description" = "Erlaube die Verwendung der Kamera"
+"camera_description" = "Erlaube die Verwendung deiner Kamera";
 
-"health_title" = "Health";
-"health_description" = "Erlauben Sie den Zugriff auf Ihre Gesundheitsinformationen";
-
-
+"health_title" = "Gesundheit";
+"health_description" = "Zugriff auf Ihre Gesundheitsinformationen erlauben";

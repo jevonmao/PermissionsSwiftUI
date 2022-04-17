@@ -1,0 +1,18 @@
+/* TANDA: Butang Benar */
+"button_allow" = "BENARKAN";
+"button_allowed" = "DIBENARKAN";
+"button_denied" = "DITOLAK";
+
+/* TANDA: label UI */
+"permission_header" = "Memerlukan Kebenaran";
+
+"permission_primary_label" = "Untuk anda menggunakan ciri tertentu apl ini, anda perlu memberikan kebenaran. Lihat penerangan untuk setiap kebenaran";
+
+"permission_secondary_label" = "Kebenaran diperlukan untuk semua ciri dan fungsi berfungsi dengan baik. Jika tidak dibenarkan, anda perlu mendayakan kebenaran dalam tetapan";
+
+/* MARKAH: Kebenaran (nama & huraian) */
+"camera_title" = "Kamera";
+"camera_description" = "Benarkan untuk menggunakan kamera anda";
+
+"health_title" = "Kesihatan";
+"health_description" = "Benarkan untuk mengakses maklumat kesihatan anda";

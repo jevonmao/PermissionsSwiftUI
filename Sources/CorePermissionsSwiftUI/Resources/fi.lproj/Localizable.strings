@@ -1,5 +1,18 @@
-/* MARK: Allow Button */
-"button_allow" = "SALLIA";
-"button_allowed" = "SALLITTUA";
+/* MERKKI: Salli-painike */
+"button_allow" = "SALLI";
+"button_allowed" = "SALLITTU";
 "button_denied" = "KIELLETTY";
 
+/* MARK: käyttöliittymätunnisteet */
+"permission_header" = "Tarvitset käyttöoikeuksia";
+
+"permission_primary_label" = "Jotta voit käyttää tämän sovelluksen tiettyjä ominaisuuksia, sinun on annettava käyttöoikeudet. Katso kunkin luvan kuvaus";
+
+"permission_secondary_label" = "Lupa tarvitaan, jotta kaikki ominaisuudet ja toiminnot toimisivat oikein. Jos se ei ole sallittua, sinun on otettava käyttöoikeudet käyttöön asetuksissa";
+
+/* MERKKI: Käyttöoikeudet (nimi ja kuvaus) */
+"camera_title" = "Kamera";
+"camera_description" = "Salli käyttää kameraasi";
+
+"health_title" = "Terveys";
+"health_description" = "Salli terveystietojen käyttö";
