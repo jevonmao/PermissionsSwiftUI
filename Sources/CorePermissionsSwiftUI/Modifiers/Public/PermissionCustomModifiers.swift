@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//MARK: Customize Permission Components
+// MARK: Customize Permission Components
 @available(iOS 13.0, tvOS 13.0, *)
 public extension CustomizableView {
     /**
@@ -31,8 +31,8 @@ public extension CustomizableView {
         - description: The description text (optional)
      */
     
-    @inlinable func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?=nil, description: String?=nil) -> some CustomizableView {
-        store.permissionComponentsStore.getPermissionComponent(for: permission){permissionComponent in
+    @inlinable func setPermissionComponent(for permission: PermissionType, image:AnyView, title: String?=nil, description: String? = nil) -> some CustomizableView {
+        store.permissionComponentsStore.getPermissionComponent(for: permission){ permissionComponent in
             permissionComponent.title = title ?? permissionComponent.title
             permissionComponent.imageIcon = image
             permissionComponent.description = description ?? permissionComponent.description
@@ -58,7 +58,7 @@ public extension CustomizableView {
      */
     
     @inlinable func setPermissionComponent(for permission: PermissionType, title: String) -> some CustomizableView {
-        store.permissionComponentsStore.getPermissionComponent(for: permission){permissionComponent in
+        store.permissionComponentsStore.getPermissionComponent(for: permission){ permissionComponent in
             permissionComponent.title = title
         }
         return self
@@ -82,12 +82,12 @@ public extension CustomizableView {
      */
     
     @inlinable func setPermissionComponent(for permission: PermissionType, description: String) -> some CustomizableView {
-        store.permissionComponentsStore.getPermissionComponent(for: permission){$0.description = description}
+        store.permissionComponentsStore.getPermissionComponent(for: permission){ $0.description = description }
         return self
     }
 }
 
-//MARK: Configure Allow Button Colors
+// MARK: Configure Allow Button Colors
 @available(iOS 13.0, tvOS 13.0, *)
 public extension CustomizableView {
     /**
@@ -111,8 +111,7 @@ public extension CustomizableView {
     }
 }
 
-
-//MARK: Set Overall Accent Color
+// MARK: Set Overall Accent Color
 @available(iOS 13.0, tvOS 13.0, *)
 public extension CustomizableView {
     /**
@@ -149,4 +148,3 @@ public extension CustomizableView {
         return self
     }
 }
-

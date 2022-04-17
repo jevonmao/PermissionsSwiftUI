@@ -19,6 +19,6 @@ final class UITests: XCTestCase {
     }
     
     func testTitle() {
-        //XCTAssertTrue(app.staticTexts["Hello World!"].exists)
+        // XCTAssertTrue(app.staticTexts["Hello World!"].exists)
     }
 }

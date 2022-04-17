@@ -25,7 +25,7 @@ public struct ButtonColor: Equatable {
         self.foregroundColor = foregroundColor
         self.backgroundColor = backgroundColor
     }
-    //MARK: Properties
+    // MARK: Properties
     ///The color of type `Color` for the foreground text
     public var foregroundColor: Color 
     ///The color of type `Color` for the foreground text

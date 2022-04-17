@@ -14,7 +14,7 @@ import Combine
 @available(iOS 13.0, tvOS 13.0, *)
 public class PermissionSchemaStore: ObservableObject {
 
-    //MARK: Filtered permission arrays
+    // MARK: Filtered permission arrays
     var undeterminedPermissions: [PermissionType.PermissionManager] {
         FilterPermissions.filterForShouldAskPermission(for: permissions)
     }
@@ -27,7 +27,7 @@ public class PermissionSchemaStore: ObservableObject {
     var successfulPermissions: [JMResult]?
     var erroneousPermissions: [JMResult]?
     
-    //MARK: Controls dismiss restriction
+    // MARK: Controls dismiss restriction
     var shouldStayInPresentation: Bool {
         if configStore.restrictDismissal ||
             ((permissionViewStyle == .modal && store.restrictModalDismissal) ||
@@ -40,7 +40,7 @@ public class PermissionSchemaStore: ObservableObject {
         }
         return false
     }
-    //MARK: Initialized configuration properties
+    // MARK: Initialized configuration properties
     var configStore: ConfigStore
     var store: PermissionStore
     @Published var permissions: [PermissionType.PermissionManager]

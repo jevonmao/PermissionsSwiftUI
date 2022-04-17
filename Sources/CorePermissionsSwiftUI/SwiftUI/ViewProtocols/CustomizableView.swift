@@ -14,7 +14,7 @@ import SwiftUI
  */
 @available(iOS 13.0, tvOS 13.0, *)
 public protocol CustomizableView: View {
-    //MARK: Environment data storage
+    // MARK: Environment data storage
     ///A global data storage object that is implemented by views
     var store: PermissionStore {get}
     ///A schema storage object that is implemented by views

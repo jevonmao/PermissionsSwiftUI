@@ -12,30 +12,30 @@ import Foundation
  */
 @available(iOS 13.0, tvOS 13.0, *)
 public struct ConfigStore {
-    //MARK: Creating a new configuration store
+    // MARK: Creating a new configuration store
     ///Creates a new configuration store with default settings
     public init(){}
-    //MARK: Configuring View Texts
+    // MARK: Configuring View Texts
     ///The text for text label components, including header and descriptions
     public var mainTexts = MainTexts()
     
-    //MARK: Customizing Colors
+    // MARK: Customizing Colors
     ///The color configuration for permission allow buttons
     public var allButtonColors = AllButtonColors()
     
-    //MARK: Change Auto Dismiss Behaviors
+    // MARK: Change Auto Dismiss Behaviors
     ///Whether to auto dismiss the view after last permission is allowed
     public var autoDismiss: Bool = false
 
-    //MARK: Configure Auto Authorization Checking
+    // MARK: Configure Auto Authorization Checking
     ///Whether to auto check for authorization status before showing, and show the view only if permission is in `notDetermined`
     public var autoCheckAuth: Bool = true
     
-    //MARK: Prevent Dismissal Before All Permissions Interacted
+    // MARK: Prevent Dismissal Before All Permissions Interacted
     ///Whether to prevent dismissal of  view before all permissions have been interacted (explict deny or allow)
     public var restrictDismissal: Bool = true
 
-    //MARK: `onAppear` and `onDisappear` Executions
+    // MARK: `onAppear` and `onDisappear` Executions
     ///Override point for executing action when PermissionsSwiftUI view appears
     public var onAppear: (()->Void)?
     ///Override point for executing action when PermissionsSwiftUI view disappears

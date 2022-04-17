@@ -23,7 +23,7 @@ public struct AllButtonColors: Equatable {
         if self == allButtonColors {return false}
         return true
     }
-    //MARK: Creating New Button Configs
+    // MARK: Creating New Button Configs
     /**
      - parameters:
         - buttonIdle: The button color configuration for the default, idle state
@@ -80,7 +80,7 @@ public struct AllButtonColors: Equatable {
                                         backgroundColor: self.tertiaryColor)
     }
     
-    //MARK: Button Color States
+    // MARK: Button Color States
     
     @usableFromInline var primaryColor: Color
     var tertiaryColor: Color

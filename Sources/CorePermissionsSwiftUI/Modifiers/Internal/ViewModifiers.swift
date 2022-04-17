@@ -23,7 +23,7 @@ extension View {
     }
 }
 
-//Custom view modifier for the button component
+// Custom view modifier for the button component
 @available(iOS 13.0, tvOS 13.0, *)
 struct ButtonStatusColor: ViewModifier {
     var allowButtonStatus: AllowButtonStatus
@@ -42,19 +42,18 @@ struct ButtonStatusColor: ViewModifier {
             return content.allowButton(foregroundColor: colorStore.buttonAllowed.foregroundColor,
                                        backgroundColor: colorStore.buttonAllowed.backgroundColor)
 
-
         case .denied:
             return content.allowButton(foregroundColor: colorStore.buttonDenied.foregroundColor,
                                        backgroundColor: colorStore.buttonDenied.backgroundColor)
         }
     }
 }
-//Custom modifier that nests within ButtonStatusColor to further extract code
+// Custom modifier that nests within ButtonStatusColor to further extract code
 @available(iOS 13.0, tvOS 13.0, *)
 struct AllowButton: ViewModifier {
     var foregroundColor: Color
     var backgroundColor: Color
-    var buttonSizeConstant :CGFloat {
+    var buttonSizeConstant: CGFloat {
         return screenSize.width < 400 ?  70-(1000-screenSize.width)/30 : 70
     }
     func body(content: Content) -> some View {
@@ -64,7 +63,7 @@ struct AllowButton: ViewModifier {
         .minimumScaleFactor(0.2)
         .lineLimit(1)
         .foregroundColor(foregroundColor)
-        .padding(.vertical,6)
+        .padding(.vertical, 6)
         .padding(.horizontal, 6)
         .background(
             Capsule()
@@ -91,9 +90,9 @@ struct TextHorizontalAlign<BodyView: View>: View {
     var body: some View {
         switch alignment {
         case .leading:
-            HStack{bodyView; Spacer()}
+            HStack { bodyView; Spacer() }
         case .trailing:
-            HStack{Spacer(); bodyView}
+            HStack { Spacer(); bodyView }
         default:
             bodyView
         }
