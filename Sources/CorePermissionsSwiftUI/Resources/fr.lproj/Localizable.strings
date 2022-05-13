@@ -14,7 +14,7 @@
 
 /* MARK: Permissions (name & description) */
 "camera_title" = "Caméra";
-"camera_description" = "Autoriser l'utilisation de la caméra"
+"camera_description" = "Autoriser l'utilisation de la caméra";
 
 "health_title" = "Santé";
 "health_description" = "Autoriser l'accés aux informations de santé";
