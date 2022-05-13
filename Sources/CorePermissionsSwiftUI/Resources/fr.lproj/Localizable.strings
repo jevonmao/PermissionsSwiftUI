@@ -1,0 +1,21 @@
+/* MARK: Allow Button */
+"button_allow" = "AUTORISER";
+"button_allowed" = "AUTORISÉ";
+"button_denied" = "REFUSÉ";
+
+/* MARK: UI labels */
+"permission_header" = "Autorisations Nécessaires";
+
+"permission_primary_label" = "Pour pouvoir utiliser certaines fonctionnalités de cette application, vous devez donner des autorisations. Voir la description de chaque autorisation";
+
+
+"permission_secondary_label" = "Une autorisation est nécessaire pour que toutes les fonctionnalités et fonctions fonctionnent correctement. Si ce n'est pas autorisé, vous devez activer les autorisations dans les paramètres";
+
+
+/* MARK: Permissions (name & description) */
+"camera_title" = "Caméra";
+"camera_description" = "Autoriser l'utilisation de la caméra"
+
+"health_title" = "Santé";
+"health_description" = "Autoriser l'accés aux informations de santé";
+
