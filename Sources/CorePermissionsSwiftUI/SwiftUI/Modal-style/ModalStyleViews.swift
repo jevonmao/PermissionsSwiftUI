@@ -279,11 +279,53 @@ public extension View {
                 onDisappear: onDisappear,
                 onDisappearHandler: onDisappearHandler)
     }
+    /**
+     Displays a PermissionsSwiftUI modal view that displays and handles permissions.
+
+     - Parameters:
+        - showModal: A `Binding<Bool>` value to toggle show the JMPermission view
+        - for: An array of type `PermissionModel` to specify permissions to show
+        - autoDismiss: Specify whether to auto dismiss modal after user allowing the last item. Default is `true`
+        - autoCheckAuthorization: Specify whether to auto check for authorization status before showing. The modal will seamlessly only display permission UI for permission that are in `notDetermined` status. If no permission meet the criteria, the alert will not show at all. Default is `true`
+        - restrictDismissal: Specify whether to prevent dismissal of modal view before all permissions have been interacted. Default is `true`.
+        - useAltButton: Whether to use the alternative "NEXT" in place of "ALLOW" for the allow button label
+        - onAppear: Override point for when the modal appears
+        - onDisappear: Override point for when the modal modal disappears
+        - onDisappearHandler: Returns back results of permission request when the modal dismissess
+        - successful:  Permissions that are successfully requested and granted. Will return nil if no permissions are successful.
+        - erroneous: Permissions that failed with error while requesting, or explicitly denied. Will return nil if all permissions are successful.
+     - Note:
+        The `autoDismiss` feature currently will not auto dismiss, if the user has not allowed all permissions. If the user denied or ignored some permissions, the modal or alert will not auto dismiss. This encourages the user to go to settings and manually re-allow denied permissions.
+        The `authCheckAuthorization` is highly recommended for best user experience.
+     - Returns:
+        Returns a new view. Will show a modal that will overlay your existing view to show PermissionsSwiftUI permission handling components.
+
+     */
+    @inlinable func JMModal(showModal: Binding<Bool>,
+                 for permissions: [PermissionType.PermissionManager],
+                 autoDismiss: Bool?=nil,
+                 autoCheckAuthorization: Bool?=nil,
+                 restrictDismissal: Bool?=nil,
+                 useAltButton: Bool? = nil,
+                 onAppear: (() -> Void)?=nil,
+                 onDisappear: (() -> Void)?=nil,
+                 onDisappearHandler: Optional<(_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void>=nil) -> some CustomizableView {
+        initializeJMModal(showModal: showModal,
+                for: permissions,
+                autoDismiss: autoDismiss,
+                autoCheckAuthorization: autoCheckAuthorization,
+                restrictDismissal: restrictDismissal,
+                useAltButton: useAltButton,
+                onAppear: onAppear,
+                onDisappear: onDisappear,
+                onDisappearHandler: onDisappearHandler)
+    }
     @usableFromInline internal func initializeJMModal(showModal: Binding<Bool>,
                          for permissions: [PermissionType.PermissionManager]?=nil,
                          autoDismiss: Bool?=nil,
                          autoCheckAuthorization: Bool?=nil,
                          restrictDismissal: Bool?=nil,
+                         useAltButton: Bool?=nil,
                          onAppear: (() -> Void)?=nil,
                          onDisappear: (() -> Void)?=nil,
                          onDisappearHandler: (([JMResult]?, [JMResult]?) -> Void)?=nil) -> some CustomizableView {
@@ -295,6 +337,7 @@ public extension View {
         store.configStore.autoCheckAuth = autoCheckAuthorization ?? true
         store.configStore.restrictDismissal = restrictDismissal ?? true
         store.configStore.onDisappearHandler = onDisappearHandler
+        store.configStore.mainTexts.useAltButtonLabel = useAltButton ?? false
         return ModalViewWrapper(for: self, showing: showModal, store: store)
 
 

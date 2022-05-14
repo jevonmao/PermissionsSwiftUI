@@ -93,7 +93,6 @@ struct PermissionSectionCell: View {
                 AllowButtonSection(action: handlePermissionRequest,
                                    useAltText: useAltText,
                                    allowButtonStatus: $allowButtonStatus)
-                    .animation(.default)
             }
             
         }

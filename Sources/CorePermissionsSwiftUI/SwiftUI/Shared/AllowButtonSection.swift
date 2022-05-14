@@ -36,5 +36,6 @@ struct AllowButtonSection: View {
         })
         .layoutPriority(-1)
         .accessibility(identifier: "Allow button")
+        .animation(.easeInOut, value: buttonText)
     }
 }
