@@ -65,4 +65,6 @@ public struct MainTexts: Equatable {
     public var headerDescription: String = "permission_primary_label".localized
     ///Text to display for bottom part description text
     public var bottomDescription: String = "permission_secondary_label".localized
+    ///Whether to use the alternative "NEXT" in place of "ALLOW" for the allow button label
+    public var useAltButtonLabel: Bool = false
 }

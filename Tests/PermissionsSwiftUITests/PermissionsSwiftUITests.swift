@@ -423,6 +423,25 @@ final class PermissionsSwiftUITests: XCTestCase {
         XCTAssertFalse(trueBinding.combine(with: falseBinding).wrappedValue)
         XCTAssertFalse(falseBinding.combine(with: .constant(false)).wrappedValue)
     }
+
+    func testAllowButtonAltLabel() {
+        let store = PermissionStore()
+        let normalView = PermissionSectionCell(permissionManager: .calendar,
+                                               showing: .constant(true))
+                            .environmentObject(store)
+                            .environmentObject(PermissionSchemaStore(store: store,
+                                                                     permissionViewStyle: .modal))
+        store.configStore.mainTexts.useAltButtonLabel = true
+        let altView = PermissionSectionCell(permissionManager: .calendar,
+                                            showing: .constant(true))
+                            .environmentObject(store)
+                            .environmentObject(PermissionSchemaStore(store: store,
+                                                                     permissionViewStyle: .modal))
+        assertSnapshot(matching: normalView, as: .image(precision: 0.99))
+        assertSnapshot(matching: altView, as: .image(precision: 0.99))
+    }
+
+
 //    func testAlertViewSinglePermission(){
 //        store.updateStore(property: {$0.autoCheckAlertAuth=$1}, value: false)
 //        let view = EmptyView()

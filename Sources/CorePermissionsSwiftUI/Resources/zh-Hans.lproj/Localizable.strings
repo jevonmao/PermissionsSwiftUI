@@ -2,6 +2,7 @@
 "button_allow" = "允许";
 "button_allowed" = "已允许";
 "button_denied" = "未允许";
+"button_next" = "继续";
 
 /* MARK: UI labels */
 "permission_header" = "需要权限";

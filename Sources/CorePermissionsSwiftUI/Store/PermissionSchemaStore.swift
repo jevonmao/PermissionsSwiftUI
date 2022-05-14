@@ -53,7 +53,7 @@ public class PermissionSchemaStore: ObservableObject {
         self.store = store
         self.permissionViewStyle = permissionViewStyle
     }
-    
+
 }
 
 @usableFromInline enum PermissionViewStyle {

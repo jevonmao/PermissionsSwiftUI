@@ -80,13 +80,19 @@ struct PermissionSectionCell: View {
             }
             .padding(.horizontal, 3)
             Spacer()
+
+            let useAltText = store.configStore.mainTexts.useAltButtonLabel
             if schemaStore.permissionViewStyle == .alert {
                 //No animation for alert to avoid unwanted jiggle
-                AllowButtonSection(action: handlePermissionRequest, allowButtonStatus: $allowButtonStatus)
+                AllowButtonSection(action: handlePermissionRequest,
+                                   useAltText: useAltText,
+                                   allowButtonStatus: $allowButtonStatus)
             }
             else{
                 //Separate case for modal style because an animation is needed for best user experience
-                AllowButtonSection(action: handlePermissionRequest, allowButtonStatus: $allowButtonStatus)
+                AllowButtonSection(action: handlePermissionRequest,
+                                   useAltText: useAltText,
+                                   allowButtonStatus: $allowButtonStatus)
                     .animation(.default)
             }
             
