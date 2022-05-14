@@ -1,6 +1,6 @@
 #!/bin/sh
 
-percentage=$(jazzy --module CorePermissionsSwiftUI --swift-build-tool xcodebuild --build-tool-arguments -scheme,PermissionsSwiftUI,-sdk,iphoneos,-destination,id=6D8B3936-07C0-4F7D-8ADB-81B3E5BC4112,-verbose --author 'Jevon Mao' --author_url https://jingwen-mao.mit-license.org/ | tail -4 | head -n 1 | cut -d " " -f1
+percentage=$(jazzy --module CorePermissionsSwiftUI --swift-build-tool xcodebuild --build-tool-arguments -scheme,PermissionsSwiftUI,-sdk,iphoneos,-destination,id=A06F71FC-0B53-4741-AD85-D237B6FB06A0,-verbose --author 'Jevon Mao' --author_url https://jingwen-mao.mit-license.org/ | tail -4 | head -n 1 | cut -d " " -f1
 )
 
 #if [ $? -eq 0 ]

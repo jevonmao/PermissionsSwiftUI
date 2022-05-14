@@ -425,19 +425,19 @@ final class PermissionsSwiftUITests: XCTestCase {
     }
 
     func testAllowButtonAltLabel() {
-        let store = PermissionStore()
+        var store = PermissionStore()
         let normalView = PermissionSectionCell(permissionManager: .calendar,
                                                showing: .constant(true))
                             .environmentObject(store)
                             .environmentObject(PermissionSchemaStore(store: store,
                                                                      permissionViewStyle: .modal))
+        assertSnapshot(matching: normalView, as: .image(precision: 0.99))
         store.configStore.mainTexts.useAltButtonLabel = true
         let altView = PermissionSectionCell(permissionManager: .calendar,
                                             showing: .constant(true))
                             .environmentObject(store)
                             .environmentObject(PermissionSchemaStore(store: store,
                                                                      permissionViewStyle: .modal))
-        assertSnapshot(matching: normalView, as: .image(precision: 0.99))
         assertSnapshot(matching: altView, as: .image(precision: 0.99))
     }
 
