@@ -84,10 +84,10 @@ target 'test abstract' do
 end
 ```
 ## 🚀 Quickstart
-> Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open source project.
+> Before you start, please `star ★` this repository. Your star is my biggest motivation to pull all-nighters and maintain this open-source project.
 
 ### ⚠️ v1.4.0 Migration Guide
-`v1.4` is here! If you encounter any issues, please checkout the [migration guide](https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0) designed to help developers resolve any deprecations and API updates.
+`v1.4` is here! If you encounter any issues, please check out the [migration guide](https://github.com/jevonmao/PermissionsSwiftUI/wiki/Migrating-to-v1.4.0) designed to help developers resolve any deprecations and API updates.
 
 ### Modal Style
 To use PermissionsSwiftUI, simply add the `JMModal` modifier to any view:
@@ -117,7 +117,7 @@ To show a permission pop up alert, use:
 .JMAlert(showModal: $showModal, for: [.locationAlways, .photo])
 ```
 Similar to the previous `JMPermissions`, you need to pass in a `Binding<Bool>` to show the view, and add whatever permissions you want to show.
-To quickly glance all of PermissionsSwiftUI's customization and configurations, checkout the [cheatsheet](#cheatsheat)!
+To quickly glance at all of PermissionsSwiftUI's customization and configurations, check out the [cheatsheet](#cheatsheat)!
 <br /> <br /> <br /> <br /> <br /> <br />
 
 ## 🛠️ Usage
@@ -159,7 +159,7 @@ Even full SwiftUI views will work😱:
 .setPermissionComponent(for: .camera, 
                         image: AnyView(YourCoolView())
 ```
-You can use custom text and icon for all the supported permissions, with a single line of code.
+You can use custom text and icons for all the supported permissions, with a single line of code.
 ### Customize Header Texts
 To customize the header title, use the modifier `changeHeaderTo`:
 <img align="right" src="https://github.com/jevonmao/PermissionsSwiftUI/blob/main/Resources/Header%20annotation.png?raw=true" alt="Annotated for headers screen" height="400" />
@@ -192,7 +192,7 @@ The same view modifier closure for state changes are available for the `JMAlert`
                      onDisappear: {print("Disappeared")})
 ```
 ### Auto Check Authorization
-PermissionsSwiftUI by default will automatically check for authorization status. It will only show permissions that are currently `notDetermined` status. (iOS system prevent developers from asking denied permissions. Allowed permissions will also be ignored by PermissionsSwiftUI). If all permissions are allowed or denied, PermissionsSwiftUI will not show the modal or alert at all.
+PermissionsSwiftUI by default will automatically check for authorization status. It will only show permissions that are currently `notDetermined` status. (the iOS system prevents developers from asking for denied permissions. Allowed permissions will also be ignored by PermissionsSwiftUI). If all permissions are allowed or denied, PermissionsSwiftUI will not show the modal or alert at all.
 To set auto check authorization, use the `autoCheckAuthorization` parameter:
 ```Swift
 .JMModal(showModal: $showModal, for: [.camera], autoCheckAuthorization: false)
@@ -202,7 +202,7 @@ same applies for JMAlert
 .JMAlert(showModal: $showModal, for: [.camera], autoCheckAuthorization: false)
 ```
 ### Auto Dismiss
-PermissionsSwiftUI by default will not have any auto dimiss behavior. You can override this behaviour to make it automatically dismiss the modal or alert after user allows the last permission item. (All permissions must be ALLOWED, if any is DENIED, it will not auto dismiss).
+PermissionsSwiftUI by default will not have any auto dismiss behavior. You can override this behavior to make it automatically dismiss the modal or alert after the user allows the last permission item. (All permissions must be ALLOWED, if any is DENIED, it will not auto dismiss).
 ```Swift
 .JMModal(... autoDismiss: Bool) -> some View
 ```
@@ -239,7 +239,7 @@ To unleash the full customization of all button colors under all states, you nee
 For more information regarding the above method, reference the [official documentation](https://jevonmao.github.io/PermissionsSwiftUI/Structs/AllButtonColors.html).
 
 ### Restrict Dismissal
-PermissionsSwiftUI will by default, prevent the user from dismissing the modal and alert, before all permissions have been interacted. This means if the user has not explictly denied or allowed EVERY permission shown, they will not be able to dismiss the PermissionsSwiftUI view. This restrict dismissal behavior can be overriden by the `var restrictModalDismissal: Bool` or `var restrictAlertDismissal: Bool` properties.
+PermissionsSwiftUI will by default, prevent the user from dismissing the modal and alert before all permissions have been interacted with. This means if the user has not explicitly denied or allowed EVERY permission shown, they will not be able to dismiss the PermissionsSwiftUI view. This restricts dismissal behavior can be overridden by the `var restrictModalDismissal: Bool` or `var restrictAlertDismissal: Bool` properties.
 To disable the default restrict dismiss behavior:
 ```Swift
 .JMModal(showModal: $show, for permissions: [.camera], restrictDismissal: false)
@@ -258,9 +258,9 @@ let model: PermissionStore = {
     .JMModal(showModal: $showModal, forModel: model)
 ```
 ### Configuring Health Permissions
-Unlike all the other permissions, the configuration for health permission is a little different. Because Apple require developers to explictly set read and write types, PermissionsSwiftUI greatly simplifies the process.
+Unlike all the other permissions, the configuration for health permission is a little different. Because Apple requires developers to explicitly set read and write types, PermissionsSwiftUI greatly simplifies the process.
 #### `HKAccess`
-The structure HKAccess is required when initalizing health permission’s enum associated values. It encapsulates the read and write type permissions for the health permission.
+The structure HKAccess is required when initializing health permission’s enum associated values. It encapsulates the read and write type permissions for the health permission.
 
 To set read and write health types (`activeEnergyBurned` is used as example here):
 ```Swift
@@ -283,7 +283,7 @@ let readTypes = Set([HKSampleType.quantityType(forIdentifier: .activeEnergyBurne
 .JMModal(showModal: $showModal, for: [.health(categories: .init(read: readTypes))])
 
 ```
-## 📖 Cheatsheat 
+## 📖 Cheatsheet 
 
 ### Modifiers
 **Customize overall accent color:**
@@ -351,7 +351,7 @@ Contributions are welcome here for coders and non-coders alike. No matter what y
 ## Additional Information
 
 ### Acknowledgement
-SPPermissions is in large a SwiftUI remake of famous Swift library **[SPPermissions](https://github.com/varabeis/SPPermissions)** by @verabeis. SPPermissions was initially created in 2017, and today on GitHub has over 4000 stars. PermissionsSwiftUI aims to deliver a just as beautiful and powerful library in SwiftUI. If you `star ★` my project PermissionsSwiftUI, be sure to checkout the original project SPPermissions where I borrowed the UI Design, some parts of README.md page, and important source code references along the way.
+SPPermissions is in large a SwiftUI remake of the famous Swift library **[SPPermissions](https://github.com/varabeis/SPPermissions)** by @verabeis. SPPermissions was initially created in 2017, and today on GitHub has over 4000 stars. PermissionsSwiftUI aims to deliver a just as beautiful and powerful library in SwiftUI. If you `star ★` my project PermissionsSwiftUI, be sure to check out the original project SPPermissions where I borrowed the UI Design, some parts of README.md page, and important source code references along the way.
 ### License
 PermissionsSwiftUI is created by Jingwen (Jevon) Mao and licensed under the [MIT License](https://jingwen-mao.mit-license.org)
 
