@@ -1,7 +1,7 @@
 /* MARK: Allow Button */
-"button_allow" = "ALLOW";
-"button_allowed" = "ALLOWED";
-"button_denied" = "DENIED";
+"button_allow" = "موافق";
+"button_allowed" = "تم";
+"button_denied" = "مرفوض";
 "button_next" = "التالي";
 
 /* MARK: UI labels */
