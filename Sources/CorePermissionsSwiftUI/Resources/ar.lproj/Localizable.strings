@@ -1,0 +1,19 @@
+/* MARK: Allow Button */
+"button_allow" = "ALLOW";
+"button_allowed" = "ALLOWED";
+"button_denied" = "DENIED";
+"button_next" = "التالي";
+
+/* MARK: UI labels */
+"permission_header" = "أذونات";
+"permission_primary_label" = "من أجل استخدام ميزات معينة من هذا التطبيق ، تحتاج إلى منح أذونات. راجع وصف كل إذن";
+"permission_secondary_label" = "الإذن ضروري لجميع الميزات والوظائف للعمل بشكل صحيح. إذا لم يكن مسموحا به، فيجب عليك تمكين الأذونات في الإعدادات";
+
+/* MARK: Permissions (name & description) */
+"camera_title" = "الكاميرا";
+"camera_description" = "التصريح باستخدام الكاميرا";
+
+"health_title" = "صحة";
+"health_description" = "التصريح بالوصول لمعلومات صحتك";
+
+
