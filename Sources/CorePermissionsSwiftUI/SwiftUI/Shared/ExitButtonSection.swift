@@ -27,16 +27,23 @@ struct ExitButtonSection: View {
             action()
             
         }, label: {
-            Circle()
-                .fill(Color(.systemGray4))
-                .frame(width: buttonSizeConstant, height: buttonSizeConstant)
-                .overlay(
-                    Image(systemName: "xmark")
-                        .font(.system(size: 18, weight: .bold, design: .rounded))
-                        .minimumScaleFactor(0.2)
-                        .foregroundColor(Color(.systemGray))
-                        .padding(4)
-                )
+            
+            // show button if dismissial is allowed && autoDismiss is disabled ( restrictDismissal == false, autoDismiss == false)
+            // otherwise, only show the button except if the user fully interacted with all permission prompts ( shouldStayInPresentation )
+            
+            if (schemaStore.store.configStore.restrictDismissal == false && schemaStore.store.configStore.autoDismiss == false) || schemaStore.shouldStayInPresentation == false {
+                
+                Circle()
+                    .fill(Color(.systemGray4))
+                    .frame(width: buttonSizeConstant, height: buttonSizeConstant)
+                    .overlay(
+                        Image(systemName: "xmark")
+                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .minimumScaleFactor(0.2)
+                            .foregroundColor(Color(.systemGray))
+                            .padding(4)
+                    )
+            }
         })
         .accessibility(identifier: "Exit button")
     }
