@@ -112,7 +112,7 @@ let permissionsTargets: [Target] = [
 let package = Package(
     name: "PermissionsSwiftUI",
     defaultLocalization: "en",
-    platforms: [.iOS(.v11)],
+    platforms: [.iOS(.v13)],
     products: permissionsTargets.map{Product.library(name: $0.name, targets: [$0.name])},
     dependencies: [
         // Dependencies declare other packages that this package depends on.
