@@ -31,14 +31,14 @@ struct HeaderView: View {
                     }
                 
                 HStack {
-                        Text(mainText.headerText)
-                            .font(.system(style == .alert ? .title : .largeTitle, design: .rounded))
-                            .fontWeight(.bold)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.85)
-                            .allowsTightening(true)
-                            .layoutPriority(1)
-                            .accessibility(identifier: "Main title")
+                    Text(.init(mainText.headerText))
+                        .font(.system(style == .alert ? .title : .largeTitle, design: .rounded))
+                        .fontWeight(.bold)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.85)
+                        .allowsTightening(true)
+                        .layoutPriority(1)
+                        .accessibility(identifier: "Main title")
                             
                             
                     Spacer()
@@ -56,7 +56,7 @@ struct HeaderView: View {
             .padding(.horizontal, style == .alert ? 0 : 16)
             
             if style == .modal {
-                Text(mainText.headerDescription)
+                Text(.init(mainText.headerDescription))
                     .font(.system(.body, design: .rounded))
                     .fontWeight(.medium)
                     .foregroundColor(Color(.systemGray))
