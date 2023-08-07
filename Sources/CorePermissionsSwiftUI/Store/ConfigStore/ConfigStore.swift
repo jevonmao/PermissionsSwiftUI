@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 /**
  The data storage class that contains configurable settings
@@ -35,6 +36,9 @@ public struct ConfigStore {
     ///Whether to prevent dismissal of  view before all permissions have been interacted (explict deny or allow)
     public var restrictDismissal: Bool = true
 
+    //MARK: Configure permission description text color
+    public var permissionDescriptionForeground: any ShapeStyle = Color(.systemGray2)
+    
     //MARK: `onAppear` and `onDisappear` Executions
     ///Override point for executing action when PermissionsSwiftUI view appears
     public var onAppear: (()->Void)?

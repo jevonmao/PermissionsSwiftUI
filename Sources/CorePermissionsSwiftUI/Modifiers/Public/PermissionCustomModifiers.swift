@@ -148,5 +148,18 @@ public extension CustomizableView {
         store.configStore.allButtonColors = buttonColors
         return self
     }
+
+    /**
+     Customizes the text foreground style for all the permission descriptions.
+
+     - Parameters:
+        - foreground: The new customized color
+
+     */
+
+    @inlinable func setPermissionDescription(foreground color: any ShapeStyle) -> some CustomizableView {
+        store.configStore.permissionDescriptionForeground = color
+        return self
+    }
 }
 
