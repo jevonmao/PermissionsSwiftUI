@@ -14,10 +14,12 @@ import CorePermissionsSwiftUI
 public extension PermissionManager {
     ///Permission that allows app to read & write to device calendar
     @available(tvOS, unavailable)
+    @available(iOS 17.0, *)
     static let calendarFull = JMCalendarPermissionManager(requestedAccessLevel: .full)
 
     ///Permission that allows app to only write to device calendar
     @available(tvOS, unavailable)
+    @available(iOS 17.0, *)
     static let calenderWrite = JMCalendarPermissionManager(requestedAccessLevel: .writeOnly)
 
     ///Permission that allows app to read & write to device calendar before iOS 17

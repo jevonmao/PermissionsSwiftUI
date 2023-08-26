@@ -11,6 +11,9 @@ import EventKit
 open class EventPermissionManager: PermissionManager {
     public init(requestedAccessLevel: AccessLevel = .legacy) {
         self.requestedAccessLevel = requestedAccessLevel
+        if requestedAccessLevel == .legacy {
+            NSLog("[PermissionsSwiftUI]: WARNING! Using legacy calendar or reminder permission, which will NOT work in iOS 17 and always return denied due to Apple EventKit API changes. Learn more: https://developer.apple.com/documentation/eventkit/accessing_the_event_store")
+        }
     }
 
 
