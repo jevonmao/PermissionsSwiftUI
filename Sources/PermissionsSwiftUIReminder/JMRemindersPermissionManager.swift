@@ -19,7 +19,6 @@ public extension PermissionManager {
 
     ///Permission that allows app to read & write to device reminder
     @available(tvOS, unavailable)
-    @available(iOS 17.0, *)
     static let remindersFull = JMRemindersPermissionManager(requestedAccessLevel: .full)
 }
 @available(iOS 13.0, tvOS 13.0, *)
