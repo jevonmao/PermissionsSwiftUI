@@ -11,6 +11,7 @@ import Intents
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionManager {
+    ///Permission that allows Siri and Maps to communicate with your app
     static let siri = JMSiriPermissionManager()
 }
 

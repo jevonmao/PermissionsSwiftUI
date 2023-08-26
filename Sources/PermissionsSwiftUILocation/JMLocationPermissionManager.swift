@@ -12,6 +12,7 @@ import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionManager {
+    ///The `location` permission allows the device's positoin to be tracked
     static let location = JMLocationPermissionManager()
 }
 

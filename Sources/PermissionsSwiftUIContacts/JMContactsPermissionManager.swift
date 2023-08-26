@@ -13,6 +13,7 @@ import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionManager {
+    ///A permission that allows developers to read & write to device contacts
     static let contacts = JMContactsPermissionManager()
 }
 

@@ -12,6 +12,7 @@ import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionManager {
+    ///Permission that allows app to use speech recognition
     static let speech = JMSpeechPermissionManager()
 }
 

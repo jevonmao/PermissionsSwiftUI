@@ -12,6 +12,7 @@ import CorePermissionsSwiftUI
 #if !os(tvOS)
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionManager {
+    ///The `locationAlways` permission provides location data even if app is in background
     static let locationAlways = JMLocationAlwaysPermissionManager()
 }
 

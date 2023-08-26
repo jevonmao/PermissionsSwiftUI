@@ -21,6 +21,16 @@ extension View {
     func textHorizontalAlign(_ alignment: Alignment) -> some View {
         TextHorizontalAlign(alignment: alignment, bodyView: self)
     }
+    
+    @ViewBuilder
+    func compatibleForegroundStyle(_ style: any ShapeStyle) -> some View {
+        if #available(iOS 15, *) {
+            self.foregroundStyle(style)
+        }
+        else {
+            self.foregroundColor(style as? Color)
+        }
+    }
 }
 
 //Custom view modifier for the button component

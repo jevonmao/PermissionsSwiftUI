@@ -73,7 +73,7 @@ struct PermissionSectionCell: View {
                 Text(currentPermission.description)
                     .font(.system(size: smallFontSizeConstant))
                     .lineLimit(3)
-                    .foregroundColor(Color(.systemGray2))
+                    .compatibleForegroundStyle(store.configStore.permissionDescriptionForeground)
                     .minimumScaleFactor(0.5)
                     .accessibility(identifier: "Permission description")
                 

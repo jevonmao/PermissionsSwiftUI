@@ -12,6 +12,7 @@ import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionManager {
+    ///The `notification` permission allows the iOS system to receive notification from app
     static let notification = JMNotificationPermissionManager()
 }
 

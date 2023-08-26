@@ -11,6 +11,7 @@ import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
 public extension PermissionManager {
+    ///Permission allows developers to interact with the device microphone
     static let microphone = JMMicrophonePermissionManager()
 }
 
