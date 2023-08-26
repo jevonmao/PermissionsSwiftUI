@@ -15,10 +15,10 @@ import Combine
 public class PermissionSchemaStore: ObservableObject {
 
     //MARK: Filtered permission arrays
-    var undeterminedPermissions: [PermissionType.PermissionManager] {
+    var undeterminedPermissions: [PermissionManager] {
         FilterPermissions.filterForShouldAskPermission(for: permissions)
     }
-    var interactedPermissions: [PermissionType.PermissionManager] {
+    var interactedPermissions: [PermissionManager] {
         //Filter for permissions that are not interacted
         permissions.filter {
             permissionComponentsStore.getPermissionComponent(for: $0.permissionType).interacted
@@ -43,7 +43,7 @@ public class PermissionSchemaStore: ObservableObject {
     //MARK: Initialized configuration properties
     var configStore: ConfigStore
     var store: PermissionStore
-    @Published var permissions: [PermissionType.PermissionManager]
+    @Published var permissions: [PermissionManager]
     var permissionViewStyle: PermissionViewStyle
     @usableFromInline var permissionComponentsStore: PermissionComponentsStore
     init(store: PermissionStore, permissionViewStyle: PermissionViewStyle) {

@@ -11,12 +11,12 @@ import Speech
 import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let speech = JMSpeechPermissionManager()
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public final class JMSpeechPermissionManager: PermissionType.PermissionManager {
+public final class JMSpeechPermissionManager: PermissionManager {
     
     
     public override var permissionType: PermissionType {

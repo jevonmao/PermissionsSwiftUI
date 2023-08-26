@@ -12,12 +12,12 @@ import AddressBook
 import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let contacts = JMContactsPermissionManager()
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public final class JMContactsPermissionManager: PermissionType.PermissionManager {
+public final class JMContactsPermissionManager: PermissionManager {
     
     typealias authorizationStatus = CNAuthorizationStatus
     typealias permissionManagerInstance = JMContactsPermissionManager

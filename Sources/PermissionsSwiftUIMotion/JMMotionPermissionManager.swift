@@ -11,12 +11,12 @@ import CoreMotion
 import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let motion = JMMotionPermissionManager()
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public final class JMMotionPermissionManager: PermissionType.PermissionManager {
+public final class JMMotionPermissionManager: PermissionManager {
     
     typealias authorizationStatus = CMAuthorizationStatus
     typealias permissionManagerInstance = JMMotionPermissionManager

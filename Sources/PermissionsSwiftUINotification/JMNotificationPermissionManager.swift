@@ -11,12 +11,12 @@ import UserNotifications
 import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let notification = JMNotificationPermissionManager()
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public final class JMNotificationPermissionManager: PermissionType.PermissionManager {
+public final class JMNotificationPermissionManager: PermissionManager {
     
     
     public override var permissionType: PermissionType {

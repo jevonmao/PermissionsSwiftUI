@@ -10,12 +10,12 @@ import Foundation
 import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let microphone = JMMicrophonePermissionManager()
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public final class JMMicrophonePermissionManager: PermissionType.PermissionManager {
+public final class JMMicrophonePermissionManager: PermissionManager {
     public override var permissionType: PermissionType {
         .microphone
     }

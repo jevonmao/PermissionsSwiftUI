@@ -11,12 +11,12 @@ import MapKit
 import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let location = JMLocationPermissionManager()
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public final class JMLocationPermissionManager: PermissionType.PermissionManager, CLLocationManagerDelegate {
+public final class JMLocationPermissionManager: PermissionManager, CLLocationManagerDelegate {
     typealias authorizationStatus = CLAuthorizationStatus
     typealias permissionManagerInstance = JMLocationPermissionManager
     

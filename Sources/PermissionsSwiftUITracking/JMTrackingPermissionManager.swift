@@ -11,11 +11,11 @@ import AdSupport
 import CorePermissionsSwiftUI
 
 @available(iOS 14, tvOS 14, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let tracking = JMTrackingPermissionManager()
 }
 @available(iOS 14, tvOS 14, *)
-public class JMTrackingPermissionManager: PermissionType.PermissionManager {
+public class JMTrackingPermissionManager: PermissionManager {
     public override var permissionType: PermissionType {
         get {
                 .tracking

@@ -10,12 +10,12 @@ import CorePermissionsSwiftUI
 import Intents
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let siri = JMSiriPermissionManager()
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public final class JMSiriPermissionManager: PermissionType.PermissionManager {
+public final class JMSiriPermissionManager: PermissionManager {
     
     
     public override var permissionType: PermissionType {

@@ -11,12 +11,12 @@ import CorePermissionsSwiftUI
 
 #if !os(tvOS)
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let locationAlways = JMLocationAlwaysPermissionManager()
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public final class JMLocationAlwaysPermissionManager: PermissionType.PermissionManager, CLLocationManagerDelegate {
+public final class JMLocationAlwaysPermissionManager: PermissionManager, CLLocationManagerDelegate {
     
 
     typealias authorizationStatus = CLAuthorizationStatus

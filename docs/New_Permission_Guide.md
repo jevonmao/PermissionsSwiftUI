@@ -27,20 +27,20 @@ Head over to the PermissionType.swift file, where you will find an enum called `
 
 ## Step 4
 Google search for Apple documentation on the particular permission. You will need to locate the relevant framework, classes, and most importantly a function related to `AuthorizationStatus` and a function related to `requestAuthorization`.
-Use the previously mentioned 2 functions to create a JMPermissionManager class that inherits from `PermissionType.PermissionManager` and provide concrete implementation for some of the parent's methods and properties.
+Use the previously mentioned 2 functions to create a JMPermissionManager class that inherits from `PermissionManager` and provide concrete implementation for some of the parent's methods and properties.
 
-In addition, provide an extension to `PermissionType.PermissionManager` to define a short name for the permission type like siri, to allow for enum like syntax access in the API.
+In addition, provide an extension to `PermissionManager` to define a short name for the permission type like siri, to allow for enum like syntax access in the API.
 
 Use the following example as template:
 
 ```swift
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let siri = JMSiriPermissionManager()
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public final JMSiriPermissionManager: PermissionType.PermissionManager {
+public final JMSiriPermissionManager: PermissionManager {
     
     
     public override var permissionType: PermissionType {

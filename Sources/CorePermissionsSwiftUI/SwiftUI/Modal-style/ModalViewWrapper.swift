@@ -20,8 +20,8 @@ import Introspect
     @usableFromInline var bodyView: Body
     //Placeholder to make sure permissionsToAsk only get computed value once
     //Otherwise, the list of permissions will change while the modal is still open, which is not good
-    var _permissionsToAsk: [PermissionType.PermissionManager]?
-    var permissionsToAsk: [PermissionType.PermissionManager] {
+    var _permissionsToAsk: [PermissionManager]?
+    var permissionsToAsk: [PermissionManager] {
         guard _permissionsToAsk == nil else {
             return _permissionsToAsk!
         }
@@ -44,7 +44,7 @@ import Introspect
     @usableFromInline init(for bodyView: Body,
          showing: Binding<Bool>,
          store: PermissionStore,
-         permissionsToAsk: [PermissionType.PermissionManager]?=nil) {
+         permissionsToAsk: [PermissionManager]?=nil) {
         self.bodyView = bodyView
         self.showing = showing
         self._permissionsToAsk = permissionsToAsk

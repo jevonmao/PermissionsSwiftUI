@@ -10,12 +10,12 @@ import UIKit
 import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     static let bluetooth = JMBluetoothPermissionManager()
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-final public class JMBluetoothPermissionManager: PermissionType.PermissionManager {
+final public class JMBluetoothPermissionManager: PermissionManager {
     private var completion: ((Bool, Error?) -> Void)?
     private var manager: CBCentralManager?
     

@@ -1,6 +1,6 @@
 //
-//  PermissionManagerProctocol.swift
-//  
+//  AuthorizationStatus.swift
+//
 //
 //  Created by Jevon Mao on 2/18/21.
 //

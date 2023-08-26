@@ -11,7 +11,7 @@ import EventKit
 import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     ///Permission that allows app to read & write to device reminder before iOS 17
     @available(tvOS, unavailable, deprecated: 16.0, obsoleted: 17.0, message: "iOS 17.0 introduced breaking changes to calendar and reminder permissions. Use the new PermissionTypes that specifies level of permission.")
     static let reminders = JMRemindersPermissionManager(requestedAccessLevel: .legacy)
@@ -21,7 +21,7 @@ public extension PermissionType.PermissionManager {
     static let remindersFull = JMRemindersPermissionManager(requestedAccessLevel: .full)
 }
 @available(iOS 13.0, tvOS 13.0, *)
-public final class JMRemindersPermissionManager: PermissionType.PermissionManager {
+public final class JMRemindersPermissionManager: PermissionManager {
     
     public init(requestedAccessLevel: AccessLevel) {
         self.requestedAccessLevel = requestedAccessLevel

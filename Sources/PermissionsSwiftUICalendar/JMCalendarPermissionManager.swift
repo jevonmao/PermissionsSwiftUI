@@ -11,7 +11,7 @@ import EventKit
 import CorePermissionsSwiftUI
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     ///Permission that allows app to read & write to device calenda
     @available(tvOS, unavailable)
     static let calendarFull = JMCalendarPermissionManager(requestedAccessLevel: .full)
@@ -26,51 +26,41 @@ public extension PermissionType.PermissionManager {
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public final class JMCalendarPermissionManager: PermissionType.PermissionManager {
-    public init(requestedAccessLevel: AccessLevel) {
-        self.requestedAccessLevel = requestedAccessLevel
-    }
-
-
-    public var requestedAccessLevel: AccessLevel
-
-    public enum AccessLevel {
-        case writeOnly, full, legacy
-    }
-    
+public final class JMCalendarPermissionManager: EventPermissionManager {
     public override var permissionType: PermissionType {
         .calendar
     }
-    
-    public override var authorizationStatus: AuthorizationStatus {
-        switch EKEventStore.authorizationStatus(for: .event){
-        case .authorized:
-            return .authorized
-        case .notDetermined:
-            return .notDetermined
-        default:
-            return .denied
-        }
+
+    public override var entityType: EKEntityType {
+        .event
     }
 
     override public func requestPermission(completion: @escaping (Bool, Error?) -> Void) {
-        let eventStore = EKEventStore()
         switch requestedAccessLevel {
         case .legacy:
-            eventStore.requestAccess(to: EKEntityType.event, completion: {
-                (accessGranted: Bool, error: Error?) in
-                DispatchQueue.main.async {
-                    completion(accessGranted, error)
-                }
-            })
+            requestLegacyPermission(completion)
         case .full:
-            // request using new API
-            break
-        case .writeOnly:
-            // request using new API
-            break
-        }
+            if #available(iOS 17.0, *) {
+                eventStore.requestFullAccessToEvents{(success, error) in
+                    DispatchQueue.main.async {
+                        completion(success, error)
+                    }
 
+                }
+            } else {
+                requestLegacyPermission(completion)
+            }
+        case .writeOnly:
+            if #available(iOS 17.0, *) {
+                eventStore.requestWriteOnlyAccessToEvents {(success, error) in
+                    DispatchQueue.main.async {
+                        completion(success, error)
+                    }
+                }
+            } else {
+                requestLegacyPermission(completion)
+            }
+        }
     }
 }
 #endif

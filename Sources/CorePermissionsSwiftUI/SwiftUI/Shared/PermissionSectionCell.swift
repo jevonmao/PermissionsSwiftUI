@@ -15,7 +15,7 @@ enum AllowButtonStatus: CaseIterable {
 
 @available(iOS 13.0, tvOS 13.0, *)
 struct PermissionSectionCell: View {
-    @State var permissionManager: PermissionType.PermissionManager
+    @State var permissionManager: PermissionManager
     @State var allowButtonStatus: AllowButtonStatus = .idle
     @Binding var showing: Bool
     @EnvironmentObject var store: PermissionStore
