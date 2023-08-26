@@ -31,7 +31,7 @@ public class PermissionStore: ObservableObject {
     public init(){}
     
     ///An  array of permissions that configures the permissions to request
-    public var permissions: [PermissionType.PermissionManager] = []
+    public var permissions: [PermissionManager] = []
     
     //MARK: Configuration store
     ///Custom configurations that alters PermissionsSwiftUI view's behaviors

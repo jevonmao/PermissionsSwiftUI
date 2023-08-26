@@ -11,7 +11,7 @@ import CorePermissionsSwiftUI
 import HealthKit
 
 @available(iOS 13.0, tvOS 13.0, *)
-public extension PermissionType.PermissionManager {
+public extension PermissionManager {
     /**
      Permission that allows app to access healthkit information
      
@@ -30,7 +30,7 @@ public extension PermissionType.PermissionManager {
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
-public class JMHealthPermissionManager: PermissionType.PermissionManager {
+public class JMHealthPermissionManager: PermissionManager {
     
     typealias authorizationStatus = HKAuthorizationStatus
     typealias CountComparison = (Int, Int)

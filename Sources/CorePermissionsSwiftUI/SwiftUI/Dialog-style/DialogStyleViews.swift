@@ -41,7 +41,7 @@ public extension View {
      
      */
     
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType.PermissionManager]) -> some CustomizableView {
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionManager]) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions)
     }
     
@@ -64,7 +64,7 @@ public extension View {
      
      */
 
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType.PermissionManager], autoDismiss: Bool) -> some CustomizableView {
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionManager], autoDismiss: Bool) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, autoDismiss: autoDismiss)
     }
     /**
@@ -87,7 +87,7 @@ public extension View {
      
      */
 
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType.PermissionManager], autoCheckAuthorization: Bool) -> some CustomizableView {
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionManager], autoCheckAuthorization: Bool) -> some CustomizableView {
         initializeJMAlert(showModal: showModal, for: permissions, autoCheckAuthorization: autoCheckAuthorization)
     }
     
@@ -113,7 +113,7 @@ public extension View {
      
      */
 
-    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionType.PermissionManager],
+    func JMAlert(showModal: Binding<Bool>, for permissions: [PermissionManager],
                  restrictDismissal: Bool?=nil,
                  autoDismiss: Bool?=nil,
                  autoCheckAuthorization: Bool?=nil) -> some CustomizableView {
@@ -145,7 +145,7 @@ public extension View {
      */
     
     func JMAlert(showModal: Binding<Bool>,
-                 for permissions: [PermissionType.PermissionManager],
+                 for permissions: [PermissionManager],
                  onAppear: (() -> Void)?=nil,
                  onDisappear: (() -> Void)?=nil,
                  onDisappearHandler: Optional<(_ successful: [JMResult]?, _ erroneous: [JMResult]?) -> Void>=nil) -> some CustomizableView {
@@ -172,7 +172,7 @@ public extension View {
      
      */
     func JMAlert(showModal: Binding<Bool>,
-                 for permissions: [PermissionType.PermissionManager],
+                 for permissions: [PermissionManager],
                  autoDismiss: Bool,
                  onAppear: (() -> Void)?=nil,
                  onDisappear: (() -> Void)?=nil,
@@ -206,7 +206,7 @@ public extension View {
      
      */
     func JMAlert(showModal: Binding<Bool>,
-                 for permissions: [PermissionType.PermissionManager],
+                 for permissions: [PermissionManager],
                  autoDismiss: Bool?=nil,
                  autoCheckAuthorization: Bool?=nil,
                  onAppear: (() -> Void)?=nil,
@@ -246,7 +246,7 @@ public extension View {
 
      */
     func JMAlert(showModal: Binding<Bool>,
-                 for permissions: [PermissionType.PermissionManager],
+                 for permissions: [PermissionManager],
                  autoDismiss: Bool?=nil,
                  autoCheckAuthorization: Bool?=nil,
                  useAltButton: Bool?=nil,
@@ -293,7 +293,7 @@ public extension View {
     }
     
     private func initializeJMAlert(showModal: Binding<Bool>,
-                                   for permissions: [PermissionType.PermissionManager]?=nil,
+                                   for permissions: [PermissionManager]?=nil,
                                 autoDismiss: Bool?=nil,
                                 autoCheckAuthorization: Bool?=nil,
                                 restrictDismissal: Bool?=nil,
