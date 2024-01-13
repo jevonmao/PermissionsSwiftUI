@@ -1,0 +1,17 @@
+/* MARK: Allow Button */
+"button_allow" = "İzin Ver";
+"button_allowed" = "İzin Verildi";
+"button_denied" = "Reddedildi";
+"button_next" = "SIRADAKİ";
+
+/* MARK: UI labels */
+"permission_header" = "İzinlerinize ihtiyacımız var";
+"permission_primary_label" = "Bu uygulamanın belirli özelliklerini kullanabilmeniz için izin vermeniz gerekir. Her izin için izne ait açıklamaya bakın";
+"permission_secondary_label" = "Tüm özelliklerin ve işlevlerin düzgün çalışması için izin gereklidir. İzin vermezseniz efektif kullanım için ayarlardan izinleri tekrardan etkinleştirmeniz gerekir.";
+
+/* MARK: Permissions (name & description) */
+"camera_title" = "Kamera";
+"camera_description" = "Kameranızın kullanılmasına izin verin";
+
+"health_title" = "Sağlık";
+"health_description" = "Sağlık bilgilerinizin kullanılmasına izin verin";
