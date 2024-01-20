@@ -40,6 +40,12 @@ public enum PermissionType: Hashable, Equatable {
     ///Permission that allows Siri and Maps to communicate with your app
     case siri
     
+    /// Permission that grants access to biometric authentication in your application.
+    ///
+    /// The `biometrics` permission enables the use of biometric authentication features, such as Face ID, Touch ID or OpticID,
+    /// allowing users to securely authenticate themselves using their unique biometric data.
+    @available(iOS 13, macOS 11, *) case biometrics
+    
     ///In order for app to track user's data across apps and websites, the tracking permission is needed
     @available(iOS 14, tvOS 14, *) case tracking
 #if !os(tvOS)
