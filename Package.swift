@@ -105,9 +105,16 @@ let permissionsTargets: [Target] = [
         dependencies: ["Introspect", .target(name: "CorePermissionsSwiftUI")],
         exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
     ),
-    .target(name: "PermissionsSwiftUISiri",
-            dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-            exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"])]
+    .target(
+        name: "PermissionsSwiftUISiri",
+        dependencies: ["Introspect", "CorePermissionsSwiftUI"],
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+    ),
+    .target(
+        name: "PermissionsSwiftUIBiometrics",
+        dependencies: ["Introspect", .target(name: "CorePermissionsSwiftUI")],
+        exclude: ["../../Tsts/PermissionsSwiftUITests/__Snapshots__"]
+    )]
 
 let package = Package(
     name: "PermissionsSwiftUI",
