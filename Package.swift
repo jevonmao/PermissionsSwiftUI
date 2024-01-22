@@ -23,7 +23,10 @@ let permissionsTargets: [Target] = [
     .target(
         name: "PermissionsSwiftUICalendar",
         dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        swiftSettings: [
+            .define("PERMISSIONSWIFTUI_EVENT")
+        ]
     ),
     .target(
         name: "PermissionsSwiftUICamera",
@@ -93,7 +96,10 @@ let permissionsTargets: [Target] = [
     .target(
         name: "PermissionsSwiftUIReminder",
         dependencies: ["Introspect", "CorePermissionsSwiftUI"],
-        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"]
+        exclude: ["../../Tests/PermissionsSwiftUITests/__Snapshots__"],
+        swiftSettings: [
+            .define("PERMISSIONSWIFTUI_EVENT")
+        ]
     ),
     .target(
         name: "PermissionsSwiftUISpeech",
