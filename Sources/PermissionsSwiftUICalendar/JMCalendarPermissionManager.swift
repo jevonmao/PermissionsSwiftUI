@@ -5,8 +5,8 @@
 //  Created by Jevon Mao on 1/31/21.
 //
 
-import UIKit
-#if !os(tvOS)
+import Foundation
+#if !os(tvOS) && PERMISSIONSWIFTUI_EVENT
 import EventKit
 import CorePermissionsSwiftUI
 

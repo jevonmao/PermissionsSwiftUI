@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+#if !os(tvOS) && PERMISSIONSWIFTUI_EVENT
 import EventKit
 
 open class EventPermissionManager: PermissionManager {
@@ -52,3 +54,4 @@ open class EventPermissionManager: PermissionManager {
     }
 
 }
+#endif
