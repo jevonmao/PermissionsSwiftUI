@@ -2,6 +2,7 @@
 "button_allow" = "AUTORISER";
 "button_allowed" = "AUTORISÉ";
 "button_denied" = "REFUSÉ";
+"button_next" = "SUIVANT";
 
 /* MARK: UI labels */
 "permission_header" = "Autorisations Nécessaires";

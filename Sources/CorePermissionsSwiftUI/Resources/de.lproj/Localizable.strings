@@ -2,6 +2,7 @@
 "button_allow" = "ERLAUBEN";
 "button_allowed" = "ERLAUBT";
 "button_denied" = "ABGELEHNT";
+"button_next" = "WEITER";
 
 /* MARK: UI labels */
 "permission_header" = "Berechtigungen benötigt";
