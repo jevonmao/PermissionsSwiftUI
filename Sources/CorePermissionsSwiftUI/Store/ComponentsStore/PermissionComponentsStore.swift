@@ -29,6 +29,13 @@ public struct PermissionComponentsStore {
      */
     public init(){}
     //MARK: Permission Components
+    /// The displayed text and image icon for the biometrics permission
+    public var biometricPermission = JMPermission(
+        imageIcon: AnyView(Image(systemName: "faceid")), 
+        title: "Biometrics",
+        description: "Allow to lock/hide your data from other persons"
+    )
+    
     ///The displayed text and image icon for the camera permission
     public var cameraPermission = JMPermission(
         imageIcon: AnyView(Image(systemName: "camera.fill")),
@@ -132,6 +139,9 @@ extension PermissionComponentsStore {
         case .location:
             modify(&self.locationPermission)
             return self.locationPermission
+        case .biometrics:
+            modify(&self.biometricPermission)
+            return self.biometricPermission
         case .locationAlways:
             modify(&self.locationAlwaysPermission)
             return self.locationAlwaysPermission
