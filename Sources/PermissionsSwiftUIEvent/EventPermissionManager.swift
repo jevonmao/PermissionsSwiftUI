@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import CorePermissionsSwiftUI
 
-#if !os(tvOS) && PERMISSIONSWIFTUI_EVENT
+#if !os(tvOS)
 import EventKit
 
 open class EventPermissionManager: PermissionManager {
